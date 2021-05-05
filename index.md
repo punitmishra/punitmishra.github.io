@@ -15,4 +15,4 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
+[https://punitmishra.github.io/](https://punitmishra.github.io/) and ![punitmishra](https://avatars.githubusercontent.com/punitmishra)
