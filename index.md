@@ -2,38 +2,82 @@
 
 # About Me
 
-Hi This is Punit. 
-
-I am an Engineer.
-
-I love tinkering with electornic things. 
-
-I build applications, automate stuff. 
-
-I design light weight scalable infrasturcture. 
-
-In my spare time I tinker with web3 & blockchain.
-
-I build pi-net, hack wifi routers, sinff packets. 
-
-Currently, I work @ SAP. 
-
-I graduated with a Bachelor of Science BS from University of California @ Berkeley in 2012.
-
-Trying to figure out a good way to document and index important things simply.
-
-I have a dog Pepper (aka Mr. Pepper) - he is ~13.5 years now.
+Hi! This is Punit. I am an Engineer. I build applications, design light weight - scalable infrasturcture and work on solving machine learning problems during the day @ SAP - which is where I work currently. In my spare time - I play with web3 & blockchain, build pi-net, hack wifi routers, sinff packets & tinker with everything powered with electricity. I graduated with a Bachelor of Science - BS in Electrical Engineering and Computer Sciences (EECS) from University of California @ Berkeley in 2012. I have a dog Pepper (aka Mr. Pepper) - he is ~13.5 years now.
 
 
-# Work Experience
+Trying to figure out a good way to document and index important things in life here on this page; instead of wasting my time on XBox.
 
-# Hobby Projects
 
-# Life
+# Projects
 
-# Stuff
+* mrpepper.dog
+* msspice.dog
+* Raspberry Pi
+  * pi-net
+  * pi-hole
+  * circuit pi
+* Model Rail Roading
+* TrollMinds
+* Hippo
+* GrepLabs
 
-## How? 
+# Life Stories
+
+# Interesting Stuff
+
+Here is a list of things I am interested in and a curated index of updated links which I use most of the time (you might find it intersting too then donate so that this website can self sustain).
+
+* Programming Languages - Rust/C/Python/Go/C++/Java/Scala
+    * Tutorials
+    * Books
+    * Hacks
+    * Debugging
+
+
+* Automation, Testing, Integration, Deployment - CI/CD
+  * CI
+    * Github Actions
+  * CD
+  * API Testing
+  * UI Testing
+  * Integration Testing
+
+* Systems Architecture and Design
+  * Domains and TLDs
+  * Let's Encrypt and SSL Certs
+  * TLS 
+  * mTLS
+  * Service Mesh (Istio Stuff)
+
+* Distributed Sytems
+  * Storage
+  * Spark
+  * Streaming
+  * Cassandra
+
+* Machine Learning
+
+* Deep Links 
+
+* Cryptography
+
+* Web3 & Blockchain
+ * bitcoins
+ * ethereum
+ * polygon
+ * ripple
+ * blockstack
+ * dogecoin
+ * grepcoin
+ * grepchain
+ * 
+ * ipfs://
+
+* Open Hardware
+
+* Open Source Software
+
+---
 
 If you are wondering how was this page created, here are the step:
 
