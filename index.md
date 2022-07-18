@@ -1,17 +1,14 @@
 ![Header](./assets/images/github-header-image-pm.png)
 
-# Hello World! - This is Punit :) ![](https://avatars.githubusercontent.com/punitmishra?v=4&s=100)
+# About Me.
 
 I build applications, automate stuff and design light weight scalable infrasturcture. 
 
-# About Me.
-
+# Work Experience/LinkedIn
 
 # Hobby Projects
 
-
-# Other Developement Work
-
+# Other things in Life.
 
 # Stuff
 
