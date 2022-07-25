@@ -20,6 +20,7 @@ Trying to figure out a good way to document and index important things in life h
 * TrollMinds
 * Hippo
 * GrepLabs
+* HomeCloud
 
 # Life Stories
 
