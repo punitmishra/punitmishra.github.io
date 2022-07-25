@@ -33,7 +33,7 @@ Extended security maintenance until April 2032
 Commercial support for enterprise customers
 ```
 
-Going with Option #2. (Manaul Install). 
+Going with Option #2. (Manual Install). 
 - I am already on a ubuntu machine (will keep things more simple and use the startup disk creator and use the iso to make a SD card with ubuntu server installed). 
 
 --- 
