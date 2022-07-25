@@ -2,7 +2,7 @@
 
 # About Me
 
-Hi! This is Punit. I am an Engineer. I build applications, design light weight - scalable infrasturcture and work on solving machine learning problems during the day @ SAP - which is where I work currently. In my spare time - I play with web3 & blockchain, build pi-net, hack wifi routers, sinff packets & tinker with everything powered with electricity. I graduated with a Bachelor of Science - BS in Electrical Engineering and Computer Sciences (EECS) from University of California @ Berkeley in 2012. I have a dog Pepper (aka Mr. Pepper) - he is ~13.5 years now.
+Hi! This is Punit. I am an Engineer. I build applications, design light weight - scalable infrasturcture and work on solving machine learning problems during the day @ SAP - which is where I work currently. In my spare time - I play with web3 & blockchain, build pi-net, hack wifi routers, sniff packets & tinker with everything powered with electricity. I graduated with a Bachelor of Science - BS in Electrical Engineering and Computer Sciences (EECS) from University of California @ Berkeley in 2012. I have a dog Pepper (aka Mr. Pepper) - he is ~13.5 years now.
 
 
 Trying to figure out a good way to document and index important things in life here on this page; instead of wasting my time on XBox.
