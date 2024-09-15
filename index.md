@@ -1,80 +1,88 @@
 ![Header](./assets/images/github-header-image-pm.png)
 
-## About Punit
+# About Punit
 
-**Punit**, an Engineer with a passion for innovation.
+## Engineer
 
-Hello!  I'm Punit, and by day, I'm an engineer at **SAP** where I tackle challenging problems that involve building applications, creating robust infrastructures, and exploring the exciting world of machine learning.  When I'm not coding, I delve into the ever-evolving landscape of **web3**, tinker with **blockchain technologies**, and explore the possibilities of **open hardware**.  I'm also a huge fan of "pi-net" projects, and I can often be found tinkering with Wi-Fi routers, analyzing data packets, and experimenting with various electrical devices.  My academic background includes a Bachelor of Science in Electrical Engineering and Computer Sciences (EECS) from the University of California, Berkeley (Go Bears!), class of 2012.  My furry companion and partner-in-crime throughout these adventures is my beloved dog, Pepper, or as I affectionately call him, Mr. Pepper.
+Hello! I'm **Punit**, an engineer with a drive for exploring cutting-edge technologies and solving complex problems. Currently, I work at **SAP**, where I dive into building innovative applications, creating robust **infrastructures**, and pushing the boundaries of **machine learning**. Outside of work, my interests span the dynamic realms of **web3**, **blockchain**, and **open hardware**.
 
-## Life Stories
+I also love working on "pi-net" projects. Whether it's configuring Wi-Fi routers, analyzing data packets, or experimenting with various electrical devices, you'll often find me in my home lab exploring new tech. I graduated with a Bachelor of Science in Electrical Engineering and Computer Sciences (EECS) from the University of California, Berkeley, in 2012 (Go Bears!). Throughout this journey, my loyal sidekick has been my dog, Pepper – or as I like to call him, Mr. Pepper.
 
-* I'll be constantly adding interesting stories and experiences to this section, so be sure to check back often! 
- (This section is a great place to showcase your personality and skills through anecdotes or achievements.)
-
-## My Interests
+---
 
 ### Programming Languages
 
-I enjoy diving deep into various programming languages, including:
+---
 
-* **Rust**, **C**, **Python**, **Go**, **C++**, **Java**, **Scala**
+I have a passion for exploring different programming languages and diving deep into their nuances. Here's a quick overview of my favorites:
 
-Here, you'll find tutorials, recommended readings, clever hacks, and essential debugging techniques to help you master these languages.
+- **Rust** – For high-performance and memory-safe applications. It's my new found love.
+- **Python** – My go-to language for data analysis, machine learning, and quick prototyping.
+- **C/C++** – C will always be my favorite of all time. For system-level programming and performance-critical tasks.
+- **Java/Scala** – When I need to work on large-scale, distributed systems. Specially Spark - it's very easy to work with Scala and Spark together, and write some resiliant spark jobs.
+- **React.js** - When I want do React work with **Next.js**
+- **Vue.js** - Personally preferred to React but I use a mixed back. 
+- **Go** – Ideal for building cloud-native applications and microservices. I use it mainly for tools I work with. 
 
-**(Consider adding code snippets or links to relevant resources for each language)**
+---
 
-### DevOps Insights
+##### Code Snippets and Tutorials
 
-**Continuous Integration (CI):** 
+I am starting to build my blog where I share recommended readings, clever hacks, and debugging techniques to help you master these languages. Here’s a sneak peek of what you'll find:
 
-Become an expert in using **GitHub Actions** to automate your code integration process seamlessly.  I'll share best practices and helpful tips to streamline your development workflow.
+```rust
+// Rust: A basic example of ownership and borrowing
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = &s1;
+    println!("{}, world!", s2);
+}
+```
 
-**Continuous Deployment (CD):**
+*(Check out the Programming Section for more snippets and in-depth tutorials.)*
 
-(Stay tuned for upcoming insights on Continuous Deployment!)
+---
 
-**Testing:**
+##### DevOps Insights
 
-Uncover various approaches to ensure the reliability and efficiency of your applications, including:
+My DevOps journey includes building CI/CD pipelines, automated testing, and infrastructure as code. Here’s what I specialize in:
 
-* **API Testing**
-* **UI Testing**
-* **Integration Testing**
 
-**(Consider adding diagrams or short videos to illustrate testing concepts)**
+##### Continuous Integration (CI)
+- **GitHub Actions**: Mastering workflows to automate builds, tests, and deployment processes.
+- **Jenkins**: Setting up multi-branch pipelines for complex projects.
 
-### Systems Architecture and Design
+*(Check out my CI/CD Best Practices Guide for detailed steps and configurations.)*
 
-* **Domain Mastery:** Learn the ins and outs of domains, TLDs, and how to leverage **Let's Encrypt** and SSL/TLS certificates to fortify your website's security.
+---
 
-* **Service Mesh with Istio:**  Navigate the intricate world of service mesh with powerful tools like **Istio**. I'll share insights and best practices to help you design robust and scalable architectures.
+##### Continuous Deployment (CD)
 
-### Distributed Systems
+*(Stay tuned for upcoming insights on Continuous Deployment, including Docker, Kubernetes, and Helm deployments!)*
 
-Explore the world of distributed systems with discussions on:
+##### Testing
+- **API Testing**: Using tools like Postman and Rest Assured for robust API validation.
+- **UI Testing**: Implementing Selenium WebDriver for automated UI testing across multiple browsers.
+- **Integration Testing**: Crafting end-to-end tests to ensure seamless interaction between components.
 
-* **Storage Solutions:** Delve into various storage solutions and their functionalities.
-* **Apache Spark:**  Uncover the power of Apache Spark for big data processing.
-* **Streaming Architectures:** Learn how to design and implement efficient streaming architectures.
-* **Cassandra:**  Gain insights into the intricacies of Cassandra, a NoSQL database management system.
+*(I'll soon be adding diagrams and short videos to illustrate these concepts in action.)*
 
-**(Consider adding links to relevant articles or tutorials for each topic)**
 
-### Machine Learning
+---
+## Life Stories
 
-(In-depth content on Machine Learning coming soon!)
+*(This section will be frequently updated with experiences and learnings.)*
 
-### Web3 & Blockchain
+### The Journey of a Tech Explorer
 
-The world of cryptocurrency is constantly evolving, and here we'll explore various blockchain technologies:
+From my early days of engineering to tackling real-world engineering challenges at SAP, my career has been a blend of learning, experimenting, and creating. Some of the memorable milestones include:
 
-* **Bitcoin**, **Ethereum**, **Polygon**, **Ripple**, **Blockstack**, **Dogecoin**, **Grepcoin**, **Grepchain**, **IPFS Protocol**
+- **Open Source Contributions:** Actively contributing to the open-source community through GitHub projects and collaborating with developers globally.
+- **Blockchain Experiments:** Exploring the mechanics of blockchain through various personal projects, including smart contract development and decentralized app building.
+- **Building a Home Lab:** Setting up my own network infrastructure, configuring servers, and experimenting with IoT devices.
+- **Teaching & Mentoring:** I often participate in hackathons and local meetups, mentoring budding developers in the fields of machine learning, blockchain, and systems architecture.
 
-Stay tuned for deep dives into these fascinating technologies and their potential to revolutionize the internet.
-
-### Open Hardware & Software
-
-(More content to be unveiled on Open Hardware & Software!)
+---
 
 ## Building This Site
 
@@ -94,6 +102,7 @@ This section will provide a step-by-step guide on how I built this website.  Her
 
 7. **Functional Assurance:**  Discover techniques for verifying the functionality of your web pages to guarantee
 
+---
 
 ```bash
 echo "Explore the binary text from the header image:"
@@ -101,3 +110,5 @@ export BINARY_TXT="01001000 01101001 00100001 00100000 01010100 01101000 0110100
 echo "Decode the message:"
 echo "$BINARY_TXT" | while read -r a; do printf "%x" "$((2#$a))"; done | xxd -r -p
 ```
+
+---
