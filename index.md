@@ -26,7 +26,7 @@ I have a passion for exploring different programming languages and diving deep i
 
 ---
 
-##### Code Snippets and Tutorials
+### Code Snippets and Tutorials
 
 I am starting to build my blog where I share recommended readings, clever hacks, and debugging techniques to help you master these languages. Here’s a sneak peek of what you'll find:
 
@@ -43,12 +43,12 @@ fn main() {
 
 ---
 
-##### DevOps Insights
+### DevOps Insights
 
 My DevOps journey includes building CI/CD pipelines, automated testing, and infrastructure as code. Here’s what I specialize in:
 
 
-##### Continuous Integration (CI)
+### Continuous Integration (CI)
 - **GitHub Actions**: Mastering workflows to automate builds, tests, and deployment processes.
 - **Jenkins**: Setting up multi-branch pipelines for complex projects.
 
@@ -56,11 +56,11 @@ My DevOps journey includes building CI/CD pipelines, automated testing, and infr
 
 ---
 
-##### Continuous Deployment (CD)
+### Continuous Deployment (CD)
 
 *(Stay tuned for upcoming insights on Continuous Deployment, including Docker, Kubernetes, and Helm deployments!)*
 
-##### Testing
+### Testing
 - **API Testing**: Using tools like Postman and Rest Assured for robust API validation.
 - **UI Testing**: Implementing Selenium WebDriver for automated UI testing across multiple browsers.
 - **Integration Testing**: Crafting end-to-end tests to ensure seamless interaction between components.
