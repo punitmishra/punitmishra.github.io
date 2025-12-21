@@ -1,18 +1,15 @@
 // Service Worker for PWA
+// This will be replaced by workbox during build
+const manifest = self.__WB_MANIFEST;
 const CACHE_NAME = 'punit-mishra-portfolio-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/favicon.png',
-  '/assets/css/index.css',
-  '/assets/js/index.js',
-];
 
 // Install event - cache resources
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
+        // Cache manifest files
+        const urlsToCache = manifest.map(entry => entry.url);
         return cache.addAll(urlsToCache);
       })
       .catch((error) => {
