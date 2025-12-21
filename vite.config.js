@@ -29,17 +29,13 @@ export default defineConfig({
           }
         ]
       },
-      // Disable workbox to avoid build issues - we'll use manual service worker
-      strategies: 'injectManifest',
-      srcDir: 'public',
-      filename: 'sw.js',
-      injectManifest: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        maximumFileSizeToCacheInBytes: 5000000
-      },
-      // Disable workbox compilation
+      // Use generateSW strategy but with minimal workbox
+      strategies: 'generateSW',
       workbox: {
-        disable: true
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,txt}'],
+        runtimeCaching: [],
+        skipWaiting: true,
+        clientsClaim: true
       }
     })
   ],
