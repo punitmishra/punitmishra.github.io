@@ -77,16 +77,16 @@ try {
         initAdvancedAnimations();
         initPerformanceOptimizations();
         
-        // Register service worker for PWA
-        if ('serviceWorker' in navigator && import.meta.env.PROD) {
-          navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-              console.log('Service Worker registered:', registration);
-            })
-            .catch((error) => {
-              console.warn('Service Worker registration failed:', error);
-            });
-        }
+        // Register service worker for PWA (temporarily disabled due to build issues)
+        // if ('serviceWorker' in navigator && import.meta.env.PROD) {
+        //   navigator.serviceWorker.register('/sw.js')
+        //     .then((registration) => {
+        //       console.log('Service Worker registered:', registration);
+        //     })
+        //     .catch((error) => {
+        //       console.warn('Service Worker registration failed:', error);
+        //     });
+        // }
       } catch (e) {
         console.warn('Performance optimizations error:', e);
       }
@@ -100,16 +100,16 @@ try {
       initAdvancedAnimations();
       initPerformanceOptimizations();
       
-      // Register service worker for PWA
-      if ('serviceWorker' in navigator && import.meta.env.PROD) {
-        navigator.serviceWorker.register('/sw.js')
-          .then((registration) => {
-            console.log('Service Worker registered:', registration);
-          })
-          .catch((error) => {
-            console.warn('Service Worker registration failed:', error);
-          });
-      }
+      // Register service worker for PWA (temporarily disabled due to build issues)
+      // if ('serviceWorker' in navigator && import.meta.env.PROD) {
+      //   navigator.serviceWorker.register('/sw.js')
+      //     .then((registration) => {
+      //       console.log('Service Worker registered:', registration);
+      //     })
+      //     .catch((error) => {
+      //       console.warn('Service Worker registration failed:', error);
+      //     });
+      // }
     } catch (e) {
       console.warn('Performance optimizations error:', e);
     }
