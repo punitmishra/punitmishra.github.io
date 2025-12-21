@@ -1,6 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Portfolio from "@/views/PortfolioView.vue";
-import ProjectDetail from "@/views/ProjectDetailView.vue";
+import { defineAsyncComponent } from "vue";
+
+// Lazy load components for better performance and code splitting
+const Portfolio = defineAsyncComponent(() => import("@/views/PortfolioView.vue"));
+const ProjectDetail = defineAsyncComponent(() => import("@/views/ProjectDetailView.vue"));
 
 const routes = [
   {

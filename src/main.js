@@ -6,6 +6,8 @@ import router from "./router";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
+import { measurePerformance, lazyLoadImages } from "@/utils/performance.js";
+import { initScrollAnimations, initScrollProgress } from "@/utils/scrollEffects.js";
 
 import "./css/main.css";
 
@@ -13,15 +15,28 @@ import "./css/main.css";
 const pinia = createPinia();
 
 /* Create Vue app */
-createApp(App).use(router).use(pinia).mount("#app");
+const app = createApp(App);
+app.use(router);
+app.use(pinia);
+app.mount("#app");
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
 
-/* Fetch sample data */
-mainStore.fetch("clients");
-mainStore.fetch("history");
+/* Fetch sample data - defer non-critical data */
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => {
+    mainStore.fetch("clients");
+    mainStore.fetch("history");
+  }, { timeout: 2000 });
+} else {
+  // Fallback for browsers without requestIdleCallback
+  setTimeout(() => {
+    mainStore.fetch("clients");
+    mainStore.fetch("history");
+  }, 2000);
+}
 
 /* App style */
 styleStore.setStyle(localStorage[styleKey] ?? "basic");
@@ -44,3 +59,18 @@ router.afterEach((to) => {
     ? `${to.meta.title} — ${defaultDocumentTitle}`
     : defaultDocumentTitle;
 });
+
+/* Performance optimizations */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+    initScrollProgress();
+    lazyLoadImages();
+    measurePerformance();
+  });
+} else {
+  initScrollAnimations();
+  initScrollProgress();
+  lazyLoadImages();
+  measurePerformance();
+}

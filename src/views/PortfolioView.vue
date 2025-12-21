@@ -31,8 +31,10 @@ import {
   mdiTrendingUp,
   mdiBrain,
 } from "@mdi/js";
+import { defineAsyncComponent } from "vue";
 import BaseIcon from "@/components/BaseIcon.vue";
-import AIBotGenerator from "@/components/AIBotGenerator.vue";
+// Lazy load heavy component for better performance
+const AIBotGenerator = defineAsyncComponent(() => import("@/components/AIBotGenerator.vue"));
 
 const router = useRouter();
 const githubUsername = "punitmishra";
@@ -528,6 +530,8 @@ onMounted(() => {
               :alt="githubProfile.name || 'Punit Mishra'"
               class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-8 border-white dark:border-slate-900 shadow-2xl transform group-hover:scale-105 transition-transform duration-500 object-cover"
               loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
             <!-- Inner Glow -->
             <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-indigo-400/20 pointer-events-none"></div>
@@ -593,7 +597,7 @@ onMounted(() => {
     </section>
 
     <!-- What's in Punit's Mind -->
-    <section class="py-32 relative overflow-hidden">
+    <section class="py-32 relative overflow-hidden fade-in">
       <!-- Background Effects -->
       <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-cyan-50/50 to-indigo-50/50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50"></div>
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
@@ -618,7 +622,7 @@ onMounted(() => {
     </section>
 
     <!-- Latest Projects -->
-    <section id="latest" class="py-32">
+    <section id="latest" class="py-32 fade-in">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
           <div class="flex items-center justify-center gap-3 mb-4">
@@ -689,7 +693,7 @@ onMounted(() => {
     </section>
 
     <!-- Featured Projects -->
-    <section id="projects" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+    <section id="projects" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm fade-in">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
           <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
@@ -842,7 +846,7 @@ onMounted(() => {
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="py-32">
+    <section id="skills" class="py-32 fade-in">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
           <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
@@ -877,7 +881,7 @@ onMounted(() => {
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+    <section id="experience" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm fade-in">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20">
           <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
