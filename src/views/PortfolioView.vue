@@ -38,6 +38,7 @@ import AIBotGenerator from "@/components/AIBotGenerator.vue";
 import AnimatedCounter from "@/components/AnimatedCounter.vue";
 import CodeSnippet from "@/components/CodeSnippet.vue";
 import TimelineItem from "@/components/TimelineItem.vue";
+import ProjectFilter from "@/components/ProjectFilter.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const router = useRouter();
@@ -431,9 +432,15 @@ const fetchGitHubRepos = async () => {
       forks: repo.forks_count,
       url: repo.html_url,
       updated: new Date(repo.updated_at).toLocaleDateString(),
+      updatedAt: repo.updated_at, // Keep for sorting
       topics: repo.topics || [],
       createdAt: repo.created_at,
       pushedAt: repo.pushed_at,
+      tech: repo.topics || [], // Use topics as tech stack
+      category: repo.topics?.includes('ai') || repo.topics?.includes('ml') ? 'AI/ML' : 
+                 repo.topics?.includes('web') || repo.topics?.includes('frontend') ? 'Web' :
+                 repo.topics?.includes('infrastructure') || repo.topics?.includes('devops') ? 'Infrastructure' :
+                 repo.topics?.includes('systems') || repo.topics?.includes('rust') ? 'Systems' : 'Other',
     }));
 
     githubRepos.value = allRepos.slice(0, 10);
@@ -461,6 +468,13 @@ const fetchGitHubRepos = async () => {
 const totalYearsExperience = computed(() => {
   return 12.5;
 });
+
+// Filter state
+const filteredRepos = ref([]);
+
+const handleFiltered = (filtered) => {
+  filteredRepos.value = filtered;
+};
 
 const goToProject = (repoName) => {
   router.push(`/project/${repoName}`);
@@ -738,6 +752,13 @@ onMounted(() => {
           <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Most recently updated repositories and contributions</p>
         </div>
 
+        <!-- Project Filter -->
+        <ProjectFilter
+          v-if="!loading.repos && githubRepos.length > 0"
+          :projects="githubRepos"
+          @filtered="handleFiltered"
+        />
+
         <div v-if="loading.repos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div v-for="i in 6" :key="i" class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse">
             <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
@@ -747,7 +768,7 @@ onMounted(() => {
 
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
-            v-for="repo in latestRepos"
+            v-for="repo in (filteredRepos.length > 0 ? filteredRepos : latestRepos)"
             :key="repo.id"
             @click="goToProject(repo.name)"
             class="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 border border-gray-200 dark:border-slate-700 cursor-pointer"
