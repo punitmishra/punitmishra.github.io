@@ -40,6 +40,7 @@ import CodeSnippet from "@/components/CodeSnippet.vue";
 import TimelineItem from "@/components/TimelineItem.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import ProjectFilter from "@/components/ProjectFilter.vue";
+import ResumeDownload from "@/components/ResumeDownload.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const router = useRouter();
@@ -664,8 +665,8 @@ onMounted(() => {
           Computer Engineer with {{ totalYearsExperience }}+ years building scalable applications from silicon to software
         </p>
 
-        <!-- Social Links -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <!-- Social Links & Resume Download -->
+        <div class="flex flex-wrap justify-center items-center gap-4 mb-12">
           <a
             v-for="link in socialLinks"
             :key="link.label"
@@ -676,6 +677,7 @@ onMounted(() => {
             <BaseIcon :path="link.icon" size="20" />
             <span class="font-semibold">{{ link.label }}</span>
           </a>
+          <ResumeDownload />
         </div>
 
         <!-- Stats with Animation -->
