@@ -1,8 +1,5 @@
-[variables]
-NODE_VERSION = "18"
-
 [phases.setup]
-nixPkgs = ["nodejs-18_x"]
+nixPkgs = ["nodejs_20", "npm"]
 
 [phases.install]
 cmds = ["npm ci"]
@@ -11,5 +8,4 @@ cmds = ["npm ci"]
 cmds = ["npm run build"]
 
 [start]
-cmd = "node server.js"
-
+cmd = "npm start"
