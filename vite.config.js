@@ -29,12 +29,17 @@ export default defineConfig({
           }
         ]
       },
-      // Use injectManifest strategy to use our custom sw.js
+      // Disable workbox to avoid build issues - we'll use manual service worker
       strategies: 'injectManifest',
       srcDir: 'public',
       filename: 'sw.js',
       injectManifest: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        maximumFileSizeToCacheInBytes: 5000000
+      },
+      // Disable workbox compilation
+      workbox: {
+        disable: true
       }
     })
   ],

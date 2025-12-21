@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { mdiDownload, mdiFileDocument } from '@mdi/js';
 import BaseIcon from '@/components/BaseIcon.vue';
 import { downloadResumePDF } from '@/utils/resumeGenerator';

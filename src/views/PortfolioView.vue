@@ -41,6 +41,7 @@ import TimelineItem from "@/components/TimelineItem.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import ProjectFilter from "@/components/ProjectFilter.vue";
 import ResumeDownload from "@/components/ResumeDownload.vue";
+import GitHubContributionGraph from "@/components/GitHubContributionGraph.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const router = useRouter();
@@ -881,6 +882,11 @@ onMounted(() => {
             Open Source
           </h2>
           <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Recent contributions and repositories</p>
+        </div>
+
+        <!-- GitHub Contribution Graph -->
+        <div class="mb-12">
+          <GitHubContributionGraph :username="githubUsername" />
         </div>
 
         <div v-if="loading.repos" class="grid grid-cols-1 md:grid-cols-2 gap-6">
