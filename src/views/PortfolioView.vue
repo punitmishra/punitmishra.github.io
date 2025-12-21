@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import {
@@ -423,16 +423,24 @@ const fetchGitHubProfile = async () => {
 
 const fetchGitHubRepos = async () => {
   try {
+    loading.value.repos = true;
     const response = await axios.get(
       `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=15&type=all`
     );
+    
+    if (!response.data || response.data.length === 0) {
+      console.warn("No repositories found");
+      loading.value.repos = false;
+      return;
+    }
+    
     const allRepos = response.data.map((repo) => ({
       id: repo.id,
       name: repo.name,
       description: repo.description || "No description",
       language: repo.language || "Other",
-      stars: repo.stargazers_count,
-      forks: repo.forks_count,
+      stars: repo.stargazers_count || 0,
+      forks: repo.forks_count || 0,
       url: repo.html_url,
       updated: new Date(repo.updated_at).toLocaleDateString(),
       updatedAt: repo.updated_at, // Keep for sorting
@@ -448,6 +456,11 @@ const fetchGitHubRepos = async () => {
 
     githubRepos.value = allRepos.slice(0, 10);
     latestRepos.value = allRepos.slice(0, 6);
+    
+    // Initialize filteredRepos with latestRepos
+    if (filteredRepos.value.length === 0) {
+      filteredRepos.value = [...latestRepos.value];
+    }
 
     githubStats.value.totalStars = allRepos.reduce((sum, repo) => sum + repo.stars, 0);
     githubStats.value.totalForks = allRepos.reduce((sum, repo) => sum + repo.forks, 0);
@@ -464,6 +477,11 @@ const fetchGitHubRepos = async () => {
   } catch (error) {
     console.error("Error fetching GitHub repos:", error);
     loading.value.repos = false;
+    // Ensure we have some data to show even if API fails
+    if (latestRepos.value.length === 0) {
+      latestRepos.value = [];
+      githubRepos.value = [];
+    }
   }
 };
 
@@ -478,6 +496,13 @@ const filteredRepos = ref([]);
 const handleFiltered = (filtered) => {
   filteredRepos.value = filtered;
 };
+
+// Initialize filteredRepos when repos are loaded
+watch(latestRepos, (newRepos) => {
+  if (newRepos.length > 0 && filteredRepos.value.length === 0) {
+    filteredRepos.value = [...newRepos];
+  }
+}, { immediate: true });
 
 const goToProject = (repoName) => {
   router.push(`/project/${repoName}`);
@@ -770,7 +795,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-else-if="latestRepos.length > 0 || filteredRepos.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="repo in (filteredRepos.length > 0 ? filteredRepos : latestRepos)"
             :key="repo.id"
@@ -896,7 +921,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div v-else-if="githubRepos.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <a
             v-for="repo in githubRepos"
             :key="repo.id"
@@ -940,6 +965,20 @@ onMounted(() => {
               <span class="text-xs text-gray-500 font-mono">{{ repo.updated }}</span>
             </div>
           </a>
+        </div>
+        
+        <!-- No repos message -->
+        <div v-else class="text-center py-12">
+          <BaseIcon :path="mdiGithub" size="48" class="text-gray-400 mx-auto mb-4" />
+          <p class="text-gray-600 dark:text-gray-400 text-lg font-display">
+            Unable to load repositories at the moment. Please try again later.
+          </p>
+          <button 
+            @click="fetchGitHubRepos"
+            class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-display"
+          >
+            Retry
+          </button>
         </div>
       </div>
     </section>
