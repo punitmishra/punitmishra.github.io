@@ -1,0 +1,15 @@
+[providers]
+node = "18"
+
+[phases.setup]
+nixPkgs = ["nodejs-18_x"]
+
+[phases.install]
+cmds = ["npm ci --legacy-peer-deps || npm install"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "node server.js"
+
