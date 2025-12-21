@@ -11,6 +11,7 @@ import { initScrollAnimations, initScrollProgress } from "@/utils/scrollEffects.
 import { initAnalytics, trackPageView, trackScrollDepth, trackTimeOnPage } from "@/utils/analytics.js";
 import { initScrollAnimations as initAdvancedAnimations } from "@/utils/animations.js";
 import { initPerformanceOptimizations } from "@/utils/performanceOptimizer.js";
+import { initSEO } from "@/utils/seo.js";
 
 import "./css/main.css";
 
@@ -52,6 +53,13 @@ if (
 ) {
   styleStore.setDarkMode(true);
 }
+
+/* Initialize SEO */
+initSEO({
+  title: 'Punit Mishra - Portfolio',
+  description: 'Full Stack Software Engineer with 12+ years of experience',
+  path: '/',
+});
 
 /* Initialize Analytics */
 if (import.meta.env.PROD) {

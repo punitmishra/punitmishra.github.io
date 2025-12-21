@@ -21,8 +21,16 @@ const categories = ['all', 'AI/ML', 'Web', 'Systems', 'Infrastructure', 'Other']
 const technologies = computed(() => {
   const techs = new Set();
   props.projects.forEach(project => {
-    if (project.tech) {
+    // Support both tech array and topics array (GitHub repos use topics)
+    if (project.tech && Array.isArray(project.tech)) {
       project.tech.forEach(t => techs.add(t));
+    }
+    if (project.topics && Array.isArray(project.topics)) {
+      project.topics.forEach(t => techs.add(t));
+    }
+    // Also check language
+    if (project.language) {
+      techs.add(project.language);
     }
   });
   return ['all', ...Array.from(techs).sort()];
@@ -38,23 +46,42 @@ const filteredProjects = computed(() => {
       return (
         project.name?.toLowerCase().includes(query) ||
         project.description?.toLowerCase().includes(query) ||
-        project.tech?.some(t => t.toLowerCase().includes(query))
+        project.tech?.some(t => t.toLowerCase().includes(query)) ||
+        project.topics?.some(t => t.toLowerCase().includes(query)) ||
+        project.language?.toLowerCase().includes(query)
       );
     });
   }
 
-  // Category filter
+  // Category filter (for GitHub repos, infer from topics/description)
   if (selectedCategory.value !== 'all') {
     filtered = filtered.filter(project => {
-      const category = project.category || 'Other';
-      return category === selectedCategory.value;
+      // If project has explicit category, use it
+      if (project.category) {
+        return project.category === selectedCategory.value;
+      }
+      // Otherwise, infer from topics or description
+      const categoryKeywords = {
+        'AI/ML': ['ai', 'ml', 'machine-learning', 'deep-learning', 'neural', 'tensorflow', 'pytorch', 'langchain', 'langgraph'],
+        'Web': ['web', 'frontend', 'backend', 'react', 'vue', 'angular', 'nextjs', 'express'],
+        'Systems': ['system', 'os', 'kernel', 'rust', 'c++', 'performance', 'low-level'],
+        'Infrastructure': ['infrastructure', 'devops', 'kubernetes', 'docker', 'aws', 'cloud', 'ci/cd'],
+      };
+      const keywords = categoryKeywords[selectedCategory.value] || [];
+      const searchText = `${project.description || ''} ${(project.topics || []).join(' ')} ${project.language || ''}`.toLowerCase();
+      return keywords.some(keyword => searchText.includes(keyword.toLowerCase()));
     });
   }
 
   // Technology filter
   if (selectedTech.value !== 'all') {
     filtered = filtered.filter(project => {
-      return project.tech?.includes(selectedTech.value);
+      // Check tech array, topics array, or language
+      return (
+        project.tech?.includes(selectedTech.value) ||
+        project.topics?.includes(selectedTech.value) ||
+        project.language === selectedTech.value
+      );
     });
   }
 

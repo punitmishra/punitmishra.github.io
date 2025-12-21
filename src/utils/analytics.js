@@ -10,7 +10,12 @@ const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
  * Initialize Google Analytics
  */
 export function initAnalytics() {
-  if (!GA_MEASUREMENT_ID || typeof window === 'undefined') {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  
+  if (!GA_MEASUREMENT_ID) {
+    console.log('Analytics: GA_MEASUREMENT_ID not set, analytics disabled');
     return;
   }
 
@@ -37,7 +42,7 @@ export function initAnalytics() {
  * Track page view
  */
 export function trackPageView(path, title) {
-  if (!window.gtag) return;
+  if (!window.gtag || !GA_MEASUREMENT_ID) return;
 
   window.gtag('config', GA_MEASUREMENT_ID, {
     page_path: path,
@@ -49,7 +54,7 @@ export function trackPageView(path, title) {
  * Track custom event
  */
 export function trackEvent(eventName, eventParams = {}) {
-  if (!window.gtag) return;
+  if (!window.gtag || !GA_MEASUREMENT_ID) return;
 
   window.gtag('event', eventName, eventParams);
 }

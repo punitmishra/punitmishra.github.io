@@ -82,7 +82,12 @@ export async function downloadResumePDF() {
     trackDownload('resume', 'resume.pdf');
 
     // Check if html2pdf is available
-    const html2pdf = await import('html2pdf.js').catch(() => null);
+    let html2pdf = null;
+    try {
+      html2pdf = (await import('html2pdf.js')).default;
+    } catch (e) {
+      console.warn('html2pdf.js not available, using print fallback');
+    }
     
     if (!html2pdf) {
       // Fallback: Open resume in new window for printing
@@ -114,7 +119,7 @@ export async function downloadResumePDF() {
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     };
 
-    await html2pdf.default().set(opt).from(element).save();
+    await html2pdf().set(opt).from(element).save();
     
     // Cleanup
     document.body.removeChild(element);
