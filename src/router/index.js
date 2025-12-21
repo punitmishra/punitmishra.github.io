@@ -1,16 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { defineAsyncComponent } from "vue";
 
-// Lazy load ProjectDetail for better performance (only loads when navigating to project page)
 // Portfolio loads immediately since it's the main page
 import Portfolio from "@/views/PortfolioView.vue";
-const ProjectDetail = defineAsyncComponent({
-  loader: () => import("@/views/ProjectDetailView.vue"),
-  loadingComponent: null,
-  errorComponent: null,
-  delay: 200,
-  timeout: 3000,
-});
+
+// ProjectDetail lazy loads only when navigating to project page
+const ProjectDetail = defineAsyncComponent(() => import("@/views/ProjectDetailView.vue"));
 
 const routes = [
   {
