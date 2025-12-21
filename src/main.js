@@ -9,6 +9,8 @@ import { darkModeKey, styleKey } from "@/config.js";
 import { measurePerformance, lazyLoadImages } from "@/utils/performance.js";
 import { initScrollAnimations, initScrollProgress } from "@/utils/scrollEffects.js";
 import { initAnalytics, trackPageView, trackScrollDepth, trackTimeOnPage } from "@/utils/analytics.js";
+import { initScrollAnimations as initAdvancedAnimations } from "@/utils/animations.js";
+import { initPerformanceOptimizations } from "@/utils/performanceOptimizer.js";
 
 import "./css/main.css";
 
@@ -72,6 +74,19 @@ try {
         initScrollProgress();
         lazyLoadImages();
         measurePerformance();
+        initAdvancedAnimations();
+        initPerformanceOptimizations();
+        
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator && import.meta.env.PROD) {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('Service Worker registered:', registration);
+            })
+            .catch((error) => {
+              console.warn('Service Worker registration failed:', error);
+            });
+        }
       } catch (e) {
         console.warn('Performance optimizations error:', e);
       }
@@ -82,6 +97,19 @@ try {
       initScrollProgress();
       lazyLoadImages();
       measurePerformance();
+      initAdvancedAnimations();
+      initPerformanceOptimizations();
+      
+      // Register service worker for PWA
+      if ('serviceWorker' in navigator && import.meta.env.PROD) {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('Service Worker registered:', registration);
+          })
+          .catch((error) => {
+            console.warn('Service Worker registration failed:', error);
+          });
+      }
     } catch (e) {
       console.warn('Performance optimizations error:', e);
     }
