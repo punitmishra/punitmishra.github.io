@@ -7,7 +7,7 @@ import {
   mdiCalendar,
   mdiDownload,
   mdiDelete,
-  mdiSparkles,
+  mdiStar,
   mdiThoughtBubble,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
@@ -171,7 +171,7 @@ onMounted(() => {
               <BaseIcon :path="mdiBrain" size="32" class="text-white" />
             </div>
             <div class="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center animate-pulse">
-              <BaseIcon :path="mdiSparkles" size="14" class="text-white" />
+              <BaseIcon :path="mdiStar" size="14" class="text-white" />
             </div>
           </div>
           <div>
