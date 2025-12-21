@@ -30,11 +30,18 @@ import {
   mdiClockOutline,
   mdiTrendingUp,
   mdiBrain,
+  mdiWeatherNight,
+  mdiWeatherSunny,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import AIBotGenerator from "@/components/AIBotGenerator.vue";
+import AnimatedCounter from "@/components/AnimatedCounter.vue";
+import CodeSnippet from "@/components/CodeSnippet.vue";
+import TimelineItem from "@/components/TimelineItem.vue";
+import { useStyleStore } from "@/stores/style.js";
 
 const router = useRouter();
+const styleStore = useStyleStore();
 const githubUsername = "punitmishra";
 const linkedinUsername = "mishrapunit";
 
@@ -241,6 +248,90 @@ const education = [
 const certifications = [
   { name: "AWS Certified Solutions Architect", issuer: "Amazon Web Services", year: "2020" },
   { name: "Kubernetes Administrator", issuer: "CNCF", year: "2021" },
+];
+
+const keyAchievements = [
+  {
+    title: "Built v1 Core Application",
+    description: "Architected and built the first version of core SAP toolkit application from scratch, establishing engineering best practices and SDLC lifecycles",
+    icon: mdiRocket,
+    gradient: "from-blue-500 to-cyan-500",
+    metric: "v1.0",
+  },
+  {
+    title: "Performance Optimization",
+    description: "Improved system performance by 40% through optimization and caching strategies, significantly enhancing user experience",
+    icon: mdiLightningBolt,
+    gradient: "from-cyan-500 to-indigo-500",
+    metric: "40%",
+  },
+  {
+    title: "Cost Reduction",
+    description: "Reduced infrastructure costs by 30% through efficient resource utilization and optimization techniques",
+    icon: mdiChartLine,
+    gradient: "from-indigo-500 to-purple-500",
+    metric: "30%",
+  },
+  {
+    title: "AI/ML Infrastructure",
+    description: "Architected and implemented secure AI infrastructure with LLM-powered applications, built ML containers before LLMs existed",
+    icon: mdiRobot,
+    gradient: "from-purple-500 to-pink-500",
+    metric: "2+ years",
+  },
+  {
+    title: "Team Leadership",
+    description: "Mentored new interns and team members for 2+ years, building technical leadership capabilities and knowledge sharing",
+    icon: mdiAccountGroup,
+    gradient: "from-pink-500 to-red-500",
+    metric: "2+ years",
+  },
+  {
+    title: "Security & Compliance",
+    description: "Drove security compliance initiatives, ensuring enterprise-grade security standards across all systems",
+    icon: mdiShield,
+    gradient: "from-red-500 to-orange-500",
+    metric: "100%",
+  },
+];
+
+const blogPosts = [
+  {
+    title: "Building Secure Multi-Agent Systems",
+    excerpt: "Deep dive into architecting secure, scalable multi-agent systems using LangGraph and Rust. Learn about memory management, agent isolation, and performance optimization.",
+    category: "AI/ML",
+    date: "2024-01",
+  },
+  {
+    title: "From Silicon to Software: My AI Journey",
+    excerpt: "A personal story about transitioning from hardware engineering to AI infrastructure, and the lessons learned along the way.",
+    category: "Personal",
+    date: "2024-02",
+  },
+  {
+    title: "Rust for AI Infrastructure: Performance Benchmarks",
+    excerpt: "Technical deep-dive comparing Rust vs Python for AI infrastructure. Real-world benchmarks showing 3-5x performance improvements.",
+    category: "Technical",
+    date: "2024-03",
+  },
+  {
+    title: "AI Security in Production: Lessons Learned",
+    excerpt: "Best practices for securing AI systems in production environments. Covering bias detection, prompt injection prevention, and compliance.",
+    category: "Security",
+    date: "2024-04",
+  },
+  {
+    title: "Vector Search at Scale: CLIP Embeddings",
+    excerpt: "Building a production-ready vector search engine using CLIP embeddings. Handling millions of images with sub-second query times.",
+    category: "Technical",
+    date: "2024-05",
+  },
+  {
+    title: "Microservices Architecture Patterns",
+    excerpt: "Designing scalable microservices architectures for enterprise applications. Lessons from building systems serving global customers.",
+    category: "Technical",
+    date: "2024-06",
+  },
 ];
 
 const technicalExpertise = [
@@ -498,6 +589,13 @@ onMounted(() => {
             Experience
           </button>
           <button 
+            @click="styleStore.setDarkMode()"
+            class="flex items-center gap-2 px-6 py-2.5 text-gray-700 dark:text-gray-300 font-semibold font-display"
+          >
+            <BaseIcon :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight" size="20" />
+            <span>{{ styleStore.darkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+          </button>
+          <button 
             @click="scrollToSection('contact')" 
             class="block w-full text-left px-6 py-2.5 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 text-white rounded-full font-semibold font-display text-center hover:shadow-lg transition-all"
           >
@@ -565,22 +663,30 @@ onMounted(() => {
           </a>
         </div>
 
-        <!-- Stats -->
+        <!-- Stats with Animation -->
         <div class="flex flex-wrap justify-center gap-6 text-center">
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-4xl font-black text-blue-600 dark:text-blue-400 font-heading">{{ githubProfile.publicRepos || 0 }}</div>
+          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
+            <div class="text-4xl font-black text-blue-600 dark:text-blue-400 font-heading">
+              <AnimatedCounter :value="githubProfile.publicRepos || 0" />
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Repositories</div>
           </div>
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-4xl font-black text-cyan-600 dark:text-cyan-400 font-heading">{{ githubStats.totalStars }}</div>
+          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
+            <div class="text-4xl font-black text-cyan-600 dark:text-cyan-400 font-heading">
+              <AnimatedCounter :value="githubStats.totalStars" />
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Stars</div>
           </div>
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-4xl font-black text-cyan-600 dark:text-cyan-400 font-heading">{{ githubProfile.followers || 0 }}</div>
+          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
+            <div class="text-4xl font-black text-cyan-600 dark:text-cyan-400 font-heading">
+              <AnimatedCounter :value="githubProfile.followers || 0" />
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Followers</div>
           </div>
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-4xl font-black text-indigo-600 dark:text-indigo-400 font-heading">{{ totalYearsExperience }}+</div>
+          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
+            <div class="text-4xl font-black text-indigo-600 dark:text-indigo-400 font-heading">
+              <AnimatedCounter :value="totalYearsExperience" :suffix="'+'" />
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Years</div>
           </div>
         </div>
@@ -888,78 +994,19 @@ onMounted(() => {
           <p class="text-xl text-gray-600 dark:text-gray-400 font-display">{{ totalYearsExperience }}+ years building enterprise software</p>
         </div>
 
-        <div class="max-w-5xl mx-auto space-y-12">
-          <div
+        <div class="max-w-5xl mx-auto">
+          <TimelineItem
             v-for="(exp, index) in experience"
             :key="index"
-            class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border-l-4 border-blue-600"
-          >
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-              <div>
-                <h3 class="text-3xl font-bold mb-2 text-gray-900 dark:text-white font-heading">{{ exp.title }}</h3>
-                <p class="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-2 font-heading">{{ exp.company }}</p>
-                <div class="flex items-center gap-4 text-gray-500 dark:text-gray-400 font-display">
-                  <div class="flex items-center gap-2">
-                    <BaseIcon :path="mdiMapMarker" size="18" />
-                    <span>{{ exp.location }}</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <BaseIcon :path="mdiCalendar" size="18" />
-                    <span>{{ exp.period }} ({{ exp.duration }})</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white flex items-center gap-2 font-heading">
-                <BaseIcon :path="mdiChartLine" size="20" class="text-blue-600" />
-                Key Achievements
-              </h4>
-              <ul class="space-y-3">
-                <li
-                  v-for="(achievement, i) in exp.achievements"
-                  :key="i"
-                  class="flex items-start gap-3 text-gray-700 dark:text-gray-300 font-display"
-                >
-                  <BaseIcon :path="mdiCheckCircle" size="24" class="text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>{{ achievement }}</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white flex items-center gap-2 font-heading">
-                <BaseIcon :path="mdiLightningBolt" size="20" class="text-cyan-600" />
-                Highlights
-              </h4>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  v-for="highlight in exp.highlights"
-                  :key="highlight"
-                  class="px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-full text-sm font-semibold font-display"
-                >
-                  {{ highlight }}
-                </span>
-              </div>
-            </div>
-
-            <div>
-              <h4 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white flex items-center gap-2 font-heading">
-                <BaseIcon :path="mdiCodeBraces" size="20" class="text-indigo-600" />
-                Technologies
-              </h4>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  v-for="tech in exp.tech"
-                  :key="tech"
-                  class="px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-semibold font-display"
-                >
-                  {{ tech }}
-                </span>
-              </div>
-            </div>
-          </div>
+            :title="exp.title"
+            :subtitle="exp.company"
+            :period="`${exp.period} (${exp.duration})`"
+            :description="exp.location"
+            :achievements="exp.achievements"
+            :icon="mdiBriefcase"
+            :gradient="index === 0 ? 'from-blue-500 to-cyan-500' : index === 1 ? 'from-cyan-500 to-indigo-500' : 'from-indigo-500 to-purple-500'"
+            :is-last="index === experience.length - 1"
+          />
         </div>
 
         <!-- Education -->
@@ -1011,6 +1058,175 @@ onMounted(() => {
               </div>
               <p class="text-gray-600 dark:text-gray-400 text-sm font-display">{{ cert.issuer }}</p>
               <p class="text-gray-500 dark:text-gray-500 text-xs mt-1 font-mono">{{ cert.year }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Snippets Showcase -->
+    <section id="code" class="py-32 relative overflow-hidden fade-in">
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/30 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900/50"></div>
+      <div class="relative max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <BaseIcon :path="mdiCodeBraces" size="48" class="text-blue-600 dark:text-blue-400" />
+            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+              Code Showcase
+            </h2>
+          </div>
+          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Snippets from real projects and systems</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <CodeSnippet
+            title="Rust Memory Manager"
+            language="rust"
+            code="// High-performance memory orchestration
+async fn persist_memory(
+    agent_id: &str,
+    memory: &MemoryState,
+) -> Result&lt;(), MemoryError&gt; {
+    let encrypted = encrypt(memory)?;
+    let key = format!(&quot;agent:{}:memory&quot;, agent_id);
+    
+    redis_client
+        .set_ex(&amp;key, encrypted, TTL)
+        .await?;
+    
+    Ok(())
+}"
+          />
+          <CodeSnippet
+            title="Vector Search Engine"
+            language="python"
+            code="# CLIP-based image embeddings
+def search_similar_images(
+    query_image: np.ndarray,
+    top_k: int = 10
+) -&gt; List[SearchResult]:
+    query_embedding = clip_model.encode(query_image)
+    
+    # Vector similarity search
+    distances, indices = index.search(
+        query_embedding.reshape(1, -1),
+        top_k
+    )
+    
+    return [
+        SearchResult(image_id=idx, score=dist)
+        for idx, dist in zip(indices[0], distances[0])
+    ]"
+          />
+          <CodeSnippet
+            title="AI Security Monitor"
+            language="typescript"
+            code="// Real-time bias detection
+async function detectBias(
+  response: AIResponse
+): Promise&lt;BiasScore&gt; {
+  const biasIndicators = await analyze({
+    content: response.text,
+    context: response.context,
+    model: response.model
+  });
+  
+  return {
+    score: calculateScore(biasIndicators),
+    violations: biasIndicators.filter(v =&gt; v.severity &gt; 0.7),
+    timestamp: Date.now()
+  };
+}"
+          />
+          <CodeSnippet
+            title="Multi-Agent Orchestration"
+            language="python"
+            code="# LangGraph agent coordination
+from langgraph.graph import StateGraph
+
+def create_agent_workflow():
+    workflow = StateGraph(AgentState)
+    
+    workflow.add_node(&quot;researcher&quot;, research_agent)
+    workflow.add_node(&quot;analyzer&quot;, analysis_agent)
+    workflow.add_node(&quot;synthesizer&quot;, synthesis_agent)
+    
+    workflow.add_edge(&quot;researcher&quot;, &quot;analyzer&quot;)
+    workflow.add_edge(&quot;analyzer&quot;, &quot;synthesizer&quot;)
+    
+    return workflow.compile()"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements & Awards -->
+    <section id="achievements" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm fade-in">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <BaseIcon :path="mdiRocket" size="48" class="text-blue-600 dark:text-blue-400" />
+            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+              Key Achievements
+            </h2>
+          </div>
+          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Notable milestones and accomplishments</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            v-for="(achievement, index) in keyAchievements"
+            :key="index"
+            class="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all border border-gray-200 dark:border-slate-700"
+          >
+            <div :class="`w-14 h-14 rounded-xl bg-gradient-to-r ${achievement.gradient} flex items-center justify-center mb-4 shadow-lg`">
+              <BaseIcon :path="achievement.icon" size="28" class="text-white" />
+            </div>
+            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 font-heading">{{ achievement.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-400 font-display">{{ achievement.description }}</p>
+            <div v-if="achievement.metric" class="mt-4 pt-4 border-t border-gray-200 dark:border-slate-700">
+              <div class="text-3xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading">
+                {{ achievement.metric }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog & Thoughts -->
+    <section id="blog" class="py-32 relative overflow-hidden fade-in">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-cyan-50/50 to-indigo-50/50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50"></div>
+      <div class="relative max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <BaseIcon :path="mdiBrain" size="48" class="text-blue-600 dark:text-blue-400" />
+            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+              Thoughts & Insights
+            </h2>
+          </div>
+          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Engineering insights, technical deep-dives, and learnings</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            v-for="(article, index) in blogPosts"
+            :key="index"
+            class="group bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all border border-gray-200 dark:border-slate-700 cursor-pointer"
+          >
+            <div class="flex items-center gap-2 mb-4">
+              <span :class="`px-3 py-1 rounded-full text-xs font-semibold font-display ${article.category === 'Technical' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : article.category === 'AI/ML' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300'}`">
+                {{ article.category }}
+              </span>
+              <span class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{ article.date }}</span>
+            </div>
+            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading">
+              {{ article.title }}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 font-display line-clamp-3">{{ article.excerpt }}</p>
+            <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm">
+              <span>Read more</span>
+              <BaseIcon :path="mdiArrowRight" size="18" class="transform group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
