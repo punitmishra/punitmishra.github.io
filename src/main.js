@@ -8,6 +8,7 @@ import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
 import { measurePerformance, lazyLoadImages } from "@/utils/performance.js";
 import { initScrollAnimations, initScrollProgress } from "@/utils/scrollEffects.js";
+import { initAnalytics, trackPageView, trackScrollDepth, trackTimeOnPage } from "@/utils/analytics.js";
 
 import "./css/main.css";
 
@@ -50,15 +51,17 @@ if (
   styleStore.setDarkMode(true);
 }
 
-/* Default title tag */
-const defaultDocumentTitle = "Punit Mishra - Portfolio";
-
-/* Set document title from route meta */
-router.afterEach((to) => {
-  document.title = to.meta?.title
-    ? `${to.meta.title} — ${defaultDocumentTitle}`
-    : defaultDocumentTitle;
-});
+/* Initialize Analytics */
+if (import.meta.env.PROD) {
+  initAnalytics();
+  trackScrollDepth();
+  trackTimeOnPage();
+  
+  // Track initial page view
+  router.afterEach((to) => {
+    trackPageView(to.fullPath, to.meta?.title || 'Punit Mishra - Portfolio');
+  });
+}
 
 /* Performance optimizations - with error handling */
 try {
