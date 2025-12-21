@@ -60,17 +60,29 @@ router.afterEach((to) => {
     : defaultDocumentTitle;
 });
 
-/* Performance optimizations */
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initScrollAnimations();
-    initScrollProgress();
-    lazyLoadImages();
-    measurePerformance();
-  });
-} else {
-  initScrollAnimations();
-  initScrollProgress();
-  lazyLoadImages();
-  measurePerformance();
+/* Performance optimizations - with error handling */
+try {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        initScrollAnimations();
+        initScrollProgress();
+        lazyLoadImages();
+        measurePerformance();
+      } catch (e) {
+        console.warn('Performance optimizations error:', e);
+      }
+    });
+  } else {
+    try {
+      initScrollAnimations();
+      initScrollProgress();
+      lazyLoadImages();
+      measurePerformance();
+    } catch (e) {
+      console.warn('Performance optimizations error:', e);
+    }
+  }
+} catch (e) {
+  console.warn('Failed to initialize performance optimizations:', e);
 }

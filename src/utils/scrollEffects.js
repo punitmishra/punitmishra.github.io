@@ -62,17 +62,30 @@ export const smoothScrollTo = (elementId, offset = 80) => {
  * Progress bar for page scroll
  */
 export const initScrollProgress = () => {
-  const progressBar = document.createElement('div');
-  progressBar.className = 'fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 z-50 transition-all duration-150';
-  progressBar.style.width = '0%';
-  document.body.appendChild(progressBar);
+  try {
+    // Check if progress bar already exists
+    if (document.querySelector('.scroll-progress-bar')) return;
+    
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress-bar fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 z-50 transition-all duration-150';
+    progressBar.style.width = '0%';
+    document.body.appendChild(progressBar);
 
-  const updateProgress = () => {
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.pageYOffset / windowHeight) * 100;
-    progressBar.style.width = `${scrolled}%`;
-  };
+    const updateProgress = () => {
+      try {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (windowHeight > 0) {
+          const scrolled = (window.pageYOffset / windowHeight) * 100;
+          progressBar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
+        }
+      } catch (e) {
+        // Silently fail on scroll updates
+      }
+    };
 
-  window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('scroll', updateProgress, { passive: true });
+  } catch (e) {
+    console.warn('Failed to initialize scroll progress:', e);
+  }
 };
 

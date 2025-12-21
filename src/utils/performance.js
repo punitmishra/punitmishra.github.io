@@ -84,7 +84,8 @@ export const isInViewport = (element) => {
  * Measure performance metrics
  */
 export const measurePerformance = () => {
-  if ('performance' in window && 'PerformanceObserver' in window) {
+  // Only run in development to avoid console logs in production
+  if (import.meta.env.DEV && 'performance' in window && 'PerformanceObserver' in window) {
     try {
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
@@ -98,7 +99,7 @@ export const measurePerformance = () => {
       });
       observer.observe({ entryTypes: ['navigation', 'paint'] });
     } catch (e) {
-      // Performance observer not supported
+      // Performance observer not supported or error
     }
   }
 };
