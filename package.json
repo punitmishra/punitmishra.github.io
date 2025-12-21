@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@mdi/js": "^7.4.47",
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
