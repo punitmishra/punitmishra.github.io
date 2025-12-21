@@ -38,6 +38,7 @@ import AIBotGenerator from "@/components/AIBotGenerator.vue";
 import AnimatedCounter from "@/components/AnimatedCounter.vue";
 import CodeSnippet from "@/components/CodeSnippet.vue";
 import TimelineItem from "@/components/TimelineItem.vue";
+import ContactForm from "@/components/ContactForm.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const router = useRouter();
@@ -1235,28 +1236,32 @@ def create_agent_workflow():
 
     <!-- Contact -->
     <section id="contact" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-          Let's Connect
-        </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-400 mb-4 font-display">
-          Ready to collaborate on your next project? Let's build something amazing together.
-        </p>
-        <p class="text-gray-500 dark:text-gray-500 mb-12 font-display">
-          Open to opportunities in AI/ML infrastructure, software development, and systems engineering.
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a
-            v-for="link in socialLinks"
-            :key="link.label"
-            :href="link.url"
-            target="_blank"
-            :class="`group flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-800 rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all ${link.color} text-gray-700 dark:text-gray-300 font-semibold font-display`"
-          >
-            <BaseIcon :path="link.icon" size="24" />
-            <span>{{ link.label }}</span>
-          </a>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+            Let's Connect
+          </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-400 mb-4 font-display">
+            Ready to collaborate on your next project? Let's build something amazing together.
+          </p>
+          <p class="text-gray-500 dark:text-gray-500 mb-8 font-display">
+            Open to opportunities in AI/ML infrastructure, software development, and systems engineering.
+          </p>
+          <!-- Social Links -->
+          <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <a
+              v-for="link in socialLinks"
+              :key="link.label"
+              :href="link.url"
+              target="_blank"
+              :class="`group flex items-center gap-3 px-6 py-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all ${link.color} text-gray-700 dark:text-gray-300 font-semibold font-display`"
+            >
+              <BaseIcon :path="link.icon" size="20" />
+              <span>{{ link.label }}</span>
+            </a>
+          </div>
         </div>
+        <ContactForm />
       </div>
     </section>
 
