@@ -31,10 +31,8 @@ import {
   mdiTrendingUp,
   mdiBrain,
 } from "@mdi/js";
-import { defineAsyncComponent } from "vue";
 import BaseIcon from "@/components/BaseIcon.vue";
-// Lazy load heavy component for better performance
-const AIBotGenerator = defineAsyncComponent(() => import("@/components/AIBotGenerator.vue"));
+import AIBotGenerator from "@/components/AIBotGenerator.vue";
 
 const router = useRouter();
 const githubUsername = "punitmishra";
