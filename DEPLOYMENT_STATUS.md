@@ -1,61 +1,102 @@
-# Deployment Status ✅
+# Deployment Status 🚀
 
-## Configuration Verified
+## ✅ Successfully Configured
 
-- ✅ **Base Path**: `/` (root domain)
-- ✅ **Router**: Hash-based (`createWebHashHistory`) - GitHub Pages compatible
-- ✅ **CNAME**: Configured for punitmishra.com and www.punitmishra.com
-- ✅ **GitHub Actions**: Workflow configured for automatic deployment
-- ✅ **Package.json**: All dependencies included
-- ✅ **Vite Config**: Correctly configured for root domain
-- ✅ **No Linting Errors**: Code is clean
+### Railway Deployment 🚂
+- **Railway Project**: Linked ✅
+- **Configuration**: `railway.json` configured ✅
+- **Build Command**: `npm run build` ✅
+- **Start Command**: `npm start` (uses `serve`) ✅
+- **Port Handling**: Dynamic PORT support ✅
+- **Dependencies**: `serve` package installed ✅
+- **GitHub Connected**: https://github.com/punitmishra/punitmishra.github.io ✅
 
-## Files Structure
+### Vercel Deployment (Alternative)
+- **Vercel CLI**: Logged in ✅
+- **Project Linked**: `punit-mishras-projects/punitmishra.github.io` ✅
+- **Configuration**: Auto-detected and configured ✅
+- **Build Settings**: Optimized ✅
 
-- ✅ `src/` - All Vue.js components and views
-- ✅ `public/` - Static assets including favicon
-- ✅ `index.html` - Entry point with proper meta tags
-- ✅ `.github/workflows/deploy.yml` - Deployment workflow
-- ✅ `CNAME` - Custom domain configuration
-- ✅ `package.json` - Dependencies and scripts
-- ✅ `vite.config.js` - Build configuration
-- ✅ `tailwind.config.js` - Tailwind CSS configuration
+## ⚠️ Vercel Rate Limit (Optional)
 
-## Features Included
+**Issue**: Vercel free plan allows 100 deployments per day
+**Status**: Limit reached, need to wait 2 hours (if using Vercel)
 
-- ✅ Modern portfolio with blue-cyan-indigo theme
-- ✅ "What's in Punit's Mind" AI bot generator
-- ✅ Latest projects section with detail pages
-- ✅ GitHub API integration
-- ✅ Smooth navigation with hash routing
-- ✅ Responsive design
-- ✅ Project detail pages
+## 🎯 Next Steps
 
-## Deployment
+### Railway Deployment (Primary) 🚂
 
-The site will be automatically deployed when:
-1. Code is pushed to `main` branch
-2. GitHub Actions workflow runs
-3. Build completes successfully
-4. Deployment to GitHub Pages
+**Railway is now linked and ready!**
 
-## URLs
+1. **Push changes to trigger auto-deploy**:
+   ```bash
+   git add .
+   git commit -m "Configure Railway deployment"
+   git push origin main
+   ```
 
-- **Custom Domain**: https://punitmishra.com
-- **GitHub Pages**: https://punitmishra.github.io
+2. **Or manually deploy via Railway Dashboard**:
+   - Go to https://railway.app
+   - Your project should be linked
+   - Click "Deploy" or it will auto-deploy on push
 
-## Next Steps
+3. **Verify deployment**:
+   - Check Railway dashboard for build logs
+   - Visit your Railway URL once deployed
+   - Test all routes (SPA routing should work)
 
-1. ✅ Code pushed to repository
-2. ⏳ GitHub Actions workflow will run automatically
-3. ⏳ Monitor deployment at: https://github.com/punitmishra/punitmishra.github.io/actions
-4. ⏳ Site will be live once workflow completes
+### Vercel Deployment (Alternative)
 
-## Troubleshooting
+**Option 1**: Wait and Deploy
+```bash
+# Wait 2 hours, then run:
+cd /Users/punitmishra/punitmishra.github.io
+vercel --prod
+```
 
-If deployment fails:
-- Check GitHub Actions logs
-- Verify Node.js version (should be 18+)
-- Ensure all dependencies are in package.json
-- Check that base path is "/" in vite.config.js
+**Option 2**: Deploy via GitHub Integration
+1. Go to https://vercel.com
+2. Your project should already be linked
+3. Click "Deploy" button in dashboard
 
+## 📊 Project Details
+
+- **Framework**: Vite (Vue.js 3)
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Start Command**: `npm start` (serves `dist` folder)
+- **Port**: Dynamic (uses Railway's PORT env variable)
+- **Repository**: https://github.com/punitmishra/punitmishra.github.io
+
+### Railway Configuration
+- **Builder**: NIXPACKS (auto-detected)
+- **Build Command**: `npm run build`
+- **Start Command**: `npm start`
+- **Restart Policy**: ON_FAILURE (max 10 retries)
+
+## 🔗 Useful Links
+
+- **Railway Dashboard**: https://railway.app (check your project)
+- **GitHub Repo**: https://github.com/punitmishra/punitmishra.github.io
+- **Railway Docs**: https://docs.railway.app
+- **Vercel Dashboard**: https://vercel.com/punit-mishras-projects/punitmishra-github-io (alternative)
+
+## ✨ What's Ready
+
+- ✅ Railway project linked and configured
+- ✅ Build configuration optimized
+- ✅ `railway.json` configured with correct commands
+- ✅ `serve` package installed as dependency
+- ✅ Port handling configured for Railway
+- ✅ Build tested and working locally
+- ✅ GitHub integration connected
+- ✅ Ready to deploy!
+
+## 🚀 Once Deployed
+
+Your site will be available at:
+- **Railway URL**: Check your Railway dashboard for the generated URL
+- **Custom Domain**: Can be configured in Railway dashboard
+- **Vercel URL**: `https://punitmishra-github-io.vercel.app` (if using Vercel)
+
+**Automatic deployments** will happen on every push to `main` branch on Railway!

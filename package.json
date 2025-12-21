@@ -9,29 +9,32 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@mdi/js": "^7.0.96",
-    "@rushstack/eslint-patch": "^1.1.4",
-    "axios": "^0.27.0",
-    "chart.js": "^3.6.0",
+    "@mdi/js": "^7.4.47",
+    "axios": "^1.7.7",
+    "chart.js": "^4.4.6",
     "numeral": "^2.0.6",
-    "pinia": "^2.0.13",
-    "serve": "^14.2.1",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0"
+    "pinia": "^2.2.6",
+    "serve": "^14.2.4",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.1.4",
-    "@tailwindcss/forms": "^0.5.1",
-    "@tailwindcss/line-clamp": "^0.4.0",
-    "@vitejs/plugin-vue": "^3.0.3",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "autoprefixer": "^10.2.6",
-    "eslint": "^8.5.0",
-    "eslint-plugin-vue": "^9.0.0",
-    "postcss": "^8.3.0",
-    "postcss-import": "^14.0.2",
-    "prettier": "^2.7.1",
-    "tailwindcss": "^3.0.14",
-    "vite": "^3.0.9"
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.30.0",
+    "postcss": "^8.4.47",
+    "postcss-import": "^16.1.0",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.11"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }
