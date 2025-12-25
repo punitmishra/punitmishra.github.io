@@ -45,10 +45,24 @@ import ResumeDownload from "@/components/ResumeDownload.vue";
 import GitHubContributionGraph from "@/components/GitHubContributionGraph.vue";
 import TypingAnimation from "@/components/TypingAnimation.vue";
 import ParticleBackground from "@/components/ParticleBackground.vue";
+import GradientMesh from "@/components/GradientMesh.vue";
 import CommandPalette from "@/components/CommandPalette.vue";
+import BentoCard from "@/components/BentoCard.vue";
+import NowSection from "@/components/NowSection.vue";
+import StatsGrid from "@/components/StatsGrid.vue";
+import SkillRing from "@/components/SkillRing.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
+
+// Skill categories for ring visualization
+const skillCategories = [
+  { name: 'Frontend', level: 95, color: '#3b82f6' },
+  { name: 'Backend', level: 90, color: '#10b981' },
+  { name: 'AI/ML', level: 85, color: '#8b5cf6' },
+  { name: 'DevOps', level: 80, color: '#f59e0b' },
+  { name: 'Systems', level: 85, color: '#ec4899' },
+];
 
 const router = useRouter();
 const styleStore = useStyleStore();
@@ -527,9 +541,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
-    <!-- Particle Background -->
-    <ParticleBackground />
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
+    <!-- Animated Gradient Mesh Background -->
+    <GradientMesh />
 
     <!-- Command Palette -->
     <CommandPalette ref="commandPaletteRef" @navigate="scrollToSection" />
@@ -666,129 +680,169 @@ onMounted(() => {
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <!-- Subtle gradient orbs -->
-      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-3xl"></div>
+      <div class="relative z-10 max-w-6xl mx-auto px-6">
+        <!-- Bento Grid Hero Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
 
-      <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        <!-- Hero Image - Clean & Professional -->
-        <div class="mb-10 relative inline-block group" v-scroll-reveal>
-          <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
-          <img
-            :src="githubProfile.avatar || `https://github.com/${githubUsername}.png`"
-            :alt="githubProfile.name || 'Punit Mishra'"
-            class="relative w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white dark:border-slate-900 shadow-2xl object-cover"
-            loading="eager"
-            fetchpriority="high"
+          <!-- Main Hero Content - Spans 2 columns -->
+          <div class="lg:col-span-2 text-center lg:text-left" v-scroll-reveal>
+            <!-- Status Badge -->
+            <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 glass-premium rounded-full">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Available for opportunities</span>
+            </div>
+
+            <!-- Name with gradient animation -->
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight font-heading tracking-tight">
+              <span class="text-gray-900 dark:text-white">Hi, I'm </span>
+              <span class="text-gradient-animate">{{ githubProfile.name?.split(' ')[0] || "Punit" }}</span>
+            </h1>
+
+            <!-- Typing Animation -->
+            <div class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-6 font-medium h-8">
+              <TypingAnimation
+                :texts="['Senior Software Engineer @ SAP', 'AI/ML Infrastructure Architect', 'UC Berkeley Alumni', 'Full Stack Developer']"
+                :typing-speed="60"
+                :deleting-speed="30"
+                :pause-duration="3000"
+              />
+            </div>
+
+            <!-- Description -->
+            <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl leading-relaxed">
+              Building enterprise-grade AI systems and scalable infrastructure.
+              {{ totalYearsExperience }}+ years of shipping products that matter.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap justify-center lg:justify-start items-center gap-3">
+              <a
+                :href="`https://github.com/${githubUsername}`"
+                target="_blank"
+                class="group flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 shine"
+              >
+                <BaseIcon :path="mdiGithub" size="20" />
+                <span>GitHub</span>
+              </a>
+              <a
+                :href="`https://linkedin.com/in/${linkedinUsername}`"
+                target="_blank"
+                class="group flex items-center gap-2 px-6 py-3 glass-premium rounded-full font-medium text-gray-700 dark:text-gray-200 hover:-translate-y-0.5 transition-all"
+              >
+                <BaseIcon :path="mdiLinkedin" size="20" />
+                <span>LinkedIn</span>
+              </a>
+              <ResumeDownload />
+            </div>
+          </div>
+
+          <!-- Profile Card - Right column -->
+          <div class="hidden lg:block" v-scroll-reveal="{ delay: '200ms' }">
+            <div class="relative group">
+              <!-- Glow effect -->
+              <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+
+              <!-- Card -->
+              <div class="relative glass-premium rounded-3xl p-6 gradient-border">
+                <div class="flex flex-col items-center">
+                  <img
+                    :src="githubProfile.avatar || `https://github.com/${githubUsername}.png`"
+                    :alt="githubProfile.name || 'Punit Mishra'"
+                    class="w-32 h-32 rounded-2xl shadow-xl mb-4 float"
+                    loading="eager"
+                  />
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading">{{ githubProfile.name }}</h3>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ githubProfile.company }}</p>
+
+                  <!-- Mini stats -->
+                  <div class="grid grid-cols-3 gap-4 w-full pt-4 border-t border-gray-200/50 dark:border-slate-700/50">
+                    <div class="text-center">
+                      <div class="text-xl font-bold text-gray-900 dark:text-white">{{ githubProfile.publicRepos }}</div>
+                      <div class="text-xs text-gray-500">Repos</div>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-xl font-bold text-gray-900 dark:text-white">{{ totalYearsExperience }}+</div>
+                      <div class="text-xs text-gray-500">Years</div>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-xl font-bold text-gray-900 dark:text-white">{{ githubProfile.followers }}</div>
+                      <div class="text-xs text-gray-500">Followers</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid below hero -->
+        <div class="mt-16" v-scroll-reveal="{ delay: '400ms' }">
+          <StatsGrid
+            :repos="githubProfile.publicRepos"
+            :stars="githubStats.totalStars"
+            :followers="githubProfile.followers"
+            :years="totalYearsExperience"
           />
-        </div>
-
-        <!-- Status Badge -->
-        <div class="mb-6" v-scroll-reveal="{ delay: '100ms' }">
-          <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium border border-emerald-200/50 dark:border-emerald-800/50">
-            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-            Available for opportunities
-          </span>
-        </div>
-
-        <!-- Name -->
-        <h1
-          class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 text-gray-900 dark:text-white leading-tight font-heading tracking-tight"
-          v-scroll-reveal="{ delay: '150ms' }"
-        >
-          {{ githubProfile.name || "Punit Mishra" }}
-        </h1>
-
-        <!-- Typing Animation Bio -->
-        <div class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-4 font-medium h-8" v-scroll-reveal="{ delay: '200ms' }">
-          <TypingAnimation
-            :texts="['Senior Software Engineer', 'AI/ML Infrastructure Architect', 'Systems Designer', 'Full Stack Developer']"
-            :typing-speed="80"
-            :deleting-speed="40"
-            :pause-duration="2500"
-          />
-        </div>
-
-        <!-- Description -->
-        <p
-          class="text-lg text-gray-500 dark:text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed"
-          v-scroll-reveal="{ delay: '250ms' }"
-        >
-          {{ totalYearsExperience }}+ years building enterprise-scale applications. From silicon to software—specializing in AI/ML infrastructure, distributed systems, and modern web technologies.
-        </p>
-
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap justify-center items-center gap-4 mb-16" v-scroll-reveal="{ delay: '300ms' }">
-          <a
-            :href="`https://github.com/${githubUsername}`"
-            target="_blank"
-            class="group flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
-          >
-            <BaseIcon :path="mdiGithub" size="20" />
-            <span>View GitHub</span>
-          </a>
-          <a
-            :href="`https://linkedin.com/in/${linkedinUsername}`"
-            target="_blank"
-            class="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-full font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-all shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700"
-          >
-            <BaseIcon :path="mdiLinkedin" size="20" />
-            <span>Connect</span>
-          </a>
-          <ResumeDownload />
-        </div>
-
-        <!-- Stats - Minimal & Clean -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto" v-scroll-reveal="{ delay: '350ms' }">
-          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
-              <AnimatedCounter :value="githubProfile.publicRepos || 0" />
-            </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Repositories</div>
-          </div>
-          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
-              <AnimatedCounter :value="githubStats.totalStars" />
-            </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Stars</div>
-          </div>
-          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
-              <AnimatedCounter :value="githubProfile.followers || 0" />
-            </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Followers</div>
-          </div>
-          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
-            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
-              <AnimatedCounter :value="totalYearsExperience" :suffix="'+'" />
-            </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Years Exp</div>
-          </div>
         </div>
       </div>
 
       <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div class="w-6 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full flex justify-center pt-2">
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-50 hover:opacity-100 transition-opacity">
+        <div class="w-6 h-10 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center pt-2">
           <div class="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
         </div>
       </div>
     </section>
 
-    <!-- What's in Punit's Mind -->
+    <!-- About / Now Section - Bento Grid -->
     <section class="py-24 relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-4">AI Insights</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
-            What's on My Mind
-          </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Current thoughts, active projects, and engineering insights powered by AI.
-          </p>
-        </div>
-        <div v-scroll-reveal="{ delay: '150ms' }">
-          <AIBotGenerator />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Now Card - Large -->
+          <BentoCard span="col" variant="glass" v-scroll-reveal>
+            <NowSection />
+          </BentoCard>
+
+          <!-- Skills Rings Card -->
+          <BentoCard variant="default" v-scroll-reveal="{ delay: '100ms' }">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 font-heading">Core Expertise</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+              <SkillRing
+                v-for="skill in skillCategories.slice(0, 3)"
+                :key="skill.name"
+                :name="skill.name"
+                :level="skill.level"
+                :color="skill.color"
+                :size="80"
+                :stroke-width="6"
+              />
+            </div>
+          </BentoCard>
+
+          <!-- Education Highlight -->
+          <BentoCard variant="gradient" v-scroll-reveal="{ delay: '200ms' }">
+            <div class="text-white">
+              <div class="text-sm font-medium opacity-80 mb-2">Education</div>
+              <h3 class="text-2xl font-bold mb-2 font-heading">UC Berkeley</h3>
+              <p class="text-sm opacity-90 mb-4">Computer Science • AI, Architecture, Networks</p>
+              <div class="text-xs opacity-70">International Student Scholarship Recipient</div>
+            </div>
+          </BentoCard>
+
+          <!-- AI Bot - Wide -->
+          <BentoCard span="2" variant="glass" v-scroll-reveal="{ delay: '300ms' }">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <span class="text-sm font-medium text-gray-500 dark:text-gray-400">AI Insights</span>
+            </div>
+            <AIBotGenerator />
+          </BentoCard>
         </div>
       </div>
     </section>
