@@ -52,6 +52,7 @@ import NowSection from "@/components/NowSection.vue";
 import StatsGrid from "@/components/StatsGrid.vue";
 import SkillRing from "@/components/SkillRing.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
+import BlogSection from "@/components/BlogSection.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
@@ -304,45 +305,6 @@ const keyAchievements = [
   },
 ];
 
-const blogPosts = [
-  {
-    title: "Building Secure Multi-Agent Systems",
-    excerpt: "Deep dive into architecting secure, scalable multi-agent systems using LangGraph and Rust. Learn about memory management, agent isolation, and performance optimization.",
-    category: "AI/ML",
-    date: "2024-01",
-  },
-  {
-    title: "From Silicon to Software: My AI Journey",
-    excerpt: "A personal story about transitioning from hardware engineering to AI infrastructure, and the lessons learned along the way.",
-    category: "Personal",
-    date: "2024-02",
-  },
-  {
-    title: "Rust for AI Infrastructure: Performance Benchmarks",
-    excerpt: "Technical deep-dive comparing Rust vs Python for AI infrastructure. Real-world benchmarks showing 3-5x performance improvements.",
-    category: "Technical",
-    date: "2024-03",
-  },
-  {
-    title: "AI Security in Production: Lessons Learned",
-    excerpt: "Best practices for securing AI systems in production environments. Covering bias detection, prompt injection prevention, and compliance.",
-    category: "Security",
-    date: "2024-04",
-  },
-  {
-    title: "Vector Search at Scale: CLIP Embeddings",
-    excerpt: "Building a production-ready vector search engine using CLIP embeddings. Handling millions of images with sub-second query times.",
-    category: "Technical",
-    date: "2024-05",
-  },
-  {
-    title: "Microservices Architecture Patterns",
-    excerpt: "Designing scalable microservices architectures for enterprise applications. Lessons from building systems serving global customers.",
-    category: "Technical",
-    date: "2024-06",
-  },
-];
-
 const technicalExpertise = [
   {
     category: "Software Development",
@@ -579,6 +541,13 @@ onMounted(() => {
             Experience
             <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
           </button>
+          <button
+            @click="scrollToSection('blog')"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Blog
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </button>
 
           <!-- Command Palette Trigger -->
           <button
@@ -640,13 +609,19 @@ onMounted(() => {
           >
             Skills
           </button>
-          <button 
-            @click="scrollToSection('experience')" 
+          <button
+            @click="scrollToSection('experience')"
             class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
           >
             Experience
           </button>
-          <button 
+          <button
+            @click="scrollToSection('blog')"
+            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+          >
+            Blog
+          </button>
+          <button
             @click="styleStore.setDarkMode()"
             class="flex items-center gap-2 px-6 py-2.5 text-gray-700 dark:text-gray-300 font-semibold font-display"
           >
@@ -1417,48 +1392,8 @@ def create_agent_workflow():
       </div>
     </section>
 
-    <!-- Blog & Thoughts -->
-    <section id="blog" class="py-24 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/30 dark:from-slate-900/50 dark:via-slate-900 dark:to-slate-800/50"></div>
-      <div class="relative max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20 rounded-full mb-4">Writing</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
-            Thoughts & Insights
-          </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">Engineering insights and technical deep-dives</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div
-            v-for="(article, index) in blogPosts"
-            :key="index"
-            class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 cursor-pointer hover:-translate-y-1 overflow-hidden"
-            v-scroll-reveal="{ delay: `${index * 75}ms` }"
-          >
-            <!-- Subtle gradient on hover -->
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-            <div class="relative">
-              <div class="flex items-center gap-2 mb-4">
-                <span :class="`px-3 py-1 rounded-full text-xs font-medium font-display ${article.category === 'Technical' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : article.category === 'AI/ML' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : article.category === 'Security' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300'}`">
-                  {{ article.category }}
-                </span>
-                <span class="text-xs text-gray-400 dark:text-gray-500 font-mono">{{ article.date }}</span>
-              </div>
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading leading-tight">
-                {{ article.title }}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 font-display leading-relaxed line-clamp-3">{{ article.excerpt }}</p>
-              <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium text-sm group-hover:gap-3 transition-all">
-                <span>Read article</span>
-                <BaseIcon :path="mdiArrowRight" size="16" class="transform group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Blog Section - Dynamic articles from content/blog -->
+    <BlogSection />
 
     <!-- Contact -->
     <section id="contact" class="py-24 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
@@ -1515,6 +1450,7 @@ def create_agent_workflow():
           <div class="flex items-center gap-6 text-sm">
             <button @click="scrollToSection('projects')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</button>
             <button @click="scrollToSection('experience')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</button>
+            <button @click="scrollToSection('blog')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</button>
             <button @click="scrollToSection('contact')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</button>
           </div>
 

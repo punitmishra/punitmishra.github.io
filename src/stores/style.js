@@ -44,6 +44,11 @@ export const useStyleStore = defineStore("style", {
       }
 
       if (typeof document !== "undefined") {
+        // Add/remove 'dark' class on HTML element for Tailwind dark mode
+        document.documentElement.classList[this.darkMode ? "add" : "remove"](
+          "dark"
+        );
+
         document.body.classList[this.darkMode ? "add" : "remove"](
           "dark-scrollbars"
         );

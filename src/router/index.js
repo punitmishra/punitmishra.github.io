@@ -5,8 +5,9 @@ import { initSEO } from "@/utils/seo";
 // Portfolio loads immediately since it's the main page
 import Portfolio from "@/views/PortfolioView.vue";
 
-// ProjectDetail lazy loads only when navigating to project page
+// Lazy load views for better performance
 const ProjectDetail = defineAsyncComponent(() => import("@/views/ProjectDetailView.vue"));
+const BlogArticle = defineAsyncComponent(() => import("@/views/BlogArticleView.vue"));
 
 const routes = [
   {
@@ -26,6 +27,15 @@ const routes = [
     path: "/project/:id",
     name: "project-detail",
     component: ProjectDetail,
+  },
+  {
+    meta: {
+      title: "Blog Article",
+      description: "Technical articles and insights on AI/ML, software engineering, and systems design.",
+    },
+    path: "/blog/:slug",
+    name: "blog-article",
+    component: BlogArticle,
   },
 ];
 
