@@ -13,8 +13,8 @@ export function generateResumeData() {
     personalInfo: {
       name: 'Punit Mishra',
       title: 'Senior Software Engineer',
-      email: 'punitmishra@example.com',
-      website: 'https://punitmishra.com',
+      email: 'contact@punitmishra.com',
+      website: 'https://punitmishra.github.io',
       location: 'San Francisco Bay Area, CA',
       github: 'https://github.com/punitmishra',
       linkedin: 'https://linkedin.com/in/mishrapunit',
@@ -23,47 +23,48 @@ export function generateResumeData() {
     experience: [
       {
         title: 'Senior Software Engineer',
-        company: 'SAP',
+        company: 'Enterprise Software Company',
         period: '2013 - Present',
         duration: '11+ years',
         location: 'San Francisco Bay Area, CA',
         achievements: [
-          'Built v1 of core SAP toolkit application from scratch',
-          'Led development of scalable microservices architecture',
+          'Built v1 of core enterprise toolkit application from scratch',
+          'Led development of scalable microservices architecture serving millions of users',
           'Architected secure AI infrastructure with LLM-powered applications',
-          'Improved system performance by 40%',
-          'Reduced infrastructure costs by 30%',
+          'Improved system performance by 40% through optimization initiatives',
+          'Reduced infrastructure costs by 30% via cloud architecture improvements',
         ],
         tech: ['Vue.js', 'React', 'Next.js', 'Node.js', 'Python', 'Rust', 'AWS', 'Docker', 'Kubernetes'],
       },
       {
         title: 'Software Engineer',
-        company: 'IBM',
+        company: 'Technology Company',
         period: '2011 - 2013',
-        duration: '1.5 years',
+        duration: '2 years',
         location: 'United States',
         achievements: [
-          'Developed enterprise software solutions',
-          'Contributed to system design and architecture',
+          'Developed enterprise software solutions for global clients',
+          'Contributed to system design and architecture decisions',
+          'Built data processing pipelines handling millions of records',
         ],
-        tech: ['Java', 'JavaScript', 'SQL'],
+        tech: ['Java', 'JavaScript', 'SQL', 'Python'],
       },
     ],
     education: [
       {
-        degree: "Bachelor's in Computer Engineering",
-        school: 'University',
+        degree: "Bachelor's in Computer Science",
+        school: 'UC Berkeley',
         period: '2007 - 2011',
         specializations: [
-          'GPU and System Design',
-          'Microfabrication and Microelectronics',
+          'Computer Architecture & Systems',
+          'Artificial Intelligence',
         ],
       },
     ],
     skills: [
-      { category: 'Languages', items: ['JavaScript/TypeScript', 'Python', 'Rust', 'Java'] },
-      { category: 'Frameworks', items: ['Vue.js', 'React', 'Next.js', 'Node.js'] },
-      { category: 'AI/ML', items: ['LangGraph', 'LangChain', 'Vector Search', 'CLIP'] },
+      { category: 'Languages', items: ['JavaScript/TypeScript', 'Python', 'Rust', 'Java', 'Go'] },
+      { category: 'Frameworks', items: ['Vue.js', 'React', 'Next.js', 'Node.js', 'FastAPI'] },
+      { category: 'AI/ML', items: ['LangGraph', 'LangChain', 'Vector Search', 'CLIP', 'PyTorch'] },
       { category: 'Infrastructure', items: ['AWS', 'Docker', 'Kubernetes', 'PostgreSQL', 'Redis'] },
     ],
     certifications: [
@@ -77,62 +78,72 @@ export function generateResumeData() {
  * Download resume as PDF using html2pdf
  */
 export async function downloadResumePDF() {
+  const resumeData = generateResumeData();
+  const resumeHTML = generateResumeHTML(resumeData);
+
   try {
     // Track download
     trackDownload('resume', 'resume.pdf');
 
-    // Check if html2pdf is available
-    let html2pdf = null;
-    try {
-      html2pdf = (await import('html2pdf.js')).default;
-    } catch (e) {
-      console.warn('html2pdf.js not available, using print fallback');
-    }
-    
+    // Dynamically import html2pdf
+    const html2pdfModule = await import('html2pdf.js');
+    const html2pdf = html2pdfModule.default || html2pdfModule;
+
     if (!html2pdf) {
-      // Fallback: Open resume in new window for printing
-      const resumeWindow = window.open('', '_blank');
-      const resumeData = generateResumeData();
-      const resumeHTML = generateResumeHTML(resumeData);
-      resumeWindow.document.write(resumeHTML);
-      resumeWindow.document.close();
-      resumeWindow.print();
-      return;
+      throw new Error('html2pdf module not loaded');
     }
 
-    const resumeData = generateResumeData();
-    const resumeHTML = generateResumeHTML(resumeData);
-    
-    // Create temporary element
-    const element = document.createElement('div');
-    element.innerHTML = resumeHTML;
-    element.style.position = 'absolute';
-    element.style.left = '-9999px';
-    document.body.appendChild(element);
+    // Create temporary container
+    const container = document.createElement('div');
+    container.innerHTML = resumeHTML;
+    container.style.cssText = 'position: absolute; left: -9999px; top: 0; width: 210mm;';
+    document.body.appendChild(container);
 
-    // Generate PDF
-    const opt = {
-      margin: [10, 10, 10, 10],
+    // Get the body content for PDF generation
+    const content = container.querySelector('body') || container;
+
+    // PDF options
+    const options = {
+      margin: 10,
       filename: 'Punit_Mishra_Resume.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        letterRendering: true,
+        logging: false
+      },
+      jsPDF: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait'
+      },
     };
 
-    await html2pdf().set(opt).from(element).save();
-    
+    // Generate and save PDF
+    await html2pdf().set(options).from(content).save();
+
     // Cleanup
-    document.body.removeChild(element);
+    document.body.removeChild(container);
+
   } catch (error) {
     console.error('Error generating PDF:', error);
-    // Fallback to print
-    alert('PDF generation failed. Opening print dialog instead.');
-    const resumeData = generateResumeData();
-    const resumeHTML = generateResumeHTML(resumeData);
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(resumeHTML);
-    printWindow.document.close();
-    printWindow.print();
+
+    // Fallback: Open in new window for printing
+    try {
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      if (printWindow) {
+        printWindow.document.write(resumeHTML);
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => printWindow.print(), 500);
+      } else {
+        alert('Please allow popups to download the resume, or disable your popup blocker.');
+      }
+    } catch (e) {
+      console.error('Print fallback also failed:', e);
+      alert('Unable to generate resume. Please try again or contact support.');
+    }
   }
 }
 
