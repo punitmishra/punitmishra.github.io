@@ -640,7 +640,7 @@ onMounted(() => {
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="hero" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-16">
       <div class="relative z-10 max-w-6xl mx-auto px-6">
         <!-- Bento Grid Hero Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
@@ -740,7 +740,7 @@ onMounted(() => {
         </div>
 
         <!-- Stats Grid below hero -->
-        <div class="mt-16" v-scroll-reveal="{ delay: '400ms' }">
+        <div class="mt-10" v-scroll-reveal="{ delay: '400ms' }">
           <StatsGrid
             :repos="githubProfile.publicRepos"
             :stars="githubStats.totalStars"
@@ -759,7 +759,7 @@ onMounted(() => {
     </section>
 
     <!-- About / Now Section - Bento Grid -->
-    <section class="py-24 relative overflow-hidden">
+    <section class="py-12 relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Now Card - Large -->
@@ -809,14 +809,14 @@ onMounted(() => {
     </section>
 
     <!-- Latest Projects -->
-    <section id="latest" class="py-24 bg-gray-50/50 dark:bg-slate-900/50">
+    <section id="latest" class="py-14 bg-gray-50/50 dark:bg-slate-900/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20 rounded-full mb-4">Recent Work</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-10" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20 rounded-full mb-3">Recent Work</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Latest Projects
           </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">Most recently updated repositories and contributions</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">Most recently updated repositories and contributions</p>
         </div>
 
         <!-- Project Filter -->
@@ -915,14 +915,14 @@ onMounted(() => {
     </section>
 
     <!-- Featured Projects -->
-    <section id="projects" class="py-24">
+    <section id="projects" class="py-14">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 rounded-full mb-4">Showcase</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-10" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 rounded-full mb-3">Showcase</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Featured Projects
           </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">Innovative solutions built with cutting-edge technology</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">Innovative solutions built with cutting-edge technology</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -959,17 +959,17 @@ onMounted(() => {
     </section>
 
     <!-- GitHub Repositories -->
-    <section class="py-32">
+    <section class="py-14">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl md:text-4xl font-black mb-2 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
             Open Source
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Recent contributions and repositories</p>
+          <p class="text-base text-gray-600 dark:text-gray-400 font-display">Recent contributions and repositories</p>
         </div>
 
         <!-- GitHub Contribution Graph -->
-        <div class="mb-12">
+        <div class="mb-8">
           <GitHubContributionGraph :username="githubUsername" />
         </div>
 
@@ -1054,14 +1054,14 @@ onMounted(() => {
     </section>
 
     <!-- Technical Expertise -->
-    <section class="py-24 bg-gradient-to-b from-gray-50/50 to-white dark:from-slate-900/50 dark:to-slate-800/50">
+    <section class="py-14 bg-gradient-to-b from-gray-50/50 to-white dark:from-slate-900/50 dark:to-slate-800/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-4">Deep Knowledge</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-10" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-3">Deep Knowledge</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Technical Expertise
           </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">Comprehensive skills across the full stack</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">Comprehensive skills across the full stack</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1101,14 +1101,14 @@ onMounted(() => {
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="py-24">
+    <section id="skills" class="py-14">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-4">Expertise</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-10" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-3">Expertise</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Skills & Technologies
           </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">Technologies I work with daily</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">Technologies I work with daily</p>
         </div>
 
         <div class="max-w-4xl mx-auto space-y-6">
@@ -1137,14 +1137,14 @@ onMounted(() => {
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-24 bg-gray-50/50 dark:bg-slate-900/50">
+    <section id="experience" class="py-14 bg-gray-50/50 dark:bg-slate-900/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 rounded-full mb-4">Career</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-10" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 rounded-full mb-3">Career</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Professional Experience
           </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">{{ totalYearsExperience }}+ years building enterprise software</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">{{ totalYearsExperience }}+ years building enterprise software</p>
         </div>
 
         <div class="max-w-5xl mx-auto">
@@ -1163,7 +1163,7 @@ onMounted(() => {
         </div>
 
         <!-- Education -->
-        <div class="max-w-5xl mx-auto mt-16">
+        <div class="max-w-5xl mx-auto mt-12">
           <h3 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white font-heading">Education</h3>
           <div class="space-y-6">
             <div
@@ -1260,17 +1260,17 @@ onMounted(() => {
     </section>
 
     <!-- Code Snippets Showcase -->
-    <section id="code" class="py-32 relative overflow-hidden fade-in">
+    <section id="code" class="py-14 relative overflow-hidden fade-in">
       <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/30 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900/50"></div>
       <div class="relative max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <div class="flex items-center justify-center gap-3 mb-4">
-            <BaseIcon :path="mdiCodeBraces" size="48" class="text-blue-600 dark:text-blue-400" />
-            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-10">
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <BaseIcon :path="mdiCodeBraces" size="32" class="text-blue-600 dark:text-blue-400" />
+            <h2 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
               Code Showcase
             </h2>
           </div>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Snippets from real projects and systems</p>
+          <p class="text-base text-gray-600 dark:text-gray-400 font-display">Snippets from real projects and systems</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -1356,14 +1356,14 @@ def create_agent_workflow():
     </section>
 
     <!-- Achievements & Awards -->
-    <section id="achievements" class="py-24 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-800/50 dark:to-slate-900/50">
+    <section id="achievements" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-800/50 dark:to-slate-900/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 rounded-full mb-4">Track Record</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-10" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 rounded-full mb-3">Track Record</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Key Achievements
           </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400">Notable milestones and impact</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">Notable milestones and impact</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1397,11 +1397,11 @@ def create_agent_workflow():
     <BlogSection />
 
     <!-- Contact -->
-    <section id="contact" class="py-24 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
+    <section id="contact" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-12" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 rounded-full mb-4">Get in Touch</span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+        <div class="text-center mb-8" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 rounded-full mb-3">Get in Touch</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Let's Connect
           </h2>
           <p class="text-lg text-gray-500 dark:text-gray-400 mb-2 max-w-2xl mx-auto">

@@ -138,146 +138,134 @@ function generateLatexStyleHTML(data) {
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${data.personalInfo.name} — Resume</title>
+  <title>${data.personalInfo.name} - Resume</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Code+Pro:wght@400;500&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'EB Garamond', 'Times New Roman', serif;
-      font-size: 11pt;
-      line-height: 1.4;
-      color: #1a1a1a;
+      font-family: 'Times New Roman', Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.35;
+      color: #000;
       background: #fff;
     }
 
     .resume-container {
-      max-width: 210mm;
+      max-width: 8.5in;
       margin: 0 auto;
-      padding: 12mm 15mm;
+      padding: 0.4in 0.5in;
       background: #fff;
     }
 
-    /* Header */
     .header {
       text-align: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 0.5pt solid #333;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #000;
     }
 
     .header h1 {
-      font-size: 22pt;
-      font-weight: 600;
-      letter-spacing: 2px;
+      font-size: 18pt;
+      font-weight: bold;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       color: #000;
     }
 
     .header .title {
-      font-size: 11pt;
-      font-style: italic;
-      color: #444;
-      margin-bottom: 8px;
+      font-size: 10pt;
+      color: #333;
+      margin-bottom: 6px;
     }
 
     .contact-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 6px 16px;
-      font-size: 9.5pt;
+      gap: 4px 12px;
+      font-size: 9pt;
       color: #333;
     }
 
-    .contact-row span {
-      white-space: nowrap;
-    }
+    .contact-row span { white-space: nowrap; }
+    .contact-row a { color: #333; text-decoration: none; }
 
-    .contact-row a {
-      color: #333;
-      text-decoration: none;
-    }
-
-    /* Sections */
     .section {
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .section-title {
-      font-size: 11pt;
-      font-weight: 600;
+      font-size: 10pt;
+      font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      border-bottom: 0.5pt solid #333;
-      padding-bottom: 3px;
-      margin-bottom: 10px;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+      margin-bottom: 6px;
       color: #000;
     }
 
-    /* Summary */
     .summary {
-      font-size: 10.5pt;
+      font-size: 9.5pt;
       text-align: justify;
-      hyphens: auto;
-      color: #222;
+      color: #000;
+      line-height: 1.4;
     }
 
-    /* Experience */
     .experience-item {
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .experience-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .experience-title {
-      font-weight: 600;
-      font-size: 11pt;
+      font-weight: bold;
+      font-size: 10pt;
     }
 
     .experience-period {
-      font-size: 10pt;
-      color: #444;
+      font-size: 9pt;
+      color: #333;
       font-style: italic;
     }
 
     .experience-company {
       font-style: italic;
-      color: #444;
-      font-size: 10.5pt;
-      margin-bottom: 6px;
+      color: #333;
+      font-size: 9.5pt;
+      margin-bottom: 4px;
     }
 
     .experience-list {
-      margin-left: 16px;
-      font-size: 10.5pt;
+      margin-left: 14px;
+      font-size: 9.5pt;
+      padding-left: 0;
     }
 
     .experience-list li {
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       text-align: justify;
+      line-height: 1.35;
     }
 
     .tech-stack {
-      margin-top: 6px;
-      font-size: 9.5pt;
-      color: #444;
+      margin-top: 4px;
+      font-size: 9pt;
+      color: #333;
     }
 
     .tech-stack strong {
-      font-weight: 500;
+      font-weight: bold;
     }
 
-    /* Education */
     .education-item {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .education-header {
@@ -287,40 +275,39 @@ function generateLatexStyleHTML(data) {
     }
 
     .education-degree {
-      font-weight: 600;
-      font-size: 10.5pt;
+      font-weight: bold;
+      font-size: 10pt;
     }
 
     .education-period {
-      font-size: 10pt;
-      color: #444;
+      font-size: 9pt;
+      color: #333;
       font-style: italic;
     }
 
     .education-school {
       font-style: italic;
-      color: #444;
-      font-size: 10pt;
+      color: #333;
+      font-size: 9.5pt;
     }
 
     .education-details {
-      font-size: 10pt;
+      font-size: 9pt;
       color: #333;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .education-honors {
-      font-size: 9.5pt;
-      color: #444;
+      font-size: 9pt;
+      color: #333;
       font-style: italic;
     }
 
-    /* Skills */
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px 20px;
-      font-size: 10pt;
+      gap: 4px 16px;
+      font-size: 9pt;
     }
 
     .skill-row {
@@ -328,34 +315,27 @@ function generateLatexStyleHTML(data) {
     }
 
     .skill-label {
-      font-weight: 600;
-      min-width: 90px;
-      color: #222;
+      font-weight: bold;
+      min-width: 80px;
+      color: #000;
     }
 
     .skill-items {
       color: #333;
     }
 
-    /* Certifications */
     .cert-row {
       display: flex;
-      gap: 24px;
-      font-size: 10pt;
+      gap: 20px;
+      font-size: 9pt;
     }
 
-    .cert-item {
-      color: #333;
-    }
+    .cert-item { color: #333; }
+    .cert-item strong { font-weight: bold; }
 
-    .cert-item strong {
-      font-weight: 500;
-    }
-
-    /* Print styles */
     @media print {
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .resume-container { padding: 10mm; }
+      .resume-container { padding: 0.3in 0.4in; }
     }
   </style>
 </head>
@@ -366,13 +346,13 @@ function generateLatexStyleHTML(data) {
       <div class="title">${data.personalInfo.title}</div>
       <div class="contact-row">
         <span>${data.personalInfo.location}</span>
-        <span>·</span>
+        <span>|</span>
         <span>${data.personalInfo.email}</span>
-        <span>·</span>
+        <span>|</span>
         <span>${data.personalInfo.website}</span>
-        <span>·</span>
+        <span>|</span>
         <span>${data.personalInfo.github}</span>
-        <span>·</span>
+        <span>|</span>
         <span>${data.personalInfo.linkedin}</span>
       </div>
     </header>

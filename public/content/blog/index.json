@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "slug": "llm-production-patterns",
+      "title": "LLM Production Patterns: Beyond the Demo",
+      "excerpt": "The gap between an impressive LLM demo and a reliable production system is massive. Patterns for routing, structured output, context management, and cost control.",
+      "date": "2024-12-22",
+      "category": "AI/ML",
+      "tags": ["LLM", "Production", "RAG", "Architecture"],
+      "readTime": "14 min read",
+      "featured": true
+    },
+    {
       "slug": "building-ai-infrastructure",
       "title": "Building Production AI Infrastructure: Lessons from the Trenches",
       "excerpt": "Key insights from years of building and scaling AI/ML systems at enterprise scale, including architecture patterns, performance optimization, and operational best practices.",
@@ -8,6 +18,16 @@
       "category": "AI/ML",
       "tags": ["AI", "Infrastructure", "MLOps", "Enterprise"],
       "readTime": "8 min read",
+      "featured": true
+    },
+    {
+      "slug": "distributed-systems-lessons",
+      "title": "Distributed Systems: Hard Lessons from Production",
+      "excerpt": "After a decade of building distributed systems serving millions of requests, here are the battle-tested patterns for handling failures, consensus, and partial failures.",
+      "date": "2024-12-18",
+      "category": "Technical",
+      "tags": ["Distributed Systems", "Architecture", "Resilience", "Scale"],
+      "readTime": "11 min read",
       "featured": true
     },
     {
