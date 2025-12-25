@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "slug": "rust-cli-tools",
+      "title": "Building Blazing Fast CLI Tools in Rust",
+      "excerpt": "Deep dive into building production-quality CLI applications in Rust with clap, parallel file walking, cross-compilation, and asciinema terminal recordings.",
+      "date": "2024-12-25",
+      "category": "Technical",
+      "tags": ["Rust", "CLI", "Performance", "Developer Tools"],
+      "readTime": "16 min read",
+      "featured": true
+    },
+    {
       "slug": "shield-ai-dns-security",
       "title": "Shield AI: Building a High-Performance DNS Security System in Rust",
       "excerpt": "How I built an AI-powered DNS filtering system with sub-millisecond latency, ML-based DGA detection, and 15MB memory footprint using Rust and FAISS.",

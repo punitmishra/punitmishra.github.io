@@ -11,6 +11,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@mdi/js": "^7.4.47",
+    "asciinema-player": "^3.13.5",
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
     "express": "^4.22.1",

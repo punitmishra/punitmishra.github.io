@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch, nextTick } from 'vue';
+import { ref, onMounted, computed, watch, nextTick, createApp, h } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { marked } from 'marked';
 import hljs from 'highlight.js/lib/core';
@@ -12,7 +12,8 @@ import json from 'highlight.js/lib/languages/json';
 import yaml from 'highlight.js/lib/languages/yaml';
 import sql from 'highlight.js/lib/languages/sql';
 import go from 'highlight.js/lib/languages/go';
-import { mdiArrowLeft, mdiClockOutline, mdiCalendar, mdiTagOutline, mdiGithub, mdiShareVariant } from '@mdi/js';
+import dockerfile from 'highlight.js/lib/languages/dockerfile';
+import { mdiArrowLeft, mdiClockOutline, mdiCalendar, mdiTagOutline, mdiGithub, mdiShareVariant, mdiPlay } from '@mdi/js';
 import BaseIcon from '@/components/BaseIcon.vue';
 
 // Register languages
@@ -31,6 +32,8 @@ hljs.registerLanguage('yaml', yaml);
 hljs.registerLanguage('yml', yaml);
 hljs.registerLanguage('sql', sql);
 hljs.registerLanguage('go', go);
+hljs.registerLanguage('dockerfile', dockerfile);
+hljs.registerLanguage('docker', dockerfile);
 
 // Language display names
 const languageNames = {
@@ -49,8 +52,15 @@ const languageNames = {
   yml: 'YAML',
   sql: 'SQL',
   go: 'Go',
+  dockerfile: 'Dockerfile',
+  docker: 'Dockerfile',
   mermaid: 'Diagram',
+  asciinema: 'Terminal Recording',
+  terminal: 'Terminal',
 };
+
+// Track asciinema instances for later initialization
+const asciinemaInstances = ref([]);
 
 const route = useRoute();
 const router = useRouter();
@@ -73,6 +83,34 @@ marked.use({
       // Handle mermaid diagrams
       if (language.toLowerCase() === 'mermaid') {
         return `<div class="mermaid-wrapper"><div class="code-lang-label">Diagram</div><div class="mermaid">${code}</div></div>`;
+      }
+
+      // Handle asciinema recordings
+      if (language.toLowerCase() === 'asciinema' || language.toLowerCase() === 'terminal') {
+        const lines = code.trim().split('\n');
+        const src = lines[0].trim();
+        const title = lines[1]?.trim() || 'Terminal Demo';
+        const id = `asciinema-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+        return `<div class="asciinema-embed" data-id="${id}" data-src="${src}" data-title="${title}">
+          <div class="asciinema-placeholder">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              <span class="ml-2 text-sm font-medium text-gray-400 font-mono">${title}</span>
+            </div>
+            <div class="flex items-center justify-center h-48 bg-gray-900 rounded-lg border border-gray-700">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                  <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <p class="text-gray-400 text-sm font-mono">Click to load terminal recording</p>
+                <p class="text-gray-500 text-xs mt-1">${src}</p>
+              </div>
+            </div>
+          </div>
+        </div>`;
       }
 
       // Syntax highlight code
@@ -113,11 +151,74 @@ const initMermaid = async () => {
   }
 };
 
+// Initialize asciinema players
+const initAsciinema = async () => {
+  try {
+    const AsciinemaPlayer = await import('asciinema-player');
+
+    const embeds = document.querySelectorAll('.asciinema-embed');
+    embeds.forEach((embed) => {
+      const placeholder = embed.querySelector('.asciinema-placeholder');
+      if (!placeholder) return;
+
+      placeholder.style.cursor = 'pointer';
+      placeholder.addEventListener('click', async () => {
+        const src = embed.dataset.src;
+        const title = embed.dataset.title;
+
+        // Replace placeholder with player
+        embed.innerHTML = `
+          <div class="asciinema-player-container">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              <span class="ml-2 text-sm font-medium text-gray-400 font-mono">${title}</span>
+            </div>
+            <div class="asciinema-player-wrapper"></div>
+          </div>
+        `;
+
+        const wrapper = embed.querySelector('.asciinema-player-wrapper');
+
+        try {
+          AsciinemaPlayer.create(
+            src,
+            wrapper,
+            {
+              cols: 100,
+              rows: 24,
+              autoPlay: true,
+              loop: false,
+              speed: 1.5,
+              theme: 'monokai',
+              fit: 'width',
+              terminalFontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+            }
+          );
+        } catch (err) {
+          console.error('Failed to create asciinema player:', err);
+          wrapper.innerHTML = `
+            <div class="text-center py-8">
+              <p class="text-red-400 mb-2">Failed to load recording</p>
+              <a href="${src}" target="_blank" class="text-blue-400 hover:underline text-sm">View on asciinema.org</a>
+            </div>
+          `;
+        }
+      });
+    });
+  } catch (e) {
+    console.warn('Asciinema player not available:', e);
+  }
+};
+
 const categoryColors = {
   'AI/ML': 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
   'Technical': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
   'Personal': 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300',
   'Security': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300',
+  'Projects': 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300',
+  'Career': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300',
 };
 
 const formatDate = (dateStr) => {
@@ -188,9 +289,10 @@ const fetchArticle = async (slug) => {
 
     loading.value = false;
 
-    // Initialize mermaid diagrams after content is rendered
+    // Initialize interactive elements after content is rendered
     await nextTick();
     initMermaid();
+    initAsciinema();
   } catch (err) {
     console.error('Failed to load article:', err);
     error.value = err.message;
@@ -653,5 +755,44 @@ watch(() => route.params.slug, (newSlug) => {
 /* Plain text code blocks without language */
 .prose pre code:not([class*="hljs"]):not([class*="language-"]) {
   color: #e6edf3;
+}
+
+/* Asciinema player styling */
+.asciinema-embed {
+  margin: 1.5rem 0;
+}
+
+.asciinema-placeholder {
+  background: #0d1117;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #30363d;
+  transition: all 0.2s;
+}
+
+.asciinema-placeholder:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.asciinema-player-container {
+  background: #0d1117;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #30363d;
+}
+
+.asciinema-player-wrapper {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Override asciinema player defaults */
+.asciinema-player-wrapper .ap-wrapper {
+  border-radius: 0.5rem;
+}
+
+.asciinema-player-wrapper .ap-player {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', monospace !important;
 }
 </style>
