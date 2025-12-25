@@ -32,6 +32,26 @@ hljs.registerLanguage('yml', yaml);
 hljs.registerLanguage('sql', sql);
 hljs.registerLanguage('go', go);
 
+// Language display names
+const languageNames = {
+  javascript: 'JavaScript',
+  js: 'JavaScript',
+  typescript: 'TypeScript',
+  ts: 'TypeScript',
+  python: 'Python',
+  py: 'Python',
+  rust: 'Rust',
+  bash: 'Bash',
+  sh: 'Shell',
+  shell: 'Shell',
+  json: 'JSON',
+  yaml: 'YAML',
+  yml: 'YAML',
+  sql: 'SQL',
+  go: 'Go',
+  mermaid: 'Diagram',
+};
+
 const route = useRoute();
 const router = useRouter();
 
@@ -40,26 +60,59 @@ const content = ref('');
 const loading = ref(true);
 const error = ref(null);
 
-// Configure marked with syntax highlighting
+// Custom renderer to add language labels and mermaid support
+const renderer = new marked.Renderer();
+renderer.code = function(code, language) {
+  const lang = language || '';
+  const langName = languageNames[lang.toLowerCase()] || lang.toUpperCase() || 'Code';
+
+  // Handle mermaid diagrams
+  if (lang.toLowerCase() === 'mermaid') {
+    return `<div class="mermaid-wrapper"><div class="code-lang-label">Diagram</div><div class="mermaid">${code}</div></div>`;
+  }
+
+  // Syntax highlight code
+  let highlighted = code;
+  if (lang && hljs.getLanguage(lang)) {
+    try {
+      highlighted = hljs.highlight(code, { language: lang }).value;
+    } catch (e) {
+      console.warn('Highlighting failed:', e);
+    }
+  } else {
+    try {
+      highlighted = hljs.highlightAuto(code).value;
+    } catch (e) {
+      // Keep original code
+    }
+  }
+
+  return `<div class="code-block-wrapper"><div class="code-lang-label">${langName}</div><pre><code class="hljs language-${lang}">${highlighted}</code></pre></div>`;
+};
+
+// Configure marked with custom renderer
 marked.setOptions({
   gfm: true,
   breaks: true,
-  highlight: function(code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(code, { language: lang }).value;
-      } catch (e) {
-        console.warn('Highlighting failed:', e);
-      }
-    }
-    // Auto-detect language if not specified
-    try {
-      return hljs.highlightAuto(code).value;
-    } catch (e) {
-      return code;
-    }
-  }
+  renderer: renderer
 });
+
+// Initialize mermaid after content loads
+const initMermaid = async () => {
+  try {
+    const mermaid = (await import('mermaid')).default;
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+      securityLevel: 'loose',
+      fontFamily: 'inherit',
+    });
+    await nextTick();
+    mermaid.run({ querySelector: '.mermaid' });
+  } catch (e) {
+    console.warn('Mermaid not available:', e);
+  }
+};
 
 const categoryColors = {
   'AI/ML': 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
@@ -135,6 +188,10 @@ const fetchArticle = async (slug) => {
     content.value = marked(articleContent);
 
     loading.value = false;
+
+    // Initialize mermaid diagrams after content is rendered
+    await nextTick();
+    initMermaid();
   } catch (err) {
     console.error('Failed to load article:', err);
     error.value = err.message;
@@ -322,21 +379,73 @@ watch(() => route.params.slug, (newSlug) => {
 </template>
 
 <style>
+/* Code block wrapper with language label */
+.code-block-wrapper {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.code-lang-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8b949e;
+  background: #161b22;
+  border-bottom-left-radius: 0.5rem;
+  border-top-right-radius: 0.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+
+/* Mermaid diagram wrapper */
+.mermaid-wrapper {
+  position: relative;
+  margin: 1.5rem 0;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .mermaid-wrapper {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.mermaid {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Code block styling with better readability */
+.code-block-wrapper pre,
 .prose pre {
   overflow-x: auto;
   background: #0d1117 !important;
   border-radius: 0.75rem;
   padding: 1.5rem;
-  margin: 1.5rem 0;
+  padding-top: 2.5rem;
+  margin: 0;
   border: 1px solid #30363d;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
+.code-block-wrapper pre code,
 .prose pre code {
   background: transparent !important;
   padding: 0 !important;
-  font-size: 0.9rem !important;
+  font-size: 0.875rem !important;
   font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
   line-height: 1.75;
   color: #e6edf3;

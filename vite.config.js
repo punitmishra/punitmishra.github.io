@@ -51,16 +51,31 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Vendor chunks
+          // Vendor chunks - split for better caching
           if (id.includes('node_modules')) {
+            // Core Vue ecosystem
             if (id.includes('vue') || id.includes('vue-router') || id.includes('pinia')) {
               return 'vue-vendor';
             }
+            // UI icons
             if (id.includes('@mdi/js')) {
               return 'ui-vendor';
             }
-            if (id.includes('axios')) {
+            // Utilities
+            if (id.includes('axios') || id.includes('lodash')) {
               return 'utils-vendor';
+            }
+            // Markdown/highlighting - lazy loaded
+            if (id.includes('marked') || id.includes('highlight.js') || id.includes('mermaid')) {
+              return 'markdown-vendor';
+            }
+            // PDF generation - lazy loaded
+            if (id.includes('html2pdf') || id.includes('jspdf') || id.includes('html2canvas')) {
+              return 'pdf-vendor';
+            }
+            // Chart.js - lazy loaded
+            if (id.includes('chart.js')) {
+              return 'chart-vendor';
             }
             // Other node_modules
             return 'vendor';
