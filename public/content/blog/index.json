@@ -1,86 +1,64 @@
 {
   "articles": [
     {
-      "slug": "multi-agent-systems",
-      "title": "Building Secure Multi-Agent Systems with LangGraph",
-      "date": "2025-01-10",
+      "slug": "building-ai-infrastructure",
+      "title": "Building Production AI Infrastructure: Lessons from the Trenches",
+      "excerpt": "Key insights from years of building and scaling AI/ML systems at enterprise scale, including architecture patterns, performance optimization, and operational best practices.",
+      "date": "2024-12-20",
       "category": "AI/ML",
-      "tags": ["AI", "LangGraph", "Multi-Agent", "Security", "Python"],
-      "readTime": "15 min",
-      "featured": true,
-      "excerpt": "A deep dive into architecting secure, scalable multi-agent systems using LangGraph and modern AI infrastructure patterns."
+      "tags": ["AI", "Infrastructure", "MLOps", "Enterprise"],
+      "readTime": "8 min read",
+      "featured": true
     },
     {
-      "slug": "rust-ai-infrastructure",
-      "title": "Rust for AI Infrastructure: Performance Benchmarks",
-      "date": "2024-11-15",
+      "slug": "rust-systems-programming",
+      "title": "Why Rust for Systems Programming in 2024",
+      "excerpt": "Exploring how Rust's memory safety guarantees and zero-cost abstractions make it ideal for building high-performance systems, from network services to embedded applications.",
+      "date": "2024-12-15",
       "category": "Technical",
-      "tags": ["Rust", "Python", "AI", "Performance", "Infrastructure"],
-      "readTime": "18 min",
-      "featured": true,
-      "excerpt": "Why we rewrote critical AI infrastructure components in Rust and achieved 3-5x performance improvements."
+      "tags": ["Rust", "Systems", "Performance", "Memory Safety"],
+      "readTime": "6 min read",
+      "featured": true
     },
     {
-      "slug": "vector-search-scale",
-      "title": "Vector Search at Scale: CLIP Embeddings in Production",
-      "date": "2024-08-20",
+      "slug": "vector-databases-scale",
+      "title": "Scaling Vector Search: From Prototype to Production",
+      "excerpt": "Deep dive into vector database architecture, indexing strategies, and performance optimization techniques for handling billions of embeddings.",
+      "date": "2024-12-10",
+      "category": "AI/ML",
+      "tags": ["Vector Search", "FAISS", "Embeddings", "Scale"],
+      "readTime": "10 min read",
+      "featured": false
+    },
+    {
+      "slug": "multi-agent-orchestration",
+      "title": "Multi-Agent AI Systems: Patterns and Pitfalls",
+      "excerpt": "Practical guide to building reliable multi-agent systems using LangGraph, including state management, error handling, and coordination patterns.",
+      "date": "2024-12-05",
+      "category": "AI/ML",
+      "tags": ["LangGraph", "Agents", "LLM", "Architecture"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
+      "slug": "kubernetes-production",
+      "title": "Kubernetes in Production: What They Don't Tell You",
+      "excerpt": "Hard-won lessons from running Kubernetes at scale, covering networking, storage, security, and the operational challenges that only surface in production.",
+      "date": "2024-11-28",
       "category": "Technical",
-      "tags": ["Vector Search", "CLIP", "FAISS", "ML", "Scale"],
-      "readTime": "20 min",
-      "featured": true,
-      "excerpt": "How we built a vector search engine handling 50 million images with sub-100ms query times."
+      "tags": ["Kubernetes", "DevOps", "Cloud", "Infrastructure"],
+      "readTime": "9 min read",
+      "featured": false
     },
     {
-      "slug": "ai-security-production",
-      "title": "AI Security in Production: A Practical Guide",
-      "date": "2024-06-10",
+      "slug": "ai-security-enterprise",
+      "title": "AI Security in the Enterprise: A Practical Guide",
+      "excerpt": "Comprehensive overview of security considerations when deploying AI systems, from model security to data privacy and compliance requirements.",
+      "date": "2024-11-20",
       "category": "Security",
-      "tags": ["AI", "Security", "LLM", "Production", "Enterprise"],
-      "readTime": "16 min",
-      "featured": true,
-      "excerpt": "Lessons from securing AI systems at enterprise scale—the threats, mitigations, and frameworks that actually work."
-    },
-    {
-      "slug": "building-developer-tools",
-      "title": "Building Developer Tools That Engineers Actually Use",
-      "date": "2024-02-20",
-      "category": "Technical",
-      "tags": ["Developer Experience", "Tools", "Productivity", "Engineering", "DX"],
-      "readTime": "14 min",
-      "featured": true,
-      "excerpt": "Why most internal tools fail, and the patterns that make developers actually adopt them."
-    },
-    {
-      "slug": "silicon-to-software",
-      "title": "From Silicon to Software: My Journey from Hardware to AI",
-      "date": "2023-03-15",
-      "category": "Personal",
-      "tags": ["Career", "Hardware", "AI", "Journey", "Engineering"],
-      "readTime": "12 min",
-      "featured": false,
-      "excerpt": "How starting in microelectronics shaped my approach to building AI systems."
-    },
-    {
-      "slug": "kubernetes-production-lessons",
-      "title": "Kubernetes in Production: Hard-Won Lessons",
-      "date": "2022-11-15",
-      "category": "Technical",
-      "tags": ["Kubernetes", "DevOps", "Infrastructure", "Scale", "Production"],
-      "readTime": "18 min",
-      "featured": false,
-      "excerpt": "Three years of running Kubernetes clusters serving millions of requests. Here's what I wish I knew on day one."
-    },
-    {
-      "slug": "microservices-patterns",
-      "title": "Enterprise Microservices Patterns",
-      "date": "2021-09-20",
-      "category": "Technical",
-      "tags": ["Microservices", "Architecture", "Enterprise", "Scale", "Patterns"],
-      "readTime": "14 min",
-      "featured": false,
-      "excerpt": "10+ years of building enterprise microservices—the patterns that work, the mistakes to avoid."
+      "tags": ["AI Security", "Enterprise", "Compliance", "Privacy"],
+      "readTime": "11 min read",
+      "featured": false
     }
-  ],
-  "categories": ["AI/ML", "Technical", "Personal", "Security"],
-  "totalArticles": 8
+  ]
 }
