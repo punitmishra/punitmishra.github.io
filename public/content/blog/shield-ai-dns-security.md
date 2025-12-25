@@ -22,30 +22,98 @@ I wanted something that combines speed, intelligence, and privacy.
 
 Shield AI uses a modular Rust architecture with 9 specialized crates:
 
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        Browser[Browser]
+        Mobile[Mobile App]
+        CLI[CLI Tool]
+    end
+
+    subgraph "Frontend"
+        React[React + Vite<br/>:3000]
+    end
+
+    subgraph "API Gateway"
+        Axum[Axum Server<br/>:8080]
+        REST[REST API]
+        WS[WebSocket]
+        DoH[DNS over HTTPS]
+    end
+
+    subgraph "Core Services"
+        Resolver[dns-resolver<br/>Hickory DNS + DNSSEC]
+        ML[ml-engine<br/>DGA Detection]
+        AI[ai-analyzer<br/>Threat Scoring]
+        Intel[threat-intel<br/>Blocklist Mgmt]
+        Filter[filter-engine<br/>Domain Filtering]
+        Profiles[profiles<br/>User Config]
+        Tiers[tiers<br/>Rate Limiting]
+        Plugins[plugins<br/>Extensibility]
+        Metrics[metrics<br/>Prometheus]
+    end
+
+    subgraph "Infrastructure"
+        Redis[(Redis Cache)]
+        Prometheus[(Prometheus)]
+    end
+
+    Browser --> React
+    Mobile --> Axum
+    CLI --> Axum
+    React --> Axum
+    Axum --> REST
+    Axum --> WS
+    Axum --> DoH
+    REST --> Filter
+    DoH --> Resolver
+    Filter --> ML
+    Filter --> AI
+    Filter --> Intel
+    ML --> Redis
+    AI --> Redis
+    Metrics --> Prometheus
 ```
-Client Layer (Browser/Mobile/CLI)
-    ↓
-Frontend (React/Vite on :3000)
-    ↓
-API Gateway (Axum on :8080 with REST/WebSocket/DoH)
-    ↓
-Core Services
-├── dns-resolver (Hickory DNS with DNSSEC)
-├── ml-engine (DGA detection)
-├── ai-analyzer (threat scoring)
-├── threat-intel (blocklist management)
-├── filter-engine (domain filtering)
-├── profiles (user configurations)
-├── tiers (rate limiting)
-├── plugins (extensibility)
-└── metrics (Prometheus)
-    ↓
-Infrastructure (Redis Cache, Prometheus)
+
+```asciinema
+https://asciinema.org/a/demo-shield-ai-setup
+Shield AI Setup and Configuration
 ```
 
 ## The Query Processing Pipeline
 
 Every DNS query flows through an optimized pipeline:
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant G as API Gateway
+    participant F as Filter Engine
+    participant Ca as Cache
+    participant R as DNS Resolver
+    participant ML as ML Engine
+
+    C->>G: DNS Query
+    G->>F: Check Blocklist (O(1))
+    alt Blocked
+        F-->>G: Blocked Response
+        G-->>C: NXDOMAIN
+    else Not Blocked
+        G->>Ca: Cache Lookup
+        alt Cache Hit
+            Ca-->>G: Cached Response
+            G-->>C: DNS Response (<0.5ms)
+        else Cache Miss
+            G->>R: Resolve (DNSSEC)
+            R-->>G: Resolution
+            G->>Ca: Cache Result
+            G-->>C: DNS Response
+            Note over G,ML: Async (non-blocking)
+            G--)ML: Analyze Domain
+            ML--)G: Threat Score
+        end
+    end
+```
 
 ```rust
 pub async fn process_query(
@@ -289,6 +357,11 @@ impl ResolverPool {
 ```
 
 ## Benchmarks
+
+```asciinema
+https://asciinema.org/a/demo-shield-ai-benchmark
+Running Shield AI Performance Benchmarks
+```
 
 On Apple M1 (single core):
 

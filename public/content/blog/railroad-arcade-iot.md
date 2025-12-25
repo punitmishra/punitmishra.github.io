@@ -21,21 +21,87 @@ The technical challenges were fascinating:
 
 ## Architecture Overview
 
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        PWA[Browser PWA]
+        Mobile[Mobile App]
+    end
+
+    subgraph "Cloud (Vercel)"
+        Next[Next.js App Router]
+        API[API Routes]
+        WS[WebSocket Server]
+        SSE[SSE Streams]
+    end
+
+    subgraph "Data Layer"
+        Postgres[(PostgreSQL<br/>Neon)]
+        Redis[(Redis<br/>Upstash)]
+        QStash[QStash<br/>Job Queue]
+    end
+
+    subgraph "Hardware Layer"
+        Pi[Raspberry Pi 4]
+        GPIO[GPIO Controller]
+        DCC[DCC Decoder]
+        Relay[Relay Board]
+    end
+
+    subgraph "Physical"
+        Trains[🚂 Model Trains]
+        Switches[Track Switches]
+        Lights[LED Lighting]
+        Cameras[USB Cameras]
+    end
+
+    PWA <-->|WebSocket| WS
+    Mobile <-->|SSE| SSE
+    Next --> API
+    API --> Postgres
+    API --> Redis
+    API --> QStash
+    WS <-->|Hardware Bridge| Pi
+    Pi --> GPIO
+    GPIO --> DCC
+    GPIO --> Relay
+    DCC --> Trains
+    Relay --> Switches
+    Relay --> Lights
+    Cameras --> Pi
 ```
-Browser (PWA)
-    ↓ WebSocket / SSE
-Next.js App Router (Vercel)
-    ↓ Prisma ORM
-PostgreSQL (Neon) ←→ Redis (Upstash)
-    ↓ Hardware Bridge
-Raspberry Pi GPIO
-    ↓
-Physical Railroad (DCC + Relays)
+
+```asciinema
+https://asciinema.org/a/demo-railroad-setup
+Setting Up Railroad Arcade Development Environment
 ```
 
 ## Real-Time Train Control
 
 The core challenge is latency. When a user presses "accelerate," the train should respond immediately—not in 500ms.
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant UI as React UI
+    participant WS as WebSocket
+    participant Pi as Raspberry Pi
+    participant T as Train
+
+    U->>UI: Press Accelerate
+    UI->>UI: Optimistic Update (immediate)
+    UI->>WS: Send Command
+    WS->>Pi: Forward via Bridge
+    Pi->>T: GPIO Signal
+    T-->>Pi: Motor Activated
+    Pi-->>WS: ACK
+    alt ACK received < 100ms
+        WS-->>UI: Confirm
+    else Timeout
+        UI->>UI: Rollback UI
+        UI-->>U: Show Error
+    end
+```
 
 ```typescript
 // hooks/useHardwareControl.ts
@@ -207,6 +273,29 @@ export const TrackVisualization = () => {
 ## Game Modes and Scoring
 
 To make it engaging, I added arcade-style game modes:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Lobby: Enter Game
+    Lobby --> ModeSelect: Insert Tokens
+    ModeSelect --> FreePlay: Select Free Play
+    ModeSelect --> SpeedRun: Select Speed Run
+    ModeSelect --> Delivery: Select Delivery
+    ModeSelect --> Survival: Select Survival
+
+    FreePlay --> Playing: Start
+    SpeedRun --> Playing: Start
+    Delivery --> Playing: Start
+    Survival --> Playing: Start
+
+    Playing --> Paused: Pause
+    Paused --> Playing: Resume
+    Playing --> GameOver: Time Up / Collision
+    GameOver --> ScoreSubmit: Submit Score
+    ScoreSubmit --> Leaderboard: View Ranking
+    Leaderboard --> Lobby: Play Again
+    GameOver --> Lobby: Skip
+```
 
 ```typescript
 // lib/gameEngine.ts
