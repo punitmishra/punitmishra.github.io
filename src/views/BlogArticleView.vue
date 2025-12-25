@@ -227,7 +227,7 @@ watch(() => route.params.slug, (newSlug) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-white dark:bg-slate-900">
+  <div class="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-slate-900 dark:via-slate-800/30 dark:to-slate-900">
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-gray-200/50 dark:border-slate-800/50">
       <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -249,7 +249,7 @@ watch(() => route.params.slug, (newSlug) => {
           </button>
           <a
             v-if="article"
-            :href="`https://github.com/punitmishra/punitmishra.github.io/blob/main/content/blog/${route.params.slug}.md`"
+            :href="`https://github.com/punitmishra/punitmishra.github.io/blob/main/public/content/blog/${route.params.slug}.md`"
             target="_blank"
             class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             title="View source on GitHub"

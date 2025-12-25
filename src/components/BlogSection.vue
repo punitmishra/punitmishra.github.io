@@ -172,7 +172,7 @@ onMounted(() => {
       <!-- View All Link -->
       <div class="text-center mt-12" v-scroll-reveal="{ delay: '200ms' }">
         <a
-          href="https://github.com/punitmishra/punitmishra.github.io/tree/main/content/blog"
+          href="https://github.com/punitmishra/punitmishra.github.io/tree/main/public/content/blog"
           target="_blank"
           class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
         >

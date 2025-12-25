@@ -59,6 +59,36 @@
       "tags": ["AI Security", "Enterprise", "Compliance", "Privacy"],
       "readTime": "11 min read",
       "featured": false
+    },
+    {
+      "slug": "typescript-at-scale",
+      "title": "TypeScript at Scale: Patterns That Actually Work",
+      "excerpt": "Practical patterns for maintaining large TypeScript codebases, from strict configuration to discriminated unions and runtime validation with Zod.",
+      "date": "2024-11-15",
+      "category": "Technical",
+      "tags": ["TypeScript", "Architecture", "Best Practices", "Frontend"],
+      "readTime": "8 min read",
+      "featured": false
+    },
+    {
+      "slug": "database-performance",
+      "title": "Database Performance: Beyond the Basics",
+      "excerpt": "Advanced PostgreSQL optimization techniques including covering indexes, connection pooling, cursor pagination, and query analysis strategies.",
+      "date": "2024-11-10",
+      "category": "Technical",
+      "tags": ["Database", "PostgreSQL", "Performance", "Optimization"],
+      "readTime": "10 min read",
+      "featured": false
+    },
+    {
+      "slug": "career-engineering-growth",
+      "title": "Engineering Career Growth: What Actually Matters",
+      "excerpt": "Lessons from 12+ years in software engineering on what separates engineers who grow continuously from those who plateau.",
+      "date": "2024-11-05",
+      "category": "Career",
+      "tags": ["Career", "Engineering", "Leadership", "Growth"],
+      "readTime": "7 min read",
+      "featured": true
     }
   ]
 }

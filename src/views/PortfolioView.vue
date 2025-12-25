@@ -73,7 +73,7 @@ const linkedinUsername = "mishrapunit";
 
 const githubProfile = ref({
   name: "Punit Mishra",
-  bio: "Staff Engineer & AI/ML Architect @ SAP",
+  bio: "Senior Engineer & AI/ML Architect @ SAP",
   avatar: `https://github.com/${githubUsername}.png`,
   followers: 10,
   following: 7,
@@ -204,7 +204,7 @@ const skills = [
 
 const experience = [
   {
-    title: "Staff Software Engineer / Tech Lead",
+    title: "Senior Software Engineer",
     company: "SAP",
     period: "2013 - Present",
     location: "Pleasanton, CA",
@@ -665,7 +665,7 @@ onMounted(() => {
             <!-- Typing Animation -->
             <div class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-6 font-medium h-8">
               <TypingAnimation
-                :texts="['Staff-Level Engineer @ SAP', 'AI/ML Systems Architect', 'Built Products Serving Millions', 'UC Berkeley • 12+ Years Experience']"
+                :texts="['Senior Engineer @ SAP', 'AI/ML Systems Architect', 'Building Products at Scale', '12+ Years • UC Berkeley']"
                 :typing-speed="60"
                 :deleting-speed="30"
                 :pause-duration="3000"
