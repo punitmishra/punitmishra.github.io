@@ -83,6 +83,5 @@ module.exports = {
         { values: theme("asideScrollbars") }
       );
     }),
-    require("@tailwindcss/line-clamp"),
   ],
 };
