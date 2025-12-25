@@ -62,9 +62,9 @@ const error = ref(null);
 
 // Custom renderer to add language labels and mermaid support
 const renderer = new marked.Renderer();
-renderer.code = function({ text, lang, escaped }) {
-  const code = text || '';
-  const language = lang || '';
+renderer.code = function(token) {
+  const code = token.text || '';
+  const language = token.lang || '';
   const langName = languageNames[language.toLowerCase()] || language.toUpperCase() || 'Code';
 
   // Handle mermaid diagrams
