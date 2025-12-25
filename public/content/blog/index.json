@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "slug": "shield-ai-dns-security",
+      "title": "Shield AI: Building a High-Performance DNS Security System in Rust",
+      "excerpt": "How I built an AI-powered DNS filtering system with sub-millisecond latency, ML-based DGA detection, and 15MB memory footprint using Rust and FAISS.",
+      "date": "2024-12-24",
+      "category": "Projects",
+      "tags": ["Rust", "DNS", "Security", "AI/ML", "Performance"],
+      "readTime": "15 min read",
+      "featured": true
+    },
+    {
+      "slug": "railroad-arcade-iot",
+      "title": "Railroad Arcade: Remote-Controlled Model Railroad with Real-Time IoT",
+      "excerpt": "Building a web app that lets anyone control a real model railroad via Raspberry Pi, with game modes, leaderboards, and sub-100ms latency.",
+      "date": "2024-12-23",
+      "category": "Projects",
+      "tags": ["Next.js", "IoT", "Raspberry Pi", "Real-time", "TypeScript"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
       "slug": "llm-production-patterns",
       "title": "LLM Production Patterns: Beyond the Demo",
       "excerpt": "The gap between an impressive LLM demo and a reliable production system is massive. Patterns for routing, structured output, context management, and cost control.",
@@ -8,6 +28,16 @@
       "category": "AI/ML",
       "tags": ["LLM", "Production", "RAG", "Architecture"],
       "readTime": "14 min read",
+      "featured": true
+    },
+    {
+      "slug": "vector-search-ecommerce",
+      "title": "Building a Production Vector Search Engine for E-Commerce",
+      "excerpt": "Multimodal product similarity search using CLIP embeddings, FAISS indexing, and FastAPI. Sub-100ms queries across 30k+ products.",
+      "date": "2024-12-21",
+      "category": "AI/ML",
+      "tags": ["Vector Search", "FAISS", "CLIP", "E-Commerce", "Python"],
+      "readTime": "13 min read",
       "featured": true
     },
     {
