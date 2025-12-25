@@ -12,6 +12,7 @@ import { initAnalytics, trackPageView, trackScrollDepth, trackTimeOnPage } from 
 import { initScrollAnimations as initAdvancedAnimations } from "@/utils/animations.js";
 import { initPerformanceOptimizations } from "@/utils/performanceOptimizer.js";
 import { initSEO } from "@/utils/seo.js";
+import { vScrollReveal } from "@/directives/scrollReveal.js";
 
 import "./css/main.css";
 
@@ -22,6 +23,7 @@ const pinia = createPinia();
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
+app.directive('scroll-reveal', vScrollReveal);
 app.mount("#app");
 
 /* Init Pinia stores */

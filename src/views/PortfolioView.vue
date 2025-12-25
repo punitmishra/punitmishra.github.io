@@ -32,6 +32,7 @@ import {
   mdiBrain,
   mdiWeatherNight,
   mdiWeatherSunny,
+  mdiMagnify,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import AIBotGenerator from "@/components/AIBotGenerator.vue";
@@ -42,7 +43,12 @@ import ContactForm from "@/components/ContactForm.vue";
 import ProjectFilter from "@/components/ProjectFilter.vue";
 import ResumeDownload from "@/components/ResumeDownload.vue";
 import GitHubContributionGraph from "@/components/GitHubContributionGraph.vue";
+import TypingAnimation from "@/components/TypingAnimation.vue";
+import ParticleBackground from "@/components/ParticleBackground.vue";
+import CommandPalette from "@/components/CommandPalette.vue";
 import { useStyleStore } from "@/stores/style.js";
+
+const commandPaletteRef = ref(null);
 
 const router = useRouter();
 const styleStore = useStyleStore();
@@ -538,50 +544,78 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 font-display">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
+    <!-- Particle Background -->
+    <ParticleBackground />
+
+    <!-- Command Palette -->
+    <CommandPalette ref="commandPaletteRef" @navigate="scrollToSection" />
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-gray-200/50 dark:border-slate-700/50">
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <button 
+        <button
           @click="scrollToSection('hero')"
-          class="text-3xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
+          class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
         >
           PM
         </button>
-        
+
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center gap-6">
-          <button 
-            @click="scrollToSection('projects')" 
-            class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display relative group"
+        <div class="hidden md:flex items-center gap-8">
+          <button
+            @click="scrollToSection('projects')"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
           >
             Projects
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
           </button>
-          <button 
-            @click="scrollToSection('latest')" 
-            class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display relative group"
+          <button
+            @click="scrollToSection('latest')"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
           >
             Latest
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
           </button>
-          <button 
-            @click="scrollToSection('skills')" 
-            class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display relative group"
+          <button
+            @click="scrollToSection('skills')"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
           >
             Skills
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
           </button>
-          <button 
-            @click="scrollToSection('experience')" 
-            class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display relative group"
+          <button
+            @click="scrollToSection('experience')"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
           >
             Experience
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
           </button>
-          <button 
-            @click="scrollToSection('contact')" 
-            class="px-6 py-2.5 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 text-white rounded-full font-semibold hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all font-display"
+
+          <!-- Command Palette Trigger -->
+          <button
+            @click="commandPaletteRef.isOpen = true"
+            class="flex items-center gap-2 px-3 py-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100/80 dark:bg-slate-800/80 rounded-lg text-sm transition-colors border border-gray-200/50 dark:border-slate-700/50"
+          >
+            <BaseIcon :path="mdiMagnify" size="16" />
+            <span class="text-xs">Search</span>
+            <kbd class="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-gray-400 bg-white dark:bg-slate-700 rounded border border-gray-200 dark:border-slate-600">
+              <span>⌘</span><span>K</span>
+            </kbd>
+          </button>
+
+          <!-- Dark Mode Toggle -->
+          <button
+            @click="styleStore.setDarkMode()"
+            class="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+            :title="styleStore.darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+          >
+            <BaseIcon :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight" size="20" />
+          </button>
+
+          <button
+            @click="scrollToSection('contact')"
+            class="px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-100 transition-all"
           >
             Contact
           </button>
@@ -649,136 +683,142 @@ onMounted(() => {
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <!-- Animated Background Gradients -->
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.2),transparent_60%)]"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(6,182,212,0.15),transparent_60%)]"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(99,102,241,0.15),transparent_60%)]"></div>
-      
-      <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <!-- Hero Image - Prominent & Styled -->
-        <div class="mb-12 relative inline-block group">
-          <!-- Glowing Background Effect -->
-          <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 rounded-full blur-3xl opacity-60 group-hover:opacity-80 transition-opacity duration-500 animate-pulse-slow"></div>
-          <!-- Outer Ring -->
-          <div class="absolute -inset-2 bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-          <!-- Image Container -->
-          <div class="relative">
-            <img
-              :src="githubProfile.avatar || `https://github.com/${githubUsername}.png`"
-              :alt="githubProfile.name || 'Punit Mishra'"
-              class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-8 border-white dark:border-slate-900 shadow-2xl transform group-hover:scale-105 transition-transform duration-500 object-cover"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-            <!-- Inner Glow -->
-            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-indigo-400/20 pointer-events-none"></div>
-          </div>
+      <!-- Subtle gradient orbs -->
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-3xl"></div>
+
+      <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <!-- Hero Image - Clean & Professional -->
+        <div class="mb-10 relative inline-block group" v-scroll-reveal>
+          <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <img
+            :src="githubProfile.avatar || `https://github.com/${githubUsername}.png`"
+            :alt="githubProfile.name || 'Punit Mishra'"
+            class="relative w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white dark:border-slate-900 shadow-2xl object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
-        
+
+        <!-- Status Badge -->
+        <div class="mb-6" v-scroll-reveal="{ delay: '100ms' }">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium border border-emerald-200/50 dark:border-emerald-800/50">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            Available for opportunities
+          </span>
+        </div>
+
         <!-- Name -->
-        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent leading-tight font-heading tracking-tighter">
+        <h1
+          class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 text-gray-900 dark:text-white leading-tight font-heading tracking-tight"
+          v-scroll-reveal="{ delay: '150ms' }"
+        >
           {{ githubProfile.name || "Punit Mishra" }}
         </h1>
-        
-        <!-- Bio -->
-        <p class="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 mb-6 font-semibold font-display">
-          {{ githubProfile.bio || "Software Engineer" }}
-        </p>
-        
+
+        <!-- Typing Animation Bio -->
+        <div class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-4 font-medium h-8" v-scroll-reveal="{ delay: '200ms' }">
+          <TypingAnimation
+            :texts="['Senior Software Engineer', 'AI/ML Infrastructure Architect', 'Systems Designer', 'Full Stack Developer']"
+            :typing-speed="80"
+            :deleting-speed="40"
+            :pause-duration="2500"
+          />
+        </div>
+
         <!-- Description -->
-        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-3xl mx-auto font-display leading-relaxed">
-          Computer Engineer with {{ totalYearsExperience }}+ years building scalable applications from silicon to software
+        <p
+          class="text-lg text-gray-500 dark:text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed"
+          v-scroll-reveal="{ delay: '250ms' }"
+        >
+          {{ totalYearsExperience }}+ years building enterprise-scale applications. From silicon to software—specializing in AI/ML infrastructure, distributed systems, and modern web technologies.
         </p>
 
-        <!-- Social Links & Resume Download -->
-        <div class="flex flex-wrap justify-center items-center gap-4 mb-12">
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap justify-center items-center gap-4 mb-16" v-scroll-reveal="{ delay: '300ms' }">
           <a
-            v-for="link in socialLinks"
-            :key="link.label"
-            :href="link.url"
+            :href="`https://github.com/${githubUsername}`"
             target="_blank"
-            :class="`group flex items-center gap-2 px-6 py-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all ${link.color} text-gray-700 dark:text-gray-300 font-display`"
+            class="group flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
           >
-            <BaseIcon :path="link.icon" size="20" />
-            <span class="font-semibold">{{ link.label }}</span>
+            <BaseIcon :path="mdiGithub" size="20" />
+            <span>View GitHub</span>
+          </a>
+          <a
+            :href="`https://linkedin.com/in/${linkedinUsername}`"
+            target="_blank"
+            class="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-full font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-all shadow-lg hover:shadow-xl border border-gray-200 dark:border-slate-700"
+          >
+            <BaseIcon :path="mdiLinkedin" size="20" />
+            <span>Connect</span>
           </a>
           <ResumeDownload />
         </div>
 
-        <!-- Stats with Animation -->
-        <div class="flex flex-wrap justify-center gap-6 text-center">
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
-            <div class="text-4xl font-black text-blue-600 dark:text-blue-400 font-heading">
+        <!-- Stats - Minimal & Clean -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto" v-scroll-reveal="{ delay: '350ms' }">
+          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
+            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
               <AnimatedCounter :value="githubProfile.publicRepos || 0" />
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Repositories</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Repositories</div>
           </div>
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
-            <div class="text-4xl font-black text-cyan-600 dark:text-cyan-400 font-heading">
+          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
+            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
               <AnimatedCounter :value="githubStats.totalStars" />
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Stars</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Stars</div>
           </div>
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
-            <div class="text-4xl font-black text-cyan-600 dark:text-cyan-400 font-heading">
+          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
+            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
               <AnimatedCounter :value="githubProfile.followers || 0" />
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Followers</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Followers</div>
           </div>
-          <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl px-8 py-5 shadow-xl border border-gray-200/50 dark:border-slate-700/50 transform hover:scale-105 transition-transform">
-            <div class="text-4xl font-black text-indigo-600 dark:text-indigo-400 font-heading">
+          <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl px-6 py-5 border border-gray-200/50 dark:border-slate-700/50">
+            <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
               <AnimatedCounter :value="totalYearsExperience" :suffix="'+'" />
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400 mt-1 font-display">Years</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Years Exp</div>
           </div>
         </div>
       </div>
 
       <!-- Scroll Indicator -->
-      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div class="w-6 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full flex justify-center pt-2">
+          <div class="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
+        </div>
       </div>
     </section>
 
     <!-- What's in Punit's Mind -->
-    <section class="py-32 relative overflow-hidden fade-in">
-      <!-- Background Effects -->
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-cyan-50/50 to-indigo-50/50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(147,51,234,0.1),transparent_50%)]"></div>
-      
-      <div class="relative max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg">
-              <BaseIcon :path="mdiBrain" size="28" class="text-white" />
-            </div>
-            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-              What's in Punit's Mind
-            </h2>
-          </div>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display max-w-2xl mx-auto">
-            Peek into current thoughts, active projects, and engineering insights. Get a glimpse of what's happening behind the code.
+    <section class="py-24 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-4">AI Insights</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+            What's on My Mind
+          </h2>
+          <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            Current thoughts, active projects, and engineering insights powered by AI.
           </p>
         </div>
-        <AIBotGenerator />
+        <div v-scroll-reveal="{ delay: '150ms' }">
+          <AIBotGenerator />
+        </div>
       </div>
     </section>
 
     <!-- Latest Projects -->
-    <section id="latest" class="py-32 fade-in">
+    <section id="latest" class="py-24 bg-gray-50/50 dark:bg-slate-900/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <div class="flex items-center justify-center gap-3 mb-4">
-            <BaseIcon :path="mdiTrendingUp" size="48" class="text-blue-600 dark:text-blue-400" />
-            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-              Latest Projects
-            </h2>
-          </div>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Most recently updated repositories and contributions</p>
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20 rounded-full mb-4">Recent Work</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+            Latest Projects
+          </h2>
+          <p class="text-lg text-gray-500 dark:text-gray-400">Most recently updated repositories and contributions</p>
         </div>
 
         <!-- Project Filter -->
@@ -847,13 +887,14 @@ onMounted(() => {
     </section>
 
     <!-- Featured Projects -->
-    <section id="projects" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm fade-in">
+    <section id="projects" class="py-24">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 rounded-full mb-4">Showcase</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
             Featured Projects
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Innovative solutions built with cutting-edge technology</p>
+          <p class="text-lg text-gray-500 dark:text-gray-400">Innovative solutions built with cutting-edge technology</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1019,13 +1060,14 @@ onMounted(() => {
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="py-32 fade-in">
+    <section id="skills" class="py-24">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-4">Expertise</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
             Skills & Technologies
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Technologies I work with</p>
+          <p class="text-lg text-gray-500 dark:text-gray-400">Technologies I work with daily</p>
         </div>
 
         <div class="max-w-4xl mx-auto space-y-6">
@@ -1054,13 +1096,14 @@ onMounted(() => {
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm fade-in">
+    <section id="experience" class="py-24 bg-gray-50/50 dark:bg-slate-900/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 rounded-full mb-4">Career</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
             Professional Experience
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">{{ totalYearsExperience }}+ years building enterprise software</p>
+          <p class="text-lg text-gray-500 dark:text-gray-400">{{ totalYearsExperience }}+ years building enterprise software</p>
         </div>
 
         <div class="max-w-5xl mx-auto">
@@ -1303,41 +1346,50 @@ def create_agent_workflow():
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+    <section id="contact" class="py-24">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-12">
-          <h2 class="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-12" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 rounded-full mb-4">Get in Touch</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
             Let's Connect
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-400 mb-4 font-display">
+          <p class="text-lg text-gray-500 dark:text-gray-400 mb-2 max-w-2xl mx-auto">
             Ready to collaborate on your next project? Let's build something amazing together.
           </p>
-          <p class="text-gray-500 dark:text-gray-500 mb-8 font-display">
+          <p class="text-gray-400 dark:text-gray-500">
             Open to opportunities in AI/ML infrastructure, software development, and systems engineering.
           </p>
-          <!-- Social Links -->
-          <div class="flex flex-wrap justify-center gap-4 mb-12">
-            <a
-              v-for="link in socialLinks"
-              :key="link.label"
-              :href="link.url"
-              target="_blank"
-              :class="`group flex items-center gap-3 px-6 py-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all ${link.color} text-gray-700 dark:text-gray-300 font-semibold font-display`"
-            >
-              <BaseIcon :path="link.icon" size="20" />
-              <span>{{ link.label }}</span>
-            </a>
-          </div>
         </div>
-        <ContactForm />
+
+        <!-- Social Links -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" v-scroll-reveal="{ delay: '100ms' }">
+          <a
+            v-for="link in socialLinks"
+            :key="link.label"
+            :href="link.url"
+            target="_blank"
+            class="group flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full shadow-sm hover:shadow-md transition-all text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:border-gray-300 dark:hover:border-slate-600"
+          >
+            <BaseIcon :path="link.icon" size="18" />
+            <span class="font-medium text-sm">{{ link.label }}</span>
+          </a>
+        </div>
+
+        <div v-scroll-reveal="{ delay: '150ms' }">
+          <ContactForm />
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-gray-200 dark:border-slate-700">
-      <div class="max-w-7xl mx-auto px-6 text-center text-gray-600 dark:text-gray-400 font-display">
-        <p>&copy; {{ new Date().getFullYear() }} Punit Mishra. Built with Vue.js & Tailwind CSS</p>
-        <p class="mt-2 text-sm">Computer Engineer • Software Developer • Systems Architect • AI/ML Infrastructure Expert</p>
+    <footer class="py-8 border-t border-gray-200/50 dark:border-slate-800/50">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-gray-500 dark:text-gray-500 text-sm">
+          &copy; {{ new Date().getFullYear() }} Punit Mishra. Built with Vue.js & Tailwind CSS
+        </p>
+        <p class="text-gray-400 dark:text-gray-600 text-xs">
+          Computer Engineer • Software Developer • Systems Architect
+        </p>
       </div>
     </footer>
   </div>
