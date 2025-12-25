@@ -32,7 +32,7 @@
     "@rushstack/eslint-patch": "^1.8.0",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^6.0.3",
     "@vue/eslint-config-prettier": "^9.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
@@ -41,7 +41,7 @@
     "postcss-import": "^16.1.0",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.17",
-    "vite": "^5.4.11",
+    "vite": "^7.3.0",
     "vite-plugin-pwa": "^1.2.0"
   },
   "engines": {
