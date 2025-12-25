@@ -51,6 +51,7 @@ import BentoCard from "@/components/BentoCard.vue";
 import NowSection from "@/components/NowSection.vue";
 import StatsGrid from "@/components/StatsGrid.vue";
 import SkillRing from "@/components/SkillRing.vue";
+import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
@@ -87,6 +88,7 @@ const githubRepos = ref([]);
 const latestRepos = ref([]);
 const githubStats = ref({ totalStars: 0, totalForks: 0, languages: {} });
 const loading = ref({ profile: true, repos: true });
+const reposError = ref(false);
 
 const socialLinks = [
   { icon: mdiGithub, label: "GitHub", url: `https://github.com/${githubUsername}`, color: "hover:text-gray-900 dark:hover:text-white" },
@@ -427,16 +429,19 @@ const fetchGitHubProfile = async () => {
 const fetchGitHubRepos = async () => {
   try {
     loading.value.repos = true;
+    reposError.value = false;
+
     const response = await axios.get(
       `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=15&type=all`
     );
-    
+
     if (!response.data || response.data.length === 0) {
       console.warn("No repositories found");
+      reposError.value = true;
       loading.value.repos = false;
       return;
     }
-    
+
     const allRepos = response.data.map((repo) => ({
       id: repo.id,
       name: repo.name,
@@ -446,12 +451,12 @@ const fetchGitHubRepos = async () => {
       forks: repo.forks_count || 0,
       url: repo.html_url,
       updated: new Date(repo.updated_at).toLocaleDateString(),
-      updatedAt: repo.updated_at, // Keep for sorting
+      updatedAt: repo.updated_at,
       topics: repo.topics || [],
       createdAt: repo.created_at,
       pushedAt: repo.pushed_at,
-      tech: repo.topics || [], // Use topics as tech stack
-      category: repo.topics?.includes('ai') || repo.topics?.includes('ml') ? 'AI/ML' : 
+      tech: repo.topics || [],
+      category: repo.topics?.includes('ai') || repo.topics?.includes('ml') ? 'AI/ML' :
                  repo.topics?.includes('web') || repo.topics?.includes('frontend') ? 'Web' :
                  repo.topics?.includes('infrastructure') || repo.topics?.includes('devops') ? 'Infrastructure' :
                  repo.topics?.includes('systems') || repo.topics?.includes('rust') ? 'Systems' : 'Other',
@@ -459,15 +464,11 @@ const fetchGitHubRepos = async () => {
 
     githubRepos.value = allRepos.slice(0, 10);
     latestRepos.value = allRepos.slice(0, 6);
-    
-    // Initialize filteredRepos with latestRepos
-    if (filteredRepos.value.length === 0) {
-      filteredRepos.value = [...latestRepos.value];
-    }
+    filteredRepos.value = [...latestRepos.value];
 
     githubStats.value.totalStars = allRepos.reduce((sum, repo) => sum + repo.stars, 0);
     githubStats.value.totalForks = allRepos.reduce((sum, repo) => sum + repo.forks, 0);
-    
+
     const langCount = {};
     allRepos.forEach((repo) => {
       if (repo.language) {
@@ -475,16 +476,12 @@ const fetchGitHubRepos = async () => {
       }
     });
     githubStats.value.languages = langCount;
-    
+
     loading.value.repos = false;
   } catch (error) {
     console.error("Error fetching GitHub repos:", error);
+    reposError.value = true;
     loading.value.repos = false;
-    // Ensure we have some data to show even if API fails
-    if (latestRepos.value.length === 0) {
-      latestRepos.value = [];
-      githubRepos.value = [];
-    }
   }
 };
 
@@ -500,12 +497,6 @@ const handleFiltered = (filtered) => {
   filteredRepos.value = filtered;
 };
 
-// Initialize filteredRepos when repos are loaded
-watch(latestRepos, (newRepos) => {
-  if (newRepos.length > 0 && filteredRepos.value.length === 0) {
-    filteredRepos.value = [...newRepos];
-  }
-}, { immediate: true });
 
 const goToProject = (repoName) => {
   router.push(`/project/${repoName}`);
@@ -601,14 +592,8 @@ onMounted(() => {
             </kbd>
           </button>
 
-          <!-- Dark Mode Toggle -->
-          <button
-            @click="styleStore.setDarkMode()"
-            class="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-            :title="styleStore.darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-          >
-            <BaseIcon :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight" size="20" />
-          </button>
+          <!-- Dark Mode Toggle with Fun Messages -->
+          <DarkModeToggle />
 
           <button
             @click="scrollToSection('contact')"
@@ -917,6 +902,39 @@ onMounted(() => {
             </div>
           </div>
         </div>
+
+        <!-- Error state when repos failed to load -->
+        <div v-else-if="reposError" class="text-center py-12">
+          <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
+            <BaseIcon :path="mdiGithub" size="48" class="text-gray-400 mx-auto mb-4" />
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Couldn't load repositories</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">GitHub API may be rate limited. Check out my profile directly.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                @click="fetchGitHubRepos"
+                class="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                Retry
+              </button>
+              <a
+                :href="`https://github.com/${githubUsername}`"
+                target="_blank"
+                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+              >
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty loading state -->
+        <div v-else class="text-center py-12">
+          <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
+            <div class="w-12 h-12 border-4 border-gray-200 dark:border-gray-700 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Loading repositories...</h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Fetching latest projects from GitHub</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1034,48 +1052,71 @@ onMounted(() => {
         
         <!-- No repos message -->
         <div v-else class="text-center py-12">
-          <BaseIcon :path="mdiGithub" size="48" class="text-gray-400 mx-auto mb-4" />
-          <p class="text-gray-600 dark:text-gray-400 text-lg font-display">
-            Unable to load repositories at the moment. Please try again later.
-          </p>
-          <button 
-            @click="fetchGitHubRepos"
-            class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-display"
-          >
-            Retry
-          </button>
+          <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
+            <BaseIcon :path="mdiGithub" size="48" class="text-gray-400 mx-auto mb-4" />
+            <p class="text-gray-600 dark:text-gray-400 text-lg font-display mb-4">
+              Unable to load repositories at the moment.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                @click="fetchGitHubRepos"
+                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-display"
+              >
+                Retry
+              </button>
+              <a
+                :href="`https://github.com/${githubUsername}`"
+                target="_blank"
+                class="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-display hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+              >
+                View Profile
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Technical Expertise -->
-    <section class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+    <section class="py-24 bg-gradient-to-b from-gray-50/50 to-white dark:from-slate-900/50 dark:to-slate-800/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-4">Deep Knowledge</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
             Technical Expertise
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Comprehensive skills across software development</p>
+          <p class="text-lg text-gray-500 dark:text-gray-400">Comprehensive skills across the full stack</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="(expertise, index) in technicalExpertise"
             :key="index"
-            class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700"
+            class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 overflow-hidden"
+            v-scroll-reveal="{ delay: `${index * 75}ms` }"
           >
-            <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2 font-heading">
-              <BaseIcon :path="mdiLightningBolt" size="24" class="text-blue-600 dark:text-blue-400" />
-              {{ expertise.category }}
-            </h3>
-            <ul class="space-y-2">
+            <!-- Top gradient accent -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md">
+                <BaseIcon :path="mdiLightningBolt" size="20" class="text-white" />
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {{ expertise.category }}
+              </h3>
+            </div>
+
+            <ul class="space-y-3">
               <li
                 v-for="(item, i) in expertise.items"
                 :key="i"
-                class="flex items-start gap-2 text-gray-700 dark:text-gray-300 text-sm font-display"
+                class="flex items-start gap-3 text-gray-600 dark:text-gray-400 text-sm font-display group/item"
               >
-                <BaseIcon :path="mdiCheckCircle" size="16" class="text-green-500 mt-0.5 flex-shrink-0" />
-                <span>{{ item }}</span>
+                <div class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <BaseIcon :path="mdiCheckCircle" size="12" class="text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <span class="group-hover/item:text-gray-900 dark:group-hover/item:text-gray-200 transition-colors">{{ item }}</span>
               </li>
             </ul>
           </div>
@@ -1148,32 +1189,60 @@ onMounted(() => {
         <!-- Education -->
         <div class="max-w-5xl mx-auto mt-16">
           <h3 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white font-heading">Education</h3>
-          <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl">
+          <div class="space-y-6">
             <div
               v-for="(edu, index) in education"
               :key="index"
-              class="flex flex-col md:flex-row md:items-start md:justify-between gap-4"
+              class="group relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50"
+              v-scroll-reveal="{ delay: `${index * 100}ms` }"
             >
-              <div class="flex-1">
-                <h4 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white font-heading">{{ edu.degree }}</h4>
-                <p class="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-3 font-heading">{{ edu.school }}</p>
-                <p class="text-gray-600 dark:text-gray-400 mb-4 font-display">{{ edu.description }}</p>
-                <div class="mb-4">
-                  <h5 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-heading">Specializations:</h5>
-                  <div class="flex flex-wrap gap-2">
-                    <span
-                      v-for="spec in edu.specializations"
-                      :key="spec"
-                      class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium font-display"
-                    >
-                      {{ spec }}
-                    </span>
+              <!-- Gradient accent -->
+              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 rounded-t-3xl"></div>
+
+              <div class="flex flex-col lg:flex-row lg:items-start gap-6">
+                <!-- Icon -->
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                    <BaseIcon :path="mdiSchool" size="32" class="text-white" />
                   </div>
                 </div>
-              </div>
-              <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-display">
-                <BaseIcon :path="mdiCalendar" size="20" />
-                <span class="font-medium">{{ edu.period }}</span>
+
+                <!-- Content -->
+                <div class="flex-1">
+                  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                    <div>
+                      <h4 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-1">{{ edu.degree }}</h4>
+                      <p class="text-xl text-blue-600 dark:text-blue-400 font-semibold font-heading">{{ edu.school }}</p>
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-slate-700/50 rounded-full text-gray-600 dark:text-gray-400 font-display shrink-0">
+                      <BaseIcon :path="mdiCalendar" size="18" />
+                      <span class="font-medium text-sm">{{ edu.period }}</span>
+                    </div>
+                  </div>
+
+                  <p class="text-gray-600 dark:text-gray-400 mb-6 font-display leading-relaxed">{{ edu.description }}</p>
+
+                  <div class="mb-4">
+                    <h5 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 font-heading uppercase tracking-wide">Coursework & Focus</h5>
+                    <div class="flex flex-wrap gap-2">
+                      <span
+                        v-for="spec in edu.specializations"
+                        :key="spec"
+                        class="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium font-display border border-blue-100 dark:border-blue-800/30"
+                      >
+                        {{ spec }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Awards -->
+                  <div v-if="edu.awards && edu.awards.length > 0" class="pt-4 border-t border-gray-100 dark:border-slate-700">
+                    <div class="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                      <BaseIcon :path="mdiStar" size="18" />
+                      <span class="font-medium text-sm">{{ edu.awards[0] }}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1182,18 +1251,32 @@ onMounted(() => {
         <!-- Certifications -->
         <div class="max-w-5xl mx-auto mt-12">
           <h3 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white font-heading">Certifications</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div
               v-for="(cert, index) in certifications"
               :key="index"
-              class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700"
+              class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-slate-700 overflow-hidden"
+              v-scroll-reveal="{ delay: `${index * 100}ms` }"
             >
-              <div class="flex items-center gap-3 mb-2">
-                <BaseIcon :path="mdiShield" size="24" class="text-blue-600 dark:text-blue-400" />
-                <h4 class="text-lg font-bold text-gray-900 dark:text-white font-heading">{{ cert.name }}</h4>
+              <!-- Background gradient on hover -->
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+              <div class="relative flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md shrink-0">
+                  <BaseIcon :path="mdiShield" size="24" class="text-white" />
+                </div>
+                <div class="flex-1">
+                  <h4 class="text-lg font-bold text-gray-900 dark:text-white font-heading mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ cert.name }}</h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm font-display mb-2">{{ cert.issuer }}</p>
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs font-mono text-gray-500 dark:text-gray-400">{{ cert.year }}</span>
+                    <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
+                      <BaseIcon :path="mdiCheckCircle" size="14" />
+                      Verified
+                    </span>
+                  </div>
+                </div>
               </div>
-              <p class="text-gray-600 dark:text-gray-400 text-sm font-display">{{ cert.issuer }}</p>
-              <p class="text-gray-500 dark:text-gray-500 text-xs mt-1 font-mono">{{ cert.year }}</p>
             </div>
           </div>
         </div>
@@ -1297,32 +1380,36 @@ def create_agent_workflow():
     </section>
 
     <!-- Achievements & Awards -->
-    <section id="achievements" class="py-32 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm fade-in">
+    <section id="achievements" class="py-24 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-800/50 dark:to-slate-900/50">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <div class="flex items-center justify-center gap-3 mb-4">
-            <BaseIcon :path="mdiRocket" size="48" class="text-blue-600 dark:text-blue-400" />
-            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-              Key Achievements
-            </h2>
-          </div>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Notable milestones and accomplishments</p>
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 rounded-full mb-4">Track Record</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+            Key Achievements
+          </h2>
+          <p class="text-lg text-gray-500 dark:text-gray-400">Notable milestones and impact</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="(achievement, index) in keyAchievements"
             :key="index"
-            class="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all border border-gray-200 dark:border-slate-700"
+            class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 overflow-hidden hover:-translate-y-1"
+            v-scroll-reveal="{ delay: `${index * 75}ms` }"
           >
-            <div :class="`w-14 h-14 rounded-xl bg-gradient-to-r ${achievement.gradient} flex items-center justify-center mb-4 shadow-lg`">
-              <BaseIcon :path="achievement.icon" size="28" class="text-white" />
-            </div>
-            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 font-heading">{{ achievement.title }}</h3>
-            <p class="text-gray-600 dark:text-gray-400 font-display">{{ achievement.description }}</p>
-            <div v-if="achievement.metric" class="mt-4 pt-4 border-t border-gray-200 dark:border-slate-700">
-              <div class="text-3xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading">
-                {{ achievement.metric }}
+            <!-- Gradient overlay on hover -->
+            <div :class="`absolute inset-0 bg-gradient-to-br ${achievement.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`"></div>
+
+            <div class="relative">
+              <div :class="`w-14 h-14 rounded-2xl bg-gradient-to-br ${achievement.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300`">
+                <BaseIcon :path="achievement.icon" size="28" class="text-white" />
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ achievement.title }}</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm font-display leading-relaxed">{{ achievement.description }}</p>
+              <div v-if="achievement.metric" class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+                <div :class="`text-2xl font-black bg-gradient-to-r ${achievement.gradient} bg-clip-text text-transparent font-heading`">
+                  {{ achievement.metric }}
+                </div>
               </div>
             </div>
           </div>
@@ -1331,38 +1418,42 @@ def create_agent_workflow():
     </section>
 
     <!-- Blog & Thoughts -->
-    <section id="blog" class="py-32 relative overflow-hidden fade-in">
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-cyan-50/50 to-indigo-50/50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50"></div>
+    <section id="blog" class="py-24 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/30 dark:from-slate-900/50 dark:via-slate-900 dark:to-slate-800/50"></div>
       <div class="relative max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20">
-          <div class="flex items-center justify-center gap-3 mb-4">
-            <BaseIcon :path="mdiBrain" size="48" class="text-blue-600 dark:text-blue-400" />
-            <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-              Thoughts & Insights
-            </h2>
-          </div>
-          <p class="text-xl text-gray-600 dark:text-gray-400 font-display">Engineering insights, technical deep-dives, and learnings</p>
+        <div class="text-center mb-16" v-scroll-reveal>
+          <span class="inline-block px-3 py-1 text-sm font-medium text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20 rounded-full mb-4">Writing</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
+            Thoughts & Insights
+          </h2>
+          <p class="text-lg text-gray-500 dark:text-gray-400">Engineering insights and technical deep-dives</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
             v-for="(article, index) in blogPosts"
             :key="index"
-            class="group bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all border border-gray-200 dark:border-slate-700 cursor-pointer"
+            class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 cursor-pointer hover:-translate-y-1 overflow-hidden"
+            v-scroll-reveal="{ delay: `${index * 75}ms` }"
           >
-            <div class="flex items-center gap-2 mb-4">
-              <span :class="`px-3 py-1 rounded-full text-xs font-semibold font-display ${article.category === 'Technical' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : article.category === 'AI/ML' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300'}`">
-                {{ article.category }}
-              </span>
-              <span class="text-xs text-gray-500 dark:text-gray-400 font-mono">{{ article.date }}</span>
-            </div>
-            <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading">
-              {{ article.title }}
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4 font-display line-clamp-3">{{ article.excerpt }}</p>
-            <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm">
-              <span>Read more</span>
-              <BaseIcon :path="mdiArrowRight" size="18" class="transform group-hover:translate-x-1 transition-transform" />
+            <!-- Subtle gradient on hover -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            <div class="relative">
+              <div class="flex items-center gap-2 mb-4">
+                <span :class="`px-3 py-1 rounded-full text-xs font-medium font-display ${article.category === 'Technical' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' : article.category === 'AI/ML' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' : article.category === 'Security' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300'}`">
+                  {{ article.category }}
+                </span>
+                <span class="text-xs text-gray-400 dark:text-gray-500 font-mono">{{ article.date }}</span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading leading-tight">
+                {{ article.title }}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 font-display leading-relaxed line-clamp-3">{{ article.excerpt }}</p>
+              <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium text-sm group-hover:gap-3 transition-all">
+                <span>Read article</span>
+                <BaseIcon :path="mdiArrowRight" size="16" class="transform group-hover:translate-x-1 transition-transform" />
+              </div>
             </div>
           </div>
         </div>
@@ -1370,7 +1461,7 @@ def create_agent_workflow():
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24">
+    <section id="contact" class="py-24 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-12" v-scroll-reveal>
           <span class="inline-block px-3 py-1 text-sm font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 rounded-full mb-4">Get in Touch</span>
@@ -1380,7 +1471,7 @@ def create_agent_workflow():
           <p class="text-lg text-gray-500 dark:text-gray-400 mb-2 max-w-2xl mx-auto">
             Ready to collaborate on your next project? Let's build something amazing together.
           </p>
-          <p class="text-gray-400 dark:text-gray-500">
+          <p class="text-gray-400 dark:text-gray-500 text-sm">
             Open to opportunities in AI/ML infrastructure, software development, and systems engineering.
           </p>
         </div>
@@ -1392,28 +1483,56 @@ def create_agent_workflow():
             :key="link.label"
             :href="link.url"
             target="_blank"
-            class="group flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full shadow-sm hover:shadow-md transition-all text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:border-gray-300 dark:hover:border-slate-600"
+            class="group flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full shadow-md hover:shadow-lg transition-all text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 hover:-translate-y-0.5"
           >
-            <BaseIcon :path="link.icon" size="18" />
-            <span class="font-medium text-sm">{{ link.label }}</span>
+            <BaseIcon :path="link.icon" size="18" class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+            <span class="font-medium text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ link.label }}</span>
           </a>
         </div>
 
-        <div v-scroll-reveal="{ delay: '150ms' }">
-          <ContactForm />
+        <div v-scroll-reveal="{ delay: '150ms' }" class="max-w-3xl mx-auto">
+          <div class="glass-premium rounded-3xl p-8 border border-gray-200/50 dark:border-slate-700/50">
+            <ContactForm />
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-gray-200/50 dark:border-slate-800/50">
-      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-gray-500 dark:text-gray-500 text-sm">
-          &copy; {{ new Date().getFullYear() }} Punit Mishra. Built with Vue.js & Tailwind CSS
-        </p>
-        <p class="text-gray-400 dark:text-gray-600 text-xs">
-          Computer Engineer • Software Developer • Systems Architect
-        </p>
+    <footer class="py-12 bg-gray-50 dark:bg-slate-900 border-t border-gray-200/50 dark:border-slate-800/50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <!-- Brand -->
+          <div class="flex items-center gap-3">
+            <div class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading">PM</div>
+            <div class="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">
+              &copy; {{ new Date().getFullYear() }} Punit Mishra
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="flex items-center gap-6 text-sm">
+            <button @click="scrollToSection('projects')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</button>
+            <button @click="scrollToSection('experience')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</button>
+            <button @click="scrollToSection('contact')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</button>
+          </div>
+
+          <!-- Made with -->
+          <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+            <span>Built with</span>
+            <span class="text-emerald-500">Vue.js</span>
+            <span>&</span>
+            <span class="text-cyan-500">Tailwind</span>
+          </div>
+        </div>
+
+        <!-- Bottom tagline -->
+        <div class="mt-8 pt-6 border-t border-gray-200/50 dark:border-slate-800/50 text-center">
+          <p class="text-gray-400 dark:text-gray-600 text-xs">
+            Senior Software Engineer @ SAP • UC Berkeley Alumni • AI/ML Infrastructure Architect
+          </p>
+        </div>
       </div>
     </footer>
   </div>

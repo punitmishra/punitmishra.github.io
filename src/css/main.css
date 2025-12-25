@@ -415,6 +415,89 @@
   color: inherit;
 }
 
+.dark ::selection {
+  background: rgb(99 102 241 / 0.3);
+}
+
+/* Smooth dark mode transition */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Dark mode enhanced glow effects */
+.dark .glow-blue {
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.25);
+}
+
+.dark .glow-indigo {
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.25);
+}
+
+.dark .glow-cyan {
+  box-shadow: 0 0 30px rgb(6 182 212 / 0.2);
+}
+
+/* Dark mode card hover glow */
+.dark .card-glow:hover::before {
+  background: linear-gradient(135deg, transparent 40%, rgb(99 102 241 / 0.15) 50%, transparent 60%);
+}
+
+/* Dark mode skeleton loading */
+.dark .skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 200% 100%;
+}
+
+/* Dark mode focus states */
+.dark :focus-visible {
+  outline: 2px solid rgb(99 102 241 / 0.5);
+  outline-offset: 2px;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgb(71 85 105 / 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgb(100 116 139 / 0.6);
+}
+
+/* Dark mode enhanced shadows */
+.dark .shadow-elegant-lg {
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 0.1),
+    0 8px 16px rgb(0 0 0 / 0.2),
+    0 16px 32px rgb(0 0 0 / 0.25);
+}
+
+/* Dark mode gradient border */
+.dark .gradient-border::before {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+}
+
+/* Dark mode text gradient */
+.dark .text-gradient-animate {
+  background: linear-gradient(90deg, #818cf8, #60a5fa, #22d3ee, #818cf8);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-gradient 8s linear infinite;
+}
+
+/* Dark mode gradient text */
+.dark .gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

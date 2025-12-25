@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
-import { mdiGithub } from '@mdi/js';
+import { ref, computed } from 'vue';
+import { mdiGithub, mdiOpenInNew } from '@mdi/js';
 import BaseIcon from '@/components/BaseIcon.vue';
 
 const props = defineProps({
@@ -11,119 +10,90 @@ const props = defineProps({
   },
 });
 
-const contributions = ref([]);
-const loading = ref(true);
-const error = ref(null);
+const imageLoaded = ref(false);
+const imageError = ref(false);
 
-// Generate calendar grid (last 52 weeks)
-const weeks = computed(() => {
-  const weeksArray = [];
-  const today = new Date();
-  
-  for (let i = 51; i >= 0; i--) {
-    const weekDate = new Date(today);
-    weekDate.setDate(today.getDate() - (i * 7));
-    weeksArray.push(weekDate);
-  }
-  
-  return weeksArray;
+// Use GitHub's contribution chart from third-party service
+const chartUrl = computed(() => {
+  return `https://ghchart.rshah.org/${props.username}`;
 });
 
-// Fetch contribution data (using GitHub API)
-const fetchContributions = async () => {
-  try {
-    loading.value = true;
-    error.value = null;
-    
-    // Note: GitHub API doesn't provide direct contribution graph data
-    // This is a simplified version. For full graph, you'd need to:
-    // 1. Use GitHub's GraphQL API
-    // 2. Or scrape the contribution graph (not recommended)
-    // 3. Or use a third-party service
-    
-    // For now, we'll show a placeholder that can be enhanced
-    // with actual API integration
-    
-    // Simulate contribution data structure
-    contributions.value = weeks.value.map(() => ({
-      date: new Date(),
-      count: Math.floor(Math.random() * 10), // Placeholder
-    }));
-    
-    loading.value = false;
-  } catch (err) {
-    error.value = err.message;
-    loading.value = false;
-  }
-};
-
-const getIntensity = (count) => {
-  if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
-  if (count < 3) return 'bg-green-200 dark:bg-green-900';
-  if (count < 6) return 'bg-green-400 dark:bg-green-700';
-  if (count < 9) return 'bg-green-600 dark:bg-green-600';
-  return 'bg-green-800 dark:bg-green-500';
-};
-
-onMounted(() => {
-  fetchContributions();
+const profileUrl = computed(() => {
+  return `https://github.com/${props.username}`;
 });
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-slate-700">
-    <div class="flex items-center gap-3 mb-6">
-      <BaseIcon :path="mdiGithub" size="24" class="text-gray-700 dark:text-gray-300" />
-      <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading">
-        Contribution Activity
-      </h3>
+  <div class="glass-premium rounded-2xl p-6 border border-gray-200/50 dark:border-slate-700/50">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-gray-900 dark:bg-white rounded-xl">
+          <BaseIcon :path="mdiGithub" size="20" class="text-white dark:text-gray-900" />
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white font-heading">
+            GitHub Activity
+          </h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Contribution graph</p>
+        </div>
+      </div>
+      <a
+        :href="profileUrl"
+        target="_blank"
+        class="flex items-center gap-1.5 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        <span>View Profile</span>
+        <BaseIcon :path="mdiOpenInNew" size="14" />
+      </a>
     </div>
 
-    <div v-if="loading" class="flex items-center justify-center py-12">
-      <div class="animate-pulse text-gray-400 font-display">Loading contributions...</div>
-    </div>
-
-    <div v-else-if="error" class="text-red-600 dark:text-red-400 text-sm font-display">
-      {{ error }}
-    </div>
-
-    <div v-else class="space-y-4">
-      <!-- Contribution Grid -->
-      <div class="flex gap-1 overflow-x-auto pb-2">
-        <div
-          v-for="(week, weekIndex) in weeks"
-          :key="weekIndex"
-          class="flex flex-col gap-1"
-        >
-          <div
-            v-for="day in 7"
-            :key="day"
-            :class="[
-              'w-3 h-3 rounded-sm',
-              getIntensity(contributions[weekIndex]?.count || 0),
-              'hover:ring-2 hover:ring-blue-500 cursor-pointer transition-all'
-            ]"
-            :title="`${contributions[weekIndex]?.count || 0} contributions`"
-          />
+    <!-- GitHub Chart Image -->
+    <div class="relative overflow-hidden rounded-xl bg-white dark:bg-slate-800 p-4">
+      <div v-if="!imageLoaded && !imageError" class="flex items-center justify-center py-8">
+        <div class="flex items-center gap-2 text-gray-400">
+          <div class="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+          <span class="text-sm">Loading contributions...</span>
         </div>
       </div>
 
-      <!-- Legend -->
-      <div class="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-display">
+      <div v-if="imageError" class="text-center py-8">
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-3">Unable to load contribution graph</p>
+        <a
+          :href="profileUrl"
+          target="_blank"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          <BaseIcon :path="mdiGithub" size="16" />
+          View on GitHub
+        </a>
+      </div>
+
+      <img
+        v-show="imageLoaded && !imageError"
+        :src="chartUrl"
+        :alt="`${username}'s GitHub contribution graph`"
+        class="w-full h-auto dark:invert dark:hue-rotate-180"
+        @load="imageLoaded = true"
+        @error="imageError = true"
+      />
+    </div>
+
+    <!-- Stats hint -->
+    <div class="mt-4 flex items-center justify-center gap-6 text-xs text-gray-500 dark:text-gray-400">
+      <div class="flex items-center gap-1.5">
+        <div class="w-2.5 h-2.5 rounded-sm bg-green-200 dark:bg-green-800"></div>
         <span>Less</span>
-        <div class="flex gap-1">
-          <div class="w-3 h-3 rounded-sm bg-gray-100 dark:bg-gray-800"></div>
-          <div class="w-3 h-3 rounded-sm bg-green-200 dark:bg-green-900"></div>
-          <div class="w-3 h-3 rounded-sm bg-green-400 dark:bg-green-700"></div>
-          <div class="w-3 h-3 rounded-sm bg-green-600 dark:bg-green-600"></div>
-          <div class="w-3 h-3 rounded-sm bg-green-800 dark:bg-green-500"></div>
-        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <div class="w-2.5 h-2.5 rounded-sm bg-green-300 dark:bg-green-700"></div>
+        <div class="w-2.5 h-2.5 rounded-sm bg-green-400 dark:bg-green-600"></div>
+        <div class="w-2.5 h-2.5 rounded-sm bg-green-500 dark:bg-green-500"></div>
+        <div class="w-2.5 h-2.5 rounded-sm bg-green-600 dark:bg-green-400"></div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <div class="w-2.5 h-2.5 rounded-sm bg-green-700 dark:bg-green-300"></div>
         <span>More</span>
       </div>
-
-      <p class="text-xs text-gray-500 dark:text-gray-500 text-center font-display">
-        Note: Full contribution graph requires GitHub GraphQL API integration
-      </p>
     </div>
   </div>
 </template>
