@@ -12,9 +12,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'display': ['Inter', 'system-ui', 'sans-serif'],
+        'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
-        'heading': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        'heading': ['Space Grotesk', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       zIndex: {
         "-1": "-1",

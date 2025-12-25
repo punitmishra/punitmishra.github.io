@@ -57,16 +57,16 @@ const linkedinUsername = "mishrapunit";
 
 const githubProfile = ref({
   name: "Punit Mishra",
-  bio: "Software Engineer",
+  bio: "Senior Software Engineer @ SAP",
   avatar: `https://github.com/${githubUsername}.png`,
-  followers: 0,
-  following: 0,
-  publicRepos: 0,
-  location: null,
-  company: null,
+  followers: 10,
+  following: 7,
+  publicRepos: 29,
+  location: "Pleasanton, CA",
+  company: "@SAP",
   blog: "https://punitmishra.com",
   htmlUrl: `https://github.com/${githubUsername}`,
-  createdAt: null,
+  createdAt: "2011-04-13T13:26:01Z",
 });
 
 const githubRepos = ref([]);
@@ -83,93 +83,87 @@ const socialLinks = [
 
 const featuredProjects = [
   {
-    name: "LangGraph Rust Memory Manager",
-    description: "High-performance Rust-based memory orchestration for AI agents with encrypted persistence, multi-tenant isolation, and real-time monitoring. Achieved 3-5x performance improvement over Python implementations. Features secure agent isolation, memory persistence across sessions, and comprehensive audit trails.",
-    tech: ["Rust", "LangGraph", "LangChain", "Redis", "PostgreSQL", "Docker"],
-    gradient: "from-blue-500 via-cyan-500 to-indigo-500",
-    url: `https://github.com/${githubUsername}?tab=repositories&q=langraph`,
+    name: "Shield AI",
+    description: "AI-powered DNS filtering system with real-time threat detection. Built with Rust for high-performance network security monitoring and malicious domain blocking.",
+    tech: ["Rust", "AI/ML", "DNS", "Security", "Networking"],
+    gradient: "from-rose-500 to-orange-500",
+    url: `https://github.com/${githubUsername}/shield-ai`,
     featured: true,
     highlights: [
-      "Multi-tenant agent orchestration",
-      "Rust-based memory persistence layer",
-      "3-5x performance improvement",
-      "Secure agent isolation",
-      "Performance benchmarking",
+      "Real-time threat detection",
+      "High-performance Rust implementation",
+      "DNS-level security filtering",
+      "AI-powered analysis",
     ],
   },
   {
-    name: "Vector Image Search Engine",
-    description: "Multimodal image search engine with CLIP embeddings, vector similarity search using FAISS, custom object detection pipeline, and relevancy reranking algorithms. Handles millions of images with sub-second query times. Built for product similarity search at scale.",
-    tech: ["Python", "Rust", "FAISS", "CLIP", "PostgreSQL", "Object Detection"],
-    gradient: "from-blue-500 via-cyan-500 to-teal-500",
-    url: `https://github.com/${githubUsername}?tab=repositories&q=vector`,
+    name: "Railroad Arcade",
+    description: "Interactive railroad simulation and arcade game built with TypeScript. Features real-time train control, track switching, and dynamic routing systems.",
+    tech: ["TypeScript", "Game Development", "Simulation", "Real-time Systems"],
+    gradient: "from-emerald-500 to-teal-500",
+    url: `https://github.com/${githubUsername}/railroad-arcade`,
     featured: true,
     highlights: [
-      "CLIP-based image embeddings",
-      "Vector similarity search",
-      "Custom object detection",
-      "Relevancy reranking",
-      "Real-time search API",
+      "Real-time simulation",
+      "Dynamic routing algorithms",
+      "Interactive controls",
+      "Systems engineering",
     ],
   },
   {
-    name: "AI Security Compliance Dashboard",
-    description: "Enterprise-grade security compliance dashboard with real-time bias detection, compliance scoring, audit trail visualization, and policy violation alerts. Built for secure AI infrastructure with multi-tenant support and encrypted memory persistence.",
-    tech: ["Next.js", "React", "Rust", "PostgreSQL", "Redis", "Docker"],
-    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
-    url: `https://github.com/${githubUsername}?tab=repositories&q=security`,
+    name: "SAP Commerce Extension",
+    description: "Enterprise commerce extension for SAP CX Intelligence & Incubation. Enables tenant credential configuration and UI component integration for visual search capabilities.",
+    tech: ["Java", "SAP Commerce", "Enterprise", "REST APIs"],
+    gradient: "from-blue-500 to-indigo-500",
+    url: `https://github.com/${githubUsername}/cxii-commerce-extn`,
     featured: true,
     highlights: [
-      "Real-time bias detection",
-      "Compliance scoring system",
-      "Audit trail visualization",
-      "Security metrics dashboard",
-      "Policy violation alerts",
+      "Enterprise-grade integration",
+      "Multi-tenant architecture",
+      "Visual search capabilities",
+      "SAP ecosystem",
     ],
   },
   {
-    name: "SAP Product Similarity Search",
-    description: "Technical exercise implementing product similarity search using FAISS, HNSW, and multimodal approaches. Includes text-based similarity with TF-IDF and transformer embeddings, plus image-based similarity with CLIP. Built for handling large-scale product datasets.",
-    tech: ["Python", "FAISS", "CLIP", "HNSW", "NLP", "Computer Vision"],
-    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
+    name: "SAP Technical Exercises",
+    description: "Data engineering and product similarity search implementations using FAISS, HNSW, and multimodal approaches with CLIP embeddings for large-scale datasets.",
+    tech: ["Python", "FAISS", "Docker", "Data Engineering", "ML"],
+    gradient: "from-violet-500 to-purple-500",
     url: `https://github.com/${githubUsername}/sap-cxii-tech-ex-01`,
     featured: true,
     highlights: [
-      "Multimodal similarity search",
-      "FAISS and HNSW implementation",
-      "CLIP image embeddings",
-      "Text and image fusion",
+      "Vector similarity search",
+      "CLIP embeddings",
       "Scalable architecture",
+      "Data pipelines",
     ],
   },
   {
-    name: "Core SAP Toolkit Application (v1)",
-    description: "Built the v1 of core SAP toolkit application from scratch. Established engineering best practices, SDLC lifecycles, PR review systems, and design architecture. Development including React/Next.js frontend and robust backend infrastructure.",
-    tech: ["React", "Next.js", "Node.js", "SAP Technologies", "Docker", "CI/CD"],
-    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-    url: "https://punitmishra.com",
+    name: "Cloud Foundry Deployment",
+    description: "Canonical open source deployment manifest for Cloud Foundry. Contributions to enterprise-grade cloud platform infrastructure and deployment automation.",
+    tech: ["Go", "Cloud Foundry", "BOSH", "Infrastructure"],
+    gradient: "from-cyan-500 to-blue-500",
+    url: `https://github.com/${githubUsername}/cf-deployment`,
     featured: true,
     highlights: [
-      "Built from scratch",
-      "Engineering best practices",
-      "SDLC implementation",
-      "Frontend and backend development",
-      "Team leadership",
+      "Cloud infrastructure",
+      "Deployment automation",
+      "Enterprise platform",
+      "Open source contribution",
     ],
   },
   {
-    name: "Raspberry Pi Railway System",
-    description: "Complete home railway system built with Raspberry Pi controllers. Demonstrates systems engineering skills, hardware integration, and passion for engineering from silicon to software. Personal hobby project showcasing engineering capabilities.",
-    tech: ["Raspberry Pi", "Python", "Hardware Integration", "IoT", "Systems Design"],
-    gradient: "from-green-500 via-emerald-500 to-teal-500",
-    url: "https://punitmishra.com",
+    name: "Kubernetes Deployment",
+    description: "Production-ready Kubernetes cluster deployment using Kubespray. Automated cluster provisioning with Ansible for scalable container orchestration.",
+    tech: ["Kubernetes", "Ansible", "DevOps", "Container Orchestration"],
+    gradient: "from-sky-500 to-cyan-500",
+    url: `https://github.com/${githubUsername}/kubespray`,
     featured: true,
     highlights: [
-      "Hardware integration",
-      "IoT systems",
-      "Real-time control",
-      "Systems engineering",
-      "Personal passion project",
+      "Production Kubernetes",
+      "Ansible automation",
+      "Cluster management",
+      "Container orchestration",
     ],
   },
 ];
@@ -196,62 +190,51 @@ const experience = [
     title: "Senior Software Engineer",
     company: "SAP",
     period: "2013 - Present",
-    location: "San Francisco Bay Area, CA",
+    location: "Pleasanton, CA",
     duration: "11+ years",
     achievements: [
-      "Built v1 of core SAP toolkit application from scratch, establishing engineering best practices and SDLC lifecycles",
-      "Led development of scalable microservices architecture serving enterprise customers globally",
-      "Architected and implemented secure AI infrastructure with LLM-powered applications (2+ years focus)",
-      "Established PR review systems, design architecture, and engineering best practices across teams",
-      "Mentored new interns and team members for 2+ years, building technical leadership capabilities",
-      "Improved system performance by 40% through optimization and caching strategies",
-      "Designed and implemented real-time data processing pipelines for AI/ML workloads",
-      "Reduced infrastructure costs by 30% through efficient resource utilization and optimization",
-      "Built ML containers and systems before LLMs existed, demonstrating early AI/ML expertise",
-      "Drove security compliance initiatives, ensuring enterprise-grade security standards",
+      "Building enterprise-grade AI/ML infrastructure and intelligent applications",
+      "Architecting scalable microservices serving global enterprise customers",
+      "Leading development of commerce extensions and visual search capabilities",
+      "Implementing cloud-native solutions with Kubernetes and Cloud Foundry",
+      "Driving security compliance and enterprise-grade standards",
+      "Mentoring engineers and establishing engineering best practices",
     ],
-    tech: ["Vue.js", "React", "Next.js", "Node.js", "Python", "Rust", "AWS", "Docker", "Kubernetes", "PostgreSQL", "Redis", "LangGraph", "LangChain"],
+    tech: ["Java", "TypeScript", "Python", "Rust", "Kubernetes", "Cloud Foundry", "Docker", "PostgreSQL", "Redis"],
     highlights: [
-      "Product development",
-      "Engineering team leadership",
-      "AI/ML infrastructure",
-      "Security & compliance",
-      "Systems architecture",
-    ],
-  },
-  {
-    title: "Software Engineer",
-    company: "IBM",
-    period: "2011 - 2013",
-    location: "United States",
-    duration: "1.5 years",
-    achievements: [
-      "Developed enterprise software solutions for large-scale clients",
-      "Contributed to system design and architecture decisions",
-      "Collaborated with cross-functional teams on complex projects",
-      "Gained foundational experience in enterprise software development",
-    ],
-    tech: ["Java", "JavaScript", "SQL", "Enterprise Systems"],
-    highlights: [
-      "Enterprise software",
-      "System design",
-      "Team collaboration",
+      "Enterprise AI/ML",
+      "Cloud Infrastructure",
+      "Team Leadership",
+      "Security & Compliance",
     ],
   },
 ];
 
 const education = [
   {
-    degree: "Bachelor's in Computer Engineering",
-    school: "University",
-    period: "2007 - 2011",
-    description: "Focus on computer engineering with specialization in GPU and system design, microfabrication, and microelectronics. Final year focused on GPU architecture and system design.",
+    degree: "Computer Science",
+    school: "University of California, Berkeley",
+    period: "2010 - 2012",
+    description: "Advanced coursework in computer science and electrical engineering at one of the world's top engineering programs.",
     specializations: [
-      "GPU and System Design (1 year specialization)",
-      "Microfabrication and Microelectronics",
-      "Hardware Engineering",
-      "Systems Architecture",
+      "Artificial Intelligence (CS 188)",
+      "Computer Architecture (CS 150/152)",
+      "Communication Networks (EE 122)",
+      "Signals and Systems (EE 120)",
     ],
+    awards: ["International Student Scholarship ($10,000)"],
+  },
+  {
+    degree: "Engineering",
+    school: "Ohlone College",
+    period: "2008 - 2010",
+    description: "Foundation in engineering with leadership in robotics and engineering clubs.",
+    specializations: [
+      "Engineering Fundamentals",
+      "VEX Robotics Competition",
+      "Engineering Club Vice President",
+    ],
+    awards: ["Outstanding Engineering Student Award"],
   },
 ];
 
@@ -829,57 +812,54 @@ onMounted(() => {
         />
 
         <div v-if="loading.repos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="i in 6" :key="i" class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse">
-            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+          <div v-for="i in 6" :key="i" class="bg-white dark:bg-slate-800 rounded-2xl p-6 skeleton">
+            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
           </div>
         </div>
 
         <div v-else-if="latestRepos.length > 0 || filteredRepos.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div
-            v-for="repo in (filteredRepos.length > 0 ? filteredRepos : latestRepos)"
+            v-for="(repo, index) in (filteredRepos.length > 0 ? filteredRepos : latestRepos)"
             :key="repo.id"
             @click="goToProject(repo.name)"
-            class="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 border border-gray-200 dark:border-slate-700 cursor-pointer"
+            class="group bg-white dark:bg-slate-800/80 rounded-2xl p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer card-glow"
+            v-scroll-reveal="{ delay: `${index * 50}ms` }"
           >
-            <div class="flex items-start justify-between mb-4">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading">
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading leading-tight">
                 {{ repo.name }}
               </h3>
-              <BaseIcon :path="mdiGithub" size="24" class="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+              <BaseIcon :path="mdiGithub" size="20" class="text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors flex-shrink-0" />
             </div>
-            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm font-display line-clamp-3">
+            <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm leading-relaxed line-clamp-2">
               {{ repo.description }}
             </p>
-            <div v-if="repo.topics && repo.topics.length > 0" class="flex flex-wrap gap-2 mb-4">
+            <div v-if="repo.topics && repo.topics.length > 0" class="flex flex-wrap gap-1.5 mb-4">
               <span
                 v-for="topic in repo.topics.slice(0, 3)"
                 :key="topic"
-                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium font-display"
+                class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 rounded text-xs font-medium"
               >
                 {{ topic }}
               </span>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
-              <div class="flex items-center gap-4 text-sm">
-                <div class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                  <BaseIcon :path="mdiStar" size="16" />
-                  <span class="font-display">{{ repo.stars }}</span>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700/50">
+              <div class="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+                <div class="flex items-center gap-1">
+                  <BaseIcon :path="mdiStar" size="14" />
+                  <span>{{ repo.stars }}</span>
                 </div>
-                <div class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                  <BaseIcon :path="mdiSourceFork" size="16" />
-                  <span class="font-display">{{ repo.forks }}</span>
+                <div class="flex items-center gap-1">
+                  <BaseIcon :path="mdiSourceFork" size="14" />
+                  <span>{{ repo.forks }}</span>
                 </div>
                 <div v-if="repo.language" class="flex items-center gap-1">
-                  <span class="w-3 h-3 rounded-full" :class="getLanguageColor(repo.language)"></span>
-                  <span class="text-gray-600 dark:text-gray-400 font-display">{{ repo.language }}</span>
+                  <span class="w-2 h-2 rounded-full" :class="getLanguageColor(repo.language)"></span>
+                  <span>{{ repo.language }}</span>
                 </div>
               </div>
-              <span class="text-xs text-gray-500 font-mono">{{ repo.updated }}</span>
-            </div>
-            <div class="mt-4 flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 font-semibold">
-              <span>View Details</span>
-              <BaseIcon :path="mdiArrowRight" size="18" class="transform group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
@@ -897,42 +877,32 @@ onMounted(() => {
           <p class="text-lg text-gray-500 dark:text-gray-400">Innovative solutions built with cutting-edge technology</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
             v-for="(project, index) in featuredProjects"
             :key="index"
             :href="project.url"
             target="_blank"
-            :class="`group relative overflow-hidden rounded-3xl bg-gradient-to-br ${project.gradient} p-8 text-white shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-500 cursor-pointer`"
+            class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-800/80 p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer"
+            v-scroll-reveal="{ delay: `${index * 75}ms` }"
           >
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+            <!-- Gradient accent bar -->
+            <div :class="`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient}`"></div>
             <div class="relative z-10">
-              <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
-                <BaseIcon :path="mdiRocket" size="32" />
-              </div>
-              <h3 class="text-2xl font-bold mb-3 font-heading">{{ project.name }}</h3>
-              <p class="text-white/90 mb-6 leading-relaxed text-sm font-display">{{ project.description }}</p>
-              <div class="space-y-2 mb-6">
-                <div class="text-xs font-semibold text-white/80 mb-2 font-display">Key Features:</div>
-                <ul class="space-y-1">
-                  <li v-for="(highlight, i) in project.highlights" :key="i" class="flex items-start gap-2 text-sm text-white/90">
-                    <BaseIcon :path="mdiCheckCircle" size="16" class="mt-0.5 flex-shrink-0" />
-                    <span class="font-display">{{ highlight }}</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="flex flex-wrap gap-2 mb-6">
+              <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ project.name }}</h3>
+              <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed text-sm line-clamp-2">{{ project.description }}</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
                 <span
-                  v-for="tech in project.tech"
+                  v-for="tech in project.tech.slice(0, 4)"
                   :key="tech"
-                  class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold font-display"
+                  class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 rounded text-xs font-medium"
                 >
                   {{ tech }}
                 </span>
               </div>
-              <div class="flex items-center gap-2 text-sm font-semibold opacity-90 group-hover:opacity-100">
-                <span class="font-display">View Project</span>
-                <BaseIcon :path="mdiArrowRight" size="18" class="transform group-hover:translate-x-1 transition-transform" />
+              <div class="flex items-center gap-1.5 text-sm text-blue-600 dark:text-blue-400 font-medium group-hover:gap-2 transition-all">
+                <span>View on GitHub</span>
+                <BaseIcon :path="mdiArrowRight" size="16" />
               </div>
             </div>
           </a>
