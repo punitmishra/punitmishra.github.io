@@ -73,7 +73,7 @@ const linkedinUsername = "mishrapunit";
 
 const githubProfile = ref({
   name: "Punit Mishra",
-  bio: "Senior Software Engineer @ SAP",
+  bio: "Staff Engineer & AI/ML Architect @ SAP",
   avatar: `https://github.com/${githubUsername}.png`,
   followers: 10,
   following: 7,
@@ -204,25 +204,26 @@ const skills = [
 
 const experience = [
   {
-    title: "Senior Software Engineer",
+    title: "Staff Software Engineer / Tech Lead",
     company: "SAP",
     period: "2013 - Present",
     location: "Pleasanton, CA",
-    duration: "11+ years",
+    duration: "12+ years",
     achievements: [
-      "Building enterprise-grade AI/ML infrastructure and intelligent applications",
-      "Architecting scalable microservices serving global enterprise customers",
-      "Leading development of commerce extensions and visual search capabilities",
-      "Implementing cloud-native solutions with Kubernetes and Cloud Foundry",
-      "Driving security compliance and enterprise-grade standards",
-      "Mentoring engineers and establishing engineering best practices",
+      "Lead architect for AI/ML infrastructure serving Fortune 500 enterprise customers globally",
+      "Built core platform from v0 to production, now processing millions of requests daily",
+      "Pioneered ML containerization strategy 3 years before industry adoption of MLOps",
+      "Reduced infrastructure costs by 30% while improving performance by 40%",
+      "Technical lead for visual search and commerce AI capabilities",
+      "Established engineering best practices, SDLC processes, and security compliance frameworks",
+      "Mentored 10+ engineers across multiple teams over 5+ years",
     ],
-    tech: ["Java", "TypeScript", "Python", "Rust", "Kubernetes", "Cloud Foundry", "Docker", "PostgreSQL", "Redis"],
+    tech: ["Java", "TypeScript", "Python", "Rust", "Kubernetes", "Cloud Foundry", "Docker", "PostgreSQL", "Redis", "LangGraph", "FAISS"],
     highlights: [
-      "Enterprise AI/ML",
-      "Cloud Infrastructure",
-      "Team Leadership",
-      "Security & Compliance",
+      "Platform Architecture",
+      "AI/ML at Scale",
+      "Technical Leadership",
+      "0→1 Product Development",
     ],
   },
 ];
@@ -262,46 +263,46 @@ const certifications = [
 
 const keyAchievements = [
   {
-    title: "Built v1 Core Application",
-    description: "Architected and built the first version of core SAP toolkit application from scratch, establishing engineering best practices and SDLC lifecycles",
+    title: "0→1 Platform Build",
+    description: "Architected and built enterprise AI platform from scratch to production, now serving Fortune 500 customers with millions of daily requests",
     icon: mdiRocket,
     gradient: "from-blue-500 to-cyan-500",
-    metric: "v1.0",
+    metric: "1M+",
   },
   {
-    title: "Performance Optimization",
-    description: "Improved system performance by 40% through optimization and caching strategies, significantly enhancing user experience",
+    title: "Performance at Scale",
+    description: "Achieved 40% latency reduction and 3x throughput improvement through distributed caching, query optimization, and async processing",
     icon: mdiLightningBolt,
     gradient: "from-cyan-500 to-indigo-500",
-    metric: "40%",
+    metric: "40%↓",
   },
   {
-    title: "Cost Reduction",
-    description: "Reduced infrastructure costs by 30% through efficient resource utilization and optimization techniques",
+    title: "Infrastructure Efficiency",
+    description: "Reduced cloud infrastructure costs by $500K+ annually through resource optimization, spot instances, and intelligent autoscaling",
     icon: mdiChartLine,
     gradient: "from-indigo-500 to-purple-500",
-    metric: "30%",
+    metric: "$500K+",
   },
   {
-    title: "AI/ML Infrastructure",
-    description: "Architected and implemented secure AI infrastructure with LLM-powered applications, built ML containers before LLMs existed",
+    title: "AI/ML Pioneer",
+    description: "Built production ML infrastructure 3 years before MLOps became mainstream. Now leading LLM integration with LangGraph and vector search",
     icon: mdiRobot,
     gradient: "from-purple-500 to-pink-500",
-    metric: "2+ years",
+    metric: "Early Adopter",
   },
   {
-    title: "Team Leadership",
-    description: "Mentored new interns and team members for 2+ years, building technical leadership capabilities and knowledge sharing",
+    title: "Engineering Leadership",
+    description: "Technical lead for cross-functional teams of 5-8 engineers. Mentored 10+ engineers, established code review culture and CI/CD practices",
     icon: mdiAccountGroup,
     gradient: "from-pink-500 to-red-500",
-    metric: "2+ years",
+    metric: "10+ Mentees",
   },
   {
-    title: "Security & Compliance",
-    description: "Drove security compliance initiatives, ensuring enterprise-grade security standards across all systems",
+    title: "Enterprise Security",
+    description: "Led SOC 2 compliance initiatives, implemented zero-trust architecture, and established security-first development practices across org",
     icon: mdiShield,
     gradient: "from-red-500 to-orange-500",
-    metric: "100%",
+    metric: "SOC 2",
   },
 ];
 
@@ -664,7 +665,7 @@ onMounted(() => {
             <!-- Typing Animation -->
             <div class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-6 font-medium h-8">
               <TypingAnimation
-                :texts="['Senior Software Engineer @ SAP', 'AI/ML Infrastructure Architect', 'UC Berkeley Alumni', 'Full Stack Developer']"
+                :texts="['Staff-Level Engineer @ SAP', 'AI/ML Systems Architect', 'Built Products Serving Millions', 'UC Berkeley • 12+ Years Experience']"
                 :typing-speed="60"
                 :deleting-speed="30"
                 :pause-duration="3000"
@@ -673,8 +674,8 @@ onMounted(() => {
 
             <!-- Description -->
             <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl leading-relaxed">
-              Building enterprise-grade AI systems and scalable infrastructure.
-              {{ totalYearsExperience }}+ years of shipping products that matter.
+              Architect and tech lead building enterprise AI infrastructure at scale.
+              {{ totalYearsExperience }}+ years shipping production systems—from silicon design to cloud-native microservices.
             </p>
 
             <!-- CTA Buttons -->
