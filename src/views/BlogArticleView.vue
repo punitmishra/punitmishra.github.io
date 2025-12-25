@@ -60,42 +60,40 @@ const content = ref('');
 const loading = ref(true);
 const error = ref(null);
 
-// Custom renderer to add language labels and mermaid support
-const renderer = new marked.Renderer();
-renderer.code = function(token) {
-  const code = token.text || '';
-  const language = token.lang || '';
-  const langName = languageNames[language.toLowerCase()] || language.toUpperCase() || 'Code';
-
-  // Handle mermaid diagrams
-  if (language.toLowerCase() === 'mermaid') {
-    return `<div class="mermaid-wrapper"><div class="code-lang-label">Diagram</div><div class="mermaid">${code}</div></div>`;
-  }
-
-  // Syntax highlight code
-  let highlighted = code;
-  if (language && hljs.getLanguage(language)) {
-    try {
-      highlighted = hljs.highlight(code, { language: language }).value;
-    } catch (e) {
-      console.warn('Highlighting failed:', e);
-    }
-  } else {
-    try {
-      highlighted = hljs.highlightAuto(code).value;
-    } catch (e) {
-      // Keep original code
-    }
-  }
-
-  return `<div class="code-block-wrapper"><div class="code-lang-label">${langName}</div><pre><code class="hljs language-${language}">${highlighted}</code></pre></div>`;
-};
-
-// Configure marked with custom renderer
-marked.setOptions({
+// Configure marked with custom renderer using modern API
+marked.use({
   gfm: true,
   breaks: true,
-  renderer: renderer
+  renderer: {
+    code(token) {
+      const code = token.text || '';
+      const language = token.lang || '';
+      const langName = languageNames[language.toLowerCase()] || language.toUpperCase() || 'Code';
+
+      // Handle mermaid diagrams
+      if (language.toLowerCase() === 'mermaid') {
+        return `<div class="mermaid-wrapper"><div class="code-lang-label">Diagram</div><div class="mermaid">${code}</div></div>`;
+      }
+
+      // Syntax highlight code
+      let highlighted = code;
+      if (language && hljs.getLanguage(language)) {
+        try {
+          highlighted = hljs.highlight(code, { language: language }).value;
+        } catch (e) {
+          console.warn('Highlighting failed:', e);
+        }
+      } else {
+        try {
+          highlighted = hljs.highlightAuto(code).value;
+        } catch (e) {
+          // Keep original code
+        }
+      }
+
+      return `<div class="code-block-wrapper"><div class="code-lang-label">${langName}</div><pre><code class="hljs language-${language}">${highlighted}</code></pre></div>`;
+    }
+  }
 });
 
 // Initialize mermaid after content loads
