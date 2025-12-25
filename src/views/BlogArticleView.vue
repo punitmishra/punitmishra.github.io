@@ -62,20 +62,21 @@ const error = ref(null);
 
 // Custom renderer to add language labels and mermaid support
 const renderer = new marked.Renderer();
-renderer.code = function(code, language) {
-  const lang = language || '';
-  const langName = languageNames[lang.toLowerCase()] || lang.toUpperCase() || 'Code';
+renderer.code = function({ text, lang, escaped }) {
+  const code = text || '';
+  const language = lang || '';
+  const langName = languageNames[language.toLowerCase()] || language.toUpperCase() || 'Code';
 
   // Handle mermaid diagrams
-  if (lang.toLowerCase() === 'mermaid') {
+  if (language.toLowerCase() === 'mermaid') {
     return `<div class="mermaid-wrapper"><div class="code-lang-label">Diagram</div><div class="mermaid">${code}</div></div>`;
   }
 
   // Syntax highlight code
   let highlighted = code;
-  if (lang && hljs.getLanguage(lang)) {
+  if (language && hljs.getLanguage(language)) {
     try {
-      highlighted = hljs.highlight(code, { language: lang }).value;
+      highlighted = hljs.highlight(code, { language: language }).value;
     } catch (e) {
       console.warn('Highlighting failed:', e);
     }
@@ -87,7 +88,7 @@ renderer.code = function(code, language) {
     }
   }
 
-  return `<div class="code-block-wrapper"><div class="code-lang-label">${langName}</div><pre><code class="hljs language-${lang}">${highlighted}</code></pre></div>`;
+  return `<div class="code-block-wrapper"><div class="code-lang-label">${langName}</div><pre><code class="hljs language-${language}">${highlighted}</code></pre></div>`;
 };
 
 // Configure marked with custom renderer
