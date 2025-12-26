@@ -1,7 +1,7 @@
 {
   "photos": [
     {
-      "publicId": "portfolio/professional/headshot-1",
+      "publicId": "punitmishra/professional/headshot-1",
       "category": "professional",
       "caption": "Professional Headshot",
       "alt": "Professional headshot of Punit Mishra",
@@ -9,21 +9,21 @@
       "featured": true
     },
     {
-      "publicId": "portfolio/professional/conference-talk",
+      "publicId": "punitmishra/professional/conference-talk",
       "category": "professional",
       "caption": "Tech Conference Speaker",
       "alt": "Speaking at a technology conference",
       "aspectRatio": "16:9"
     },
     {
-      "publicId": "portfolio/professional/team-collaboration",
+      "publicId": "punitmishra/professional/team-collaboration",
       "category": "professional",
       "caption": "Team Collaboration",
       "alt": "Collaborating with engineering team",
       "aspectRatio": "4:3"
     },
     {
-      "publicId": "portfolio/projects/ai-dashboard",
+      "publicId": "punitmishra/projects/ai-dashboard",
       "category": "projects",
       "caption": "AI Analytics Dashboard",
       "alt": "Screenshot of AI-powered analytics dashboard",
@@ -31,35 +31,35 @@
       "featured": true
     },
     {
-      "publicId": "portfolio/projects/mobile-app",
+      "publicId": "punitmishra/projects/mobile-app",
       "category": "projects",
       "caption": "Mobile Application",
       "alt": "Mobile app interface design",
       "aspectRatio": "9:16"
     },
     {
-      "publicId": "portfolio/projects/architecture-diagram",
+      "publicId": "punitmishra/projects/architecture-diagram",
       "category": "projects",
       "caption": "System Architecture",
       "alt": "Cloud architecture diagram for distributed system",
       "aspectRatio": "4:3"
     },
     {
-      "publicId": "portfolio/projects/code-review",
+      "publicId": "punitmishra/projects/code-review",
       "category": "projects",
       "caption": "Code Review Session",
       "alt": "Screenshot of code review process",
       "aspectRatio": "16:9"
     },
     {
-      "publicId": "portfolio/personal/hiking-adventure",
+      "publicId": "punitmishra/personal/hiking-adventure",
       "category": "personal",
       "caption": "Mountain Hiking",
       "alt": "Hiking in the mountains",
       "aspectRatio": "4:3"
     },
     {
-      "publicId": "portfolio/personal/workspace",
+      "publicId": "punitmishra/personal/workspace",
       "category": "personal",
       "caption": "Home Office Setup",
       "alt": "Personal workspace and development setup",
@@ -67,14 +67,14 @@
       "featured": true
     },
     {
-      "publicId": "portfolio/personal/travel",
+      "publicId": "punitmishra/personal/travel",
       "category": "personal",
       "caption": "Travels",
       "alt": "Travel photography",
       "aspectRatio": "3:2"
     },
     {
-      "publicId": "portfolio/personal/hobbies",
+      "publicId": "punitmishra/personal/hobbies",
       "category": "personal",
       "caption": "Side Projects",
       "alt": "Working on personal projects",

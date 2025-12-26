@@ -3,7 +3,7 @@
  * Generates optimized image URLs with transformations
  */
 
-const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'demo';
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'punitmishra';
 const BASE_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload`;
 
 /**
