@@ -1,6 +1,6 @@
 /**
  * Resume Generator
- * Generates elegant LaTeX-style resume as PDF
+ * Generates FAANG-quality professional resume as PDF
  * Uses resume.json as single source of truth
  */
 
@@ -33,7 +33,7 @@ export async function downloadResumePDF() {
     trackDownload('resume', 'resume.pdf');
 
     const resumeData = await fetchResumeData();
-    const resumeHTML = generateLatexHTML(resumeData);
+    const resumeHTML = generateEliteHTML(resumeData);
 
     const html2pdfModule = await import('html2pdf.js');
     const html2pdf = html2pdfModule.default || html2pdfModule;
@@ -76,18 +76,15 @@ export async function downloadResumePDF() {
 }
 
 /**
- * Generate LaTeX-style HTML resume
+ * Generate elite FAANG-style HTML resume
+ * Based on best practices from Tech Interview Handbook and Resume Worded
  */
-function generateLatexHTML(data) {
+function generateEliteHTML(data) {
   const basics = data.basics;
   const experience = data.experience || [];
   const education = data.education || [];
   const skills = data.skills || [];
   const certifications = data.certifications || [];
-  const projects = data.projects || [];
-
-  // Get top 3 projects for the PDF
-  const topProjects = projects.slice(0, 3);
 
   return `<!DOCTYPE html>
 <html>
@@ -95,182 +92,124 @@ function generateLatexHTML(data) {
   <meta charset="UTF-8">
   <title>${basics.name} - Resume</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Crimson Pro', 'Times New Roman', Georgia, serif;
-      font-size: 10.5px;
-      line-height: 1.3;
-      color: #1a1a1a;
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 10.5pt;
+      line-height: 1.25;
+      color: #000;
       background: #fff;
-      -webkit-font-smoothing: antialiased;
     }
 
     a {
-      color: #0066cc;
+      color: #0645AD;
       text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
     }
 
     .resume {
       width: 210mm;
       height: 297mm;
-      padding: 18mm 20mm;
+      padding: 12mm 14mm;
       background: #fff;
-      overflow: hidden;
     }
 
-    /* Header - Centered LaTeX style */
+    /* Header */
     .header {
       text-align: center;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 0.5px solid #000;
+      margin-bottom: 8pt;
+      padding-bottom: 6pt;
+      border-bottom: 1.5pt solid #000;
     }
 
-    .header h1 {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 2px;
+    .name {
+      font-size: 20pt;
+      font-weight: bold;
+      letter-spacing: 1pt;
+      margin-bottom: 4pt;
     }
 
-    .header .title {
-      font-size: 11px;
-      font-weight: 400;
-      color: #444;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-
-    .header .contact {
-      font-family: 'Source Sans Pro', sans-serif;
-      font-size: 9px;
+    .contact-line {
+      font-size: 9.5pt;
       color: #333;
     }
 
-    .header .contact a {
-      color: #0066cc;
+    .contact-line a {
+      color: #0645AD;
     }
 
-    .header .contact span {
-      margin: 0 6px;
+    .separator {
+      margin: 0 6pt;
+      color: #666;
     }
 
-    .header .contact .separator {
-      color: #999;
-    }
-
-    /* Two column layout */
-    .content {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-
-    .main-col {
-      display: table-cell;
-      width: 68%;
-      padding-right: 16px;
-      vertical-align: top;
-    }
-
-    .side-col {
-      display: table-cell;
-      width: 32%;
-      padding-left: 12px;
-      border-left: 0.5px solid #ddd;
-      vertical-align: top;
-    }
-
-    /* Section headers */
+    /* Section */
     .section {
-      margin-bottom: 10px;
+      margin-bottom: 8pt;
     }
 
     .section-title {
-      font-family: 'Source Sans Pro', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
+      font-size: 11pt;
+      font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #000;
-      margin-bottom: 6px;
-      padding-bottom: 2px;
-      border-bottom: 0.5px solid #ccc;
-    }
-
-    /* Summary */
-    .summary {
-      font-size: 9.5px;
-      color: #333;
-      line-height: 1.4;
-      text-align: justify;
-      margin-bottom: 2px;
+      letter-spacing: 1pt;
+      border-bottom: 0.75pt solid #000;
+      padding-bottom: 2pt;
+      margin-bottom: 6pt;
     }
 
     /* Experience */
-    .job {
-      margin-bottom: 8px;
+    .exp-item {
+      margin-bottom: 8pt;
     }
 
-    .job:last-child {
-      margin-bottom: 0;
-    }
-
-    .job-header {
+    .exp-header {
       display: table;
       width: 100%;
-      margin-bottom: 1px;
+      margin-bottom: 1pt;
     }
 
-    .job-title {
+    .exp-left {
       display: table-cell;
-      font-weight: 700;
-      font-size: 10px;
     }
 
-    .job-period {
+    .exp-right {
       display: table-cell;
       text-align: right;
-      font-size: 9px;
-      color: #666;
+    }
+
+    .exp-title {
+      font-weight: bold;
+      font-size: 10.5pt;
+    }
+
+    .exp-company {
       font-style: italic;
     }
 
-    .job-company {
-      font-size: 9.5px;
+    .exp-date {
+      font-size: 10pt;
+    }
+
+    .exp-location {
+      font-size: 10pt;
       color: #444;
-      margin-bottom: 3px;
     }
 
-    .job-list {
-      margin-left: 12px;
-      font-size: 9px;
-      color: #333;
+    .achievements {
+      margin-left: 16pt;
+      margin-top: 3pt;
     }
 
-    .job-list li {
-      margin-bottom: 1px;
+    .achievements li {
+      margin-bottom: 2pt;
+      font-size: 10pt;
       line-height: 1.3;
-    }
-
-    .tech-tags {
-      font-family: 'Source Sans Pro', sans-serif;
-      font-size: 8px;
-      color: #555;
-      margin-top: 3px;
     }
 
     /* Education */
     .edu-item {
-      margin-bottom: 6px;
+      margin-bottom: 4pt;
     }
 
     .edu-header {
@@ -278,167 +217,131 @@ function generateLatexHTML(data) {
       width: 100%;
     }
 
-    .edu-degree {
+    .edu-left {
       display: table-cell;
-      font-weight: 700;
-      font-size: 9.5px;
     }
 
-    .edu-period {
+    .edu-right {
       display: table-cell;
       text-align: right;
-      font-size: 8.5px;
-      color: #666;
-      font-style: italic;
+      font-size: 10pt;
+    }
+
+    .edu-degree {
+      font-weight: bold;
+      font-size: 10.5pt;
     }
 
     .edu-school {
-      font-size: 9px;
-      color: #444;
+      font-style: italic;
     }
 
     .edu-details {
-      font-size: 8.5px;
-      color: #666;
-      margin-top: 1px;
+      font-size: 9.5pt;
+      color: #444;
+      margin-top: 1pt;
     }
 
     /* Skills */
+    .skills-grid {
+      font-size: 10pt;
+      line-height: 1.4;
+    }
+
+    .skill-row {
+      margin-bottom: 2pt;
+    }
+
     .skill-category {
-      margin-bottom: 6px;
-    }
-
-    .skill-category:last-child {
-      margin-bottom: 0;
-    }
-
-    .skill-label {
-      font-family: 'Source Sans Pro', sans-serif;
-      font-size: 8.5px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 2px;
-    }
-
-    .skill-items {
-      font-size: 8.5px;
-      color: #444;
-      line-height: 1.35;
+      font-weight: bold;
     }
 
     /* Certifications */
+    .certs {
+      font-size: 10pt;
+    }
+
     .cert-item {
-      margin-bottom: 4px;
+      margin-bottom: 2pt;
     }
 
-    .cert-name {
-      font-size: 9px;
-      font-weight: 600;
+    /* Two column for bottom */
+    .two-col {
+      display: table;
+      width: 100%;
     }
 
-    .cert-issuer {
-      font-size: 8px;
-      color: #666;
+    .col-left {
+      display: table-cell;
+      width: 55%;
+      vertical-align: top;
+      padding-right: 12pt;
     }
 
-    /* Projects */
-    .project-item {
-      margin-bottom: 6px;
-    }
-
-    .project-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .project-name {
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .project-name a {
-      color: #0066cc;
-    }
-
-    .project-desc {
-      font-size: 8px;
-      color: #555;
-      line-height: 1.3;
-      margin-top: 1px;
+    .col-right {
+      display: table-cell;
+      width: 45%;
+      vertical-align: top;
     }
   </style>
 </head>
 <body>
   <div class="resume">
     <!-- Header -->
-    <header class="header">
-      <h1>${basics.name}</h1>
-      <div class="title">${basics.title}</div>
-      <div class="contact">
-        ${basics.location}
-        <span class="separator">|</span>
-        <a href="mailto:${basics.email}">${basics.email}</a>
-        <span class="separator">|</span>
-        <a href="https://punitmishra.com" target="_blank">punitmishra.com</a>
-        ${basics.profiles.slice(0, 2).map(p => `
-          <span class="separator">|</span>
-          <a href="${p.url}" target="_blank">${p.network}</a>
-        `).join('')}
+    <div class="header">
+      <div class="name">${basics.name.toUpperCase()}</div>
+      <div class="contact-line">
+        ${basics.location}<span class="separator">|</span>
+        <a href="mailto:${basics.email}">${basics.email}</a><span class="separator">|</span>
+        <a href="https://punitmishra.com">punitmishra.com</a><span class="separator">|</span>
+        <a href="${basics.profiles[0].url}">github.com/punitmishra</a><span class="separator">|</span>
+        <a href="${basics.profiles[1].url}">linkedin.com/in/mishrapunit</a>
       </div>
-    </header>
+    </div>
 
-    <!-- Two Column Layout -->
-    <div class="content">
-      <!-- Main Column -->
-      <div class="main-col">
-        <!-- Summary -->
-        <div class="section">
-          <div class="section-title">Summary</div>
-          <p class="summary">${basics.summary}</p>
-        </div>
+    <!-- Summary -->
+    <div class="section">
+      <div class="section-title">Summary</div>
+      <div style="font-size: 10pt; line-height: 1.35;">
+        ${basics.summary}
+      </div>
+    </div>
 
-        <!-- Experience -->
-        <div class="section">
-          <div class="section-title">Experience</div>
-          ${experience.map(job => `
-            <div class="job">
-              <div class="job-header">
-                <span class="job-title">${job.position}</span>
-                <span class="job-period">${formatDate(job.startDate)} — ${formatDate(job.endDate)}</span>
-              </div>
-              <div class="job-company">${job.company}</div>
-              <ul class="job-list">
-                ${job.highlights.slice(0, 4).map(h => `<li>${h}</li>`).join('')}
-              </ul>
-              <div class="tech-tags">${job.technologies.join(' · ')}</div>
+    <!-- Experience -->
+    <div class="section">
+      <div class="section-title">Professional Experience</div>
+      ${experience.map(job => `
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-left">
+              <span class="exp-title">${job.position}</span>, <span class="exp-company">${job.company}</span>
             </div>
-          `).join('')}
+            <div class="exp-right">
+              <span class="exp-date">${formatDate(job.startDate)} – ${formatDate(job.endDate)}</span>
+            </div>
+          </div>
+          <ul class="achievements">
+            ${job.highlights.slice(0, 5).map(h => `<li>${h}</li>`).join('')}
+          </ul>
         </div>
+      `).join('')}
+    </div>
 
+    <!-- Two Column Layout for Education, Skills, Certs -->
+    <div class="two-col">
+      <div class="col-left">
         <!-- Education -->
         <div class="section">
           <div class="section-title">Education</div>
           ${education.map(edu => `
             <div class="edu-item">
               <div class="edu-header">
-                <span class="edu-degree">${edu.degree} in ${edu.field}</span>
-                <span class="edu-period">${edu.startDate} — ${edu.endDate}</span>
+                <div class="edu-left">
+                  <span class="edu-degree">${edu.degree} in ${edu.field}</span>, <span class="edu-school">${edu.institution}</span>
+                </div>
+                <div class="edu-right">${edu.endDate}</div>
               </div>
-              <div class="edu-school">${edu.institution}</div>
-              ${edu.highlights ? `<div class="edu-details">${edu.highlights.join(' · ')}</div>` : ''}
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <!-- Side Column -->
-      <div class="side-col">
-        <!-- Skills -->
-        <div class="section">
-          <div class="section-title">Technical Skills</div>
-          ${skills.map(cat => `
-            <div class="skill-category">
-              <div class="skill-label">${cat.category}</div>
-              <div class="skill-items">${cat.items.map(s => s.name).join(', ')}</div>
+              ${edu.highlights ? `<div class="edu-details">${edu.highlights.join(' • ')}</div>` : ''}
             </div>
           `).join('')}
         </div>
@@ -446,23 +349,25 @@ function generateLatexHTML(data) {
         <!-- Certifications -->
         <div class="section">
           <div class="section-title">Certifications</div>
-          ${certifications.map(cert => `
-            <div class="cert-item">
-              <div class="cert-name">${cert.name}</div>
-              <div class="cert-issuer">${cert.issuer} · ${cert.date}</div>
-            </div>
-          `).join('')}
+          <div class="certs">
+            ${certifications.map(cert => `
+              <div class="cert-item"><strong>${cert.name}</strong> — ${cert.issuer}, ${cert.date}</div>
+            `).join('')}
+          </div>
         </div>
+      </div>
 
-        <!-- Projects -->
+      <div class="col-right">
+        <!-- Technical Skills -->
         <div class="section">
-          <div class="section-title">Projects</div>
-          ${topProjects.map(proj => `
-            <div class="project-item">
-              <div class="project-name"><a href="${proj.url}" target="_blank">${proj.name}</a></div>
-              <div class="project-desc">${proj.highlights.slice(0, 2).join(' · ')}</div>
-            </div>
-          `).join('')}
+          <div class="section-title">Technical Skills</div>
+          <div class="skills-grid">
+            ${skills.map(cat => `
+              <div class="skill-row">
+                <span class="skill-category">${cat.category}:</span> ${cat.items.map(s => s.name).join(', ')}
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
     </div>
