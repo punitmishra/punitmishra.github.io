@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import InteractiveResume from '@/components/InteractiveResume.vue';
+import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import { downloadResumePDF } from '@/utils/resumeGenerator';
 
 const resume = ref(null);
@@ -33,9 +34,42 @@ async function downloadPDF() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-surface dark:bg-slate-900">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <router-link
+          to="/"
+          class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight hover:opacity-80 transition-opacity"
+        >
+          PM
+        </router-link>
+
+        <div class="flex items-center gap-6">
+          <router-link
+            to="/"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Home
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </router-link>
+          <router-link
+            to="/photos"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Photos
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </router-link>
+          <span class="text-gray-900 dark:text-white font-medium text-sm tracking-wide">
+            Resume
+          </span>
+          <DarkModeToggle />
+        </div>
+      </div>
+    </nav>
+
     <!-- Header -->
-    <section class="pt-32 pb-8 px-6">
+    <section class="pt-28 pb-8 px-6">
       <div class="max-w-4xl mx-auto">
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -45,7 +79,7 @@ async function downloadPDF() {
           <button
             @click="downloadPDF"
             :disabled="isDownloading"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg text-sm font-medium hover:from-blue-700 hover:to-cyan-700 transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg class="w-4 h-4" :class="isDownloading && 'animate-pulse'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -61,7 +95,7 @@ async function downloadPDF() {
       <div class="max-w-4xl mx-auto">
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-2 border-accent border-t-transparent"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-blue-500 border-t-transparent"></div>
         </div>
 
         <!-- Error State -->
@@ -75,29 +109,10 @@ async function downloadPDF() {
         </div>
 
         <!-- Resume Component -->
-        <InteractiveResume v-else-if="resume" :resume="resume" />
+        <div v-else-if="resume" class="bg-white dark:bg-slate-900/50 rounded-2xl shadow-soft-xl border border-gray-100 dark:border-slate-800 p-8 md:p-12">
+          <InteractiveResume :resume="resume" />
+        </div>
       </div>
     </section>
-
-    <!-- Back to Home -->
-    <div class="fixed bottom-8 left-8 z-40">
-      <router-link
-        to="/"
-        class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-soft-lg hover:shadow-soft-xl transition-shadow text-gray-600 dark:text-gray-300 hover:text-accent"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        <span class="text-sm font-medium">Back</span>
-      </router-link>
-    </div>
   </div>
 </template>
-
-<style>
-@media print {
-  .fixed {
-    display: none;
-  }
-}
-</style>

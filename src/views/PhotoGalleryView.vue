@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import PhotoGallery from '@/components/PhotoGallery.vue';
+import DarkModeToggle from '@/components/DarkModeToggle.vue';
 
 const photos = ref([]);
 const loading = ref(true);
@@ -21,9 +22,42 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-surface dark:bg-slate-900">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <router-link
+          to="/"
+          class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight hover:opacity-80 transition-opacity"
+        >
+          PM
+        </router-link>
+
+        <div class="flex items-center gap-6">
+          <router-link
+            to="/"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Home
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </router-link>
+          <span class="text-gray-900 dark:text-white font-medium text-sm tracking-wide">
+            Photos
+          </span>
+          <router-link
+            to="/resume"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Resume
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </router-link>
+          <DarkModeToggle />
+        </div>
+      </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="pt-32 pb-16 px-6">
+    <section class="pt-28 pb-12 px-6">
       <div class="max-w-6xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-4">
           Photo Gallery
@@ -39,7 +73,7 @@ onMounted(async () => {
       <div class="max-w-7xl mx-auto">
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-2 border-accent border-t-transparent"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-blue-500 border-t-transparent"></div>
         </div>
 
         <!-- Error State -->
@@ -54,14 +88,14 @@ onMounted(async () => {
 
         <!-- Empty State -->
         <div v-else-if="photos.length === 0" class="text-center py-20">
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-slate-800 mb-6">
+            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-gray-600 dark:text-gray-400">No photos available yet.</p>
-          <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">
-            Upload photos to Cloudinary and update the photos.json file.
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No photos yet</h3>
+          <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+            Photos will appear here once they're uploaded to Cloudinary and added to the gallery.
           </p>
         </div>
 
@@ -74,18 +108,5 @@ onMounted(async () => {
         />
       </div>
     </section>
-
-    <!-- Back to Home -->
-    <div class="fixed bottom-8 left-8 z-40">
-      <router-link
-        to="/"
-        class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-full shadow-soft-lg hover:shadow-soft-xl transition-shadow text-gray-600 dark:text-gray-300 hover:text-accent"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        <span class="text-sm font-medium">Back</span>
-      </router-link>
-    </div>
   </div>
 </template>
