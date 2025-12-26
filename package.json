@@ -6,7 +6,11 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "start": "node server.js",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "publish:medium": "node scripts/publish-to-medium.mjs",
+    "publish:medium:list": "node scripts/publish-to-medium.mjs --list",
+    "post:twitter": "node scripts/post-to-twitter.mjs",
+    "post:twitter:daily": "node scripts/post-to-twitter.mjs --daily-update"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

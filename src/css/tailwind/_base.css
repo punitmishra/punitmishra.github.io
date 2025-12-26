@@ -1,16 +1,34 @@
 @tailwind base;
 
 @layer base {
+  /* Global font size reduction - 80% of default */
+  html {
+    font-size: 14px; /* Base 16px * 0.875 ≈ 14px for refined, compact feel */
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: 14.5px; /* Slightly larger on desktop */
+    }
+  }
+
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+    font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
-  
+
   code, pre {
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-feature-settings: 'liga' on, 'calt' on;
   }
 }
 
