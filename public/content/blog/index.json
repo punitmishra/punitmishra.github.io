@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "slug": "complete-homelab-guide",
+      "title": "Complete Homelab Setup: From Zero to Production Infrastructure",
+      "excerpt": "Build a 5-node Raspberry Pi cluster with DNS filtering, media server, monitoring, IoT hub, and sensors. Docker deployments, Cloudflare tunnels, and backup strategies.",
+      "date": "2025-01-18",
+      "category": "Projects",
+      "tags": ["Homelab", "Raspberry Pi", "Docker", "DevOps", "Self-Hosting"],
+      "readTime": "25 min read",
+      "featured": true
+    },
+    {
+      "slug": "github-twitter-automation",
+      "title": "Automating Twitter Posts with GitHub Actions",
+      "excerpt": "Build a GitHub Actions workflow that automatically posts to Twitter when you publish new blog articles. OAuth setup, article detection, and tweet formatting.",
+      "date": "2025-01-17",
+      "category": "Technical",
+      "tags": ["GitHub Actions", "Twitter", "Automation", "DevOps", "CI/CD"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
+      "slug": "building-this-portfolio",
+      "title": "Building This Portfolio: Vue 3, Vite, and Tailwind CSS",
+      "excerpt": "Complete walkthrough of building a modern portfolio website with Vue 3 Composition API, Vite, Tailwind CSS, dark mode, GitHub integration, and PDF resume generation.",
+      "date": "2025-01-16",
+      "category": "Technical",
+      "tags": ["Vue.js", "Vite", "Tailwind CSS", "Portfolio", "Frontend"],
+      "readTime": "15 min read",
+      "featured": true
+    },
+    {
       "slug": "observability-production",
       "title": "Observability in Production: Metrics, Logs, and Traces",
       "excerpt": "The three pillars of observability explained with practical examples. Metrics, logs, traces, alerting that doesn't suck, and cost-effective strategies.",
