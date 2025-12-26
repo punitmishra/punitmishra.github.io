@@ -53,6 +53,7 @@ import StatsGrid from "@/components/StatsGrid.vue";
 import SkillRing from "@/components/SkillRing.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import BlogSection from "@/components/BlogSection.vue";
+import TerminalShowcase from "@/components/TerminalShowcase.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
@@ -1354,6 +1355,9 @@ def create_agent_workflow():
         </div>
       </div>
     </section>
+
+    <!-- Terminal Showcase -->
+    <TerminalShowcase />
 
     <!-- Achievements & Awards -->
     <section id="achievements" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-800/50 dark:to-slate-900/50">
