@@ -1477,15 +1477,17 @@ def create_agent_workflow():
             <div class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading">PM</div>
             <div class="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
             <p class="text-gray-500 dark:text-gray-400 text-sm">
-              &copy; {{ new Date().getFullYear() }} Punit Mishra
+              &copy; {{ new Date().getFullYear() }} Punit Mishra. All rights reserved.
             </p>
           </div>
 
           <!-- Quick Links -->
-          <div class="flex items-center gap-6 text-sm">
+          <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm">
             <button @click="scrollToSection('projects')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</button>
             <button @click="scrollToSection('experience')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</button>
             <button @click="scrollToSection('blog')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</button>
+            <router-link to="/photos" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Photos</router-link>
+            <router-link to="/resume" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Resume</router-link>
             <button @click="scrollToSection('contact')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</button>
           </div>
 
@@ -1498,10 +1500,18 @@ def create_agent_workflow():
           </div>
         </div>
 
-        <!-- Bottom tagline -->
-        <div class="mt-8 pt-6 border-t border-gray-200/50 dark:border-slate-800/50 text-center">
-          <p class="text-gray-400 dark:text-gray-600 text-xs">
-            Senior Software Engineer @ SAP • UC Berkeley Alumni • AI/ML Infrastructure Architect
+        <!-- Bottom section -->
+        <div class="mt-8 pt-6 border-t border-gray-200/50 dark:border-slate-800/50">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-gray-400 dark:text-gray-600 text-xs text-center md:text-left">
+              Senior Software Engineer @ SAP • UC Berkeley Alumni • AI/ML Infrastructure Architect
+            </p>
+            <div class="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
+              <span>All content and code on this site is the intellectual property of Punit Mishra.</span>
+            </div>
+          </div>
+          <p class="mt-4 text-center text-[10px] text-gray-400 dark:text-gray-600">
+            This website and its contents are protected under applicable copyright laws. Unauthorized reproduction, distribution, or use of any content without explicit written permission is prohibited. For inquiries regarding licensing or usage rights, please contact via the form above.
           </p>
         </div>
       </div>

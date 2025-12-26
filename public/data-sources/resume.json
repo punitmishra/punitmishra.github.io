@@ -1,71 +1,59 @@
 {
   "basics": {
     "name": "Punit Mishra",
-    "title": "Full Stack Software Engineer",
-    "summary": "Passionate software engineer with 12+ years of experience building scalable applications from silicon to software. Specialized in AI/ML infrastructure, systems architecture, and enterprise software development.",
+    "title": "Senior Software Engineer",
+    "summary": "Senior Software Engineer with 12+ years of experience architecting and building production systems at scale. Deep expertise in AI/ML infrastructure, distributed systems, and full-stack development. Track record of delivering high-impact projects from concept to production serving enterprise customers globally.",
     "email": "contact@punitmishra.com",
-    "location": "San Francisco Bay Area",
+    "location": "Pleasanton, CA",
     "profiles": [
       { "network": "GitHub", "url": "https://github.com/punitmishra" },
-      { "network": "LinkedIn", "url": "https://linkedin.com/in/punitmishra" },
-      { "network": "Twitter", "url": "https://twitter.com/punitmishra" }
+      { "network": "LinkedIn", "url": "https://linkedin.com/in/mishrapunit" },
+      { "network": "Twitter", "url": "https://twitter.com/punitmishra" },
+      { "network": "Instagram", "url": "https://instagram.com/punitmishra" }
     ]
   },
   "experience": [
     {
-      "company": "Tech Company",
+      "company": "SAP",
       "position": "Senior Software Engineer",
-      "startDate": "2020-01",
+      "startDate": "2013-01",
       "endDate": null,
       "current": true,
-      "summary": "Leading development of AI/ML infrastructure and cloud-native applications.",
+      "summary": "Lead architect for AI/ML infrastructure serving Fortune 500 enterprise customers globally.",
       "highlights": [
-        "Architected and deployed scalable ML pipelines processing 1M+ requests daily",
-        "Led migration to microservices architecture, reducing deployment time by 70%",
-        "Mentored team of 5 engineers on best practices and system design"
+        "Architected and built core enterprise platform from v0 to production, now serving Fortune 500 customers with millions of daily requests",
+        "Led AI/ML infrastructure development including LLM integration, vector search (FAISS), and multi-agent systems using LangGraph",
+        "Pioneered ML containerization strategy 3 years before industry adoption of MLOps practices",
+        "Achieved 40% latency reduction and 3x throughput improvement through distributed caching and query optimization",
+        "Reduced cloud infrastructure costs by $500K+ annually through resource optimization and intelligent autoscaling",
+        "Technical lead for cross-functional teams of 5-8 engineers; mentored 10+ engineers across multiple teams",
+        "Led SOC 2 compliance initiatives and implemented zero-trust security architecture"
       ],
-      "technologies": ["Python", "Go", "Kubernetes", "TensorFlow", "AWS"]
-    },
-    {
-      "company": "Previous Company",
-      "position": "Software Engineer",
-      "startDate": "2016-06",
-      "endDate": "2019-12",
-      "current": false,
-      "summary": "Built full-stack applications and contributed to core platform infrastructure.",
-      "highlights": [
-        "Developed real-time data processing system handling 500K events/second",
-        "Implemented CI/CD pipelines reducing release cycles from weeks to hours",
-        "Contributed to open-source tools used by 10K+ developers"
-      ],
-      "technologies": ["Java", "Node.js", "React", "PostgreSQL", "Docker"]
-    },
-    {
-      "company": "Startup",
-      "position": "Junior Developer",
-      "startDate": "2013-01",
-      "endDate": "2016-05",
-      "current": false,
-      "summary": "Started career building web applications and learning software engineering fundamentals.",
-      "highlights": [
-        "Built customer-facing features used by 100K+ users",
-        "Optimized database queries reducing page load times by 40%",
-        "Introduced automated testing practices to the team"
-      ],
-      "technologies": ["JavaScript", "PHP", "MySQL", "HTML/CSS"]
+      "technologies": ["Python", "TypeScript", "Java", "Rust", "Kubernetes", "AWS", "PostgreSQL", "Redis", "LangGraph"]
     }
   ],
   "education": [
     {
-      "institution": "University",
+      "institution": "University of California, Berkeley",
       "degree": "Bachelor of Science",
       "field": "Computer Science",
-      "startDate": "2009",
-      "endDate": "2013",
+      "startDate": "2010",
+      "endDate": "2012",
       "highlights": [
-        "GPA: 3.8/4.0",
-        "Dean's List",
-        "Computer Science Club President"
+        "Coursework: Artificial Intelligence, Computer Architecture, Communication Networks, Signals & Systems",
+        "International Student Scholarship ($10,000)"
+      ]
+    },
+    {
+      "institution": "Ohlone College",
+      "degree": "Associate of Science",
+      "field": "Engineering",
+      "startDate": "2008",
+      "endDate": "2010",
+      "highlights": [
+        "Engineering Club Vice President",
+        "VEX Robotics Competition",
+        "Outstanding Engineering Student Award"
       ]
     }
   ],
@@ -74,38 +62,45 @@
       "category": "Languages",
       "items": [
         { "name": "Python", "level": 95 },
-        { "name": "JavaScript/TypeScript", "level": 90 },
-        { "name": "Go", "level": 85 },
-        { "name": "Java", "level": 80 },
-        { "name": "Rust", "level": 70 }
+        { "name": "TypeScript", "level": 90 },
+        { "name": "JavaScript", "level": 90 },
+        { "name": "Rust", "level": 80 },
+        { "name": "Java", "level": 85 },
+        { "name": "Go", "level": 75 },
+        { "name": "SQL", "level": 90 }
       ]
     },
     {
       "category": "Frontend",
       "items": [
-        { "name": "React", "level": 90 },
-        { "name": "Vue.js", "level": 85 },
-        { "name": "Tailwind CSS", "level": 90 },
-        { "name": "Next.js", "level": 80 }
+        { "name": "Vue.js", "level": 90 },
+        { "name": "React", "level": 85 },
+        { "name": "Next.js", "level": 80 },
+        { "name": "Tailwind CSS", "level": 95 }
       ]
     },
     {
       "category": "Backend & Infrastructure",
       "items": [
         { "name": "Node.js", "level": 90 },
-        { "name": "PostgreSQL", "level": 85 },
-        { "name": "Kubernetes", "level": 80 },
-        { "name": "AWS/GCP", "level": 85 },
-        { "name": "Docker", "level": 90 }
+        { "name": "FastAPI", "level": 85 },
+        { "name": "PostgreSQL", "level": 90 },
+        { "name": "Redis", "level": 85 },
+        { "name": "Kubernetes", "level": 85 },
+        { "name": "Docker", "level": 95 },
+        { "name": "AWS", "level": 90 },
+        { "name": "Terraform", "level": 80 }
       ]
     },
     {
       "category": "AI/ML",
       "items": [
-        { "name": "TensorFlow", "level": 80 },
-        { "name": "PyTorch", "level": 75 },
-        { "name": "MLOps", "level": 80 },
-        { "name": "LLMs/RAG", "level": 85 }
+        { "name": "LangGraph", "level": 90 },
+        { "name": "LangChain", "level": 85 },
+        { "name": "FAISS", "level": 85 },
+        { "name": "Vector Search", "level": 90 },
+        { "name": "RAG", "level": 90 },
+        { "name": "PyTorch", "level": 75 }
       ]
     }
   ],
@@ -113,22 +108,28 @@
     {
       "name": "AWS Solutions Architect",
       "issuer": "Amazon Web Services",
-      "date": "2022",
+      "date": "2020",
       "url": null
     },
     {
-      "name": "Google Cloud Professional",
-      "issuer": "Google",
+      "name": "Kubernetes Administrator (CKA)",
+      "issuer": "CNCF",
       "date": "2021",
       "url": null
     }
   ],
   "projects": [
     {
-      "name": "Open Source Contribution",
-      "description": "Major contributor to popular developer tools",
+      "name": "Shield AI",
+      "description": "AI-powered DNS filtering system with real-time threat detection using Rust and ML",
       "url": "https://github.com/punitmishra",
-      "highlights": ["1000+ GitHub stars", "Used by Fortune 500 companies"]
+      "highlights": ["Real-time threat detection", "High-performance Rust implementation"]
+    },
+    {
+      "name": "Multi-Agent AI System",
+      "description": "Orchestrated AI agents for complex task automation using LangGraph",
+      "url": "https://github.com/punitmishra",
+      "highlights": ["LangGraph orchestration", "Complex task automation"]
     }
   ]
 }
