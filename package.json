@@ -1,6 +1,23 @@
 {
   "name": "punitmishra-portfolio",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "description": "Personal portfolio website showcasing 12+ years of software engineering, AI/ML infrastructure, and open source projects",
+  "author": "Punit Mishra <contact@punitmishra.com>",
+  "license": "MIT",
+  "homepage": "https://punitmishra.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/punitmishra/punitmishra.github.io.git"
+  },
+  "keywords": [
+    "portfolio",
+    "vue3",
+    "vite",
+    "tailwindcss",
+    "personal-website",
+    "resume",
+    "blog"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
