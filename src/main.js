@@ -30,19 +30,7 @@ app.mount("#app");
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
 
-/* Fetch sample data - defer non-critical data */
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(() => {
-    mainStore.fetch("clients");
-    mainStore.fetch("history");
-  }, { timeout: 2000 });
-} else {
-  // Fallback for browsers without requestIdleCallback
-  setTimeout(() => {
-    mainStore.fetch("clients");
-    mainStore.fetch("history");
-  }, 2000);
-}
+/* Data fetching handled by individual components as needed */
 
 /* App style */
 styleStore.setStyle(localStorage[styleKey] ?? "basic");

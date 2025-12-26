@@ -5,20 +5,11 @@
 
 /**
  * Preload critical resources
+ * Note: In production, Vite handles preloading of bundled assets automatically
  */
 export function preloadCriticalResources() {
-  const criticalResources = [
-    { href: '/src/main.js', as: 'script' },
-    { href: '/src/css/main.css', as: 'style' },
-  ];
-
-  criticalResources.forEach(({ href, as }) => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = href;
-    link.as = as;
-    document.head.appendChild(link);
-  });
+  // Vite automatically adds modulepreload links in production build
+  // This function is kept for potential future manual preloading needs
 }
 
 /**
