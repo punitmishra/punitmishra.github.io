@@ -1,6 +1,6 @@
 /**
  * Resume Generator
- * Generates FAANG-quality professional resume as PDF
+ * Generates clean, professional resume as PDF
  * Uses resume.json as single source of truth
  */
 
@@ -33,7 +33,7 @@ export async function downloadResumePDF() {
     trackDownload('resume', 'resume.pdf');
 
     const resumeData = await fetchResumeData();
-    const resumeHTML = generateEliteHTML(resumeData);
+    const resumeHTML = generateResumeHTML(resumeData);
 
     const html2pdfModule = await import('html2pdf.js');
     const html2pdf = html2pdfModule.default || html2pdfModule;
@@ -44,24 +44,23 @@ export async function downloadResumePDF() {
 
     const container = document.createElement('div');
     container.innerHTML = resumeHTML;
-    container.style.cssText = 'position: absolute; left: -9999px; top: 0; width: 210mm;';
+    container.style.cssText = 'position: absolute; left: -9999px; top: 0;';
     document.body.appendChild(container);
 
-    const content = container.querySelector('.resume') || container;
+    const content = container.querySelector('.resume');
 
     const options = {
-      margin: [0, 0, 0, 0],
+      margin: 0,
       filename: 'Punit_Mishra_Resume.pdf',
-      image: { type: 'jpeg', quality: 1 },
+      image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
         scale: 2,
         useCORS: true,
-        letterRendering: true,
         logging: false,
       },
       jsPDF: {
-        unit: 'mm',
-        format: 'a4',
+        unit: 'in',
+        format: 'letter',
         orientation: 'portrait',
       },
     };
@@ -76,299 +75,220 @@ export async function downloadResumePDF() {
 }
 
 /**
- * Generate elite FAANG-style HTML resume
- * Based on best practices from Tech Interview Handbook and Resume Worded
+ * Generate professional HTML resume
  */
-function generateEliteHTML(data) {
+function generateResumeHTML(data) {
   const basics = data.basics;
   const experience = data.experience || [];
   const education = data.education || [];
   const skills = data.skills || [];
   const certifications = data.certifications || [];
 
+  // Combine skills into categories for compact display
+  const skillsCompact = skills.map(cat =>
+    `<strong>${cat.category}:</strong> ${cat.items.slice(0, 6).map(s => s.name).join(', ')}`
+  ).join('<br>');
+
   return `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${basics.name} - Resume</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    body {
-      font-family: 'Times New Roman', Times, Georgia, serif;
-      font-size: 10.5pt;
-      line-height: 1.25;
+    .resume {
+      width: 8.5in;
+      min-height: 11in;
+      padding: 0.5in 0.6in;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 11px;
+      line-height: 1.4;
       color: #000;
       background: #fff;
     }
 
     a {
-      color: #0645AD;
+      color: #0066cc;
       text-decoration: none;
     }
 
-    .resume {
-      width: 210mm;
-      height: 297mm;
-      padding: 12mm 14mm;
-      background: #fff;
-    }
-
-    /* Header */
     .header {
       text-align: center;
-      margin-bottom: 8pt;
-      padding-bottom: 6pt;
-      border-bottom: 1.5pt solid #000;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #000;
+      margin-bottom: 12px;
     }
 
     .name {
-      font-size: 20pt;
+      font-size: 24px;
       font-weight: bold;
-      letter-spacing: 1pt;
-      margin-bottom: 4pt;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
     }
 
-    .contact-line {
-      font-size: 9.5pt;
+    .contact {
+      font-size: 10px;
       color: #333;
     }
 
-    .contact-line a {
-      color: #0645AD;
+    .contact a {
+      color: #0066cc;
     }
 
-    .separator {
-      margin: 0 6pt;
-      color: #666;
-    }
-
-    /* Section */
     .section {
-      margin-bottom: 8pt;
+      margin-bottom: 12px;
     }
 
     .section-title {
-      font-size: 11pt;
+      font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 1pt;
-      border-bottom: 0.75pt solid #000;
-      padding-bottom: 2pt;
-      margin-bottom: 6pt;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
     }
 
-    /* Experience */
-    .exp-item {
-      margin-bottom: 8pt;
+    .job {
+      margin-bottom: 10px;
     }
 
-    .exp-header {
-      display: table;
-      width: 100%;
-      margin-bottom: 1pt;
+    .job-header {
+      margin-bottom: 4px;
     }
 
-    .exp-left {
-      display: table-cell;
-    }
-
-    .exp-right {
-      display: table-cell;
-      text-align: right;
-    }
-
-    .exp-title {
+    .job-title {
       font-weight: bold;
-      font-size: 10.5pt;
+      font-size: 11px;
     }
 
-    .exp-company {
+    .job-company {
       font-style: italic;
     }
 
-    .exp-date {
-      font-size: 10pt;
-    }
-
-    .exp-location {
-      font-size: 10pt;
+    .job-date {
+      float: right;
+      font-size: 10px;
       color: #444;
     }
 
-    .achievements {
-      margin-left: 16pt;
-      margin-top: 3pt;
+    .job-bullets {
+      margin-left: 18px;
+      margin-top: 4px;
     }
 
-    .achievements li {
-      margin-bottom: 2pt;
-      font-size: 10pt;
-      line-height: 1.3;
+    .job-bullets li {
+      margin-bottom: 3px;
+      font-size: 10px;
+      line-height: 1.35;
     }
 
-    /* Education */
-    .edu-item {
-      margin-bottom: 4pt;
-    }
-
-    .edu-header {
-      display: table;
-      width: 100%;
-    }
-
-    .edu-left {
-      display: table-cell;
-    }
-
-    .edu-right {
-      display: table-cell;
-      text-align: right;
-      font-size: 10pt;
+    .edu-row {
+      margin-bottom: 6px;
     }
 
     .edu-degree {
       font-weight: bold;
-      font-size: 10.5pt;
     }
 
     .edu-school {
       font-style: italic;
     }
 
+    .edu-date {
+      float: right;
+      font-size: 10px;
+    }
+
     .edu-details {
-      font-size: 9.5pt;
+      font-size: 10px;
       color: #444;
-      margin-top: 1pt;
+      margin-top: 2px;
     }
 
-    /* Skills */
-    .skills-grid {
-      font-size: 10pt;
-      line-height: 1.4;
+    .skills-content {
+      font-size: 10px;
+      line-height: 1.5;
     }
 
-    .skill-row {
-      margin-bottom: 2pt;
-    }
-
-    .skill-category {
-      font-weight: bold;
-    }
-
-    /* Certifications */
-    .certs {
-      font-size: 10pt;
+    .certs-content {
+      font-size: 10px;
     }
 
     .cert-item {
-      margin-bottom: 2pt;
+      margin-bottom: 3px;
     }
 
-    /* Two column for bottom */
-    .two-col {
+    .clearfix::after {
+      content: "";
       display: table;
-      width: 100%;
-    }
-
-    .col-left {
-      display: table-cell;
-      width: 55%;
-      vertical-align: top;
-      padding-right: 12pt;
-    }
-
-    .col-right {
-      display: table-cell;
-      width: 45%;
-      vertical-align: top;
+      clear: both;
     }
   </style>
 </head>
 <body>
   <div class="resume">
-    <!-- Header -->
     <div class="header">
       <div class="name">${basics.name.toUpperCase()}</div>
-      <div class="contact-line">
-        ${basics.location}<span class="separator">|</span>
-        <a href="mailto:${basics.email}">${basics.email}</a><span class="separator">|</span>
-        <a href="https://punitmishra.com">punitmishra.com</a><span class="separator">|</span>
-        <a href="${basics.profiles[0].url}">github.com/punitmishra</a><span class="separator">|</span>
-        <a href="${basics.profiles[1].url}">linkedin.com/in/mishrapunit</a>
+      <div class="contact">
+        ${basics.location} &nbsp;|&nbsp;
+        <a href="mailto:${basics.email}">${basics.email}</a> &nbsp;|&nbsp;
+        <a href="https://punitmishra.com">punitmishra.com</a> &nbsp;|&nbsp;
+        <a href="https://github.com/punitmishra">GitHub</a> &nbsp;|&nbsp;
+        <a href="https://linkedin.com/in/mishrapunit">LinkedIn</a>
       </div>
     </div>
 
-    <!-- Summary -->
     <div class="section">
       <div class="section-title">Summary</div>
-      <div style="font-size: 10pt; line-height: 1.35;">
+      <div style="font-size: 10px; line-height: 1.4;">
         ${basics.summary}
       </div>
     </div>
 
-    <!-- Experience -->
     <div class="section">
       <div class="section-title">Professional Experience</div>
       ${experience.map(job => `
-        <div class="exp-item">
-          <div class="exp-header">
-            <div class="exp-left">
-              <span class="exp-title">${job.position}</span>, <span class="exp-company">${job.company}</span>
-            </div>
-            <div class="exp-right">
-              <span class="exp-date">${formatDate(job.startDate)} – ${formatDate(job.endDate)}</span>
-            </div>
+        <div class="job">
+          <div class="job-header clearfix">
+            <span class="job-date">${formatDate(job.startDate)} - ${formatDate(job.endDate)}</span>
+            <span class="job-title">${job.position}</span>, <span class="job-company">${job.company}</span>
           </div>
-          <ul class="achievements">
-            ${job.highlights.slice(0, 5).map(h => `<li>${h}</li>`).join('')}
+          <ul class="job-bullets">
+            ${job.highlights.slice(0, 4).map(h => `<li>${h}</li>`).join('')}
           </ul>
         </div>
       `).join('')}
     </div>
 
-    <!-- Two Column Layout for Education, Skills, Certs -->
-    <div class="two-col">
-      <div class="col-left">
-        <!-- Education -->
-        <div class="section">
-          <div class="section-title">Education</div>
-          ${education.map(edu => `
-            <div class="edu-item">
-              <div class="edu-header">
-                <div class="edu-left">
-                  <span class="edu-degree">${edu.degree} in ${edu.field}</span>, <span class="edu-school">${edu.institution}</span>
-                </div>
-                <div class="edu-right">${edu.endDate}</div>
-              </div>
-              ${edu.highlights ? `<div class="edu-details">${edu.highlights.join(' • ')}</div>` : ''}
-            </div>
-          `).join('')}
-        </div>
-
-        <!-- Certifications -->
-        <div class="section">
-          <div class="section-title">Certifications</div>
-          <div class="certs">
-            ${certifications.map(cert => `
-              <div class="cert-item"><strong>${cert.name}</strong> — ${cert.issuer}, ${cert.date}</div>
-            `).join('')}
-          </div>
-        </div>
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-content">
+        ${skillsCompact}
       </div>
+    </div>
 
-      <div class="col-right">
-        <!-- Technical Skills -->
-        <div class="section">
-          <div class="section-title">Technical Skills</div>
-          <div class="skills-grid">
-            ${skills.map(cat => `
-              <div class="skill-row">
-                <span class="skill-category">${cat.category}:</span> ${cat.items.map(s => s.name).join(', ')}
-              </div>
-            `).join('')}
-          </div>
+    <div class="section">
+      <div class="section-title">Education</div>
+      ${education.map(edu => `
+        <div class="edu-row clearfix">
+          <span class="edu-date">${edu.endDate}</span>
+          <span class="edu-degree">${edu.degree} in ${edu.field}</span>, <span class="edu-school">${edu.institution}</span>
+          ${edu.highlights ? `<div class="edu-details">${edu.highlights[0]}</div>` : ''}
         </div>
+      `).join('')}
+    </div>
+
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <div class="certs-content">
+        ${certifications.map(cert => `
+          <div class="cert-item"><strong>${cert.name}</strong> - ${cert.issuer} (${cert.date})</div>
+        `).join('')}
       </div>
     </div>
   </div>
