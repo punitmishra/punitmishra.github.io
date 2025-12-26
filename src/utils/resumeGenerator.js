@@ -19,7 +19,7 @@ export function generateResumeData() {
       github: 'github.com/punitmishra',
       linkedin: 'linkedin.com/in/mishrapunit',
     },
-    summary: 'Senior Software Engineer with 12+ years of experience architecting and building production systems at scale. Deep expertise in AI/ML infrastructure, distributed systems, and full-stack development. Track record of delivering high-impact projects from concept to production serving enterprise customers globally.',
+    summary: 'Senior Software Engineer with 12+ years of experience building production systems at scale. Deep expertise in AI/ML infrastructure, distributed systems, and full-stack development. Track record of delivering high-impact projects serving enterprise customers globally.',
     experience: [
       {
         title: 'Senior Software Engineer',
@@ -27,14 +27,25 @@ export function generateResumeData() {
         period: '2013 — Present',
         location: 'Pleasanton, CA',
         achievements: [
-          'Architected core enterprise platform from v0 to production, serving Fortune 500 customers with millions of daily requests',
+          'Architected core enterprise platform from v0 to production, serving Fortune 500 customers with 1M+ daily requests',
           'Led AI/ML infrastructure: LLM integration, vector search (FAISS), multi-agent systems with LangGraph',
-          'Pioneered ML containerization strategy 3 years before industry MLOps adoption',
           'Achieved 40% latency reduction and 3x throughput via distributed caching and query optimization',
           'Reduced cloud costs by $500K+ annually through resource optimization and intelligent autoscaling',
           'Technical lead for teams of 5-8 engineers; mentored 10+ engineers across multiple teams',
         ],
-        tech: ['Python', 'TypeScript', 'Rust', 'Kubernetes', 'AWS', 'PostgreSQL', 'LangGraph'],
+        tech: ['Python', 'TypeScript', 'Rust', 'Kubernetes', 'AWS', 'PostgreSQL', 'LangGraph', 'FAISS'],
+      },
+      {
+        title: 'Hardware & IoT Engineer',
+        company: 'Personal Projects',
+        period: '2020 — Present',
+        location: 'Home Lab',
+        achievements: [
+          'Built Railroad Arcade: remote-controlled model railroad with real-time IoT via Raspberry Pi and WebSockets',
+          'Developed Shield AI: high-performance DNS security in Rust with ML-based threat detection (<1ms latency)',
+          'Deployed 5-node Raspberry Pi homelab with Docker, Prometheus/Grafana monitoring, and Cloudflare Tunnels',
+        ],
+        tech: ['Raspberry Pi', 'CircuitPython', 'Rust', 'Docker', 'Prometheus', 'Next.js', 'Solidity'],
       },
     ],
     education: [
@@ -42,20 +53,16 @@ export function generateResumeData() {
         degree: 'B.S. Computer Science',
         school: 'University of California, Berkeley',
         period: '2010 — 2012',
-        details: 'AI, Computer Architecture, Networks • International Student Scholarship',
-      },
-      {
-        degree: 'A.S. Engineering',
-        school: 'Ohlone College',
-        period: '2008 — 2010',
-        details: 'Engineering Club VP • Outstanding Engineering Student Award',
+        details: 'AI, Computer Architecture, Networks • International Student Scholarship ($10,000)',
       },
     ],
     skills: {
-      languages: ['Python', 'TypeScript', 'Rust', 'Java', 'Go', 'SQL'],
-      frameworks: ['Vue.js', 'React', 'Node.js', 'FastAPI'],
+      languages: ['Python', 'TypeScript', 'Rust', 'Java', 'Go', 'SQL', 'Solidity'],
+      frontend: ['Vue.js', 'React', 'Next.js', 'Tailwind CSS'],
+      backend: ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis'],
       aiml: ['LangGraph', 'LangChain', 'FAISS', 'RAG', 'PyTorch'],
-      infrastructure: ['AWS', 'Kubernetes', 'Docker', 'Terraform', 'PostgreSQL', 'Redis'],
+      infrastructure: ['AWS', 'Kubernetes', 'Docker', 'Terraform', 'Cloudflare'],
+      web3: ['Solidity', 'Hardhat', 'Wagmi', 'ERC-20', 'DeFi'],
     },
     certifications: [
       'AWS Solutions Architect (2020)',
@@ -142,8 +149,8 @@ function generateProfessionalHTML(data) {
 
     body {
       font-family: 'Source Sans Pro', -apple-system, sans-serif;
-      font-size: 10pt;
-      line-height: 1.4;
+      font-size: 9pt;
+      line-height: 1.35;
       color: #2d2d2d;
       background: #fff;
     }
@@ -152,20 +159,20 @@ function generateProfessionalHTML(data) {
       max-width: 210mm;
       min-height: 297mm;
       margin: 0 auto;
-      padding: 40px 50px;
+      padding: 28px 40px;
       background: #fff;
     }
 
     /* Header */
     .header {
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       border-bottom: 2px solid #1a1a1a;
-      padding-bottom: 16px;
+      padding-bottom: 12px;
     }
 
     .header h1 {
       font-family: 'Source Serif Pro', Georgia, serif;
-      font-size: 26pt;
+      font-size: 22pt;
       font-weight: 700;
       color: #1a1a1a;
       letter-spacing: -0.5px;
@@ -173,12 +180,12 @@ function generateProfessionalHTML(data) {
     }
 
     .header .title {
-      font-size: 11pt;
+      font-size: 10pt;
       font-weight: 600;
       color: #555;
       text-transform: uppercase;
       letter-spacing: 2px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .contact-row {
@@ -203,68 +210,68 @@ function generateProfessionalHTML(data) {
 
     /* Section */
     .section {
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
     .section-title {
       font-family: 'Source Serif Pro', Georgia, serif;
-      font-size: 11pt;
+      font-size: 10pt;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: #1a1a1a;
-      margin-bottom: 10px;
-      padding-bottom: 4px;
+      margin-bottom: 6px;
+      padding-bottom: 3px;
       border-bottom: 1px solid #ddd;
     }
 
     /* Summary */
     .summary {
-      font-size: 9.5pt;
+      font-size: 9pt;
       color: #333;
-      line-height: 1.5;
+      line-height: 1.4;
       text-align: justify;
     }
 
     /* Experience */
     .experience-item {
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .experience-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .experience-title {
       font-weight: 700;
-      font-size: 10.5pt;
+      font-size: 9.5pt;
       color: #1a1a1a;
     }
 
     .experience-period {
-      font-size: 9pt;
+      font-size: 8.5pt;
       color: #666;
     }
 
     .experience-company {
       font-weight: 600;
       color: #444;
-      font-size: 9.5pt;
-      margin-bottom: 6px;
+      font-size: 9pt;
+      margin-bottom: 4px;
     }
 
     .experience-list {
-      margin-left: 14px;
-      font-size: 9pt;
+      margin-left: 12px;
+      font-size: 8.5pt;
       color: #333;
     }
 
     .experience-list li {
-      margin-bottom: 3px;
-      line-height: 1.4;
+      margin-bottom: 2px;
+      line-height: 1.35;
     }
 
     .experience-list li::marker {
@@ -272,8 +279,8 @@ function generateProfessionalHTML(data) {
     }
 
     .tech-line {
-      margin-top: 6px;
-      font-size: 8.5pt;
+      margin-top: 4px;
+      font-size: 8pt;
       color: #555;
     }
 
@@ -286,12 +293,12 @@ function generateProfessionalHTML(data) {
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
+      gap: 20px;
     }
 
     /* Education */
     .education-item {
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .education-header {
@@ -302,35 +309,35 @@ function generateProfessionalHTML(data) {
 
     .education-degree {
       font-weight: 700;
-      font-size: 10pt;
+      font-size: 9pt;
       color: #1a1a1a;
     }
 
     .education-period {
-      font-size: 8.5pt;
+      font-size: 8pt;
       color: #666;
     }
 
     .education-school {
-      font-size: 9pt;
+      font-size: 8.5pt;
       color: #444;
       font-weight: 600;
     }
 
     .education-details {
-      font-size: 8.5pt;
+      font-size: 8pt;
       color: #666;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     /* Skills */
     .skills-section {
-      font-size: 9pt;
+      font-size: 8.5pt;
     }
 
     .skill-row {
-      margin-bottom: 6px;
-      line-height: 1.4;
+      margin-bottom: 3px;
+      line-height: 1.35;
     }
 
     .skill-label {
@@ -345,17 +352,17 @@ function generateProfessionalHTML(data) {
 
     /* Certifications */
     .cert-list {
-      font-size: 9pt;
+      font-size: 8.5pt;
       color: #444;
     }
 
     .cert-list li {
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
     @media print {
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .resume-container { padding: 30px 40px; }
+      .resume-container { padding: 20px 30px; }
     }
   </style>
 </head>
@@ -428,7 +435,7 @@ function generateProfessionalHTML(data) {
           </div>
         `).join('')}
 
-        <h2 class="section-title" style="margin-top: 16px;">Certifications</h2>
+        <h2 class="section-title" style="margin-top: 10px;">Certifications</h2>
         <ul class="cert-list">
           ${data.certifications.map(c => `<li>${c}</li>`).join('')}
         </ul>
@@ -442,8 +449,12 @@ function generateProfessionalHTML(data) {
             <span class="skill-items"> ${data.skills.languages.join(' · ')}</span>
           </div>
           <div class="skill-row">
-            <span class="skill-label">Frameworks:</span>
-            <span class="skill-items"> ${data.skills.frameworks.join(' · ')}</span>
+            <span class="skill-label">Frontend:</span>
+            <span class="skill-items"> ${data.skills.frontend.join(' · ')}</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Backend:</span>
+            <span class="skill-items"> ${data.skills.backend.join(' · ')}</span>
           </div>
           <div class="skill-row">
             <span class="skill-label">AI/ML:</span>
@@ -452,6 +463,10 @@ function generateProfessionalHTML(data) {
           <div class="skill-row">
             <span class="skill-label">Infrastructure:</span>
             <span class="skill-items"> ${data.skills.infrastructure.join(' · ')}</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-label">Web3:</span>
+            <span class="skill-items"> ${data.skills.web3.join(' · ')}</span>
           </div>
         </div>
       </section>
