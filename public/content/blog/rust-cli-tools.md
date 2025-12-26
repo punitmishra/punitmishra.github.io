@@ -52,8 +52,8 @@ strip = true
 ```
 
 ```asciinema
-https://asciinema.org/a/demo-rust-find-setup
-Setting up Rust CLI project
+https://asciinema.org/a/679075
+Terminal Demo - Building CLI Tools
 ```
 
 ## Argument Parsing with Clap
@@ -112,11 +112,28 @@ fn main() {
 }
 ```
 
-The derive macro generates:
+The derive macro generates comprehensive help output automatically:
 
-```asciinema
-https://asciinema.org/a/demo-rust-find-help
-rust-find --help output
+```bash
+$ rust-find --help
+A blazing fast file finder
+
+Usage: rust-find [OPTIONS] <PATTERN>
+
+Arguments:
+  <PATTERN>  Pattern to search for (regex supported)
+
+Options:
+  -p, --path <PATH>        Directory to search in [default: .]
+  -H, --hidden             Search hidden files and directories
+  -L, --follow-links       Follow symbolic links
+  -d, --max-depth <DEPTH>  Maximum depth to search
+  -t, --file-type <TYPE>   File type (f=file, d=directory, l=symlink)
+  -s, --size               Show file sizes
+  -j, --threads <N>        Number of parallel threads [default: 0]
+  -x, --exec <CMD>         Execute command on each result
+  -h, --help               Print help
+  -V, --version            Print version
 ```
 
 ## Parallel File Walking
@@ -268,12 +285,7 @@ fn is_executable(path: &std::path::Path) -> bool {
 
 Let's compare against `find` and `fd`:
 
-```asciinema
-https://asciinema.org/a/demo-rust-find-benchmark
-Benchmarking rust-find vs find vs fd
-```
-
-Results on a large monorepo (50,000 files):
+Benchmark results on a large monorepo (50,000 files):
 
 | Tool | Time | Memory |
 |------|------|--------|
@@ -324,10 +336,6 @@ rust-find '\.rs$' -x 'wc -l {}'
 rust-find '\.log$' -x 'gzip {}'
 ```
 
-```asciinema
-https://asciinema.org/a/demo-rust-find-exec
-Using -x to execute commands on matches
-```
 
 ## Progress Indicators
 
@@ -439,10 +447,6 @@ cargo build --release --target x86_64-pc-windows-gnu
 cargo build --release --target aarch64-apple-darwin
 ```
 
-```asciinema
-https://asciinema.org/a/demo-rust-cross-compile
-Cross-compiling for Linux, Windows, and ARM Mac
-```
 
 ## Release Optimization
 
@@ -512,10 +516,6 @@ rust-find '\.toml$' -x 'stat -f "%m %N" {}' | sort -rn | head -10
 rust-find '^target$' -t d -x 'rm -rf {}'
 ```
 
-```asciinema
-https://asciinema.org/a/demo-rust-find-usage
-Real-world rust-find usage examples
-```
 
 ## Key Takeaways
 

@@ -75,10 +75,6 @@ graph TB
     Metrics --> Prometheus
 ```
 
-```asciinema
-https://asciinema.org/a/demo-shield-ai-setup
-Shield AI Setup and Configuration
-```
 
 ## The Query Processing Pipeline
 
@@ -357,11 +353,6 @@ impl ResolverPool {
 ```
 
 ## Benchmarks
-
-```asciinema
-https://asciinema.org/a/demo-shield-ai-benchmark
-Running Shield AI Performance Benchmarks
-```
 
 On Apple M1 (single core):
 

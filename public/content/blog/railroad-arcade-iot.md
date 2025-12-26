@@ -71,10 +71,6 @@ graph TB
     Cameras --> Pi
 ```
 
-```asciinema
-https://asciinema.org/a/demo-railroad-setup
-Setting Up Railroad Arcade Development Environment
-```
 
 ## Real-Time Train Control
 
