@@ -8,66 +8,25 @@ import {
   mdiTwitter,
   mdiInstagram,
   mdiWeb,
-  mdiCodeBraces,
   mdiStar,
   mdiSourceFork,
-  mdiMapMarker,
-  mdiEmail,
   mdiArrowRight,
-  mdiCheckCircle,
-  mdiRocket,
-  mdiLightningBolt,
-  mdiBriefcase,
-  mdiSchool,
-  mdiCalendar,
-  mdiChip,
-  mdiShield,
-  mdiChartLine,
-  mdiAccountGroup,
-  mdiServer,
-  mdiDatabase,
-  mdiCloud,
-  mdiRobot,
-  mdiClockOutline,
-  mdiTrendingUp,
-  mdiBrain,
-  mdiWeatherNight,
-  mdiWeatherSunny,
   mdiMagnify,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
-import AIBotGenerator from "@/components/AIBotGenerator.vue";
 import AnimatedCounter from "@/components/AnimatedCounter.vue";
-import CodeSnippet from "@/components/CodeSnippet.vue";
-import TimelineItem from "@/components/TimelineItem.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import ProjectFilter from "@/components/ProjectFilter.vue";
 import ResumeDownload from "@/components/ResumeDownload.vue";
 import GitHubContributionGraph from "@/components/GitHubContributionGraph.vue";
 import TypingAnimation from "@/components/TypingAnimation.vue";
-import ParticleBackground from "@/components/ParticleBackground.vue";
-import GradientMesh from "@/components/GradientMesh.vue";
 import CommandPalette from "@/components/CommandPalette.vue";
-import BentoCard from "@/components/BentoCard.vue";
-import NowSection from "@/components/NowSection.vue";
 import StatsGrid from "@/components/StatsGrid.vue";
-import SkillRing from "@/components/SkillRing.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import BlogSection from "@/components/BlogSection.vue";
-import TerminalShowcase from "@/components/TerminalShowcase.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
-
-// Skill categories for ring visualization
-const skillCategories = [
-  { name: 'Frontend', level: 95, color: '#3b82f6' },
-  { name: 'Backend', level: 90, color: '#10b981' },
-  { name: 'AI/ML', level: 85, color: '#8b5cf6' },
-  { name: 'DevOps', level: 80, color: '#f59e0b' },
-  { name: 'Systems', level: 85, color: '#ec4899' },
-];
-
 const router = useRouter();
 const styleStore = useStyleStore();
 const githubUsername = "punitmishra";
@@ -188,23 +147,6 @@ const featuredProjects = [
   },
 ];
 
-const skills = [
-  { name: "JavaScript/TypeScript", level: 95, category: "Languages", icon: mdiCodeBraces },
-  { name: "Vue.js / React", level: 90, category: "Frameworks", icon: mdiCodeBraces },
-  { name: "Python", level: 85, category: "Languages", icon: mdiCodeBraces },
-  { name: "Rust", level: 80, category: "Languages", icon: mdiCodeBraces },
-  { name: "Node.js", level: 90, category: "Backend", icon: mdiServer },
-  { name: "AWS / Cloud", level: 85, category: "Infrastructure", icon: mdiCloud },
-  { name: "PostgreSQL", level: 85, category: "Database", icon: mdiDatabase },
-  { name: "Docker / Kubernetes", level: 80, category: "DevOps", icon: mdiCloud },
-  { name: "Redis", level: 85, category: "Database", icon: mdiDatabase },
-  { name: "Git / CI/CD", level: 90, category: "Tools", icon: mdiCodeBraces },
-  { name: "LangGraph / LangChain", level: 85, category: "AI/ML", icon: mdiLightningBolt },
-  { name: "Security & Compliance", level: 90, category: "Security", icon: mdiShield },
-  { name: "GPU / System Design", level: 75, category: "Hardware", icon: mdiChip },
-  { name: "Microelectronics", level: 70, category: "Hardware", icon: mdiChip },
-];
-
 const experience = [
   {
     title: "Senior Software Engineer",
@@ -213,20 +155,17 @@ const experience = [
     location: "Pleasanton, CA",
     duration: "12+ years",
     achievements: [
-      "Lead architect for AI/ML infrastructure serving Fortune 500 enterprise customers globally",
-      "Built core platform from v0 to production, now processing millions of requests daily",
-      "Pioneered ML containerization strategy 3 years before industry adoption of MLOps",
-      "Reduced infrastructure costs by 30% while improving performance by 40%",
-      "Technical lead for visual search and commerce AI capabilities",
-      "Established engineering best practices, SDLC processes, and security compliance frameworks",
-      "Mentored 10+ engineers across multiple teams over 5+ years",
+      "Architected enterprise AI platform from v0 to production serving Fortune 500 customers with 1M+ daily requests",
+      "Led AI/ML infrastructure: LLM integration, vector search (FAISS), multi-agent systems (LangGraph)",
+      "Achieved 40% latency reduction and 3x throughput through distributed caching and query optimization",
+      "Reduced cloud costs by $500K+ annually via resource optimization and intelligent autoscaling",
+      "Technical lead for teams of 5-8 engineers; mentored 10+ engineers across multiple teams",
     ],
-    tech: ["Java", "TypeScript", "Python", "Rust", "Kubernetes", "Cloud Foundry", "Docker", "PostgreSQL", "Redis", "LangGraph", "FAISS"],
+    tech: ["Python", "TypeScript", "Java", "Rust", "Kubernetes", "AWS", "PostgreSQL", "Redis", "LangGraph", "FAISS"],
     highlights: [
       "Platform Architecture",
       "AI/ML at Scale",
       "Technical Leadership",
-      "0→1 Product Development",
     ],
   },
 ];
@@ -262,103 +201,6 @@ const education = [
 const certifications = [
   { name: "AWS Certified Solutions Architect", issuer: "Amazon Web Services", year: "2020" },
   { name: "Kubernetes Administrator", issuer: "CNCF", year: "2021" },
-];
-
-const keyAchievements = [
-  {
-    title: "0→1 Platform Build",
-    description: "Architected and built enterprise AI platform from scratch to production, now serving Fortune 500 customers with millions of daily requests",
-    icon: mdiRocket,
-    gradient: "from-blue-500 to-cyan-500",
-    metric: "1M+",
-  },
-  {
-    title: "Performance at Scale",
-    description: "Achieved 40% latency reduction and 3x throughput improvement through distributed caching, query optimization, and async processing",
-    icon: mdiLightningBolt,
-    gradient: "from-cyan-500 to-indigo-500",
-    metric: "40%↓",
-  },
-  {
-    title: "Infrastructure Efficiency",
-    description: "Reduced cloud infrastructure costs by $500K+ annually through resource optimization, spot instances, and intelligent autoscaling",
-    icon: mdiChartLine,
-    gradient: "from-indigo-500 to-purple-500",
-    metric: "$500K+",
-  },
-  {
-    title: "AI/ML Pioneer",
-    description: "Built production ML infrastructure 3 years before MLOps became mainstream. Now leading LLM integration with LangGraph and vector search",
-    icon: mdiRobot,
-    gradient: "from-purple-500 to-pink-500",
-    metric: "Early Adopter",
-  },
-  {
-    title: "Engineering Leadership",
-    description: "Technical lead for cross-functional teams of 5-8 engineers. Mentored 10+ engineers, established code review culture and CI/CD practices",
-    icon: mdiAccountGroup,
-    gradient: "from-pink-500 to-red-500",
-    metric: "10+ Mentees",
-  },
-  {
-    title: "Enterprise Security",
-    description: "Led SOC 2 compliance initiatives, implemented zero-trust architecture, and established security-first development practices across org",
-    icon: mdiShield,
-    gradient: "from-red-500 to-orange-500",
-    metric: "SOC 2",
-  },
-];
-
-const technicalExpertise = [
-  {
-    category: "Software Development",
-    items: [
-      "Built v1 of core SAP toolkit application from scratch",
-      "React, Next.js, Vue.js frontend development",
-      "Node.js, Python, Rust backend development",
-      "Product development experience",
-    ],
-  },
-  {
-    category: "AI/ML Infrastructure",
-    items: [
-      "LLM-powered applications (2+ years experience)",
-      "LangGraph and LangChain expertise",
-      "ML containers and systems (pre-LLM era)",
-      "Vector search and embeddings",
-      "Multi-agent orchestration",
-    ],
-  },
-  {
-    category: "Systems Engineering",
-    items: [
-      "GPU and system design background",
-      "Microfabrication and microelectronics",
-      "Hardware integration (Raspberry Pi projects)",
-      "Systems architecture from silicon to software",
-      "Performance optimization and benchmarking",
-    ],
-  },
-  {
-    category: "Engineering Leadership",
-    items: [
-      "Established engineering best practices",
-      "SDLC lifecycle implementation",
-      "PR review systems and processes",
-      "Mentored interns and team members (2+ years)",
-      "Technical architecture decisions",
-    ],
-  },
-  {
-    category: "Security & Compliance",
-    items: [
-      "Enterprise-grade security standards",
-      "AI security and compliance",
-      "Multi-tenant isolation",
-      "Encrypted memory persistence",
-      "Audit trails and monitoring",
-    ],
-  },
 ];
 
 const getLanguageColor = (language) => {
@@ -789,55 +631,32 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- About / Now Section - Bento Grid -->
-    <section class="py-12 relative overflow-hidden">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Now Card - Large -->
-          <BentoCard span="col" variant="glass" v-scroll-reveal>
-            <NowSection />
-          </BentoCard>
-
-          <!-- Skills Rings Card -->
-          <BentoCard variant="default" v-scroll-reveal="{ delay: '100ms' }">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 font-heading">Core Expertise</h3>
-            <div class="flex flex-wrap justify-center gap-4">
-              <SkillRing
-                v-for="skill in skillCategories.slice(0, 3)"
-                :key="skill.name"
-                :name="skill.name"
-                :level="skill.level"
-                :color="skill.color"
-                :size="80"
-                :stroke-width="6"
-              />
-            </div>
-          </BentoCard>
-
-          <!-- Education Highlight -->
-          <BentoCard variant="gradient" v-scroll-reveal="{ delay: '200ms' }">
-            <div class="text-white">
-              <div class="text-sm font-medium opacity-80 mb-2">Education</div>
-              <h3 class="text-2xl font-bold mb-2 font-heading">UC Berkeley</h3>
-              <p class="text-sm opacity-90 mb-4">Computer Science • AI, Architecture, Networks</p>
-              <div class="text-xs opacity-70">International Student Scholarship Recipient</div>
-            </div>
-          </BentoCard>
-
-          <!-- AI Bot - Wide -->
-          <BentoCard span="2" variant="glass" v-scroll-reveal="{ delay: '300ms' }">
-            <div class="flex items-center gap-2 mb-4">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-              <span class="text-sm font-medium text-gray-500 dark:text-gray-400">AI Insights</span>
-            </div>
-            <AIBotGenerator />
-          </BentoCard>
+    <!-- Quick Stats Section -->
+    <section class="py-10 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">12+</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">Years Experience</div>
+          </div>
+          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">SAP</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">Senior Engineer</div>
+          </div>
+          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">UC Berkeley</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">Computer Science</div>
+          </div>
+          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">AI/ML</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">Infrastructure</div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Blog Section - Highlighted -->
+    <BlogSection />
 
     <!-- Latest Projects -->
     <section id="latest" class="py-14 bg-gray-50/50 dark:bg-slate-900/50">
@@ -1084,83 +903,33 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- Technical Expertise -->
-    <section class="py-14 bg-gradient-to-b from-gray-50/50 to-white dark:from-slate-900/50 dark:to-slate-800/50">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-3">Deep Knowledge</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Technical Expertise
-          </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">Comprehensive skills across the full stack</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div
-            v-for="(expertise, index) in technicalExpertise"
-            :key="index"
-            class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 overflow-hidden"
-            v-scroll-reveal="{ delay: `${index * 75}ms` }"
-          >
-            <!-- Top gradient accent -->
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-            <div class="flex items-center gap-3 mb-5">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md">
-                <BaseIcon :path="mdiLightningBolt" size="20" class="text-white" />
-              </div>
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                {{ expertise.category }}
-              </h3>
-            </div>
-
-            <ul class="space-y-3">
-              <li
-                v-for="(item, i) in expertise.items"
-                :key="i"
-                class="flex items-start gap-3 text-gray-600 dark:text-gray-400 text-sm font-display group/item"
-              >
-                <div class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <BaseIcon :path="mdiCheckCircle" size="12" class="text-emerald-600 dark:text-emerald-400" />
-                </div>
-                <span class="group-hover/item:text-gray-900 dark:group-hover/item:text-gray-200 transition-colors">{{ item }}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Skills -->
-    <section id="skills" class="py-14">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-3">Expertise</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Skills & Technologies
-          </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">Technologies I work with daily</p>
-        </div>
-
-        <div class="max-w-4xl mx-auto space-y-6">
-          <div
-            v-for="skill in skills"
-            :key="skill.name"
-            class="group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <div class="flex items-center gap-3">
-                <BaseIcon :path="skill.icon" size="20" class="text-blue-600 dark:text-blue-400" />
-                <span class="text-lg font-semibold text-gray-900 dark:text-white font-heading">{{ skill.name }}</span>
-                <span class="text-xs text-gray-500 dark:text-gray-500 px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded font-display">{{ skill.category }}</span>
-              </div>
-              <span class="text-sm font-medium text-gray-600 dark:text-gray-400 font-mono">{{ skill.level }}%</span>
+    <section id="skills" class="py-12">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">Skills</h2>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Languages</h3>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="lang in ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'Go', 'SQL']" :key="lang" class="px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium">{{ lang }}</span>
             </div>
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-              <div
-                :style="{ width: `${skill.level}%` }"
-                class="h-full bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 rounded-full transform transition-all duration-1000 group-hover:shadow-lg"
-              ></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Frontend</h3>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tech in ['Vue.js', 'React', 'Next.js', 'Tailwind CSS']" :key="tech" class="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Backend & Infrastructure</h3>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tech in ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'Kubernetes', 'Docker', 'AWS', 'Terraform']" :key="tech" class="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">AI/ML</h3>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tech in ['LangGraph', 'LangChain', 'FAISS', 'Vector Search', 'RAG', 'PyTorch']" :key="tech" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-sm font-medium">{{ tech }}</span>
             </div>
           </div>
         </div>
@@ -1168,267 +937,49 @@ onMounted(() => {
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-14 bg-gray-50/50 dark:bg-slate-900/50">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 rounded-full mb-3">Career</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Professional Experience
-          </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">{{ totalYearsExperience }}+ years building enterprise software</p>
-        </div>
+    <section id="experience" class="py-12 bg-gray-50/50 dark:bg-slate-900/50">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">Experience</h2>
 
-        <div class="max-w-5xl mx-auto">
-          <TimelineItem
-            v-for="(exp, index) in experience"
-            :key="index"
-            :title="exp.title"
-            :subtitle="exp.company"
-            :period="`${exp.period} (${exp.duration})`"
-            :description="exp.location"
-            :achievements="exp.achievements"
-            :icon="mdiBriefcase"
-            :gradient="index === 0 ? 'from-blue-500 to-cyan-500' : index === 1 ? 'from-cyan-500 to-indigo-500' : 'from-indigo-500 to-purple-500'"
-            :is-last="index === experience.length - 1"
-          />
-        </div>
-
-        <!-- Education -->
-        <div class="max-w-5xl mx-auto mt-12">
-          <h3 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white font-heading">Education</h3>
-          <div class="space-y-6">
-            <div
-              v-for="(edu, index) in education"
-              :key="index"
-              class="group relative bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50"
-              v-scroll-reveal="{ delay: `${index * 100}ms` }"
-            >
-              <!-- Gradient accent -->
-              <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 rounded-t-3xl"></div>
-
-              <div class="flex flex-col lg:flex-row lg:items-start gap-6">
-                <!-- Icon -->
-                <div class="flex-shrink-0">
-                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
-                    <BaseIcon :path="mdiSchool" size="32" class="text-white" />
-                  </div>
-                </div>
-
-                <!-- Content -->
-                <div class="flex-1">
-                  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                    <div>
-                      <h4 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-1">{{ edu.degree }}</h4>
-                      <p class="text-xl text-blue-600 dark:text-blue-400 font-semibold font-heading">{{ edu.school }}</p>
-                    </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-slate-700/50 rounded-full text-gray-600 dark:text-gray-400 font-display shrink-0">
-                      <BaseIcon :path="mdiCalendar" size="18" />
-                      <span class="font-medium text-sm">{{ edu.period }}</span>
-                    </div>
-                  </div>
-
-                  <p class="text-gray-600 dark:text-gray-400 mb-6 font-display leading-relaxed">{{ edu.description }}</p>
-
-                  <div class="mb-4">
-                    <h5 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 font-heading uppercase tracking-wide">Coursework & Focus</h5>
-                    <div class="flex flex-wrap gap-2">
-                      <span
-                        v-for="spec in edu.specializations"
-                        :key="spec"
-                        class="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium font-display border border-blue-100 dark:border-blue-800/30"
-                      >
-                        {{ spec }}
-                      </span>
-                    </div>
-                  </div>
-
-                  <!-- Awards -->
-                  <div v-if="edu.awards && edu.awards.length > 0" class="pt-4 border-t border-gray-100 dark:border-slate-700">
-                    <div class="flex items-center gap-2 text-amber-600 dark:text-amber-400">
-                      <BaseIcon :path="mdiStar" size="18" />
-                      <span class="font-medium text-sm">{{ edu.awards[0] }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <!-- Current Role -->
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700/50 mb-6">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">Senior Software Engineer</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium">SAP</p>
             </div>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2013 - Present</span>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <li v-for="achievement in experience[0].achievements" :key="achievement" class="flex items-start gap-2">
+              <span class="text-emerald-500 mt-1">•</span>
+              <span>{{ achievement }}</span>
+            </li>
+          </ul>
+          <div class="flex flex-wrap gap-1.5 mt-4">
+            <span v-for="tech in experience[0].tech.slice(0, 6)" :key="tech" class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 rounded text-xs">{{ tech }}</span>
           </div>
         </div>
 
-        <!-- Certifications -->
-        <div class="max-w-5xl mx-auto mt-12">
-          <h3 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white font-heading">Certifications</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div
-              v-for="(cert, index) in certifications"
-              :key="index"
-              class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-slate-700 overflow-hidden"
-              v-scroll-reveal="{ delay: `${index * 100}ms` }"
-            >
-              <!-- Background gradient on hover -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-              <div class="relative flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md shrink-0">
-                  <BaseIcon :path="mdiShield" size="24" class="text-white" />
-                </div>
-                <div class="flex-1">
-                  <h4 class="text-lg font-bold text-gray-900 dark:text-white font-heading mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ cert.name }}</h4>
-                  <p class="text-gray-600 dark:text-gray-400 text-sm font-display mb-2">{{ cert.issuer }}</p>
-                  <div class="flex items-center gap-2">
-                    <span class="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs font-mono text-gray-500 dark:text-gray-400">{{ cert.year }}</span>
-                    <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
-                      <BaseIcon :path="mdiCheckCircle" size="14" />
-                      Verified
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Education - Compact -->
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Education</h3>
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div v-for="edu in education" :key="edu.school" class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-100 dark:border-slate-700/50">
+            <h4 class="font-bold text-gray-900 dark:text-white">{{ edu.school }}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{{ edu.degree }} • {{ edu.period }}</p>
+            <p v-if="edu.awards && edu.awards[0]" class="text-xs text-amber-600 dark:text-amber-400 mt-2">{{ edu.awards[0] }}</p>
           </div>
+        </div>
+
+        <!-- Certifications - Inline -->
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Certifications:</span>
+          <span v-for="cert in certifications" :key="cert.name" class="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm">
+            {{ cert.name }}
+          </span>
         </div>
       </div>
     </section>
-
-    <!-- Code Snippets Showcase -->
-    <section id="code" class="py-14 relative overflow-hidden fade-in">
-      <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/30 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900/50"></div>
-      <div class="relative max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10">
-          <div class="flex items-center justify-center gap-2 mb-2">
-            <BaseIcon :path="mdiCodeBraces" size="32" class="text-blue-600 dark:text-blue-400" />
-            <h2 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-              Code Showcase
-            </h2>
-          </div>
-          <p class="text-base text-gray-600 dark:text-gray-400 font-display">Snippets from real projects and systems</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <CodeSnippet
-            title="Rust Memory Manager"
-            language="rust"
-            code="// High-performance memory orchestration
-async fn persist_memory(
-    agent_id: &str,
-    memory: &MemoryState,
-) -> Result&lt;(), MemoryError&gt; {
-    let encrypted = encrypt(memory)?;
-    let key = format!(&quot;agent:{}:memory&quot;, agent_id);
-    
-    redis_client
-        .set_ex(&amp;key, encrypted, TTL)
-        .await?;
-    
-    Ok(())
-}"
-          />
-          <CodeSnippet
-            title="Vector Search Engine"
-            language="python"
-            code="# CLIP-based image embeddings
-def search_similar_images(
-    query_image: np.ndarray,
-    top_k: int = 10
-) -&gt; List[SearchResult]:
-    query_embedding = clip_model.encode(query_image)
-    
-    # Vector similarity search
-    distances, indices = index.search(
-        query_embedding.reshape(1, -1),
-        top_k
-    )
-    
-    return [
-        SearchResult(image_id=idx, score=dist)
-        for idx, dist in zip(indices[0], distances[0])
-    ]"
-          />
-          <CodeSnippet
-            title="AI Security Monitor"
-            language="typescript"
-            code="// Real-time bias detection
-async function detectBias(
-  response: AIResponse
-): Promise&lt;BiasScore&gt; {
-  const biasIndicators = await analyze({
-    content: response.text,
-    context: response.context,
-    model: response.model
-  });
-  
-  return {
-    score: calculateScore(biasIndicators),
-    violations: biasIndicators.filter(v =&gt; v.severity &gt; 0.7),
-    timestamp: Date.now()
-  };
-}"
-          />
-          <CodeSnippet
-            title="Multi-Agent Orchestration"
-            language="python"
-            code="# LangGraph agent coordination
-from langgraph.graph import StateGraph
-
-def create_agent_workflow():
-    workflow = StateGraph(AgentState)
-    
-    workflow.add_node(&quot;researcher&quot;, research_agent)
-    workflow.add_node(&quot;analyzer&quot;, analysis_agent)
-    workflow.add_node(&quot;synthesizer&quot;, synthesis_agent)
-    
-    workflow.add_edge(&quot;researcher&quot;, &quot;analyzer&quot;)
-    workflow.add_edge(&quot;analyzer&quot;, &quot;synthesizer&quot;)
-    
-    return workflow.compile()"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Terminal Showcase -->
-    <TerminalShowcase />
-
-    <!-- Achievements & Awards -->
-    <section id="achievements" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-800/50 dark:to-slate-900/50">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10" v-scroll-reveal>
-          <span class="inline-block px-3 py-1 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 rounded-full mb-3">Track Record</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Key Achievements
-          </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">Notable milestones and impact</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div
-            v-for="(achievement, index) in keyAchievements"
-            :key="index"
-            class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 overflow-hidden hover:-translate-y-1"
-            v-scroll-reveal="{ delay: `${index * 75}ms` }"
-          >
-            <!-- Gradient overlay on hover -->
-            <div :class="`absolute inset-0 bg-gradient-to-br ${achievement.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`"></div>
-
-            <div class="relative">
-              <div :class="`w-14 h-14 rounded-2xl bg-gradient-to-br ${achievement.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300`">
-                <BaseIcon :path="achievement.icon" size="28" class="text-white" />
-              </div>
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ achievement.title }}</h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm font-display leading-relaxed">{{ achievement.description }}</p>
-              <div v-if="achievement.metric" class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
-                <div :class="`text-2xl font-black bg-gradient-to-r ${achievement.gradient} bg-clip-text text-transparent font-heading`">
-                  {{ achievement.metric }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Blog Section - Dynamic articles from content/blog -->
-    <BlogSection />
 
     <!-- Contact -->
     <section id="contact" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
