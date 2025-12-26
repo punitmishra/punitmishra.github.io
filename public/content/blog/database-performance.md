@@ -231,3 +231,12 @@ LIMIT 10;
 6. **Monitor continuously** - slow queries creep in over time
 
 Database performance is about understanding your data access patterns and optimizing for them specifically. Generic advice only gets you so far.
+
+## References
+
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/current/) - Official docs
+- [Use The Index, Luke](https://use-the-index-luke.com/) - SQL indexing and tuning guide
+- [PgBouncer Documentation](https://www.pgbouncer.org/) - Connection pooling
+- [Postgres EXPLAIN Visualizer](https://explain.dalibo.com/) - Visual query analysis
+- [pg_stat_statements](https://www.postgresql.org/docs/current/pgstatstatements.html) - Query statistics
+- [High Performance PostgreSQL](https://www.highperfpostgresql.com/) - Performance patterns

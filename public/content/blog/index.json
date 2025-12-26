@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "slug": "observability-production",
+      "title": "Observability in Production: Metrics, Logs, and Traces",
+      "excerpt": "The three pillars of observability explained with practical examples. Metrics, logs, traces, alerting that doesn't suck, and cost-effective strategies.",
+      "date": "2024-12-28",
+      "category": "Technical",
+      "tags": ["Observability", "DevOps", "Monitoring", "SRE"],
+      "readTime": "11 min read",
+      "featured": true
+    },
+    {
+      "slug": "api-design-principles",
+      "title": "API Design Principles That Stand the Test of Time",
+      "excerpt": "Building APIs that developers love. Consistency, versioning, HTTP semantics, pagination, security, and documentation best practices from real-world experience.",
+      "date": "2024-12-27",
+      "category": "Technical",
+      "tags": ["API", "REST", "Architecture", "Backend"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
+      "slug": "vue-composition-patterns",
+      "title": "Vue 3 Composition API: Patterns for Scalable Applications",
+      "excerpt": "Production-tested patterns for Vue 3 Composition API including composables, provide/inject, state machines, and performance optimization techniques.",
+      "date": "2024-12-26",
+      "category": "Technical",
+      "tags": ["Vue.js", "TypeScript", "Frontend", "Architecture"],
+      "readTime": "10 min read",
+      "featured": true
+    },
+    {
       "slug": "rust-cli-tools",
       "title": "Building Blazing Fast CLI Tools in Rust",
       "excerpt": "Deep dive into building production-quality CLI applications in Rust with clap, parallel file walking, cross-compilation, and asciinema terminal recordings.",

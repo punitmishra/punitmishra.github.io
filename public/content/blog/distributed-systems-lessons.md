@@ -450,3 +450,12 @@ class IdempotentOperationHandler:
 6. **Circuit breakers save systems** - Fail fast, recover gracefully
 
 These patterns have saved my systems countless times. The code above is battle-tested and production-ready. Use it as a starting point, then adapt to your specific failure modes.
+
+## References
+
+- [Fallacies of Distributed Computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing) - The classic eight fallacies
+- [Designing Data-Intensive Applications](https://dataintensive.net/) - Martin Kleppmann's essential book
+- [Google SRE Book - Handling Overload](https://sre.google/sre-book/handling-overload/)
+- [Circuit Breaker Pattern - Microsoft](https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)
+- [Hybrid Logical Clocks](https://cse.buffalo.edu/tech-reports/2014-04.pdf) - HLC paper
+- [Jepsen Analyses](https://jepsen.io/analyses) - Real-world distributed systems testing

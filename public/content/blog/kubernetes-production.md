@@ -289,3 +289,12 @@ spec:
 5. **Observe everything** - custom metrics, centralized logging, tracing
 
 Kubernetes is a powerful platform, but it requires operational investment. Don't underestimate the learning curve and ongoing maintenance required for production deployments.
+
+## References
+
+- [Kubernetes Documentation](https://kubernetes.io/docs/) - Official docs
+- [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way) - Learn the internals
+- [CNCF Landscape](https://landscape.cncf.io/) - Cloud native ecosystem
+- [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- [Kubernetes Failure Stories](https://k8s.af/) - Learn from others' mistakes
+- [Learnk8s](https://learnk8s.io/blog) - Production Kubernetes tutorials

@@ -369,3 +369,12 @@ class ComplianceAuditLogger:
 5. **Test continuously** - adversarial testing, red teaming
 
 AI security is an evolving field. Stay informed about new attack vectors and update your defenses accordingly. The investment in security upfront prevents costly breaches later.
+
+## References
+
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) - LLM security risks
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) - AI governance standards
+- [Microsoft Responsible AI](https://www.microsoft.com/en-us/ai/responsible-ai) - Enterprise AI principles
+- [Adversarial Robustness Toolbox](https://github.com/Trusted-AI/adversarial-robustness-toolbox) - ML security testing
+- [ML Security Evasion Competition](https://mlsec.io/) - Adversarial ML challenges
+- [AI Incident Database](https://incidentdatabase.ai/) - Learn from AI failures

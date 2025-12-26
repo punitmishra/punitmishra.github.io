@@ -175,3 +175,12 @@ Vector search infrastructure can be expensive. Strategies:
 5. **Test at scale early** - performance characteristics change dramatically
 
 Vector search at scale is more about systems engineering than ML. Get the fundamentals right, and you'll have a solid foundation for building powerful AI applications.
+
+## References
+
+- [FAISS Documentation](https://github.com/facebookresearch/faiss/wiki) - Facebook AI Similarity Search
+- [HNSW Algorithm Paper](https://arxiv.org/abs/1603.09320) - Original research paper
+- [Pinecone Learning Center](https://www.pinecone.io/learn/) - Vector database concepts
+- [hnswlib](https://github.com/nmslib/hnswlib) - Fast HNSW implementation
+- [Milvus Documentation](https://milvus.io/docs) - Open-source vector database
+- [ANN Benchmarks](https://ann-benchmarks.com/) - Algorithm performance comparison

@@ -524,3 +524,12 @@ class CostController:
 6. **Control costs** - Set budgets before costs spiral
 
 Production LLM systems require engineering discipline. The patterns above have saved me countless hours of debugging and prevented multiple production incidents. Start with these, then iterate based on your specific failure modes.
+
+## References
+
+- [OpenAI API Documentation](https://platform.openai.com/docs/) - GPT models and best practices
+- [Anthropic Documentation](https://docs.anthropic.com/) - Claude models guide
+- [LangChain](https://python.langchain.com/) - LLM orchestration framework
+- [Pydantic Documentation](https://docs.pydantic.dev/) - Data validation
+- [tiktoken](https://github.com/openai/tiktoken) - Token counting library
+- [LLM Evaluation Best Practices](https://eugeneyan.com/writing/llm-patterns/) - Patterns and anti-patterns

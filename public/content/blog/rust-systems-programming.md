@@ -125,6 +125,15 @@ Yes, Rust has a steeper learning curve. The borrow checker will fight you initia
 - Debugging time decreases dramatically
 - Code reviews catch logical issues instead of memory bugs
 
+## References
+
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) - Official Rust book
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) - Learn by doing
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/) - The dark arts of unsafe Rust
+- [Tokio Tutorial](https://tokio.rs/tokio/tutorial) - Async Rust runtime
+- [Discord: Why Rust](https://discord.com/blog/why-discord-is-switching-from-go-to-rust) - Real-world migration story
+- [AWS Firecracker](https://firecracker-microvm.github.io/) - Production Rust at scale
+
 ## Conclusion
 
 Rust isn't just another systems language—it's a fundamental improvement in how we build reliable software. The initial investment in learning pays dividends in code quality, performance, and maintainability.

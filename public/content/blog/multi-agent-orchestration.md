@@ -447,3 +447,12 @@ async def smart_routing(state: DocumentState) -> str:
 6. **Optimize for cost** - Right-size models, cache, batch
 
 Multi-agent systems are powerful but complex. Build incrementally, test thoroughly, and always have fallbacks.
+
+## References
+
+- [LangGraph Documentation](https://python.langchain.com/docs/langgraph) - Multi-agent orchestration
+- [AutoGen](https://microsoft.github.io/autogen/) - Microsoft multi-agent framework
+- [CrewAI](https://docs.crewai.com/) - Agent collaboration framework
+- [LangSmith](https://docs.smith.langchain.com/) - LLM observability and tracing
+- [OpenTelemetry](https://opentelemetry.io/) - Distributed tracing standards
+- [Multi-Agent Systems Book](https://www.masfoundations.org/) - Academic foundations

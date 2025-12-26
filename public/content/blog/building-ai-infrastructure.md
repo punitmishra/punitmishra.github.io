@@ -116,3 +116,12 @@ AI infrastructure costs can spiral quickly. Key strategies:
 5. **Version everything** - data, models, configurations, and code
 
 Building production AI systems is hard, but the principles are learnable. Start simple, iterate based on real production feedback, and always keep the end user in mind.
+
+## References
+
+- [Feast Feature Store](https://feast.dev/) - Open-source feature store
+- [MLflow](https://mlflow.org/) - ML lifecycle management
+- [Weights & Biases](https://wandb.ai/) - Experiment tracking and monitoring
+- [Kubeflow](https://www.kubeflow.org/) - ML platform on Kubernetes
+- [Google ML Best Practices](https://developers.google.com/machine-learning/guides/rules-of-ml) - ML engineering rules
+- [Hidden Technical Debt in ML Systems](https://papers.nips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html) - Classic NIPS paper

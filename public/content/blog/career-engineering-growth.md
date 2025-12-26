@@ -148,6 +148,15 @@ All of these are valid paths. The key is intentionality—know what you want and
 - Build a relationship with someone in a different part of the org
 - Reflect on whether your current path aligns with your goals
 
+## References
+
+- [The Staff Engineer's Path](https://www.oreilly.com/library/view/the-staff-engineers/9781098118730/) - Tanya Reilly's essential guide
+- [An Elegant Puzzle](https://lethain.com/elegant-puzzle/) - Will Larson on engineering management
+- [StaffEng](https://staffeng.com/) - Stories and guides for staff+ engineers
+- [The Manager's Path](https://www.oreilly.com/library/view/the-managers-path/9781491973882/) - Camille Fournier's classic
+- [Architecture Decision Records](https://adr.github.io/) - Documenting decisions
+- [Google Engineering Practices](https://google.github.io/eng-practices/) - Code review and more
+
 ## Final Thoughts
 
 Career growth in engineering isn't about accumulating technologies or climbing titles. It's about continuously expanding your ability to have positive impact—on the product, on the team, on the organization.

@@ -184,3 +184,12 @@ Keep types close to where they're used, but extract shared types to a central lo
 5. **Keep it simple** - overly complex types are a code smell
 
 TypeScript's power comes from using it as intended. Fight the urge to escape the type system—it's trying to help you.
+
+## References
+
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/) - Official documentation
+- [Zod Documentation](https://zod.dev/) - TypeScript-first schema validation
+- [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) - Free comprehensive guide
+- [Total TypeScript](https://www.totaltypescript.com/) - Advanced TypeScript patterns
+- [Type Challenges](https://github.com/type-challenges/type-challenges) - Practice advanced types
+- [ts-reset](https://github.com/total-typescript/ts-reset) - Improve built-in types
