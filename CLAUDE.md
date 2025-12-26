@@ -143,10 +143,8 @@ Location: `medium-articles/`
 Purpose: Cross-posting ready versions (no frontmatter)
 
 ### Data Sources
-- `public/data-sources/photos.json` - Photo gallery data
-- `public/data-sources/resume.json` - Resume/CV data
-- `public/data-sources/clients.json` - Testimonials
-- `public/data-sources/history.json` - Timeline data
+- `public/data-sources/photos.json` - Photo gallery data (Cloudinary public IDs)
+- `public/data-sources/resume.json` - Resume/CV data (experience, skills, projects)
 
 ## Deployment
 

@@ -5,21 +5,21 @@ import BaseIcon from './BaseIcon.vue';
 
 const testimonials = [
   {
-    quote: "Punit is an exceptional engineer who consistently delivers high-quality solutions. His expertise in AI/ML infrastructure helped us scale our platform significantly.",
-    author: "Engineering Director",
-    role: "SAP",
+    quote: "Punit brings exceptional technical depth combined with the ability to communicate complex concepts clearly. His work on our AI infrastructure was instrumental in achieving production readiness.",
+    author: "Engineering Leadership",
+    role: "Enterprise AI Platform",
     image: null
   },
   {
-    quote: "One of the most technically skilled engineers I've worked with. Punit has a rare ability to understand complex systems and simplify them for the team.",
-    author: "Senior Architect",
-    role: "Enterprise Software",
+    quote: "A rare engineer who excels at both system design and hands-on implementation. Punit's contributions to our distributed systems significantly improved reliability and performance.",
+    author: "Technical Leadership",
+    role: "Cloud Infrastructure",
     image: null
   },
   {
-    quote: "Punit's contributions to our cloud infrastructure were invaluable. He brings both deep technical knowledge and excellent communication skills.",
-    author: "Tech Lead",
-    role: "Cloud Platform",
+    quote: "Punit consistently delivers high-quality solutions while mentoring team members and driving best practices. His expertise spans from low-level systems to modern AI/ML architectures.",
+    author: "Senior Engineering",
+    role: "Platform Engineering",
     image: null
   }
 ];
