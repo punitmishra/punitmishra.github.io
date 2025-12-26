@@ -63,78 +63,78 @@ const socialLinks = [
 const featuredProjects = [
   {
     name: "Shield AI",
-    description: "AI-powered DNS filtering system with real-time threat detection. Built with Rust for high-performance network security monitoring and malicious domain blocking.",
-    tech: ["Rust", "AI/ML", "DNS", "Security", "Networking"],
+    description: "High-performance DNS security system in Rust with ML-based DGA detection. Sub-millisecond latency, 15MB memory footprint, 127K queries/sec throughput.",
+    tech: ["Rust", "AI/ML", "DNS", "Security", "FAISS"],
     gradient: "from-rose-500 to-orange-500",
     url: `https://github.com/${githubUsername}/shield-ai`,
     featured: true,
     highlights: [
-      "Real-time threat detection",
-      "High-performance Rust implementation",
-      "DNS-level security filtering",
-      "AI-powered analysis",
+      "Sub-millisecond DNS resolution",
+      "ML-based DGA detection",
+      "15MB memory footprint",
+      "127K queries/sec throughput",
     ],
   },
   {
     name: "Railroad Arcade",
-    description: "Interactive railroad simulation and arcade game built with TypeScript. Features real-time train control, track switching, and dynamic routing systems.",
-    tech: ["TypeScript", "Game Development", "Simulation", "Real-time Systems"],
+    description: "Remote-controlled model railroad via web app with Raspberry Pi GPIO, WebSockets, game modes, and leaderboards. Real physical trains, controlled from anywhere.",
+    tech: ["Next.js", "Raspberry Pi", "WebSockets", "IoT", "TypeScript"],
     gradient: "from-emerald-500 to-teal-500",
     url: `https://github.com/${githubUsername}/railroad-arcade`,
     featured: true,
     highlights: [
-      "Real-time simulation",
-      "Dynamic routing algorithms",
-      "Interactive controls",
-      "Systems engineering",
+      "Real-time WebSocket control",
+      "Sub-100ms latency",
+      "Gamification system",
+      "Multi-camera support",
     ],
   },
   {
-    name: "SAP Commerce Extension",
-    description: "Enterprise commerce extension for SAP CX Intelligence & Incubation. Enables tenant credential configuration and UI component integration for visual search capabilities.",
-    tech: ["Java", "SAP Commerce", "Enterprise", "REST APIs"],
-    gradient: "from-blue-500 to-indigo-500",
-    url: `https://github.com/${githubUsername}/cxii-commerce-extn`,
+    name: "Circuit Playground Controller",
+    description: "Open-source CircuitPython firmware for embedded model railroad control. PWM motor control, NeoPixel feedback, smooth acceleration, and serial protocol bridge.",
+    tech: ["CircuitPython", "Embedded", "Hardware", "Open Source"],
+    gradient: "from-amber-500 to-yellow-500",
+    url: `https://github.com/${githubUsername}/railroad-arcade-cpx`,
     featured: true,
     highlights: [
-      "Enterprise-grade integration",
-      "Multi-tenant architecture",
-      "Visual search capabilities",
-      "SAP ecosystem",
+      "CircuitPython firmware",
+      "PWM motor control",
+      "NeoPixel feedback",
+      "Serial protocol bridge",
     ],
   },
   {
-    name: "SAP Technical Exercises",
-    description: "Data engineering and product similarity search implementations using FAISS, HNSW, and multimodal approaches with CLIP embeddings for large-scale datasets.",
-    tech: ["Python", "FAISS", "Docker", "Data Engineering", "ML"],
+    name: "Raspberry Pi Homelab",
+    description: "Fleet of 5 Raspberry Pis providing DNS security, IoT control, media serving, monitoring, and sensor collection with Docker and Cloudflare Tunnels.",
+    tech: ["Raspberry Pi", "Docker", "Prometheus", "Grafana", "Cloudflare"],
     gradient: "from-violet-500 to-purple-500",
+    url: `https://github.com/${githubUsername}/homelab`,
+    featured: true,
+    highlights: [
+      "Docker-based deployments",
+      "Prometheus/Grafana monitoring",
+      "Cloudflare Tunnel access",
+      "Automated CI/CD",
+    ],
+  },
+  {
+    name: "Vector Search Engine",
+    description: "Production vector similarity search using FAISS, HNSW, and CLIP embeddings. Sub-100ms queries across 30k+ products with multimodal product similarity.",
+    tech: ["Python", "FAISS", "CLIP", "Docker", "FastAPI"],
+    gradient: "from-blue-500 to-indigo-500",
     url: `https://github.com/${githubUsername}/sap-cxii-tech-ex-01`,
     featured: true,
     highlights: [
-      "Vector similarity search",
       "CLIP embeddings",
-      "Scalable architecture",
-      "Data pipelines",
+      "FAISS indexing",
+      "Sub-100ms queries",
+      "Multimodal search",
     ],
   },
   {
-    name: "Cloud Foundry Deployment",
-    description: "Canonical open source deployment manifest for Cloud Foundry. Contributions to enterprise-grade cloud platform infrastructure and deployment automation.",
-    tech: ["Go", "Cloud Foundry", "BOSH", "Infrastructure"],
-    gradient: "from-cyan-500 to-blue-500",
-    url: `https://github.com/${githubUsername}/cf-deployment`,
-    featured: true,
-    highlights: [
-      "Cloud infrastructure",
-      "Deployment automation",
-      "Enterprise platform",
-      "Open source contribution",
-    ],
-  },
-  {
-    name: "Kubernetes Deployment",
-    description: "Production-ready Kubernetes cluster deployment using Kubespray. Automated cluster provisioning with Ansible for scalable container orchestration.",
-    tech: ["Kubernetes", "Ansible", "DevOps", "Container Orchestration"],
+    name: "Kubernetes Infrastructure",
+    description: "Production Kubernetes cluster deployment using Kubespray with Ansible automation. Scalable container orchestration for enterprise workloads.",
+    tech: ["Kubernetes", "Ansible", "DevOps", "Terraform"],
     gradient: "from-sky-500 to-cyan-500",
     url: `https://github.com/${githubUsername}/kubespray`,
     featured: true,
@@ -168,11 +168,30 @@ const experience = [
       "Technical Leadership",
     ],
   },
+  {
+    title: "Hardware & IoT Engineer",
+    company: "Personal Projects",
+    period: "2020 - Present",
+    location: "Home Lab",
+    duration: "5+ years",
+    achievements: [
+      "Built Railroad Arcade: remote-controlled model railroad with real-time IoT via Raspberry Pi and WebSockets",
+      "Developed Shield AI: high-performance DNS security in Rust with ML-based threat detection (<1ms latency)",
+      "Created open-source CircuitPython controller for embedded hardware with smooth acceleration curves",
+      "Deployed 5-node Raspberry Pi homelab: DNS filtering, media server, monitoring, IoT bridge, sensors",
+    ],
+    tech: ["Raspberry Pi", "CircuitPython", "Rust", "Docker", "Prometheus", "Grafana", "Next.js", "WebSockets"],
+    highlights: [
+      "IoT Systems",
+      "Embedded Development",
+      "Home Infrastructure",
+    ],
+  },
 ];
 
 const education = [
   {
-    degree: "Computer Science",
+    degree: "B.S. Computer Science",
     school: "University of California, Berkeley",
     period: "2010 - 2012",
     description: "Advanced coursework in computer science and electrical engineering at one of the world's top engineering programs.",
@@ -183,18 +202,6 @@ const education = [
       "Signals and Systems (EE 120)",
     ],
     awards: ["International Student Scholarship ($10,000)"],
-  },
-  {
-    degree: "Engineering",
-    school: "Ohlone College",
-    period: "2008 - 2010",
-    description: "Foundation in engineering with leadership in robotics and engineering clubs.",
-    specializations: [
-      "Engineering Fundamentals",
-      "VEX Robotics Competition",
-      "Engineering Club Vice President",
-    ],
-    awards: ["Outstanding Engineering Student Award"],
   },
 ];
 
@@ -911,7 +918,7 @@ onMounted(() => {
           <div>
             <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Languages</h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="lang in ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'Go', 'SQL']" :key="lang" class="px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium">{{ lang }}</span>
+              <span v-for="lang in ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'Go', 'SQL', 'CircuitPython']" :key="lang" class="px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium">{{ lang }}</span>
             </div>
           </div>
           <div>
@@ -932,6 +939,12 @@ onMounted(() => {
               <span v-for="tech in ['LangGraph', 'LangChain', 'FAISS', 'Vector Search', 'RAG', 'PyTorch']" :key="tech" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-sm font-medium">{{ tech }}</span>
             </div>
           </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Hardware & IoT</h3>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tech in ['Raspberry Pi', 'Circuit Playground', 'GPIO', 'PWM', 'Prometheus', 'Grafana', 'WebSockets']" :key="tech" class="px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -941,30 +954,35 @@ onMounted(() => {
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">Experience</h2>
 
-        <!-- Current Role -->
-        <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700/50 mb-6">
-          <div class="flex items-start justify-between mb-3">
-            <div>
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white">Senior Software Engineer</h3>
-              <p class="text-blue-600 dark:text-blue-400 font-medium">SAP</p>
+        <!-- All Experience Entries -->
+        <div class="space-y-4 mb-6">
+          <div v-for="exp in experience" :key="exp.company" class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700/50">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ exp.title }}</h3>
+                <p class="text-blue-600 dark:text-blue-400 font-medium">{{ exp.company }}</p>
+              </div>
+              <div class="text-right">
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ exp.period }}</span>
+                <p class="text-xs text-gray-400 dark:text-gray-500">{{ exp.location }}</p>
+              </div>
             </div>
-            <span class="text-sm text-gray-500 dark:text-gray-400">2013 - Present</span>
-          </div>
-          <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-            <li v-for="achievement in experience[0].achievements" :key="achievement" class="flex items-start gap-2">
-              <span class="text-emerald-500 mt-1">•</span>
-              <span>{{ achievement }}</span>
-            </li>
-          </ul>
-          <div class="flex flex-wrap gap-1.5 mt-4">
-            <span v-for="tech in experience[0].tech.slice(0, 6)" :key="tech" class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 rounded text-xs">{{ tech }}</span>
+            <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+              <li v-for="achievement in exp.achievements" :key="achievement" class="flex items-start gap-2">
+                <span class="text-emerald-500 mt-1 flex-shrink-0">•</span>
+                <span>{{ achievement }}</span>
+              </li>
+            </ul>
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              <span v-for="tech in exp.tech.slice(0, 8)" :key="tech" class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 rounded text-xs">{{ tech }}</span>
+            </div>
           </div>
         </div>
 
-        <!-- Education - Compact -->
+        <!-- Education -->
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Education</h3>
-        <div class="grid md:grid-cols-2 gap-4 mb-6">
-          <div v-for="edu in education" :key="edu.school" class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-100 dark:border-slate-700/50">
+        <div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-100 dark:border-slate-700/50 mb-6">
+          <div v-for="edu in education" :key="edu.school">
             <h4 class="font-bold text-gray-900 dark:text-white">{{ edu.school }}</h4>
             <p class="text-sm text-gray-600 dark:text-gray-400">{{ edu.degree }} • {{ edu.period }}</p>
             <p v-if="edu.awards && edu.awards[0]" class="text-xs text-amber-600 dark:text-amber-400 mt-2">{{ edu.awards[0] }}</p>
