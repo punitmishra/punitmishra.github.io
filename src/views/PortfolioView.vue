@@ -24,6 +24,9 @@ import CommandPalette from "@/components/CommandPalette.vue";
 import StatsGrid from "@/components/StatsGrid.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import BlogSection from "@/components/BlogSection.vue";
+import CurrentlyBuilding from "@/components/CurrentlyBuilding.vue";
+import TestimonialsSection from "@/components/TestimonialsSection.vue";
+import VisitorCounter from "@/components/VisitorCounter.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
@@ -595,7 +598,7 @@ onMounted(() => {
           </div>
 
           <!-- Profile Card - Right column -->
-          <div class="hidden lg:block" v-scroll-reveal="{ delay: '200ms' }">
+          <div class="hidden lg:block space-y-6" v-scroll-reveal="{ delay: '200ms' }">
             <div class="relative group">
               <!-- Glow effect -->
               <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
@@ -630,6 +633,9 @@ onMounted(() => {
                 </div>
               </div>
             </div>
+
+            <!-- Currently Building -->
+            <CurrentlyBuilding :username="githubUsername" />
           </div>
         </div>
 
@@ -1019,6 +1025,9 @@ onMounted(() => {
       </div>
     </section>
 
+    <!-- Testimonials -->
+    <TestimonialsSection />
+
     <!-- Contact -->
     <section id="contact" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
       <div class="max-w-7xl mx-auto px-6">
@@ -1080,12 +1089,15 @@ onMounted(() => {
             <button @click="scrollToSection('contact')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</button>
           </div>
 
-          <!-- Made with -->
-          <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
-            <span>Built with</span>
-            <span class="text-emerald-500">Vue.js</span>
-            <span>&</span>
-            <span class="text-cyan-500">Tailwind</span>
+          <!-- Made with & Views -->
+          <div class="flex items-center gap-4">
+            <VisitorCounter />
+            <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+              <span>Built with</span>
+              <span class="text-emerald-500">Vue.js</span>
+              <span>&</span>
+              <span class="text-cyan-500">Tailwind</span>
+            </div>
           </div>
         </div>
 
