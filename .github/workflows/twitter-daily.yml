@@ -1,0 +1,157 @@
+name: Daily Twitter/X Update
+
+on:
+  # Run every day at 9 AM PST (5 PM UTC)
+  schedule:
+    - cron: '0 17 * * *'
+
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview only)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  daily-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate daily stats
+        id: stats
+        run: |
+          # Count articles
+          TOTAL_ARTICLES=$(ls -1 public/content/blog/*.md 2>/dev/null | wc -l | tr -d ' ')
+
+          # Get categories from index.json
+          CATEGORIES=$(cat public/content/blog/index.json | jq -r '.articles[].category' | sort -u | head -4 | tr '\n' ', ' | sed 's/,$//')
+
+          # Get latest article
+          LATEST=$(cat public/content/blog/index.json | jq -r '.articles[0].title')
+          LATEST_SLUG=$(cat public/content/blog/index.json | jq -r '.articles[0].slug')
+
+          # Day of week
+          DAY=$(date +%A)
+
+          echo "total=$TOTAL_ARTICLES" >> $GITHUB_OUTPUT
+          echo "categories=$CATEGORIES" >> $GITHUB_OUTPUT
+          echo "latest=$LATEST" >> $GITHUB_OUTPUT
+          echo "latest_slug=$LATEST_SLUG" >> $GITHUB_OUTPUT
+          echo "day=$DAY" >> $GITHUB_OUTPUT
+
+      - name: Format daily tweet
+        id: tweet
+        run: |
+          DAY="${{ steps.stats.outputs.day }}"
+          TOTAL="${{ steps.stats.outputs.total }}"
+          CATEGORIES="${{ steps.stats.outputs.categories }}"
+          LATEST="${{ steps.stats.outputs.latest }}"
+          LATEST_SLUG="${{ steps.stats.outputs.latest_slug }}"
+
+          # Rotate through different tweet formats
+          WEEK_NUM=$(date +%V)
+          FORMAT=$((WEEK_NUM % 3))
+
+          case $FORMAT in
+            0)
+              TWEET="🚀 ${DAY} Engineering Update
+
+📊 ${TOTAL} technical articles
+📚 Topics: ${CATEGORIES}
+
+💡 Latest: ${LATEST}
+
+🔗 punitmishra.github.io
+
+#SoftwareEngineering #Tech #AI"
+              ;;
+            1)
+              TWEET="☕ ${DAY} from the engineering trenches
+
+🧠 What I'm thinking about:
+• AI infrastructure at scale
+• Rust for systems programming
+• Vector search optimization
+
+📝 ${TOTAL} articles & counting
+
+🔗 punitmishra.github.io
+
+#Engineering #AI #Rust"
+              ;;
+            2)
+              TWEET="🔧 ${DAY} Build Log
+
+Latest: ${LATEST}
+
+Topics I write about:
+${CATEGORIES}
+
+Check out my technical blog 👇
+🔗 punitmishra.github.io
+
+#TechBlog #SoftwareEngineering"
+              ;;
+          esac
+
+          echo "$TWEET" > tweet.txt
+
+          echo "🐦 Daily tweet:"
+          echo "---"
+          cat tweet.txt
+          echo "---"
+
+      - name: Post to Twitter/X
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        run: |
+          if [ -z "$TWITTER_API_KEY" ]; then
+            echo "⚠️ Twitter API keys not configured"
+            exit 0
+          fi
+
+          TWEET=$(cat tweet.txt)
+          TIMESTAMP=$(date +%s)
+          NONCE=$(openssl rand -hex 16)
+
+          OAUTH_PARAMS="oauth_consumer_key=${TWITTER_API_KEY}&oauth_nonce=${NONCE}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=${TIMESTAMP}&oauth_token=${TWITTER_ACCESS_TOKEN}&oauth_version=1.0"
+
+          BASE_URL="https://api.twitter.com/2/tweets"
+          ENCODED_URL=$(echo -n "$BASE_URL" | jq -sRr @uri)
+          ENCODED_PARAMS=$(echo -n "$OAUTH_PARAMS" | jq -sRr @uri)
+          SIGNATURE_BASE="POST&${ENCODED_URL}&${ENCODED_PARAMS}"
+
+          SIGNING_KEY="${TWITTER_API_SECRET}&${TWITTER_ACCESS_SECRET}"
+          SIGNATURE=$(echo -n "$SIGNATURE_BASE" | openssl dgst -sha1 -hmac "$SIGNING_KEY" -binary | base64)
+          ENCODED_SIGNATURE=$(echo -n "$SIGNATURE" | jq -sRr @uri)
+
+          AUTH_HEADER="OAuth oauth_consumer_key=\"${TWITTER_API_KEY}\", oauth_nonce=\"${NONCE}\", oauth_signature=\"${ENCODED_SIGNATURE}\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"${TIMESTAMP}\", oauth_token=\"${TWITTER_ACCESS_TOKEN}\", oauth_version=\"1.0\""
+
+          RESPONSE=$(curl -s -X POST "$BASE_URL" \
+            -H "Authorization: $AUTH_HEADER" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\": $(echo "$TWEET" | jq -Rs .)}")
+
+          if echo "$RESPONSE" | grep -q '"id"'; then
+            TWEET_ID=$(echo "$RESPONSE" | jq -r '.data.id')
+            echo "✅ Daily update posted!"
+            echo "🔗 https://twitter.com/punitmishra/status/${TWEET_ID}"
+          else
+            echo "❌ Failed to post"
+            echo "$RESPONSE"
+          fi
+
+      - name: Dry run summary
+        if: github.event.inputs.dry_run == 'true'
+        run: |
+          echo "🔍 DRY RUN - Would post:"
+          cat tweet.txt

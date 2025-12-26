@@ -1,0 +1,183 @@
+name: Post to Twitter/X
+
+on:
+  # Trigger when blog articles change
+  push:
+    branches: [main]
+    paths:
+      - 'public/content/blog/*.md'
+      - 'public/content/blog/index.json'
+
+  # Manual trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      article_slug:
+        description: 'Article slug to post (e.g., shield-ai-dns-security)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run (preview only, no actual post)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  post-tweet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need previous commit to detect changes
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Detect new/updated articles
+        id: detect
+        if: github.event_name == 'push'
+        run: |
+          # Get changed markdown files
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'public/content/blog/*.md' | head -1)
+          if [ -n "$CHANGED" ]; then
+            SLUG=$(basename "$CHANGED" .md)
+            echo "slug=$SLUG" >> $GITHUB_OUTPUT
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "📝 Detected article: $SLUG"
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "No new articles detected"
+          fi
+
+      - name: Set article slug
+        id: article
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "slug=${{ github.event.inputs.article_slug }}" >> $GITHUB_OUTPUT
+            echo "dry_run=${{ github.event.inputs.dry_run }}" >> $GITHUB_OUTPUT
+          else
+            echo "slug=${{ steps.detect.outputs.slug }}" >> $GITHUB_OUTPUT
+            echo "dry_run=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read article metadata
+        id: metadata
+        if: steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          SLUG="${{ steps.article.outputs.slug }}"
+          ARTICLE_PATH="public/content/blog/${SLUG}.md"
+
+          if [ ! -f "$ARTICLE_PATH" ]; then
+            echo "❌ Article not found: $ARTICLE_PATH"
+            exit 1
+          fi
+
+          # Extract title from frontmatter
+          TITLE=$(grep -m1 '^title:' "$ARTICLE_PATH" | sed 's/title: *["'"'"']\{0,1\}\([^"'"'"']*\)["'"'"']\{0,1\}/\1/')
+
+          # Extract tags
+          TAGS=$(grep -m1 '^tags:' "$ARTICLE_PATH" | sed 's/tags: *\[//' | sed 's/\]//' | tr -d '"' | tr ',' '\n' | head -3 | tr '\n' ' ')
+
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+
+          echo "📰 Title: $TITLE"
+          echo "🏷️ Tags: $TAGS"
+
+      - name: Format tweet
+        id: tweet
+        if: steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          SLUG="${{ steps.article.outputs.slug }}"
+          TITLE="${{ steps.metadata.outputs.title }}"
+          TAGS="${{ steps.metadata.outputs.tags }}"
+          URL="https://punitmishra.github.io/blog/${SLUG}"
+
+          # Format hashtags
+          HASHTAGS=$(echo "$TAGS" | tr ' ' '\n' | grep -v '^$' | sed 's/[^a-zA-Z0-9]//g' | sed 's/^/#/' | tr '\n' ' ')
+
+          # Build tweet (max 280 chars)
+          TWEET="📝 ${TITLE}
+
+${HASHTAGS}
+
+🔗 ${URL}"
+
+          # Save to file for multi-line handling
+          echo "$TWEET" > tweet.txt
+
+          echo "🐦 Tweet preview:"
+          echo "---"
+          cat tweet.txt
+          echo "---"
+          echo "📊 Length: $(cat tweet.txt | wc -c) characters"
+
+      - name: Post to Twitter/X
+        if: (steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch') && steps.article.outputs.dry_run != 'true'
+        env:
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        run: |
+          if [ -z "$TWITTER_API_KEY" ]; then
+            echo "⚠️ Twitter API keys not configured. Add secrets to repository."
+            echo "See: https://github.com/${{ github.repository }}/settings/secrets/actions"
+            exit 0
+          fi
+
+          TWEET=$(cat tweet.txt)
+
+          # Use Twitter API v2
+          # Generate OAuth 1.0a signature
+          TIMESTAMP=$(date +%s)
+          NONCE=$(openssl rand -hex 16)
+
+          # OAuth parameters
+          OAUTH_PARAMS="oauth_consumer_key=${TWITTER_API_KEY}&oauth_nonce=${NONCE}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=${TIMESTAMP}&oauth_token=${TWITTER_ACCESS_TOKEN}&oauth_version=1.0"
+
+          # Create signature base
+          BASE_URL="https://api.twitter.com/2/tweets"
+          ENCODED_URL=$(echo -n "$BASE_URL" | jq -sRr @uri)
+          ENCODED_PARAMS=$(echo -n "$OAUTH_PARAMS" | jq -sRr @uri)
+          SIGNATURE_BASE="POST&${ENCODED_URL}&${ENCODED_PARAMS}"
+
+          # Create signing key
+          SIGNING_KEY="${TWITTER_API_SECRET}&${TWITTER_ACCESS_SECRET}"
+
+          # Generate signature
+          SIGNATURE=$(echo -n "$SIGNATURE_BASE" | openssl dgst -sha1 -hmac "$SIGNING_KEY" -binary | base64)
+          ENCODED_SIGNATURE=$(echo -n "$SIGNATURE" | jq -sRr @uri)
+
+          # Build Authorization header
+          AUTH_HEADER="OAuth oauth_consumer_key=\"${TWITTER_API_KEY}\", oauth_nonce=\"${NONCE}\", oauth_signature=\"${ENCODED_SIGNATURE}\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"${TIMESTAMP}\", oauth_token=\"${TWITTER_ACCESS_TOKEN}\", oauth_version=\"1.0\""
+
+          # Post tweet
+          RESPONSE=$(curl -s -X POST "$BASE_URL" \
+            -H "Authorization: $AUTH_HEADER" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\": $(echo "$TWEET" | jq -Rs .)}")
+
+          echo "📤 Response: $RESPONSE"
+
+          if echo "$RESPONSE" | grep -q '"id"'; then
+            TWEET_ID=$(echo "$RESPONSE" | jq -r '.data.id')
+            echo "✅ Tweet posted successfully!"
+            echo "🔗 https://twitter.com/punitmishra/status/${TWEET_ID}"
+          else
+            echo "❌ Failed to post tweet"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+      - name: Dry run summary
+        if: steps.article.outputs.dry_run == 'true'
+        run: |
+          echo "🔍 DRY RUN - Tweet would be:"
+          echo "---"
+          cat tweet.txt
+          echo "---"
+          echo "No actual tweet was posted."
