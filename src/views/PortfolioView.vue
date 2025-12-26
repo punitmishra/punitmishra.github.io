@@ -6,6 +6,7 @@ import {
   mdiGithub,
   mdiLinkedin,
   mdiTwitter,
+  mdiInstagram,
   mdiWeb,
   mdiCodeBraces,
   mdiStar,
@@ -96,6 +97,7 @@ const socialLinks = [
   { icon: mdiGithub, label: "GitHub", url: `https://github.com/${githubUsername}`, color: "hover:text-gray-900 dark:hover:text-white" },
   { icon: mdiLinkedin, label: "LinkedIn", url: `https://linkedin.com/in/${linkedinUsername}`, color: "hover:text-blue-600" },
   { icon: mdiTwitter, label: "Twitter", url: "https://twitter.com/punitmishra", color: "hover:text-sky-400" },
+  { icon: mdiInstagram, label: "Instagram", url: "https://instagram.com/punitmishra", color: "hover:text-pink-500" },
   { icon: mdiWeb, label: "Website", url: "https://punitmishra.com", color: "hover:text-cyan-600" },
 ];
 
