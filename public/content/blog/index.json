@@ -41,6 +41,46 @@
       "featured": true
     },
     {
+      "slug": "launching-grepcoin",
+      "title": "Launching Grepcoin: Building a Cryptocurrency from Scratch",
+      "excerpt": "Complete journey of launching $GREP token - tokenomics design, smart contract development, security audits, liquidity provision, and community building.",
+      "date": "2024-12-19",
+      "category": "Crypto",
+      "tags": ["Cryptocurrency", "Blockchain", "Solidity", "Web3", "DeFi"],
+      "readTime": "20 min read",
+      "featured": true
+    },
+    {
+      "slug": "web3-development-guide",
+      "title": "Web3 Development: From Traditional Backend to Blockchain",
+      "excerpt": "Transitioning from Web2 to Web3 - mental model shifts, tooling differences, smart contract patterns, and practical dApp development with Foundry and Wagmi.",
+      "date": "2024-12-18",
+      "category": "Crypto",
+      "tags": ["Web3", "Blockchain", "Ethereum", "Solidity", "dApps"],
+      "readTime": "16 min read",
+      "featured": true
+    },
+    {
+      "slug": "smart-contract-security",
+      "title": "Smart Contract Security: Lessons from $3B in Hacks",
+      "excerpt": "Dissecting real DeFi exploits - reentrancy, flash loans, oracle manipulation, access control. Defensive patterns and security audit checklists.",
+      "date": "2024-12-17",
+      "category": "Security",
+      "tags": ["Smart Contracts", "Security", "Solidity", "Auditing", "DeFi"],
+      "readTime": "18 min read",
+      "featured": true
+    },
+    {
+      "slug": "defi-protocols-engineering",
+      "title": "DeFi Protocol Engineering: Building AMMs, Lending, and Vaults",
+      "excerpt": "Engineering deep dive into DeFi primitives - constant product AMMs, lending pool mechanics, yield vaults, and ERC-4626 tokenized vaults.",
+      "date": "2024-12-16",
+      "category": "Crypto",
+      "tags": ["DeFi", "AMM", "Lending", "Yield", "Solidity"],
+      "readTime": "22 min read",
+      "featured": true
+    },
+    {
       "slug": "api-design-principles",
       "title": "API Design Principles That Stand the Test of Time",
       "excerpt": "Building APIs that developers love. Consistency, versioning, HTTP semantics, pagination, security, and documentation best practices from real-world experience.",

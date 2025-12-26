@@ -132,6 +132,20 @@ const featuredProjects = [
     ],
   },
   {
+    name: "Grepcoin ($GREP)",
+    description: "Cryptocurrency for developers with utility tied to code search APIs. ERC-20 token with staking, governance, and DeFi integration. Open source smart contracts.",
+    tech: ["Solidity", "Web3", "DeFi", "React", "Hardhat"],
+    gradient: "from-green-500 to-emerald-500",
+    url: `https://github.com/${githubUsername}/grepcoin`,
+    featured: true,
+    highlights: [
+      "ERC-20 token launch",
+      "Staking & governance",
+      "API token utility",
+      "Security audited",
+    ],
+  },
+  {
     name: "Kubernetes Infrastructure",
     description: "Production Kubernetes cluster deployment using Kubespray with Ansible automation. Scalable container orchestration for enterprise workloads.",
     tech: ["Kubernetes", "Ansible", "DevOps", "Terraform"],
@@ -943,6 +957,12 @@ onMounted(() => {
             <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Hardware & IoT</h3>
             <div class="flex flex-wrap gap-2">
               <span v-for="tech in ['Raspberry Pi', 'Circuit Playground', 'GPIO', 'PWM', 'Prometheus', 'Grafana', 'WebSockets']" :key="tech" class="px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Web3 & Blockchain</h3>
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tech in ['Solidity', 'Hardhat', 'Foundry', 'Wagmi', 'Ethers.js', 'ERC-20', 'DeFi', 'The Graph']" :key="tech" class="px-3 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-lg text-sm font-medium">{{ tech }}</span>
             </div>
           </div>
         </div>

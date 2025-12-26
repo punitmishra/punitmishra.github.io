@@ -107,6 +107,17 @@
         { "name": "RAG", "level": 90 },
         { "name": "PyTorch", "level": 75 }
       ]
+    },
+    {
+      "category": "Web3 & Blockchain",
+      "items": [
+        { "name": "Solidity", "level": 85 },
+        { "name": "Hardhat", "level": 85 },
+        { "name": "Foundry", "level": 80 },
+        { "name": "Wagmi/Viem", "level": 80 },
+        { "name": "ERC-20/721", "level": 85 },
+        { "name": "DeFi Protocols", "level": 75 }
+      ]
     }
   ],
   "certifications": [
@@ -147,6 +158,12 @@
       "description": "Fleet of 5 Raspberry Pis providing DNS security, IoT control, media serving, monitoring, and sensor collection.",
       "url": "https://github.com/punitmishra/homelab",
       "highlights": ["Docker-based deployments", "Prometheus/Grafana monitoring", "Cloudflare Tunnel access", "Automated CI/CD"]
+    },
+    {
+      "name": "Grepcoin ($GREP)",
+      "description": "Developer-focused cryptocurrency with utility for code search APIs. ERC-20 token with staking, governance, and DeFi integration.",
+      "url": "https://github.com/punitmishra/grepcoin",
+      "highlights": ["ERC-20 token launch", "Staking & governance", "Security audited", "2,500+ holders"]
     },
     {
       "name": "Multi-Agent AI System",
