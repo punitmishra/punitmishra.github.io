@@ -59,9 +59,9 @@ onUnmounted(() => {
     <!-- Terminal Header -->
     <div class="flex items-center gap-2 mb-3 pb-3 border-b border-gray-200/50 dark:border-slate-700/50">
       <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-red-400" />
+        <div class="w-2.5 h-2.5 rounded-full bg-amber-400" />
+        <div class="w-2.5 h-2.5 rounded-full bg-emerald-400" />
       </div>
       <span class="text-[10px] font-mono text-gray-400 dark:text-gray-500 ml-2">neural-process v2.0</span>
     </div>
@@ -76,7 +76,7 @@ onUnmounted(() => {
           <span
             v-if="isTyping"
             class="inline-block w-2 h-4 bg-emerald-500 dark:bg-emerald-400 ml-0.5 animate-pulse align-middle"
-          ></span>
+          />
         </div>
       </div>
 
@@ -84,7 +84,7 @@ onUnmounted(() => {
       <div class="mt-4 flex items-center justify-between text-[10px] text-gray-400 dark:text-gray-500">
         <div class="flex items-center gap-3">
           <span class="flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             active
           </span>
           <span>|</span>

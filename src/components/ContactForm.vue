@@ -102,7 +102,11 @@ const submitForm = async () => {
     <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-slate-700">
       <div class="text-center mb-8">
         <div class="w-16 h-16 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-          <BaseIcon :path="mdiEmail" size="32" class="text-white" />
+          <BaseIcon
+            :path="mdiEmail"
+            size="32"
+            class="text-white"
+          />
         </div>
         <h3 class="text-3xl font-black text-gray-900 dark:text-white mb-2 font-heading">
           Get in Touch
@@ -117,10 +121,18 @@ const submitForm = async () => {
         v-if="submitStatus === 'success'"
         class="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl flex items-center gap-3"
       >
-        <BaseIcon :path="mdiCheckCircle" size="24" class="text-green-600 dark:text-green-400 flex-shrink-0" />
+        <BaseIcon
+          :path="mdiCheckCircle"
+          size="24"
+          class="text-green-600 dark:text-green-400 flex-shrink-0"
+        />
         <div>
-          <p class="text-green-800 dark:text-green-300 font-semibold font-display">Message sent successfully!</p>
-          <p class="text-green-700 dark:text-green-400 text-sm font-display">I'll get back to you soon.</p>
+          <p class="text-green-800 dark:text-green-300 font-semibold font-display">
+            Message sent successfully!
+          </p>
+          <p class="text-green-700 dark:text-green-400 text-sm font-display">
+            I'll get back to you soon.
+          </p>
         </div>
       </div>
 
@@ -129,18 +141,32 @@ const submitForm = async () => {
         v-if="submitStatus === 'error'"
         class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-start gap-3"
       >
-        <BaseIcon :path="mdiAlertCircle" size="24" class="text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+        <BaseIcon
+          :path="mdiAlertCircle"
+          size="24"
+          class="text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5"
+        />
         <div>
-          <p class="text-red-800 dark:text-red-300 font-semibold font-display">Failed to send message</p>
-          <p class="text-red-700 dark:text-red-400 text-sm font-display">{{ errorMessage }}</p>
+          <p class="text-red-800 dark:text-red-300 font-semibold font-display">
+            Failed to send message
+          </p>
+          <p class="text-red-700 dark:text-red-400 text-sm font-display">
+            {{ errorMessage }}
+          </p>
           <p class="text-red-600 dark:text-red-500 text-sm mt-2 font-display">
             You can also email directly at: 
-            <a href="mailto:punitmishra@example.com" class="underline font-semibold">punitmishra@example.com</a>
+            <a
+              href="mailto:punitmishra@example.com"
+              class="underline font-semibold"
+            >punitmishra@example.com</a>
           </p>
         </div>
       </div>
 
-      <form @submit.prevent="submitForm" class="space-y-6">
+      <form
+        class="space-y-6"
+        @submit.prevent="submitForm"
+      >
         <!-- Honeypot field (hidden from users) -->
         <input
           v-model="formData.honeypot"
@@ -150,11 +176,14 @@ const submitForm = async () => {
           tabindex="-1"
           class="hidden"
           aria-hidden="true"
-        />
+        >
 
         <!-- Name -->
         <div>
-          <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display">
+          <label
+            for="name"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display"
+          >
             Name *
           </label>
           <input
@@ -164,12 +193,15 @@ const submitForm = async () => {
             required
             class="w-full px-4 py-3 bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white font-display"
             placeholder="Your name"
-          />
+          >
         </div>
 
         <!-- Email -->
         <div>
-          <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display">
+          <label
+            for="email"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display"
+          >
             Email *
           </label>
           <input
@@ -179,12 +211,15 @@ const submitForm = async () => {
             required
             class="w-full px-4 py-3 bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white font-display"
             placeholder="your.email@example.com"
-          />
+          >
         </div>
 
         <!-- Subject -->
         <div>
-          <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display">
+          <label
+            for="subject"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display"
+          >
             Subject *
           </label>
           <input
@@ -194,12 +229,15 @@ const submitForm = async () => {
             required
             class="w-full px-4 py-3 bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white font-display"
             placeholder="What's this about?"
-          />
+          >
         </div>
 
         <!-- Message -->
         <div>
-          <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display">
+          <label
+            for="message"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 font-display"
+          >
             Message *
           </label>
           <textarea
@@ -209,7 +247,7 @@ const submitForm = async () => {
             rows="6"
             class="w-full px-4 py-3 bg-gray-50 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none text-gray-900 dark:text-white font-display"
             placeholder="Tell me about your project or just say hello..."
-          ></textarea>
+          />
         </div>
 
         <!-- Submit Button -->

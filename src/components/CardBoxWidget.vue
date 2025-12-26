@@ -45,8 +45,16 @@ defineProps({
 
 <template>
   <CardBox>
-    <BaseLevel v-if="trend" class="mb-3" mobile>
-      <PillTagTrend :trend="trend" :trend-type="trendType" small />
+    <BaseLevel
+      v-if="trend"
+      class="mb-3"
+      mobile
+    >
+      <PillTagTrend
+        :trend="trend"
+        :trend-type="trendType"
+        small
+      />
       <BaseButton
         :icon="mdiCog"
         icon-w="w-4"
@@ -61,7 +69,11 @@ defineProps({
           {{ label }}
         </h3>
         <h1 class="text-3xl leading-tight font-semibold">
-          <NumberDynamic :value="number" :prefix="prefix" :suffix="suffix" />
+          <NumberDynamic
+            :value="number"
+            :prefix="prefix"
+            :suffix="suffix"
+          />
         </h1>
       </div>
       <BaseIcon

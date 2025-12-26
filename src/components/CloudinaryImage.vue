@@ -184,7 +184,7 @@ function handleError() {
       decoding="async"
       @load="handleLoad"
       @error="handleError"
-    />
+    >
 
     <!-- Error state -->
     <div

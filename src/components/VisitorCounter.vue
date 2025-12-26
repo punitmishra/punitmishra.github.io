@@ -45,8 +45,14 @@ const formatNumber = (num) => {
 
 <template>
   <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-slate-800 rounded-full text-xs text-gray-600 dark:text-gray-400">
-    <BaseIcon :path="mdiEye" size="14" />
-    <span v-if="loading" class="animate-pulse">...</span>
+    <BaseIcon
+      :path="mdiEye"
+      size="14"
+    />
+    <span
+      v-if="loading"
+      class="animate-pulse"
+    >...</span>
     <span v-else-if="views !== null">{{ formatNumber(views) }} views</span>
   </div>
 </template>

@@ -369,14 +369,17 @@ onMounted(() => {
     <GradientMesh />
 
     <!-- Command Palette -->
-    <CommandPalette ref="commandPaletteRef" @navigate="scrollToSection" />
+    <CommandPalette
+      ref="commandPaletteRef"
+      @navigate="scrollToSection"
+    />
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <button
-          @click="scrollToSection('hero')"
           class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
+          @click="scrollToSection('hero')"
         >
           PM
         </button>
@@ -384,61 +387,64 @@ onMounted(() => {
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-8">
           <button
-            @click="scrollToSection('projects')"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            @click="scrollToSection('projects')"
           >
             Projects
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </button>
           <button
-            @click="scrollToSection('latest')"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            @click="scrollToSection('latest')"
           >
             Latest
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </button>
           <button
-            @click="scrollToSection('skills')"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            @click="scrollToSection('skills')"
           >
             Skills
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </button>
           <button
-            @click="scrollToSection('experience')"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            @click="scrollToSection('experience')"
           >
             Experience
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </button>
           <button
-            @click="scrollToSection('blog')"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            @click="scrollToSection('blog')"
           >
             Blog
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </button>
           <router-link
             to="/photos"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
           >
             Photos
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </router-link>
           <router-link
             to="/resume"
             class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
           >
             Resume
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
           </router-link>
 
           <!-- Command Palette Trigger -->
           <button
-            @click="commandPaletteRef.isOpen = true"
             class="flex items-center gap-2 px-3 py-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100/80 dark:bg-slate-800/80 rounded-lg text-sm transition-colors border border-gray-200/50 dark:border-slate-700/50"
+            @click="commandPaletteRef.isOpen = true"
           >
-            <BaseIcon :path="mdiMagnify" size="16" />
+            <BaseIcon
+              :path="mdiMagnify"
+              size="16"
+            />
             <span class="text-xs">Search</span>
             <kbd class="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-gray-400 bg-white dark:bg-slate-700 rounded border border-gray-200 dark:border-slate-600">
               <span>⌘</span><span>K</span>
@@ -449,8 +455,8 @@ onMounted(() => {
           <DarkModeToggle />
 
           <button
-            @click="scrollToSection('contact')"
             class="px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-100 transition-all"
+            @click="scrollToSection('contact')"
           >
             Contact
           </button>
@@ -458,13 +464,30 @@ onMounted(() => {
 
         <!-- Mobile Menu Button -->
         <button
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
           class="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           aria-label="Toggle menu"
+          @click="isMobileMenuOpen = !isMobileMenuOpen"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path v-if="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              v-if="!isMobileMenuOpen"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+            <path
+              v-else
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
@@ -476,32 +499,32 @@ onMounted(() => {
       >
         <div class="max-w-7xl mx-auto px-6 py-4 space-y-3">
           <button 
-            @click="scrollToSection('projects')" 
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2" 
+            @click="scrollToSection('projects')"
           >
             Projects
           </button>
           <button 
-            @click="scrollToSection('latest')" 
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2" 
+            @click="scrollToSection('latest')"
           >
             Latest
           </button>
           <button 
-            @click="scrollToSection('skills')" 
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2" 
+            @click="scrollToSection('skills')"
           >
             Skills
           </button>
           <button
-            @click="scrollToSection('experience')"
             class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            @click="scrollToSection('experience')"
           >
             Experience
           </button>
           <button
-            @click="scrollToSection('blog')"
             class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            @click="scrollToSection('blog')"
           >
             Blog
           </button>
@@ -520,15 +543,18 @@ onMounted(() => {
             Resume
           </router-link>
           <button
-            @click="styleStore.setDarkMode()"
             class="flex items-center gap-2 px-6 py-2.5 text-gray-700 dark:text-gray-300 font-semibold font-display"
+            @click="styleStore.setDarkMode()"
           >
-            <BaseIcon :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight" size="20" />
+            <BaseIcon
+              :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight"
+              size="20"
+            />
             <span>{{ styleStore.darkMode ? 'Light Mode' : 'Dark Mode' }}</span>
           </button>
           <button 
-            @click="scrollToSection('contact')" 
-            class="block w-full text-left px-6 py-2.5 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 text-white rounded-full font-semibold font-display text-center hover:shadow-lg transition-all"
+            class="block w-full text-left px-6 py-2.5 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 text-white rounded-full font-semibold font-display text-center hover:shadow-lg transition-all" 
+            @click="scrollToSection('contact')"
           >
             Contact
           </button>
@@ -537,18 +563,23 @@ onMounted(() => {
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-16">
+    <section
+      id="hero"
+      class="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-16"
+    >
       <div class="relative z-10 max-w-6xl mx-auto px-6">
         <!-- Bento Grid Hero Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-
           <!-- Main Hero Content - Spans 2 columns -->
-          <div class="lg:col-span-2 text-center lg:text-left" v-scroll-reveal>
+          <div
+            v-scroll-reveal
+            class="lg:col-span-2 text-center lg:text-left"
+          >
             <!-- Status Badge -->
             <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 glass-premium rounded-full">
               <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
               <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Available for opportunities</span>
             </div>
@@ -582,7 +613,10 @@ onMounted(() => {
                 target="_blank"
                 class="group flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 shine"
               >
-                <BaseIcon :path="mdiGithub" size="20" />
+                <BaseIcon
+                  :path="mdiGithub"
+                  size="20"
+                />
                 <span>GitHub</span>
               </a>
               <a
@@ -590,7 +624,10 @@ onMounted(() => {
                 target="_blank"
                 class="group flex items-center gap-2 px-6 py-3 glass-premium rounded-full font-medium text-gray-700 dark:text-gray-200 hover:-translate-y-0.5 transition-all"
               >
-                <BaseIcon :path="mdiLinkedin" size="20" />
+                <BaseIcon
+                  :path="mdiLinkedin"
+                  size="20"
+                />
                 <span>LinkedIn</span>
               </a>
               <ResumeDownload />
@@ -598,10 +635,13 @@ onMounted(() => {
           </div>
 
           <!-- Profile Card - Right column -->
-          <div class="hidden lg:block space-y-6" v-scroll-reveal="{ delay: '200ms' }">
+          <div
+            v-scroll-reveal="{ delay: '200ms' }"
+            class="hidden lg:block space-y-6"
+          >
             <div class="relative group">
               <!-- Glow effect -->
-              <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+              <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
 
               <!-- Card -->
               <div class="relative glass-premium rounded-3xl p-6 gradient-border">
@@ -611,23 +651,39 @@ onMounted(() => {
                     :alt="githubProfile.name || 'Punit Mishra'"
                     class="w-32 h-32 rounded-2xl shadow-xl mb-4 float"
                     loading="eager"
-                  />
-                  <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading">{{ githubProfile.name }}</h3>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ githubProfile.company }}</p>
+                  >
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading">
+                    {{ githubProfile.name }}
+                  </h3>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    {{ githubProfile.company }}
+                  </p>
 
                   <!-- Mini stats -->
                   <div class="grid grid-cols-3 gap-4 w-full pt-4 border-t border-gray-200/50 dark:border-slate-700/50">
                     <div class="text-center">
-                      <div class="text-xl font-bold text-gray-900 dark:text-white">{{ githubProfile.publicRepos }}</div>
-                      <div class="text-xs text-gray-500">Repos</div>
+                      <div class="text-xl font-bold text-gray-900 dark:text-white">
+                        {{ githubProfile.publicRepos }}
+                      </div>
+                      <div class="text-xs text-gray-500">
+                        Repos
+                      </div>
                     </div>
                     <div class="text-center">
-                      <div class="text-xl font-bold text-gray-900 dark:text-white">{{ totalYearsExperience }}+</div>
-                      <div class="text-xs text-gray-500">Years</div>
+                      <div class="text-xl font-bold text-gray-900 dark:text-white">
+                        {{ totalYearsExperience }}+
+                      </div>
+                      <div class="text-xs text-gray-500">
+                        Years
+                      </div>
                     </div>
                     <div class="text-center">
-                      <div class="text-xl font-bold text-gray-900 dark:text-white">{{ githubProfile.followers }}</div>
-                      <div class="text-xs text-gray-500">Followers</div>
+                      <div class="text-xl font-bold text-gray-900 dark:text-white">
+                        {{ githubProfile.followers }}
+                      </div>
+                      <div class="text-xs text-gray-500">
+                        Followers
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -640,7 +696,10 @@ onMounted(() => {
         </div>
 
         <!-- Stats Grid below hero -->
-        <div class="mt-10" v-scroll-reveal="{ delay: '400ms' }">
+        <div
+          v-scroll-reveal="{ delay: '400ms' }"
+          class="mt-10"
+        >
           <StatsGrid
             :repos="githubProfile.publicRepos"
             :stars="githubStats.totalStars"
@@ -653,7 +712,7 @@ onMounted(() => {
       <!-- Scroll Indicator -->
       <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-50 hover:opacity-100 transition-opacity">
         <div class="w-6 h-10 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center pt-2">
-          <div class="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce"></div>
+          <div class="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" />
         </div>
       </div>
     </section>
@@ -663,20 +722,36 @@ onMounted(() => {
       <div class="max-w-5xl mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">12+</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Years Experience</div>
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">
+              12+
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Years Experience
+            </div>
           </div>
           <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">SAP</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Senior Engineer</div>
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">
+              SAP
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Senior Engineer
+            </div>
           </div>
           <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">UC Berkeley</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Computer Science</div>
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">
+              UC Berkeley
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Computer Science
+            </div>
           </div>
           <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">AI/ML</div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">Infrastructure</div>
+            <div class="text-2xl font-bold text-gray-900 dark:text-white">
+              AI/ML
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">
+              Infrastructure
+            </div>
           </div>
         </div>
       </div>
@@ -686,14 +761,22 @@ onMounted(() => {
     <BlogSection />
 
     <!-- Latest Projects -->
-    <section id="latest" class="py-14 bg-gray-50/50 dark:bg-slate-900/50">
+    <section
+      id="latest"
+      class="py-14 bg-gray-50/50 dark:bg-slate-900/50"
+    >
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10" v-scroll-reveal>
+        <div
+          v-scroll-reveal
+          class="text-center mb-10"
+        >
           <span class="inline-block px-3 py-1 text-sm font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20 rounded-full mb-3">Recent Work</span>
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Latest Projects
           </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">Most recently updated repositories and contributions</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">
+            Most recently updated repositories and contributions
+          </p>
         </div>
 
         <!-- Project Filter -->
@@ -703,32 +786,49 @@ onMounted(() => {
           @filtered="handleFiltered"
         />
 
-        <div v-if="loading.repos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="i in 6" :key="i" class="bg-white dark:bg-slate-800 rounded-2xl p-6 skeleton">
-            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+        <div
+          v-if="loading.repos"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <div
+            v-for="i in 6"
+            :key="i"
+            class="bg-white dark:bg-slate-800 rounded-2xl p-6 skeleton"
+          >
+            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3" />
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
           </div>
         </div>
 
-        <div v-else-if="latestRepos.length > 0 || filteredRepos.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          v-else-if="latestRepos.length > 0 || filteredRepos.length > 0"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           <div
             v-for="(repo, index) in (filteredRepos.length > 0 ? filteredRepos : latestRepos)"
             :key="repo.id"
-            @click="goToProject(repo.name)"
-            class="group bg-white dark:bg-slate-800/80 rounded-2xl p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer card-glow"
             v-scroll-reveal="{ delay: `${index * 50}ms` }"
+            class="group bg-white dark:bg-slate-800/80 rounded-2xl p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer card-glow"
+            @click="goToProject(repo.name)"
           >
             <div class="flex items-start justify-between mb-3">
               <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading leading-tight">
                 {{ repo.name }}
               </h3>
-              <BaseIcon :path="mdiGithub" size="20" class="text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors flex-shrink-0" />
+              <BaseIcon
+                :path="mdiGithub"
+                size="20"
+                class="text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors flex-shrink-0"
+              />
             </div>
             <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm leading-relaxed line-clamp-2">
               {{ repo.description }}
             </p>
-            <div v-if="repo.topics && repo.topics.length > 0" class="flex flex-wrap gap-1.5 mb-4">
+            <div
+              v-if="repo.topics && repo.topics.length > 0"
+              class="flex flex-wrap gap-1.5 mb-4"
+            >
               <span
                 v-for="topic in repo.topics.slice(0, 3)"
                 :key="topic"
@@ -740,15 +840,27 @@ onMounted(() => {
             <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700/50">
               <div class="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
                 <div class="flex items-center gap-1">
-                  <BaseIcon :path="mdiStar" size="14" />
+                  <BaseIcon
+                    :path="mdiStar"
+                    size="14"
+                  />
                   <span>{{ repo.stars }}</span>
                 </div>
                 <div class="flex items-center gap-1">
-                  <BaseIcon :path="mdiSourceFork" size="14" />
+                  <BaseIcon
+                    :path="mdiSourceFork"
+                    size="14"
+                  />
                   <span>{{ repo.forks }}</span>
                 </div>
-                <div v-if="repo.language" class="flex items-center gap-1">
-                  <span class="w-2 h-2 rounded-full" :class="getLanguageColor(repo.language)"></span>
+                <div
+                  v-if="repo.language"
+                  class="flex items-center gap-1"
+                >
+                  <span
+                    class="w-2 h-2 rounded-full"
+                    :class="getLanguageColor(repo.language)"
+                  />
                   <span>{{ repo.language }}</span>
                 </div>
               </div>
@@ -757,15 +869,26 @@ onMounted(() => {
         </div>
 
         <!-- Error state when repos failed to load -->
-        <div v-else-if="reposError" class="text-center py-12">
+        <div
+          v-else-if="reposError"
+          class="text-center py-12"
+        >
           <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
-            <BaseIcon :path="mdiGithub" size="48" class="text-gray-400 mx-auto mb-4" />
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Couldn't load repositories</h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">GitHub API may be rate limited. Check out my profile directly.</p>
+            <BaseIcon
+              :path="mdiGithub"
+              size="48"
+              class="text-gray-400 mx-auto mb-4"
+            />
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Couldn't load repositories
+            </h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">
+              GitHub API may be rate limited. Check out my profile directly.
+            </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <button
-                @click="fetchGitHubRepos"
                 class="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                @click="fetchGitHubRepos"
               >
                 Retry
               </button>
@@ -781,38 +904,53 @@ onMounted(() => {
         </div>
 
         <!-- Empty loading state -->
-        <div v-else class="text-center py-12">
+        <div
+          v-else
+          class="text-center py-12"
+        >
           <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
-            <div class="w-12 h-12 border-4 border-gray-200 dark:border-gray-700 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Loading repositories...</h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">Fetching latest projects from GitHub</p>
+            <div class="w-12 h-12 border-4 border-gray-200 dark:border-gray-700 border-t-blue-500 rounded-full animate-spin mx-auto mb-4" />
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Loading repositories...
+            </h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">
+              Fetching latest projects from GitHub
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Featured Projects -->
-    <section id="projects" class="py-14">
+    <section
+      id="projects"
+      class="py-14"
+    >
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10" v-scroll-reveal>
+        <div
+          v-scroll-reveal
+          class="text-center mb-10"
+        >
           <span class="inline-block px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 rounded-full mb-3">Showcase</span>
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Featured Projects
           </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">Innovative solutions built with cutting-edge technology</p>
+          <p class="text-base text-gray-500 dark:text-gray-400">
+            Innovative solutions built with cutting-edge technology
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
             v-for="(project, index) in featuredProjects"
             :key="index"
+            v-scroll-reveal="{ delay: `${index * 75}ms` }"
             :href="project.url"
             target="_blank"
             class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-800/80 p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer"
-            v-scroll-reveal="{ delay: `${index * 75}ms` }"
           >
             <!-- Gradient accent bar -->
-            <div :class="`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient}`"></div>
+            <div :class="`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient}`" />
             <div class="relative z-10">
               <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ project.name }}</h3>
               <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed text-sm line-clamp-2">{{ project.description }}</p>
@@ -827,7 +965,10 @@ onMounted(() => {
               </div>
               <div class="flex items-center gap-1.5 text-sm text-blue-600 dark:text-blue-400 font-medium group-hover:gap-2 transition-all">
                 <span>View on GitHub</span>
-                <BaseIcon :path="mdiArrowRight" size="16" />
+                <BaseIcon
+                  :path="mdiArrowRight"
+                  size="16"
+                />
               </div>
             </div>
           </a>
@@ -842,7 +983,9 @@ onMounted(() => {
           <h2 class="text-3xl md:text-4xl font-black mb-2 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
             Open Source
           </h2>
-          <p class="text-base text-gray-600 dark:text-gray-400 font-display">Recent contributions and repositories</p>
+          <p class="text-base text-gray-600 dark:text-gray-400 font-display">
+            Recent contributions and repositories
+          </p>
         </div>
 
         <!-- GitHub Contribution Graph -->
@@ -850,14 +993,24 @@ onMounted(() => {
           <GitHubContributionGraph :username="githubUsername" />
         </div>
 
-        <div v-if="loading.repos" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div v-for="i in 4" :key="i" class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse">
-            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+        <div
+          v-if="loading.repos"
+          class="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          <div
+            v-for="i in 4"
+            :key="i"
+            class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse"
+          >
+            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full" />
           </div>
         </div>
 
-        <div v-else-if="githubRepos.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          v-else-if="githubRepos.length > 0"
+          class="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           <a
             v-for="repo in githubRepos"
             :key="repo.id"
@@ -869,12 +1022,19 @@ onMounted(() => {
               <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading">
                 {{ repo.name }}
               </h3>
-              <BaseIcon :path="mdiGithub" size="24" class="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+              <BaseIcon
+                :path="mdiGithub"
+                size="24"
+                class="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+              />
             </div>
             <p class="text-gray-600 dark:text-gray-400 mb-4 font-display line-clamp-2">
               {{ repo.description }}
             </p>
-            <div v-if="repo.topics && repo.topics.length > 0" class="flex flex-wrap gap-2 mb-4">
+            <div
+              v-if="repo.topics && repo.topics.length > 0"
+              class="flex flex-wrap gap-2 mb-4"
+            >
               <span
                 v-for="topic in repo.topics.slice(0, 4)"
                 :key="topic"
@@ -886,15 +1046,27 @@ onMounted(() => {
             <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
               <div class="flex items-center gap-4 text-sm">
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                  <BaseIcon :path="mdiStar" size="16" />
+                  <BaseIcon
+                    :path="mdiStar"
+                    size="16"
+                  />
                   <span class="font-display">{{ repo.stars }}</span>
                 </div>
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                  <BaseIcon :path="mdiSourceFork" size="16" />
+                  <BaseIcon
+                    :path="mdiSourceFork"
+                    size="16"
+                  />
                   <span class="font-display">{{ repo.forks }}</span>
                 </div>
-                <div v-if="repo.language" class="flex items-center gap-1">
-                  <span class="w-3 h-3 rounded-full" :class="getLanguageColor(repo.language)"></span>
+                <div
+                  v-if="repo.language"
+                  class="flex items-center gap-1"
+                >
+                  <span
+                    class="w-3 h-3 rounded-full"
+                    :class="getLanguageColor(repo.language)"
+                  />
                   <span class="text-gray-600 dark:text-gray-400 font-display">{{ repo.language }}</span>
                 </div>
               </div>
@@ -904,16 +1076,23 @@ onMounted(() => {
         </div>
         
         <!-- No repos message -->
-        <div v-else class="text-center py-12">
+        <div
+          v-else
+          class="text-center py-12"
+        >
           <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
-            <BaseIcon :path="mdiGithub" size="48" class="text-gray-400 mx-auto mb-4" />
+            <BaseIcon
+              :path="mdiGithub"
+              size="48"
+              class="text-gray-400 mx-auto mb-4"
+            />
             <p class="text-gray-600 dark:text-gray-400 text-lg font-display mb-4">
               Unable to load repositories at the moment.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <button
-                @click="fetchGitHubRepos"
                 class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-display"
+                @click="fetchGitHubRepos"
               >
                 Retry
               </button>
@@ -931,44 +1110,85 @@ onMounted(() => {
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="py-12">
+    <section
+      id="skills"
+      class="py-12"
+    >
       <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">Skills</h2>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
+          Skills
+        </h2>
         <div class="space-y-4">
           <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Languages</h3>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+              Languages
+            </h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="lang in ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'Go', 'SQL', 'CircuitPython']" :key="lang" class="px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium">{{ lang }}</span>
+              <span
+                v-for="lang in ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'Go', 'SQL', 'CircuitPython']"
+                :key="lang"
+                class="px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium"
+              >{{ lang }}</span>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Frontend</h3>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+              Frontend
+            </h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="tech in ['Vue.js', 'React', 'Next.js', 'Tailwind CSS']" :key="tech" class="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+              <span
+                v-for="tech in ['Vue.js', 'React', 'Next.js', 'Tailwind CSS']"
+                :key="tech"
+                class="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium"
+              >{{ tech }}</span>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Backend & Infrastructure</h3>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+              Backend & Infrastructure
+            </h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="tech in ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'Kubernetes', 'Docker', 'AWS', 'Terraform']" :key="tech" class="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+              <span
+                v-for="tech in ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'Kubernetes', 'Docker', 'AWS', 'Terraform']"
+                :key="tech"
+                class="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-lg text-sm font-medium"
+              >{{ tech }}</span>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">AI/ML</h3>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+              AI/ML
+            </h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="tech in ['LangGraph', 'LangChain', 'FAISS', 'Vector Search', 'RAG', 'PyTorch']" :key="tech" class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+              <span
+                v-for="tech in ['LangGraph', 'LangChain', 'FAISS', 'Vector Search', 'RAG', 'PyTorch']"
+                :key="tech"
+                class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-sm font-medium"
+              >{{ tech }}</span>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Hardware & IoT</h3>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+              Hardware & IoT
+            </h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="tech in ['Raspberry Pi', 'Circuit Playground', 'GPIO', 'PWM', 'Prometheus', 'Grafana', 'WebSockets']" :key="tech" class="px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+              <span
+                v-for="tech in ['Raspberry Pi', 'Circuit Playground', 'GPIO', 'PWM', 'Prometheus', 'Grafana', 'WebSockets']"
+                :key="tech"
+                class="px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg text-sm font-medium"
+              >{{ tech }}</span>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Web3 & Blockchain</h3>
+            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+              Web3 & Blockchain
+            </h3>
             <div class="flex flex-wrap gap-2">
-              <span v-for="tech in ['Solidity', 'Hardhat', 'Foundry', 'Wagmi', 'Ethers.js', 'ERC-20', 'DeFi', 'The Graph']" :key="tech" class="px-3 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-lg text-sm font-medium">{{ tech }}</span>
+              <span
+                v-for="tech in ['Solidity', 'Hardhat', 'Foundry', 'Wagmi', 'Ethers.js', 'ERC-20', 'DeFi', 'The Graph']"
+                :key="tech"
+                class="px-3 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-lg text-sm font-medium"
+              >{{ tech }}</span>
             </div>
           </div>
         </div>
@@ -976,49 +1196,90 @@ onMounted(() => {
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-12 bg-gray-50/50 dark:bg-slate-900/50">
+    <section
+      id="experience"
+      class="py-12 bg-gray-50/50 dark:bg-slate-900/50"
+    >
       <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">Experience</h2>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
+          Experience
+        </h2>
 
         <!-- All Experience Entries -->
         <div class="space-y-4 mb-6">
-          <div v-for="exp in experience" :key="exp.company" class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700/50">
+          <div
+            v-for="exp in experience"
+            :key="exp.company"
+            class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700/50"
+          >
             <div class="flex items-start justify-between mb-3">
               <div>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ exp.title }}</h3>
-                <p class="text-blue-600 dark:text-blue-400 font-medium">{{ exp.company }}</p>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                  {{ exp.title }}
+                </h3>
+                <p class="text-blue-600 dark:text-blue-400 font-medium">
+                  {{ exp.company }}
+                </p>
               </div>
               <div class="text-right">
                 <span class="text-sm text-gray-500 dark:text-gray-400">{{ exp.period }}</span>
-                <p class="text-xs text-gray-400 dark:text-gray-500">{{ exp.location }}</p>
+                <p class="text-xs text-gray-400 dark:text-gray-500">
+                  {{ exp.location }}
+                </p>
               </div>
             </div>
             <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li v-for="achievement in exp.achievements" :key="achievement" class="flex items-start gap-2">
+              <li
+                v-for="achievement in exp.achievements"
+                :key="achievement"
+                class="flex items-start gap-2"
+              >
                 <span class="text-emerald-500 mt-1 flex-shrink-0">•</span>
                 <span>{{ achievement }}</span>
               </li>
             </ul>
             <div class="flex flex-wrap gap-1.5 mt-4">
-              <span v-for="tech in exp.tech.slice(0, 8)" :key="tech" class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 rounded text-xs">{{ tech }}</span>
+              <span
+                v-for="tech in exp.tech.slice(0, 8)"
+                :key="tech"
+                class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 rounded text-xs"
+              >{{ tech }}</span>
             </div>
           </div>
         </div>
 
         <!-- Education -->
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Education</h3>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          Education
+        </h3>
         <div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-100 dark:border-slate-700/50 mb-6">
-          <div v-for="edu in education" :key="edu.school">
-            <h4 class="font-bold text-gray-900 dark:text-white">{{ edu.school }}</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">{{ edu.degree }} • {{ edu.period }}</p>
-            <p v-if="edu.awards && edu.awards[0]" class="text-xs text-amber-600 dark:text-amber-400 mt-2">{{ edu.awards[0] }}</p>
+          <div
+            v-for="edu in education"
+            :key="edu.school"
+          >
+            <h4 class="font-bold text-gray-900 dark:text-white">
+              {{ edu.school }}
+            </h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {{ edu.degree }} • {{ edu.period }}
+            </p>
+            <p
+              v-if="edu.awards && edu.awards[0]"
+              class="text-xs text-amber-600 dark:text-amber-400 mt-2"
+            >
+              {{ edu.awards[0] }}
+            </p>
           </div>
         </div>
 
         <!-- Certifications - Inline -->
         <div class="flex flex-wrap items-center gap-3">
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Certifications:</span>
-          <span v-for="cert in certifications" :key="cert.name" class="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm">
+          <span
+            v-for="cert in certifications"
+            :key="cert.name"
+            class="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm"
+          >
             {{ cert.name }}
           </span>
         </div>
@@ -1029,9 +1290,15 @@ onMounted(() => {
     <TestimonialsSection />
 
     <!-- Contact -->
-    <section id="contact" class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50">
+    <section
+      id="contact"
+      class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50"
+    >
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-8" v-scroll-reveal>
+        <div
+          v-scroll-reveal
+          class="text-center mb-8"
+        >
           <span class="inline-block px-3 py-1 text-sm font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 rounded-full mb-3">Get in Touch</span>
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
             Let's Connect
@@ -1045,7 +1312,10 @@ onMounted(() => {
         </div>
 
         <!-- Social Links -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12" v-scroll-reveal="{ delay: '100ms' }">
+        <div
+          v-scroll-reveal="{ delay: '100ms' }"
+          class="flex flex-wrap justify-center gap-3 mb-12"
+        >
           <a
             v-for="link in socialLinks"
             :key="link.label"
@@ -1053,12 +1323,19 @@ onMounted(() => {
             target="_blank"
             class="group flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full shadow-md hover:shadow-lg transition-all text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 hover:-translate-y-0.5"
           >
-            <BaseIcon :path="link.icon" size="18" class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+            <BaseIcon
+              :path="link.icon"
+              size="18"
+              class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+            />
             <span class="font-medium text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ link.label }}</span>
           </a>
         </div>
 
-        <div v-scroll-reveal="{ delay: '150ms' }" class="max-w-3xl mx-auto">
+        <div
+          v-scroll-reveal="{ delay: '150ms' }"
+          class="max-w-3xl mx-auto"
+        >
           <div class="glass-premium rounded-3xl p-8 border border-gray-200/50 dark:border-slate-700/50">
             <ContactForm />
           </div>
@@ -1072,8 +1349,10 @@ onMounted(() => {
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <!-- Brand -->
           <div class="flex items-center gap-3">
-            <div class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading">PM</div>
-            <div class="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
+            <div class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading">
+              PM
+            </div>
+            <div class="h-6 w-px bg-gray-300 dark:bg-gray-700" />
             <p class="text-gray-500 dark:text-gray-400 text-sm">
               &copy; {{ new Date().getFullYear() }} Punit Mishra. All rights reserved.
             </p>
@@ -1081,12 +1360,42 @@ onMounted(() => {
 
           <!-- Quick Links -->
           <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm">
-            <button @click="scrollToSection('projects')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</button>
-            <button @click="scrollToSection('experience')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</button>
-            <button @click="scrollToSection('blog')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</button>
-            <router-link to="/photos" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Photos</router-link>
-            <router-link to="/resume" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Resume</router-link>
-            <button @click="scrollToSection('contact')" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</button>
+            <button
+              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              @click="scrollToSection('projects')"
+            >
+              Projects
+            </button>
+            <button
+              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              @click="scrollToSection('experience')"
+            >
+              Experience
+            </button>
+            <button
+              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              @click="scrollToSection('blog')"
+            >
+              Blog
+            </button>
+            <router-link
+              to="/photos"
+              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Photos
+            </router-link>
+            <router-link
+              to="/resume"
+              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Resume
+            </router-link>
+            <button
+              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              @click="scrollToSection('contact')"
+            >
+              Contact
+            </button>
           </div>
 
           <!-- Made with & Views -->
@@ -1104,13 +1413,21 @@ onMounted(() => {
         <!-- Bottom section -->
         <div class="mt-8 pt-6 border-t border-gray-200/50 dark:border-slate-800/50">
           <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-gray-400 dark:text-gray-500">
-            <a href="https://github.com/punitmishra/punitmishra.github.io/blob/main/LICENSE" target="_blank" class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            <a
+              href="https://github.com/punitmishra/punitmishra.github.io/blob/main/LICENSE"
+              target="_blank"
+              class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            >
               MIT License (Code)
             </a>
             <span class="hidden md:inline">•</span>
             <span>Content &copy; {{ new Date().getFullYear() }} Punit Mishra</span>
             <span class="hidden md:inline">•</span>
-            <a href="#contact" @click.prevent="scrollToSection('contact')" class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            <a
+              href="#contact"
+              class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              @click.prevent="scrollToSection('contact')"
+            >
               Licensing Inquiries
             </a>
           </div>

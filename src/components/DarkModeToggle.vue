@@ -44,9 +44,9 @@ const toggleDarkMode = () => {
 <template>
   <div class="relative">
     <button
-      @click="toggleDarkMode"
       class="group relative p-2.5 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-300 overflow-hidden"
       :title="styleStore.darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+      @click="toggleDarkMode"
     >
       <!-- Animated background -->
       <div
@@ -67,7 +67,11 @@ const toggleDarkMode = () => {
 
       <!-- Sparkle effect on hover -->
       <div class="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <BaseIcon :path="mdiCreation" size="12" class="text-yellow-400 dark:text-purple-400" />
+        <BaseIcon
+          :path="mdiCreation"
+          size="12"
+          class="text-yellow-400 dark:text-purple-400"
+        />
       </div>
     </button>
 

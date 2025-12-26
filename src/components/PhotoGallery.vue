@@ -34,7 +34,10 @@ function openLightbox(index) {
 <template>
   <div class="photo-gallery">
     <!-- Category filters -->
-    <div v-if="categories.length > 2" class="flex flex-wrap gap-2 mb-8">
+    <div
+      v-if="categories.length > 2"
+      class="flex flex-wrap gap-2 mb-8"
+    >
       <button
         v-for="cat in categories"
         :key="cat"
@@ -75,7 +78,10 @@ function openLightbox(index) {
         <!-- Hover overlay -->
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-200 flex items-end">
           <div class="w-full p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-200">
-            <p v-if="photo.caption" class="text-white text-sm font-medium">
+            <p
+              v-if="photo.caption"
+              class="text-white text-sm font-medium"
+            >
               {{ photo.caption }}
             </p>
           </div>

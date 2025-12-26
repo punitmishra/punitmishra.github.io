@@ -98,20 +98,27 @@ defineExpose({ isOpen });
         @click.self="close"
       >
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="close" />
+        <div
+          class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          @click="close"
+        />
 
         <!-- Palette -->
         <div class="relative w-full max-w-xl mx-4 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
           <!-- Search Input -->
           <div class="flex items-center gap-3 px-4 py-4 border-b border-gray-200 dark:border-slate-700">
-            <BaseIcon :path="mdiMagnify" size="24" class="text-gray-400" />
+            <BaseIcon
+              :path="mdiMagnify"
+              size="24"
+              class="text-gray-400"
+            />
             <input
               v-model="searchQuery"
               type="text"
               placeholder="Type a command or search..."
               class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-lg"
               autofocus
-            />
+            >
             <div class="flex items-center gap-1 text-xs text-gray-400">
               <kbd class="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded font-mono">esc</kbd>
               <span>to close</span>
@@ -123,20 +130,29 @@ defineExpose({ isOpen });
             <div
               v-for="(command, index) in filteredCommands"
               :key="command.id"
-              @click="executeCommand(command)"
               :class="[
                 'flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors',
                 index === selectedIndex
                   ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
               ]"
+              @click="executeCommand(command)"
             >
-              <BaseIcon :path="command.icon" size="20" />
+              <BaseIcon
+                :path="command.icon"
+                size="20"
+              />
               <span class="font-medium">{{ command.label }}</span>
-              <span v-if="command.type === 'link'" class="ml-auto text-xs text-gray-400">Opens in new tab</span>
+              <span
+                v-if="command.type === 'link'"
+                class="ml-auto text-xs text-gray-400"
+              >Opens in new tab</span>
             </div>
 
-            <div v-if="filteredCommands.length === 0" class="px-4 py-8 text-center text-gray-400">
+            <div
+              v-if="filteredCommands.length === 0"
+              class="px-4 py-8 text-center text-gray-400"
+            >
               No commands found
             </div>
           </div>

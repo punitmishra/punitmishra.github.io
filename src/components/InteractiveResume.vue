@@ -28,16 +28,30 @@ const topProjects = computed(() => (props.resume.projects || []).slice(0, 3));
       <div class="flex flex-wrap justify-center gap-2 mt-3 text-xs text-gray-600 dark:text-gray-400">
         <span>{{ resume.basics?.location }}</span>
         <span class="text-gray-400">|</span>
-        <a :href="`mailto:${resume.basics?.email}`" class="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          :href="`mailto:${resume.basics?.email}`"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           {{ resume.basics?.email }}
         </a>
         <span class="text-gray-400">|</span>
-        <a href="https://punitmishra.com" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">
+        <a
+          href="https://punitmishra.com"
+          target="_blank"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+        >
           punitmishra.com
         </a>
-        <template v-for="profile in resume.basics?.profiles?.slice(0, 2)" :key="profile.network">
+        <template
+          v-for="profile in resume.basics?.profiles?.slice(0, 2)"
+          :key="profile.network"
+        >
           <span class="text-gray-400">|</span>
-          <a :href="profile.url" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">
+          <a
+            :href="profile.url"
+            target="_blank"
+            class="text-blue-600 dark:text-blue-400 hover:underline"
+          >
             {{ profile.network }}
           </a>
         </template>
@@ -50,7 +64,9 @@ const topProjects = computed(() => (props.resume.projects || []).slice(0, 3));
       <div class="lg:col-span-2 space-y-5">
         <!-- Summary -->
         <section>
-          <h2 class="section-title">Summary</h2>
+          <h2 class="section-title">
+            Summary
+          </h2>
           <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed text-justify">
             {{ resume.basics?.summary }}
           </p>
@@ -58,17 +74,30 @@ const topProjects = computed(() => (props.resume.projects || []).slice(0, 3));
 
         <!-- Experience -->
         <section>
-          <h2 class="section-title">Experience</h2>
-          <div v-for="(job, index) in resume.experience" :key="index" class="mb-4 last:mb-0">
+          <h2 class="section-title">
+            Experience
+          </h2>
+          <div
+            v-for="(job, index) in resume.experience"
+            :key="index"
+            class="mb-4 last:mb-0"
+          >
             <div class="flex justify-between items-baseline mb-0.5">
-              <h3 class="font-bold text-gray-900 dark:text-white text-sm">{{ job.position }}</h3>
+              <h3 class="font-bold text-gray-900 dark:text-white text-sm">
+                {{ job.position }}
+              </h3>
               <span class="text-xs text-gray-500 dark:text-gray-400 italic">
                 {{ formatDate(job.startDate) }} — {{ formatDate(job.endDate) }}
               </span>
             </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ job.company }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              {{ job.company }}
+            </p>
             <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-0.5 ml-4 list-disc">
-              <li v-for="(highlight, hi) in job.highlights.slice(0, 4)" :key="hi">
+              <li
+                v-for="(highlight, hi) in job.highlights.slice(0, 4)"
+                :key="hi"
+              >
                 {{ highlight }}
               </li>
             </ul>
@@ -80,16 +109,27 @@ const topProjects = computed(() => (props.resume.projects || []).slice(0, 3));
 
         <!-- Education -->
         <section>
-          <h2 class="section-title">Education</h2>
-          <div v-for="(edu, index) in resume.education" :key="index" class="mb-3 last:mb-0">
+          <h2 class="section-title">
+            Education
+          </h2>
+          <div
+            v-for="(edu, index) in resume.education"
+            :key="index"
+            class="mb-3 last:mb-0"
+          >
             <div class="flex justify-between items-baseline">
               <h3 class="font-bold text-gray-900 dark:text-white text-sm">
                 {{ edu.degree }} in {{ edu.field }}
               </h3>
               <span class="text-xs text-gray-500 dark:text-gray-400 italic">{{ edu.startDate }} — {{ edu.endDate }}</span>
             </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400">{{ edu.institution }}</p>
-            <p v-if="edu.highlights" class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {{ edu.institution }}
+            </p>
+            <p
+              v-if="edu.highlights"
+              class="text-xs text-gray-500 dark:text-gray-500 mt-1"
+            >
               {{ edu.highlights.join(' · ') }}
             </p>
           </div>
@@ -100,9 +140,17 @@ const topProjects = computed(() => (props.resume.projects || []).slice(0, 3));
       <div class="lg:border-l lg:border-gray-200 lg:dark:border-gray-700 lg:pl-6 space-y-5">
         <!-- Skills -->
         <section>
-          <h2 class="section-title">Technical Skills</h2>
-          <div v-for="category in resume.skills" :key="category.category" class="mb-3 last:mb-0">
-            <h3 class="text-xs font-bold text-gray-700 dark:text-gray-300 font-sans mb-1">{{ category.category }}</h3>
+          <h2 class="section-title">
+            Technical Skills
+          </h2>
+          <div
+            v-for="category in resume.skills"
+            :key="category.category"
+            class="mb-3 last:mb-0"
+          >
+            <h3 class="text-xs font-bold text-gray-700 dark:text-gray-300 font-sans mb-1">
+              {{ category.category }}
+            </h3>
             <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
               {{ category.items.map(s => s.name).join(', ') }}
             </p>
@@ -111,18 +159,38 @@ const topProjects = computed(() => (props.resume.projects || []).slice(0, 3));
 
         <!-- Certifications -->
         <section>
-          <h2 class="section-title">Certifications</h2>
-          <div v-for="cert in resume.certifications" :key="cert.name" class="mb-2 last:mb-0">
-            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">{{ cert.name }}</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">{{ cert.issuer }} · {{ cert.date }}</p>
+          <h2 class="section-title">
+            Certifications
+          </h2>
+          <div
+            v-for="cert in resume.certifications"
+            :key="cert.name"
+            class="mb-2 last:mb-0"
+          >
+            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {{ cert.name }}
+            </p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              {{ cert.issuer }} · {{ cert.date }}
+            </p>
           </div>
         </section>
 
         <!-- Projects -->
         <section v-if="topProjects.length">
-          <h2 class="section-title">Projects</h2>
-          <div v-for="project in topProjects" :key="project.name" class="mb-3 last:mb-0">
-            <a :href="project.url" target="_blank" class="text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline">
+          <h2 class="section-title">
+            Projects
+          </h2>
+          <div
+            v-for="project in topProjects"
+            :key="project.name"
+            class="mb-3 last:mb-0"
+          >
+            <a
+              :href="project.url"
+              target="_blank"
+              class="text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline"
+            >
               {{ project.name }}
             </a>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">

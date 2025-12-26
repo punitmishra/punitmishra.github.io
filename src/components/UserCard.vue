@@ -30,12 +30,15 @@ const userSwitchVal = ref(false);
           />
         </div>
         <h1 class="text-2xl">
-          Howdy, <b>{{ userName }}</b
-          >!
+          Howdy, <b>{{ userName }}</b>!
         </h1>
         <p>Last login <b>12 mins ago</b> from <b>127.0.0.1</b></p>
         <div class="flex justify-center md:block">
-          <PillTag label="Verified" color="info" :icon="mdiCheckDecagram" />
+          <PillTag
+            label="Verified"
+            color="info"
+            :icon="mdiCheckDecagram"
+          />
         </div>
       </div>
     </BaseLevel>

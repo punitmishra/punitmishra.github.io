@@ -228,18 +228,27 @@ const setActiveDemo = (index) => {
 </script>
 
 <template>
-  <section id="terminal-demos" class="py-14 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+  <section
+    id="terminal-demos"
+    class="py-14 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
+  >
     <div class="max-w-7xl mx-auto px-6">
       <!-- Header -->
       <div class="text-center mb-10">
         <div class="flex items-center justify-center gap-2 mb-3">
-          <BaseIcon :path="mdiConsole" size="32" class="text-emerald-400" />
+          <BaseIcon
+            :path="mdiConsole"
+            size="32"
+            class="text-emerald-400"
+          />
           <span class="inline-block px-3 py-1 text-sm font-medium text-emerald-400 bg-emerald-900/30 rounded-full">Live Demos</span>
         </div>
         <h2 class="text-3xl md:text-4xl font-bold text-white font-heading tracking-tight mb-2">
           Terminal Showcase
         </h2>
-        <p class="text-base text-gray-400">Watch real command-line workflows from my projects</p>
+        <p class="text-base text-gray-400">
+          Watch real command-line workflows from my projects
+        </p>
       </div>
 
       <!-- Demo Tabs -->
@@ -247,13 +256,13 @@ const setActiveDemo = (index) => {
         <button
           v-for="(demo, index) in demos"
           :key="demo.id"
-          @click="setActiveDemo(index)"
           :class="[
             'px-4 py-2 rounded-lg font-medium text-sm transition-all',
             activeDemo === index
               ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25'
               : 'bg-slate-700/50 text-gray-400 hover:bg-slate-700 hover:text-white'
           ]"
+          @click="setActiveDemo(index)"
         >
           {{ demo.title }}
         </button>
@@ -262,8 +271,12 @@ const setActiveDemo = (index) => {
       <!-- Active Demo -->
       <div class="max-w-4xl mx-auto">
         <div class="mb-4">
-          <h3 class="text-xl font-semibold text-white mb-1">{{ demos[activeDemo].title }}</h3>
-          <p class="text-gray-400 text-sm">{{ demos[activeDemo].description }}</p>
+          <h3 class="text-xl font-semibold text-white mb-1">
+            {{ demos[activeDemo].title }}
+          </h3>
+          <p class="text-gray-400 text-sm">
+            {{ demos[activeDemo].description }}
+          </p>
         </div>
 
         <!-- Terminal Demo Component -->
@@ -284,9 +297,17 @@ const setActiveDemo = (index) => {
           target="_blank"
           class="inline-flex items-center gap-2 px-6 py-3 bg-slate-700/50 hover:bg-slate-700 text-gray-300 hover:text-white rounded-full font-medium transition-all border border-slate-600/50 hover:border-emerald-500/50"
         >
-          <BaseIcon :path="mdiPlay" size="20" class="text-emerald-400" />
+          <BaseIcon
+            :path="mdiPlay"
+            size="20"
+            class="text-emerald-400"
+          />
           <span>View Real Recordings on Asciinema</span>
-          <BaseIcon :path="mdiOpenInNew" size="16" class="opacity-50" />
+          <BaseIcon
+            :path="mdiOpenInNew"
+            size="16"
+            class="opacity-50"
+          />
         </a>
       </div>
     </div>

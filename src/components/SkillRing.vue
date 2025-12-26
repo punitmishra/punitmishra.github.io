@@ -37,9 +37,16 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col items-center gap-3">
-    <div class="relative" :style="{ width: `${size}px`, height: `${size}px` }">
+    <div
+      class="relative"
+      :style="{ width: `${size}px`, height: `${size}px` }"
+    >
       <!-- Background ring -->
-      <svg :width="size" :height="size" class="transform -rotate-90">
+      <svg
+        :width="size"
+        :height="size"
+        class="transform -rotate-90"
+      >
         <circle
           :cx="size / 2"
           :cy="size / 2"

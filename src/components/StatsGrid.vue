@@ -45,7 +45,11 @@ onMounted(() => {
       <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-violet-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
       <div class="relative">
         <div class="flex items-center gap-2 mb-2">
-          <BaseIcon :path="stat.icon" size="18" class="text-blue-500" />
+          <BaseIcon
+            :path="stat.icon"
+            size="18"
+            class="text-blue-500"
+          />
         </div>
         <div class="text-3xl font-bold text-gray-900 dark:text-white font-heading">
           {{ stat.value.toLocaleString() }}{{ stat.suffix }}

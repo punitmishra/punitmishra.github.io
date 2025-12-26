@@ -87,7 +87,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <BaseDivider v-if="item.isDivider" nav-bar />
+  <BaseDivider
+    v-if="item.isDivider"
+    nav-bar
+  />
   <component
     :is="is"
     v-else
@@ -110,12 +113,15 @@ onBeforeUnmount(() => {
         v-if="item.isCurrentUser"
         class="w-6 h-6 mr-3 inline-flex"
       />
-      <BaseIcon v-if="item.icon" :path="item.icon" class="transition-colors" />
+      <BaseIcon
+        v-if="item.icon"
+        :path="item.icon"
+        class="transition-colors"
+      />
       <span
         class="px-2 transition-colors"
         :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
-        >{{ itemLabel }}</span
-      >
+      >{{ itemLabel }}</span>
       <BaseIcon
         v-if="item.menu"
         :path="isDropdownActive ? mdiChevronUp : mdiChevronDown"
@@ -127,7 +133,10 @@ onBeforeUnmount(() => {
       class="text-sm border-b border-gray-100 lg:border lg:bg-white lg:absolute lg:top-full lg:left-0 lg:min-w-full lg:z-20 lg:rounded-lg lg:shadow-lg lg:dark:bg-slate-800 dark:border-slate-700"
       :class="{ 'lg:hidden': !isDropdownActive }"
     >
-      <NavBarMenuList :menu="item.menu" @menu-click="menuClickDropdown" />
+      <NavBarMenuList
+        :menu="item.menu"
+        @menu-click="menuClickDropdown"
+      />
     </div>
   </component>
 </template>

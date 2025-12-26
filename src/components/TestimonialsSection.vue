@@ -66,7 +66,11 @@ onUnmounted(() => {
           <!-- Quote Icon -->
           <div class="absolute -top-4 left-8">
             <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-              <BaseIcon :path="mdiFormatQuoteOpen" size="20" class="text-white" />
+              <BaseIcon
+                :path="mdiFormatQuoteOpen"
+                size="20"
+                class="text-white"
+              />
             </div>
           </div>
 
@@ -96,7 +100,10 @@ onUnmounted(() => {
                 target="_blank"
                 class="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 hover:underline"
               >
-                <BaseIcon :path="mdiLinkedin" size="16" />
+                <BaseIcon
+                  :path="mdiLinkedin"
+                  size="16"
+                />
                 <span class="hidden sm:inline">View on LinkedIn</span>
               </a>
             </div>
@@ -108,7 +115,6 @@ onUnmounted(() => {
           <button
             v-for="(_, index) in testimonials"
             :key="index"
-            @click="goTo(index)"
             :class="[
               'w-2 h-2 rounded-full transition-all',
               currentIndex === index
@@ -116,26 +122,47 @@ onUnmounted(() => {
                 : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
             ]"
             :aria-label="`Go to testimonial ${index + 1}`"
+            @click="goTo(index)"
           />
         </div>
 
         <!-- Arrow Navigation -->
         <button
-          @click="prevTestimonial"
           class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white dark:bg-slate-700 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors hidden md:flex"
           aria-label="Previous testimonial"
+          @click="prevTestimonial"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
         <button
-          @click="nextTestimonial"
           class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-white dark:bg-slate-700 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors hidden md:flex"
           aria-label="Next testimonial"
+          @click="nextTestimonial"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
       </div>

@@ -77,7 +77,10 @@ const menuClick = (event, item) => {
           display="hidden lg:flex xl:hidden"
           @click.prevent="isAsideLgActive = true"
         >
-          <BaseIcon :path="mdiMenu" size="24" />
+          <BaseIcon
+            :path="mdiMenu"
+            size="24"
+          />
         </NavBarItemPlain>
         <NavBarItemPlain use-margin>
           <FormControl
@@ -101,8 +104,7 @@ const menuClick = (event, item) => {
           href="https://github.com/punitmishra"
           target="_blank"
           class="text-blue-600"
-          >Punit Mishra</a
-        > - Portfolio
+        >Punit Mishra</a> - Portfolio
       </FooterBar>
     </div>
   </div>

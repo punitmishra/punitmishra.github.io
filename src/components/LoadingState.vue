@@ -21,7 +21,9 @@ defineProps({
       :size="size === 'small' ? 24 : size === 'large' ? 48 : 32"
       class="text-blue-600 dark:text-blue-400 animate-spin mb-4"
     />
-    <p class="text-gray-600 dark:text-gray-400 font-display">{{ message }}</p>
+    <p class="text-gray-600 dark:text-gray-400 font-display">
+      {{ message }}
+    </p>
   </div>
 </template>
 

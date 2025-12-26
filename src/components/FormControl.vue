@@ -159,7 +159,11 @@ if (props.ctrlKFocus) {
       :placeholder="placeholder"
       :type="computedType"
       :class="inputElClass"
+    >
+    <FormControlIcon
+      v-if="icon"
+      :icon="icon"
+      :h="controlIconH"
     />
-    <FormControlIcon v-if="icon" :icon="icon" :h="controlIconH" />
   </div>
 </template>

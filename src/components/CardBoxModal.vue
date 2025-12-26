@@ -51,7 +51,10 @@ window.addEventListener("keydown", (e) => {
 </script>
 
 <template>
-  <OverlayLayer v-show="value" @overlay-click="cancel">
+  <OverlayLayer
+    v-show="value"
+    @overlay-click="cancel"
+  >
     <CardBox
       v-show="value"
       class="shadow-lg max-h-modal w-11/12 md:w-3/5 lg:w-2/5 xl:w-4/12 z-50"
@@ -74,7 +77,11 @@ window.addEventListener("keydown", (e) => {
 
       <template #footer>
         <BaseButtons>
-          <BaseButton :label="buttonLabel" :color="button" @click="confirm" />
+          <BaseButton
+            :label="buttonLabel"
+            :color="button"
+            @click="confirm"
+          />
           <BaseButton
             v-if="hasCancel"
             label="Cancel"

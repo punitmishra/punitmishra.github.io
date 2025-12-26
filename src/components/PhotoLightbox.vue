@@ -84,8 +84,18 @@ onUnmounted(() => {
           class="absolute top-4 right-4 z-10 p-2 text-white/70 hover:text-white transition-colors"
           @click="close"
         >
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
@@ -95,8 +105,18 @@ onUnmounted(() => {
           class="absolute left-4 z-10 p-2 text-white/70 hover:text-white transition-colors"
           @click="prev"
         >
-          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+          <svg
+            class="w-10 h-10"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
 
@@ -105,8 +125,18 @@ onUnmounted(() => {
           class="absolute right-4 z-10 p-2 text-white/70 hover:text-white transition-colors"
           @click="next"
         >
-          <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+          <svg
+            class="w-10 h-10"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
 
@@ -121,7 +151,7 @@ onUnmounted(() => {
             :alt="currentPhoto.alt || currentPhoto.caption || ''"
             class="max-w-full max-h-[85vh] object-contain transition-transform duration-300"
             :class="{ 'scale-150': isZoomed }"
-          />
+          >
         </div>
 
         <!-- Caption -->
@@ -129,8 +159,13 @@ onUnmounted(() => {
           v-if="currentPhoto.caption"
           class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent"
         >
-          <p class="text-white text-center text-lg">{{ currentPhoto.caption }}</p>
-          <p v-if="currentPhoto.date" class="text-white/60 text-center text-sm mt-1">
+          <p class="text-white text-center text-lg">
+            {{ currentPhoto.caption }}
+          </p>
+          <p
+            v-if="currentPhoto.date"
+            class="text-white/60 text-center text-sm mt-1"
+          >
             {{ currentPhoto.date }}
           </p>
         </div>

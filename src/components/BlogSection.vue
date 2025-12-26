@@ -56,12 +56,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="blog" class="py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/30 dark:from-slate-900/50 dark:via-slate-900 dark:to-slate-800/50"></div>
+  <section
+    id="blog"
+    class="py-24 relative overflow-hidden"
+  >
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/30 dark:from-slate-900/50 dark:via-slate-900 dark:to-slate-800/50" />
 
     <div class="relative max-w-7xl mx-auto px-6">
       <!-- Header -->
-      <div class="text-center mb-12" v-scroll-reveal>
+      <div
+        v-scroll-reveal
+        class="text-center mb-12"
+      >
         <span class="inline-block px-3 py-1 text-sm font-medium text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20 rounded-full mb-4">Writing</span>
         <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-4">
           Technical Articles
@@ -72,46 +78,62 @@ onMounted(() => {
       </div>
 
       <!-- Category Filter -->
-      <div class="flex flex-wrap justify-center gap-2 mb-10" v-scroll-reveal="{ delay: '100ms' }">
+      <div
+        v-scroll-reveal="{ delay: '100ms' }"
+        class="flex flex-wrap justify-center gap-2 mb-10"
+      >
         <button
           v-for="category in categories"
           :key="category"
-          @click="selectedCategory = category"
           :class="[
             'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
             selectedCategory === category
               ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
               : 'bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-700'
           ]"
+          @click="selectedCategory = category"
         >
           {{ category === 'all' ? 'All Articles' : category }}
         </button>
       </div>
 
       <!-- Loading State -->
-      <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div v-for="i in 6" :key="i" class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse">
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4"></div>
-          <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+      <div
+        v-if="loading"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <div
+          v-for="i in 6"
+          :key="i"
+          class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse"
+        >
+          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4" />
+          <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3" />
+          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
+          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
         </div>
       </div>
 
       <!-- Articles Grid -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        v-else
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         <article
           v-for="(article, index) in filteredArticles"
           :key="article.slug"
-          @click="goToArticle(article.slug)"
-          class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 cursor-pointer hover:-translate-y-1 overflow-hidden"
           v-scroll-reveal="{ delay: `${index * 75}ms` }"
+          class="group relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700/50 cursor-pointer hover:-translate-y-1 overflow-hidden"
+          @click="goToArticle(article.slug)"
         >
           <!-- Gradient accent on top -->
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity" />
 
           <!-- Featured badge -->
-          <div v-if="article.featured" class="absolute top-4 right-4">
+          <div
+            v-if="article.featured"
+            class="absolute top-4 right-4"
+          >
             <span class="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-medium rounded-full">
               Featured
             </span>
@@ -152,12 +174,19 @@ onMounted(() => {
             <!-- Footer -->
             <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700/50">
               <div class="flex items-center gap-1.5 text-gray-400 dark:text-gray-500 text-sm">
-                <BaseIcon :path="mdiClockOutline" size="14" />
+                <BaseIcon
+                  :path="mdiClockOutline"
+                  size="14"
+                />
                 <span>{{ article.readTime }}</span>
               </div>
               <div class="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-medium text-sm group-hover:gap-2 transition-all">
                 <span>Read article</span>
-                <BaseIcon :path="mdiArrowRight" size="14" class="transform group-hover:translate-x-1 transition-transform" />
+                <BaseIcon
+                  :path="mdiArrowRight"
+                  size="14"
+                  class="transform group-hover:translate-x-1 transition-transform"
+                />
               </div>
             </div>
           </div>
@@ -165,19 +194,30 @@ onMounted(() => {
       </div>
 
       <!-- Empty State -->
-      <div v-if="!loading && filteredArticles.length === 0" class="text-center py-12">
-        <p class="text-gray-500 dark:text-gray-400">No articles found in this category.</p>
+      <div
+        v-if="!loading && filteredArticles.length === 0"
+        class="text-center py-12"
+      >
+        <p class="text-gray-500 dark:text-gray-400">
+          No articles found in this category.
+        </p>
       </div>
 
       <!-- View All Link -->
-      <div class="text-center mt-12" v-scroll-reveal="{ delay: '200ms' }">
+      <div
+        v-scroll-reveal="{ delay: '200ms' }"
+        class="text-center mt-12"
+      >
         <a
           href="https://github.com/punitmishra/punitmishra.github.io/tree/main/public/content/blog"
           target="_blank"
           class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
         >
           <span>View All on GitHub</span>
-          <BaseIcon :path="mdiArrowRight" size="18" />
+          <BaseIcon
+            :path="mdiArrowRight"
+            size="18"
+          />
         </a>
       </div>
     </div>

@@ -12,5 +12,5 @@ const props = defineProps({
         : 'my-6 -mx-6 dark:border-slate-800'
     "
     class="border-t border-gray-100"
-  />
+  >
 </template>

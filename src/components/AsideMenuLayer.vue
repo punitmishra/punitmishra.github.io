@@ -66,11 +66,17 @@ const asideLgCloseClick = (event) => {
         "
         class="flex-1 overflow-y-auto overflow-x-hidden"
       >
-        <AsideMenuList :menu="menu" @menu-click="menuClick" />
+        <AsideMenuList
+          :menu="menu"
+          @menu-click="menuClick"
+        />
       </div>
 
       <ul>
-        <AsideMenuItem :item="logoutItem" @menu-click="menuClick" />
+        <AsideMenuItem
+          :item="logoutItem"
+          @menu-click="menuClick"
+        />
       </ul>
     </div>
   </aside>

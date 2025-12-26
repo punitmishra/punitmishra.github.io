@@ -20,9 +20,9 @@ const handleDownload = async () => {
 
 <template>
   <button
-    @click="handleDownload"
     :disabled="isDownloading"
     class="group flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all font-display disabled:opacity-50 disabled:cursor-not-allowed"
+    @click="handleDownload"
   >
     <BaseIcon
       :path="isDownloading ? mdiFileDocument : mdiDownload"

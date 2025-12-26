@@ -136,13 +136,16 @@ const hasActiveFilters = computed(() => {
         type="text"
         placeholder="Search projects by name, description, or technology..."
         class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-gray-900 dark:text-white font-display"
-      />
+      >
       <button
         v-if="searchQuery"
-        @click="searchQuery = ''"
         class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+        @click="searchQuery = ''"
       >
-        <BaseIcon :path="mdiClose" size="20" />
+        <BaseIcon
+          :path="mdiClose"
+          size="20"
+        />
       </button>
     </div>
 
@@ -150,12 +153,20 @@ const hasActiveFilters = computed(() => {
     <div class="flex flex-wrap items-center gap-4">
       <!-- Category Filter -->
       <div class="flex items-center gap-2">
-        <BaseIcon :path="mdiFilterVariant" size="20" class="text-gray-400" />
+        <BaseIcon
+          :path="mdiFilterVariant"
+          size="20"
+          class="text-gray-400"
+        />
         <select
           v-model="selectedCategory"
           class="px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-gray-900 dark:text-white font-display text-sm"
         >
-          <option v-for="cat in categories" :key="cat" :value="cat">
+          <option
+            v-for="cat in categories"
+            :key="cat"
+            :value="cat"
+          >
             {{ cat === 'all' ? 'All Categories' : cat }}
           </option>
         </select>
@@ -167,7 +178,11 @@ const hasActiveFilters = computed(() => {
           v-model="selectedTech"
           class="px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-gray-900 dark:text-white font-display text-sm"
         >
-          <option v-for="tech in technologies" :key="tech" :value="tech">
+          <option
+            v-for="tech in technologies"
+            :key="tech"
+            :value="tech"
+          >
             {{ tech === 'all' ? 'All Technologies' : tech }}
           </option>
         </select>
@@ -175,22 +190,32 @@ const hasActiveFilters = computed(() => {
 
       <!-- Sort -->
       <div class="flex items-center gap-2 ml-auto">
-        <BaseIcon :path="mdiSort" size="20" class="text-gray-400" />
+        <BaseIcon
+          :path="mdiSort"
+          size="20"
+          class="text-gray-400"
+        />
         <select
           v-model="sortBy"
           class="px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-gray-900 dark:text-white font-display text-sm"
         >
-          <option value="updated">Recently Updated</option>
-          <option value="stars">Most Stars</option>
-          <option value="name">Name (A-Z)</option>
+          <option value="updated">
+            Recently Updated
+          </option>
+          <option value="stars">
+            Most Stars
+          </option>
+          <option value="name">
+            Name (A-Z)
+          </option>
         </select>
       </div>
 
       <!-- Clear Filters -->
       <button
         v-if="hasActiveFilters"
-        @click="clearFilters"
         class="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-display transition-colors"
+        @click="clearFilters"
       >
         Clear Filters
       </button>

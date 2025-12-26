@@ -35,7 +35,10 @@ const iconSize = computed(() => props.size ?? 16);
       :height="iconSize"
       class="inline-block"
     >
-      <path fill="currentColor" :d="path" />
+      <path
+        fill="currentColor"
+        :d="path"
+      />
     </svg>
     <slot />
   </span>

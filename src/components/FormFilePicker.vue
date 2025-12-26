@@ -100,7 +100,7 @@ const upload = (event) => {
         class="absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1"
         :accept="accept"
         @input="upload"
-      />
+      >
     </label>
     <div
       v-if="showFilename"

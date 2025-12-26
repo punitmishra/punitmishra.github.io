@@ -133,21 +133,34 @@ onUnmounted(() => {
     <!-- Terminal header -->
     <div class="terminal-header">
       <div class="flex items-center gap-2">
-        <span class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 cursor-pointer" @click="stopDemo"></span>
-        <span class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 cursor-pointer"></span>
-        <span class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 cursor-pointer" @click="restartDemo"></span>
+        <span
+          class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 cursor-pointer"
+          @click="stopDemo"
+        />
+        <span class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 cursor-pointer" />
+        <span
+          class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 cursor-pointer"
+          @click="restartDemo"
+        />
       </div>
       <span class="terminal-title">{{ title }}</span>
-      <div class="w-16"></div>
+      <div class="w-16" />
     </div>
 
     <!-- Terminal body -->
     <div class="terminal-body">
-      <div v-for="(line, index) in lines" :key="index" class="terminal-line">
+      <div
+        v-for="(line, index) in lines"
+        :key="index"
+        class="terminal-line"
+      >
         <template v-if="line.type === 'input'">
           <span class="terminal-prompt">{{ line.prompt }}</span>
           <span class="terminal-command">{{ line.text }}</span>
-          <span v-if="line.isTyping" class="terminal-cursor">▋</span>
+          <span
+            v-if="line.isTyping"
+            class="terminal-cursor"
+          >▋</span>
         </template>
         <template v-else>
           <span :class="['terminal-output', line.color]">{{ line.text }}</span>
@@ -155,7 +168,10 @@ onUnmounted(() => {
       </div>
 
       <!-- Placeholder when empty -->
-      <div v-if="lines.length === 0 && !isPlaying" class="terminal-placeholder">
+      <div
+        v-if="lines.length === 0 && !isPlaying"
+        class="terminal-placeholder"
+      >
         <span class="terminal-prompt">$ </span>
         <span class="terminal-cursor">▋</span>
       </div>

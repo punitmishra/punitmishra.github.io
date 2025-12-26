@@ -334,20 +334,26 @@ watch(() => route.params.slug, (newSlug) => {
     <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-gray-200/50 dark:border-slate-800/50">
       <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
         <button
-          @click="goBack"
           class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          @click="goBack"
         >
-          <BaseIcon :path="mdiArrowLeft" size="20" />
+          <BaseIcon
+            :path="mdiArrowLeft"
+            size="20"
+          />
           <span class="font-medium">Back</span>
         </button>
 
         <div class="flex items-center gap-3">
           <button
-            @click="shareArticle"
             class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             title="Share article"
+            @click="shareArticle"
           >
-            <BaseIcon :path="mdiShareVariant" size="20" />
+            <BaseIcon
+              :path="mdiShareVariant"
+              size="20"
+            />
           </button>
           <a
             v-if="article"
@@ -356,33 +362,46 @@ watch(() => route.params.slug, (newSlug) => {
             class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             title="View source on GitHub"
           >
-            <BaseIcon :path="mdiGithub" size="20" />
+            <BaseIcon
+              :path="mdiGithub"
+              size="20"
+            />
           </a>
         </div>
       </div>
     </nav>
 
     <!-- Loading State -->
-    <div v-if="loading" class="pt-24 pb-16">
+    <div
+      v-if="loading"
+      class="pt-24 pb-16"
+    >
       <div class="max-w-4xl mx-auto px-6">
         <div class="animate-pulse">
-          <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4"></div>
-          <div class="h-12 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-6"></div>
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-4"></div>
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 mb-4"></div>
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
+          <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4" />
+          <div class="h-12 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-6" />
+          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-4" />
+          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 mb-4" />
+          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6" />
         </div>
       </div>
     </div>
 
     <!-- Error State -->
-    <div v-else-if="error" class="pt-24 pb-16">
+    <div
+      v-else-if="error"
+      class="pt-24 pb-16"
+    >
       <div class="max-w-4xl mx-auto px-6 text-center">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Article Not Found</h1>
-        <p class="text-gray-600 dark:text-gray-400 mb-8">{{ error }}</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          Article Not Found
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400 mb-8">
+          {{ error }}
+        </p>
         <button
-          @click="goBack"
           class="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium"
+          @click="goBack"
         >
           Go Back
         </button>
@@ -390,7 +409,10 @@ watch(() => route.params.slug, (newSlug) => {
     </div>
 
     <!-- Article Content -->
-    <article v-else-if="article" class="pt-24 pb-16">
+    <article
+      v-else-if="article"
+      class="pt-24 pb-16"
+    >
       <div class="max-w-4xl mx-auto px-6">
         <!-- Header -->
         <header class="mb-12">
@@ -399,7 +421,10 @@ watch(() => route.params.slug, (newSlug) => {
             <span :class="['px-3 py-1 rounded-full text-sm font-medium', categoryColors[article.category] || categoryColors['Technical']]">
               {{ article.category }}
             </span>
-            <span v-if="article.featured" class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-medium rounded-full">
+            <span
+              v-if="article.featured"
+              class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-medium rounded-full"
+            >
               Featured
             </span>
           </div>
@@ -412,11 +437,17 @@ watch(() => route.params.slug, (newSlug) => {
           <!-- Meta -->
           <div class="flex flex-wrap items-center gap-4 text-gray-500 dark:text-gray-400 text-sm mb-6">
             <div class="flex items-center gap-1.5">
-              <BaseIcon :path="mdiCalendar" size="16" />
+              <BaseIcon
+                :path="mdiCalendar"
+                size="16"
+              />
               <span>{{ formatDate(article.date) }}</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <BaseIcon :path="mdiClockOutline" size="16" />
+              <BaseIcon
+                :path="mdiClockOutline"
+                size="16"
+              />
               <span>{{ article.readTime }}</span>
             </div>
           </div>
@@ -449,7 +480,7 @@ watch(() => route.params.slug, (newSlug) => {
             prose-img:rounded-xl prose-img:shadow-lg
             prose-hr:border-gray-200 dark:prose-hr:border-slate-700"
           v-html="content"
-        ></div>
+        />
 
         <!-- Footer -->
         <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-slate-700">
@@ -459,17 +490,24 @@ watch(() => route.params.slug, (newSlug) => {
                 src="https://github.com/punitmishra.png"
                 alt="Punit Mishra"
                 class="w-12 h-12 rounded-full"
-              />
+              >
               <div>
-                <p class="font-semibold text-gray-900 dark:text-white">Punit Mishra</p>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Senior Software Engineer @ SAP</p>
+                <p class="font-semibold text-gray-900 dark:text-white">
+                  Punit Mishra
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Senior Software Engineer @ SAP
+                </p>
               </div>
             </div>
             <button
-              @click="goBack"
               class="flex items-center gap-2 px-6 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+              @click="goBack"
             >
-              <BaseIcon :path="mdiArrowLeft" size="18" />
+              <BaseIcon
+                :path="mdiArrowLeft"
+                size="18"
+              />
               <span>Back to Articles</span>
             </button>
           </div>
