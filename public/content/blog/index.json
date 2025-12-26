@@ -11,6 +11,36 @@
       "featured": true
     },
     {
+      "slug": "circuit-playground-express",
+      "title": "Circuit Playground Express: Building the Railroad Arcade Controller",
+      "excerpt": "Open-source CircuitPython code for embedded model railroad control. Hardware abstraction, PWM motor control, serial protocols, and the Raspberry Pi bridge.",
+      "date": "2024-12-22",
+      "category": "Projects",
+      "tags": ["CircuitPython", "Embedded", "IoT", "Hardware", "Open Source"],
+      "readTime": "14 min read",
+      "featured": true
+    },
+    {
+      "slug": "raspberry-pi-homelab",
+      "title": "Raspberry Pi Homelab: Building a Network of Smart Devices",
+      "excerpt": "Complete setup guide for a fleet of Raspberry Pis: DNS security, IoT control, media server, monitoring, and sensor nodes with Docker deployments.",
+      "date": "2024-12-21",
+      "category": "Projects",
+      "tags": ["Raspberry Pi", "Homelab", "IoT", "Docker", "Linux"],
+      "readTime": "16 min read",
+      "featured": true
+    },
+    {
+      "slug": "homelab-deployment-guide",
+      "title": "Homelab Deployment Guide: From Code to Production",
+      "excerpt": "Complete deployment pipeline for personal projects: GitHub Actions, Docker multi-arch builds, Watchtower, Cloudflare Tunnels, and monitoring.",
+      "date": "2024-12-20",
+      "category": "Technical",
+      "tags": ["DevOps", "Docker", "CI/CD", "Raspberry Pi", "Deployment"],
+      "readTime": "18 min read",
+      "featured": true
+    },
+    {
       "slug": "api-design-principles",
       "title": "API Design Principles That Stand the Test of Time",
       "excerpt": "Building APIs that developers love. Consistency, versioning, HTTP semantics, pagination, security, and documentation best practices from real-world experience.",

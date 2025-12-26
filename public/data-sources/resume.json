@@ -30,6 +30,23 @@
         "Led SOC 2 compliance initiatives and implemented zero-trust security architecture"
       ],
       "technologies": ["Python", "TypeScript", "Java", "Rust", "Kubernetes", "AWS", "PostgreSQL", "Redis", "LangGraph"]
+    },
+    {
+      "company": "Personal Projects",
+      "position": "Hardware & IoT Engineer",
+      "startDate": "2020-01",
+      "endDate": null,
+      "current": true,
+      "summary": "Building production-grade IoT systems, embedded controllers, and network infrastructure for home automation and personal projects.",
+      "highlights": [
+        "Built Railroad Arcade: remote-controlled model railroad with Next.js, WebSockets, and Raspberry Pi GPIO for real-time control",
+        "Developed Shield AI: high-performance DNS security system in Rust with ML-based threat detection, sub-millisecond latency",
+        "Created Circuit Playground Express controller with CircuitPython for embedded train control, open-sourced for maker community",
+        "Designed and deployed homelab with 5 Raspberry Pis: DNS filtering, media server, monitoring, IoT bridge, and sensor nodes",
+        "Implemented Pi-hole alternative with custom ML models for DGA detection and real-time threat analysis",
+        "Built automated deployment pipeline with GitHub Actions, Docker multi-arch builds, and Cloudflare Tunnels"
+      ],
+      "technologies": ["Raspberry Pi", "CircuitPython", "Rust", "Docker", "Prometheus", "Grafana", "Pi-hole", "Cloudflare"]
     }
   ],
   "education": [
@@ -42,18 +59,6 @@
       "highlights": [
         "Coursework: Artificial Intelligence, Computer Architecture, Communication Networks, Signals & Systems",
         "International Student Scholarship ($10,000)"
-      ]
-    },
-    {
-      "institution": "Ohlone College",
-      "degree": "Associate of Science",
-      "field": "Engineering",
-      "startDate": "2008",
-      "endDate": "2010",
-      "highlights": [
-        "Engineering Club Vice President",
-        "VEX Robotics Competition",
-        "Outstanding Engineering Student Award"
       ]
     }
   ],
@@ -121,15 +126,33 @@
   "projects": [
     {
       "name": "Shield AI",
-      "description": "AI-powered DNS filtering system with real-time threat detection using Rust and ML",
-      "url": "https://github.com/punitmishra",
-      "highlights": ["Real-time threat detection", "High-performance Rust implementation"]
+      "description": "AI-powered DNS filtering system with real-time threat detection using Rust and ML. Sub-millisecond latency, 15MB memory, DGA detection.",
+      "url": "https://github.com/punitmishra/shield-ai",
+      "highlights": ["Sub-millisecond DNS resolution", "ML-based DGA detection", "15MB memory footprint", "127K queries/sec throughput"]
+    },
+    {
+      "name": "Railroad Arcade",
+      "description": "Remote-controlled model railroad web app with real-time IoT control, game modes, and leaderboards using Next.js and Raspberry Pi.",
+      "url": "https://github.com/punitmishra/railroad-arcade",
+      "highlights": ["Real-time WebSocket control", "Sub-100ms latency", "Gamification system", "Multi-camera support"]
+    },
+    {
+      "name": "Circuit Playground Express Controller",
+      "description": "Open-source CircuitPython firmware for embedded model railroad control with smooth acceleration and sensor feedback.",
+      "url": "https://github.com/punitmishra/railroad-arcade-cpx",
+      "highlights": ["CircuitPython firmware", "PWM motor control", "NeoPixel feedback", "Serial protocol bridge"]
+    },
+    {
+      "name": "Raspberry Pi Homelab",
+      "description": "Fleet of 5 Raspberry Pis providing DNS security, IoT control, media serving, monitoring, and sensor collection.",
+      "url": "https://github.com/punitmishra/homelab",
+      "highlights": ["Docker-based deployments", "Prometheus/Grafana monitoring", "Cloudflare Tunnel access", "Automated CI/CD"]
     },
     {
       "name": "Multi-Agent AI System",
-      "description": "Orchestrated AI agents for complex task automation using LangGraph",
+      "description": "Orchestrated AI agents for complex task automation using LangGraph with state management and error recovery.",
       "url": "https://github.com/punitmishra",
-      "highlights": ["LangGraph orchestration", "Complex task automation"]
+      "highlights": ["LangGraph orchestration", "Complex task automation", "State machine design", "Error recovery patterns"]
     }
   ]
 }
