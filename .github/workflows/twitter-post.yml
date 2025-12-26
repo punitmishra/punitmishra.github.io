@@ -1,14 +1,12 @@
 name: Post to Twitter/X
 
 on:
-  # Trigger when blog articles change
   push:
     branches: [main]
     paths:
       - 'public/content/blog/*.md'
       - 'public/content/blog/index.json'
 
-  # Manual trigger from GitHub UI
   workflow_dispatch:
     inputs:
       article_slug:
@@ -29,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # Need previous commit to detect changes
+          fetch-depth: 2
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,13 +38,12 @@ jobs:
         id: detect
         if: github.event_name == 'push'
         run: |
-          # Get changed markdown files
           CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'public/content/blog/*.md' | head -1)
           if [ -n "$CHANGED" ]; then
             SLUG=$(basename "$CHANGED" .md)
             echo "slug=$SLUG" >> $GITHUB_OUTPUT
             echo "found=true" >> $GITHUB_OUTPUT
-            echo "📝 Detected article: $SLUG"
+            echo "Detected article: $SLUG"
           else
             echo "found=false" >> $GITHUB_OUTPUT
             echo "No new articles detected"
@@ -71,21 +68,20 @@ jobs:
           ARTICLE_PATH="public/content/blog/${SLUG}.md"
 
           if [ ! -f "$ARTICLE_PATH" ]; then
-            echo "❌ Article not found: $ARTICLE_PATH"
+            echo "Article not found: $ARTICLE_PATH"
             exit 1
           fi
 
-          # Extract title from frontmatter
-          TITLE=$(grep -m1 '^title:' "$ARTICLE_PATH" | sed 's/title: *["'"'"']\{0,1\}\([^"'"'"']*\)["'"'"']\{0,1\}/\1/')
+          # Extract title - remove 'title:' prefix and quotes
+          TITLE=$(grep -m1 '^title:' "$ARTICLE_PATH" | sed 's/^title: *//' | sed 's/^"//' | sed 's/"$//')
 
-          # Extract tags
-          TAGS=$(grep -m1 '^tags:' "$ARTICLE_PATH" | sed 's/tags: *\[//' | sed 's/\]//' | tr -d '"' | tr ',' '\n' | head -3 | tr '\n' ' ')
+          # Extract first 3 tags
+          TAGS=$(grep -m1 '^tags:' "$ARTICLE_PATH" | sed 's/^tags: *\[//' | sed 's/\]//' | tr -d '"' | cut -d',' -f1-3 | tr ',' ' ')
 
           echo "title=$TITLE" >> $GITHUB_OUTPUT
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
-
-          echo "📰 Title: $TITLE"
-          echo "🏷️ Tags: $TAGS"
+          echo "Title: $TITLE"
+          echo "Tags: $TAGS"
 
       - name: Format tweet
         id: tweet
@@ -94,26 +90,27 @@ jobs:
           SLUG="${{ steps.article.outputs.slug }}"
           TITLE="${{ steps.metadata.outputs.title }}"
           TAGS="${{ steps.metadata.outputs.tags }}"
-          URL="https://punitmishra.github.io/blog/${SLUG}"
+          URL="https://punitmishra.github.io/#/blog/${SLUG}"
 
           # Format hashtags
-          HASHTAGS=$(echo "$TAGS" | tr ' ' '\n' | grep -v '^$' | sed 's/[^a-zA-Z0-9]//g' | sed 's/^/#/' | tr '\n' ' ')
+          HASHTAGS=""
+          for tag in $TAGS; do
+            clean=$(echo "$tag" | tr -d ' ' | sed 's/[^a-zA-Z0-9]//g')
+            if [ -n "$clean" ]; then
+              HASHTAGS="$HASHTAGS #$clean"
+            fi
+          done
 
-          # Build tweet (max 280 chars)
-          TWEET="📝 ${TITLE}
+          # Build tweet
+          cat > tweet.txt << TWEETEOF
+          New article: ${TITLE}
+          ${HASHTAGS}
 
-${HASHTAGS}
+          ${URL}
+          TWEETEOF
 
-🔗 ${URL}"
-
-          # Save to file for multi-line handling
-          echo "$TWEET" > tweet.txt
-
-          echo "🐦 Tweet preview:"
-          echo "---"
+          echo "Tweet preview:"
           cat tweet.txt
-          echo "---"
-          echo "📊 Length: $(cat tweet.txt | wc -c) characters"
 
       - name: Post to Twitter/X
         if: (steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch') && steps.article.outputs.dry_run != 'true'
@@ -124,60 +121,99 @@ ${HASHTAGS}
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
         run: |
           if [ -z "$TWITTER_API_KEY" ]; then
-            echo "⚠️ Twitter API keys not configured. Add secrets to repository."
-            echo "See: https://github.com/${{ github.repository }}/settings/secrets/actions"
+            echo "Twitter API keys not configured"
             exit 0
           fi
 
+          # Install twurl for easier Twitter API access
+          npm install -g twurl-cli 2>/dev/null || true
+
           TWEET=$(cat tweet.txt)
 
-          # Use Twitter API v2
-          # Generate OAuth 1.0a signature
+          # Use curl with OAuth 1.0a
           TIMESTAMP=$(date +%s)
           NONCE=$(openssl rand -hex 16)
 
-          # OAuth parameters
-          OAUTH_PARAMS="oauth_consumer_key=${TWITTER_API_KEY}&oauth_nonce=${NONCE}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=${TIMESTAMP}&oauth_token=${TWITTER_ACCESS_TOKEN}&oauth_version=1.0"
+          # For simplicity, use a Node.js script for OAuth
+          cat > post-tweet.js << 'JSEOF'
+          const crypto = require('crypto');
+          const https = require('https');
 
-          # Create signature base
-          BASE_URL="https://api.twitter.com/2/tweets"
-          ENCODED_URL=$(echo -n "$BASE_URL" | jq -sRr @uri)
-          ENCODED_PARAMS=$(echo -n "$OAUTH_PARAMS" | jq -sRr @uri)
-          SIGNATURE_BASE="POST&${ENCODED_URL}&${ENCODED_PARAMS}"
+          const apiKey = process.env.TWITTER_API_KEY;
+          const apiSecret = process.env.TWITTER_API_SECRET;
+          const accessToken = process.env.TWITTER_ACCESS_TOKEN;
+          const accessSecret = process.env.TWITTER_ACCESS_SECRET;
+          const tweet = require('fs').readFileSync('tweet.txt', 'utf8').trim();
 
-          # Create signing key
-          SIGNING_KEY="${TWITTER_API_SECRET}&${TWITTER_ACCESS_SECRET}"
+          function generateOAuthSignature(method, url, params, consumerSecret, tokenSecret) {
+            const sortedParams = Object.keys(params).sort().map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`).join('&');
+            const signatureBase = `${method}&${encodeURIComponent(url)}&${encodeURIComponent(sortedParams)}`;
+            const signingKey = `${encodeURIComponent(consumerSecret)}&${encodeURIComponent(tokenSecret)}`;
+            return crypto.createHmac('sha1', signingKey).update(signatureBase).digest('base64');
+          }
 
-          # Generate signature
-          SIGNATURE=$(echo -n "$SIGNATURE_BASE" | openssl dgst -sha1 -hmac "$SIGNING_KEY" -binary | base64)
-          ENCODED_SIGNATURE=$(echo -n "$SIGNATURE" | jq -sRr @uri)
+          const timestamp = Math.floor(Date.now() / 1000).toString();
+          const nonce = crypto.randomBytes(16).toString('hex');
 
-          # Build Authorization header
-          AUTH_HEADER="OAuth oauth_consumer_key=\"${TWITTER_API_KEY}\", oauth_nonce=\"${NONCE}\", oauth_signature=\"${ENCODED_SIGNATURE}\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"${TIMESTAMP}\", oauth_token=\"${TWITTER_ACCESS_TOKEN}\", oauth_version=\"1.0\""
+          const oauthParams = {
+            oauth_consumer_key: apiKey,
+            oauth_nonce: nonce,
+            oauth_signature_method: 'HMAC-SHA1',
+            oauth_timestamp: timestamp,
+            oauth_token: accessToken,
+            oauth_version: '1.0'
+          };
 
-          # Post tweet
-          RESPONSE=$(curl -s -X POST "$BASE_URL" \
-            -H "Authorization: $AUTH_HEADER" \
-            -H "Content-Type: application/json" \
-            -d "{\"text\": $(echo "$TWEET" | jq -Rs .)}")
+          const url = 'https://api.twitter.com/2/tweets';
+          const signature = generateOAuthSignature('POST', url, oauthParams, apiSecret, accessSecret);
+          oauthParams.oauth_signature = signature;
 
-          echo "📤 Response: $RESPONSE"
+          const authHeader = 'OAuth ' + Object.keys(oauthParams).sort().map(k => `${encodeURIComponent(k)}="${encodeURIComponent(oauthParams[k])}"`).join(', ');
 
-          if echo "$RESPONSE" | grep -q '"id"'; then
-            TWEET_ID=$(echo "$RESPONSE" | jq -r '.data.id')
-            echo "✅ Tweet posted successfully!"
-            echo "🔗 https://twitter.com/punitmishra/status/${TWEET_ID}"
-          else
-            echo "❌ Failed to post tweet"
-            echo "$RESPONSE"
-            exit 1
-          fi
+          const postData = JSON.stringify({ text: tweet });
+
+          const options = {
+            hostname: 'api.twitter.com',
+            port: 443,
+            path: '/2/tweets',
+            method: 'POST',
+            headers: {
+              'Authorization': authHeader,
+              'Content-Type': 'application/json',
+              'Content-Length': Buffer.byteLength(postData)
+            }
+          };
+
+          const req = https.request(options, (res) => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+              console.log('Response:', data);
+              const json = JSON.parse(data);
+              if (json.data && json.data.id) {
+                console.log('Tweet posted: https://twitter.com/punitmishra/status/' + json.data.id);
+                process.exit(0);
+              } else {
+                console.error('Failed to post tweet');
+                process.exit(1);
+              }
+            });
+          });
+
+          req.on('error', (e) => {
+            console.error('Error:', e.message);
+            process.exit(1);
+          });
+
+          req.write(postData);
+          req.end();
+          JSEOF
+
+          node post-tweet.js
 
       - name: Dry run summary
         if: steps.article.outputs.dry_run == 'true'
         run: |
-          echo "🔍 DRY RUN - Tweet would be:"
-          echo "---"
+          echo "DRY RUN - Tweet would be:"
           cat tweet.txt
-          echo "---"
           echo "No actual tweet was posted."
