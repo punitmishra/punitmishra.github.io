@@ -1,0 +1,134 @@
+{
+  "basics": {
+    "name": "Punit Mishra",
+    "title": "Full Stack Software Engineer",
+    "summary": "Passionate software engineer with 12+ years of experience building scalable applications from silicon to software. Specialized in AI/ML infrastructure, systems architecture, and enterprise software development.",
+    "email": "contact@punitmishra.com",
+    "location": "San Francisco Bay Area",
+    "profiles": [
+      { "network": "GitHub", "url": "https://github.com/punitmishra" },
+      { "network": "LinkedIn", "url": "https://linkedin.com/in/punitmishra" },
+      { "network": "Twitter", "url": "https://twitter.com/punitmishra" }
+    ]
+  },
+  "experience": [
+    {
+      "company": "Tech Company",
+      "position": "Senior Software Engineer",
+      "startDate": "2020-01",
+      "endDate": null,
+      "current": true,
+      "summary": "Leading development of AI/ML infrastructure and cloud-native applications.",
+      "highlights": [
+        "Architected and deployed scalable ML pipelines processing 1M+ requests daily",
+        "Led migration to microservices architecture, reducing deployment time by 70%",
+        "Mentored team of 5 engineers on best practices and system design"
+      ],
+      "technologies": ["Python", "Go", "Kubernetes", "TensorFlow", "AWS"]
+    },
+    {
+      "company": "Previous Company",
+      "position": "Software Engineer",
+      "startDate": "2016-06",
+      "endDate": "2019-12",
+      "current": false,
+      "summary": "Built full-stack applications and contributed to core platform infrastructure.",
+      "highlights": [
+        "Developed real-time data processing system handling 500K events/second",
+        "Implemented CI/CD pipelines reducing release cycles from weeks to hours",
+        "Contributed to open-source tools used by 10K+ developers"
+      ],
+      "technologies": ["Java", "Node.js", "React", "PostgreSQL", "Docker"]
+    },
+    {
+      "company": "Startup",
+      "position": "Junior Developer",
+      "startDate": "2013-01",
+      "endDate": "2016-05",
+      "current": false,
+      "summary": "Started career building web applications and learning software engineering fundamentals.",
+      "highlights": [
+        "Built customer-facing features used by 100K+ users",
+        "Optimized database queries reducing page load times by 40%",
+        "Introduced automated testing practices to the team"
+      ],
+      "technologies": ["JavaScript", "PHP", "MySQL", "HTML/CSS"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "2009",
+      "endDate": "2013",
+      "highlights": [
+        "GPA: 3.8/4.0",
+        "Dean's List",
+        "Computer Science Club President"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages",
+      "items": [
+        { "name": "Python", "level": 95 },
+        { "name": "JavaScript/TypeScript", "level": 90 },
+        { "name": "Go", "level": 85 },
+        { "name": "Java", "level": 80 },
+        { "name": "Rust", "level": 70 }
+      ]
+    },
+    {
+      "category": "Frontend",
+      "items": [
+        { "name": "React", "level": 90 },
+        { "name": "Vue.js", "level": 85 },
+        { "name": "Tailwind CSS", "level": 90 },
+        { "name": "Next.js", "level": 80 }
+      ]
+    },
+    {
+      "category": "Backend & Infrastructure",
+      "items": [
+        { "name": "Node.js", "level": 90 },
+        { "name": "PostgreSQL", "level": 85 },
+        { "name": "Kubernetes", "level": 80 },
+        { "name": "AWS/GCP", "level": 85 },
+        { "name": "Docker", "level": 90 }
+      ]
+    },
+    {
+      "category": "AI/ML",
+      "items": [
+        { "name": "TensorFlow", "level": 80 },
+        { "name": "PyTorch", "level": 75 },
+        { "name": "MLOps", "level": 80 },
+        { "name": "LLMs/RAG", "level": 85 }
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Solutions Architect",
+      "issuer": "Amazon Web Services",
+      "date": "2022",
+      "url": null
+    },
+    {
+      "name": "Google Cloud Professional",
+      "issuer": "Google",
+      "date": "2021",
+      "url": null
+    }
+  ],
+  "projects": [
+    {
+      "name": "Open Source Contribution",
+      "description": "Major contributor to popular developer tools",
+      "url": "https://github.com/punitmishra",
+      "highlights": ["1000+ GitHub stars", "Used by Fortune 500 companies"]
+    }
+  ]
+}

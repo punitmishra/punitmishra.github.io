@@ -91,17 +91,28 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Premium Glassmorphism */
+/* Premium Glassmorphism - Minimalist version */
 .glass-premium {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .dark .glass-premium {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Minimalist glass - very subtle */
+.glass-minimal {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dark .glass-minimal {
+  background: rgba(15, 23, 42, 0.6);
 }
 
 /* Gradient border effect */
@@ -290,13 +301,35 @@
   background: rgba(15, 23, 42, 0.7);
 }
 
-/* Smooth hover lift */
+/* Smooth hover lift - Minimalist version */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
+}
+
+/* Subtle scale on hover */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.01);
+}
+
+/* Minimal hover glow */
+.hover-glow {
+  transition: box-shadow 0.2s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+}
+
+.dark .hover-glow:hover {
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.12);
 }
 
 /* Gradient text with better rendering */

@@ -550,6 +550,20 @@ onMounted(() => {
             Blog
             <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
           </button>
+          <router-link
+            to="/photos"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Photos
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </router-link>
+          <router-link
+            to="/resume"
+            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+          >
+            Resume
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          </router-link>
 
           <!-- Command Palette Trigger -->
           <button
@@ -623,6 +637,20 @@ onMounted(() => {
           >
             Blog
           </button>
+          <router-link
+            to="/photos"
+            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            @click="isMobileMenuOpen = false"
+          >
+            Photos
+          </router-link>
+          <router-link
+            to="/resume"
+            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
+            @click="isMobileMenuOpen = false"
+          >
+            Resume
+          </router-link>
           <button
             @click="styleStore.setDarkMode()"
             class="flex items-center gap-2 px-6 py-2.5 text-gray-700 dark:text-gray-300 font-semibold font-display"

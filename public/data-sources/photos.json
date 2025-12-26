@@ -1,0 +1,101 @@
+{
+  "photos": [
+    {
+      "publicId": "portfolio/professional/headshot-1",
+      "category": "professional",
+      "caption": "Professional Headshot",
+      "alt": "Professional headshot of Punit Mishra",
+      "aspectRatio": "3:4",
+      "featured": true
+    },
+    {
+      "publicId": "portfolio/professional/conference-talk",
+      "category": "professional",
+      "caption": "Tech Conference Speaker",
+      "alt": "Speaking at a technology conference",
+      "aspectRatio": "16:9"
+    },
+    {
+      "publicId": "portfolio/professional/team-collaboration",
+      "category": "professional",
+      "caption": "Team Collaboration",
+      "alt": "Collaborating with engineering team",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "portfolio/projects/ai-dashboard",
+      "category": "projects",
+      "caption": "AI Analytics Dashboard",
+      "alt": "Screenshot of AI-powered analytics dashboard",
+      "aspectRatio": "16:9",
+      "featured": true
+    },
+    {
+      "publicId": "portfolio/projects/mobile-app",
+      "category": "projects",
+      "caption": "Mobile Application",
+      "alt": "Mobile app interface design",
+      "aspectRatio": "9:16"
+    },
+    {
+      "publicId": "portfolio/projects/architecture-diagram",
+      "category": "projects",
+      "caption": "System Architecture",
+      "alt": "Cloud architecture diagram for distributed system",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "portfolio/projects/code-review",
+      "category": "projects",
+      "caption": "Code Review Session",
+      "alt": "Screenshot of code review process",
+      "aspectRatio": "16:9"
+    },
+    {
+      "publicId": "portfolio/personal/hiking-adventure",
+      "category": "personal",
+      "caption": "Mountain Hiking",
+      "alt": "Hiking in the mountains",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "portfolio/personal/workspace",
+      "category": "personal",
+      "caption": "Home Office Setup",
+      "alt": "Personal workspace and development setup",
+      "aspectRatio": "16:9",
+      "featured": true
+    },
+    {
+      "publicId": "portfolio/personal/travel",
+      "category": "personal",
+      "caption": "Travels",
+      "alt": "Travel photography",
+      "aspectRatio": "3:2"
+    },
+    {
+      "publicId": "portfolio/personal/hobbies",
+      "category": "personal",
+      "caption": "Side Projects",
+      "alt": "Working on personal projects",
+      "aspectRatio": "1:1"
+    }
+  ],
+  "categories": [
+    {
+      "id": "professional",
+      "name": "Professional",
+      "description": "Professional headshots and work-related photos"
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "description": "Screenshots and visuals from various projects"
+    },
+    {
+      "id": "personal",
+      "name": "Personal",
+      "description": "Personal photos and behind-the-scenes"
+    }
+  ]
+}

@@ -8,6 +8,8 @@ import Portfolio from "@/views/PortfolioView.vue";
 // Lazy load views for better performance
 const ProjectDetail = defineAsyncComponent(() => import("@/views/ProjectDetailView.vue"));
 const BlogArticle = defineAsyncComponent(() => import("@/views/BlogArticleView.vue"));
+const PhotoGallery = defineAsyncComponent(() => import("@/views/PhotoGalleryView.vue"));
+const Resume = defineAsyncComponent(() => import("@/views/ResumeView.vue"));
 
 const routes = [
   {
@@ -36,6 +38,24 @@ const routes = [
     path: "/blog/:slug",
     name: "blog-article",
     component: BlogArticle,
+  },
+  {
+    meta: {
+      title: "Photo Gallery - Punit Mishra",
+      description: "Photo gallery featuring professional photos, project screenshots, and personal moments.",
+    },
+    path: "/photos",
+    name: "photos",
+    component: PhotoGallery,
+  },
+  {
+    meta: {
+      title: "Resume - Punit Mishra",
+      description: "Interactive resume and CV of Punit Mishra, Full Stack Software Engineer.",
+    },
+    path: "/resume",
+    name: "resume",
+    component: Resume,
   },
 ];
 
