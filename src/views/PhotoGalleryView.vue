@@ -35,7 +35,7 @@ onMounted(async () => {
     </section>
 
     <!-- Gallery Section -->
-    <section class="pb-32 px-6">
+    <section class="pb-24 px-6">
       <div class="max-w-7xl mx-auto">
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center py-20">

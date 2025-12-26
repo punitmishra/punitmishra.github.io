@@ -27,23 +27,28 @@ function downloadPDF() {
 <template>
   <div class="min-h-screen bg-surface dark:bg-slate-900">
     <!-- Header -->
-    <section class="pt-24 pb-4 px-6">
-      <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-4">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Resume</h1>
-        <button
-          @click="downloadPDF"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          Download PDF
-        </button>
+    <section class="pt-32 pb-8 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-2">Resume</h1>
+            <p class="text-gray-600 dark:text-gray-400">Professional experience and qualifications</p>
+          </div>
+          <button
+            @click="downloadPDF"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-sm"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download PDF
+          </button>
+        </div>
       </div>
     </section>
 
     <!-- Resume Content -->
-    <section class="pb-16 px-6">
+    <section class="pb-24 px-6">
       <div class="max-w-4xl mx-auto">
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center py-20">

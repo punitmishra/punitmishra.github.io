@@ -1502,17 +1502,17 @@ def create_agent_workflow():
 
         <!-- Bottom section -->
         <div class="mt-8 pt-6 border-t border-gray-200/50 dark:border-slate-800/50">
-          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p class="text-gray-400 dark:text-gray-600 text-xs text-center md:text-left">
-              Senior Software Engineer @ SAP • UC Berkeley Alumni • AI/ML Infrastructure Architect
-            </p>
-            <div class="flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
-              <span>All content and code on this site is the intellectual property of Punit Mishra.</span>
-            </div>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-gray-400 dark:text-gray-500">
+            <a href="https://github.com/punitmishra/punitmishra.github.io/blob/main/LICENSE" target="_blank" class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+              MIT License (Code)
+            </a>
+            <span class="hidden md:inline">•</span>
+            <span>Content &copy; {{ new Date().getFullYear() }} Punit Mishra</span>
+            <span class="hidden md:inline">•</span>
+            <a href="#contact" @click.prevent="scrollToSection('contact')" class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+              Licensing Inquiries
+            </a>
           </div>
-          <p class="mt-4 text-center text-[10px] text-gray-400 dark:text-gray-600">
-            This website and its contents are protected under applicable copyright laws. Unauthorized reproduction, distribution, or use of any content without explicit written permission is prohibited. For inquiries regarding licensing or usage rights, please contact via the form above.
-          </p>
         </div>
       </div>
     </footer>
