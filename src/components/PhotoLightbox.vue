@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
-import { getImageUrl } from '@/utils/cloudinary';
 
 const props = defineProps({
   photos: { type: Array, required: true },

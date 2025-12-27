@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue';
-import CloudinaryImage from './CloudinaryImage.vue';
 import PhotoLightbox from './PhotoLightbox.vue';
 
 const props = defineProps({
@@ -43,7 +42,7 @@ function openLightbox(index) {
         :key="cat"
         class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200"
         :class="activeCategory === cat
-          ? 'bg-accent text-white'
+          ? 'bg-blue-600 text-white'
           : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'"
         @click="activeCategory = cat"
       >
