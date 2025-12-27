@@ -51,7 +51,7 @@ function openLightbox(index) {
       </button>
     </div>
 
-    <!-- Masonry grid -->
+    <!-- Photo grid -->
     <div
       class="grid gap-4"
       :style="{
@@ -62,17 +62,15 @@ function openLightbox(index) {
       <div
         v-for="(photo, index) in filteredPhotos"
         :key="photo.publicId || index"
-        class="group relative overflow-hidden rounded-2xl cursor-pointer hover-scale"
-        :class="photo.span === 2 ? 'row-span-2' : ''"
+        class="group relative overflow-hidden rounded-2xl cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+        :style="{ aspectRatio: (photo.aspectRatio || '4:3').replace(':', '/') }"
         @click="openLightbox(index)"
       >
-        <CloudinaryImage
-          :public-id="photo.publicId"
-          :alt="photo.alt || photo.caption || ''"
-          :aspect-ratio="photo.aspectRatio || '4:3'"
-          preset="gallery"
-          class="w-full h-full"
-          rounded="2xl"
+        <img
+          :src="`https://res.cloudinary.com/dnqycaqeb/image/upload/f_auto,q_auto,w_600,c_fill/${photo.publicId}`"
+          :alt="photo.alt || photo.caption || 'Photo'"
+          class="w-full h-full object-cover rounded-2xl"
+          loading="lazy"
         />
 
         <!-- Hover overlay -->

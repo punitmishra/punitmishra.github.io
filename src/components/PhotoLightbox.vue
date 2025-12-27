@@ -19,7 +19,7 @@ const hasNext = computed(() => currentIndex.value < props.photos.length - 1);
 const hasPrev = computed(() => currentIndex.value > 0);
 
 const imageUrl = computed(() =>
-  getImageUrl(currentPhoto.value.publicId, { width: 1920, quality: 'auto:best' })
+  `https://res.cloudinary.com/dnqycaqeb/image/upload/f_auto,q_auto:best,w_1920/${currentPhoto.value.publicId}`
 );
 
 function next() {
