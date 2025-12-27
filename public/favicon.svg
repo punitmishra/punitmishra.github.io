@@ -1,10 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b82f6"/>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
       <stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
+    <linearGradient id="g2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="6" fill="#0f172a"/>
-  <text x="16" y="23" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="14" fill="url(#g)">PM</text>
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#020617"/>
+
+  <!-- Code brackets hint -->
+  <path d="M5 10 L3 16 L5 22" stroke="url(#g1)" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <path d="M27 10 L29 16 L27 22" stroke="url(#g1)" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+  <!-- P -->
+  <path d="M8 8 L8 24" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M8 8 L14 8 C18 8 18 15 14 15 L8 15" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- M -->
+  <path d="M19 24 L19 12 L23 18 L27 12 L27 24" stroke="url(#g2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Accent dot -->
+  <circle cx="28" cy="5" r="1.5" fill="#06b6d4"/>
 </svg>

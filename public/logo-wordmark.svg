@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" fill="none">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon background -->
+  <rect width="50" height="50" rx="10" y="5" fill="url(#bg)"/>
+  <rect width="50" height="50" rx="10" y="5" fill="none" stroke="url(#grad)" stroke-width="1" opacity="0.5"/>
+
+  <!-- PM Icon -->
+  <path d="M10 14h9c5 0 8 3 8 7.5s-3 7.5-8 7.5h-4v11h-5V14zm5 4v7h4c3 0 4-1.5 4-3.5s-1-3.5-4-3.5h-4z" fill="url(#grad)"/>
+  <path d="M30 14h4l5 14 5-14h4v26h-4V24l-4 12h-2l-4-12v16h-4V14z" fill="url(#grad)"/>
+  <rect x="10" y="42" width="30" height="1" rx="0.5" fill="url(#grad)" opacity="0.5"/>
+
+  <!-- Wordmark: Punit Mishra -->
+  <text x="60" y="38" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700" font-size="24" fill="#0f172a">
+    <tspan fill="url(#grad)">Punit</tspan>
+    <tspan dx="6" fill="#64748b">Mishra</tspan>
+  </text>
+</svg>

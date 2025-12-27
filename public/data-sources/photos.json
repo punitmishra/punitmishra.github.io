@@ -1,5 +1,177 @@
 {
-  "photos": [],
+  "photos": [
+    {
+      "publicId": "punitmishra/PXL_20251107_022005719.MP_yh283e",
+      "category": "personal",
+      "caption": "Evening Moment",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4",
+      "featured": true
+    },
+    {
+      "publicId": "punitmishra/PXL_20251107_234420616_u5uajl",
+      "category": "personal",
+      "caption": "Night Scene",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251107_234427138_rvxg52",
+      "category": "personal",
+      "caption": "After Dark",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251109_171639749_gfpdnu",
+      "category": "personal",
+      "caption": "Weekend Adventure",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4",
+      "featured": true
+    },
+    {
+      "publicId": "punitmishra/PXL_20251109_171704439_1_vfivwa",
+      "category": "personal",
+      "caption": "Exploring",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251110_144257197_z0y5i8",
+      "category": "personal",
+      "caption": "Day Out",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251110_144400822.NIGHT_1_d2romk",
+      "category": "personal",
+      "caption": "Night Photography",
+      "alt": "Night photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251110_154030152.MP_x9k2bc",
+      "category": "personal",
+      "caption": "Afternoon",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251110_202155097_yropqx",
+      "category": "personal",
+      "caption": "Evening Vibes",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4",
+      "featured": true
+    },
+    {
+      "publicId": "punitmishra/PXL_20251110_202501386_azva7n",
+      "category": "personal",
+      "caption": "Golden Hour",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/PXL_20251111_144323259.MP_q3vfql",
+      "category": "personal",
+      "caption": "Midday Shot",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/1E62846D-2024-4937-9986-71C85B611BE7_cjdymo",
+      "category": "personal",
+      "caption": "Captured Moment",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/294B9860-DF6B-435B-90AE-B39C46462288_mlkngp",
+      "category": "personal",
+      "caption": "Memory",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/680CD2BD-76FD-4180-A7C0-8E174C55984A_jhukru",
+      "category": "personal",
+      "caption": "Portrait",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/6B561353-5886-4345-8F5C-7E9ED3B89CF9_lbpn6o",
+      "category": "personal",
+      "caption": "Scene",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/858486EA-EB10-44E1-AA04-4557E09152FC_pbpqvn",
+      "category": "personal",
+      "caption": "View",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/86D00237-D67C-4EBB-A266-290B578AB616_hdfe8r",
+      "category": "personal",
+      "caption": "Snapshot",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/87182AE8-9C19-4E33-B519-8A6E5C3DC065_mi6gyg",
+      "category": "personal",
+      "caption": "Adventure",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/877D6621-5E44-40A0-9DD5-6F1350EDF0E1_qwatmg",
+      "category": "personal",
+      "caption": "Journey",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/8D4B8ED0-6186-4FCB-84C3-6A6743E1A75E_favwgz",
+      "category": "personal",
+      "caption": "Moment",
+      "alt": "Personal photo",
+      "aspectRatio": "4:3"
+    },
+    {
+      "publicId": "punitmishra/A247E8F1-3822-4444-81AE-AE2997679FC5_dunsty",
+      "category": "personal",
+      "caption": "Discovery",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/B867E168-9B33-4171-A655-818211AECB85_irqmzi",
+      "category": "personal",
+      "caption": "Experience",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/D31E978E-5601-49B3-B410-EE98C07C6FEB_tyhqwb",
+      "category": "personal",
+      "caption": "Perspective",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    },
+    {
+      "publicId": "punitmishra/F19380F4-BBF7-49CE-BBF9-A2CAD1A9D71C_xkluan",
+      "category": "personal",
+      "caption": "Frame",
+      "alt": "Personal photo",
+      "aspectRatio": "3:4"
+    }
+  ],
   "categories": [
     {
       "id": "professional",

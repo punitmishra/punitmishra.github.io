@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <!-- Primary gradient - blue to cyan -->
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+
+    <!-- Light background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100" height="100" rx="20" fill="url(#bg)"/>
+  <rect width="100" height="100" rx="20" fill="none" stroke="url(#grad)" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- P - Bold geometric -->
+  <path d="M18 22h20c10 0 17 7 17 16s-7 16-17 16H28v22H18V22zm10 8v16h9c6 0 9-3 9-8s-3-8-9-8h-9z" fill="url(#grad)"/>
+
+  <!-- M - Bold geometric -->
+  <path d="M60 22h9l9 28 9-28h9v54h-9V44l-8 24h-4l-8-24v32h-7V22z" fill="url(#grad)"/>
+
+  <!-- Accent line -->
+  <rect x="18" y="82" width="64" height="2" rx="1" fill="url(#grad)" opacity="0.4"/>
+</svg>
