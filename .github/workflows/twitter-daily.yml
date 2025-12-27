@@ -59,43 +59,40 @@ jobs:
 
           case $FORMAT in
             0)
-              TWEET="🚀 ${DAY} Engineering Update
+              TWEET="🚀 ${DAY} Engineering Update 
+              📊 ${TOTAL} technical articles
+              📚 Topics: ${CATEGORIES}
+              💡 Latest: ${LATEST}
+              🔗 punitmishra.github.io
 
-📊 ${TOTAL} technical articles
-📚 Topics: ${CATEGORIES}
+              #SoftwareEngineering #Tech #AI"
+                            ;;
+                          1)
+                            TWEET="☕ ${DAY} from the engineering trenches
+              
+              🧠 What I'm thinking about:
+              • AI infrastructure at scale
+              • Rust for systems programming
+              • Vector search optimization
+              
+              📝 ${TOTAL} articles & counting
+              
+              🔗 punitmishra.github.io
 
-💡 Latest: ${LATEST}
-
-🔗 punitmishra.github.io
-
-#SoftwareEngineering #Tech #AI"
-              ;;
-            1)
-              TWEET="☕ ${DAY} from the engineering trenches
-
-🧠 What I'm thinking about:
-• AI infrastructure at scale
-• Rust for systems programming
-• Vector search optimization
-
-📝 ${TOTAL} articles & counting
-
-🔗 punitmishra.github.io
-
-#Engineering #AI #Rust"
+              #Engineering #AI #Rust"
               ;;
             2)
               TWEET="🔧 ${DAY} Build Log
 
-Latest: ${LATEST}
-
-Topics I write about:
-${CATEGORIES}
-
-Check out my technical blog 👇
-🔗 punitmishra.github.io
-
-#TechBlog #SoftwareEngineering"
+                    Latest: ${LATEST}
+                    
+                    Topics I write about:
+                    ${CATEGORIES}
+                    
+                    Check out my technical blog 👇
+                    🔗 punitmishra.github.io
+                    
+                    #TechBlog #SoftwareEngineering"
               ;;
           esac
 
