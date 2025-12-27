@@ -131,6 +131,23 @@ Secrets: TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCE
 3. Get credentials from: https://developer.twitter.com/en/portal/projects
 4. Test with: Run workflow manually with `dry_run=true`
 
+### Threads API
+```
+Workflow: .github/workflows/threads-post.yml
+Secrets: THREADS_ACCESS_TOKEN, THREADS_USER_ID
+```
+
+#### Threads Secrets Setup
+1. Create a Meta Developer App at https://developers.facebook.com
+2. Add Threads API permissions
+3. Generate Access Token and get User ID
+4. Add secrets to: https://github.com/punitmishra/punitmishra.github.io/settings/secrets/actions
+
+| Secret Name | Description | Get From |
+|-------------|-------------|----------|
+| `THREADS_ACCESS_TOKEN` | Graph API Access Token | Meta Developer Portal |
+| `THREADS_USER_ID` | Your Threads User ID | Meta Developer Portal |
+
 ## Content
 
 ### Blog Articles
@@ -148,10 +165,8 @@ Purpose: Cross-posting ready versions (no frontmatter)
 
 ## Deployment
 
-**Primary**: Vercel (auto-deploy from main)
-**Secondary**: GitHub Pages (hash routing)
-
-Build output: `/dist`
+**Platform**: GitHub Pages (auto-deploy via GitHub Actions)
+**Build output**: `/dist`
 
 ## Development Notes
 

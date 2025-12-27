@@ -1,0 +1,250 @@
+name: Post to Threads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/content/blog/*.md'
+      - 'public/content/blog/index.json'
+
+  workflow_dispatch:
+    inputs:
+      article_slug:
+        description: 'Article slug to post (e.g., shield-ai-dns-security)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run (preview only, no actual post)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  post-threads:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Detect new/updated articles
+        id: detect
+        if: github.event_name == 'push'
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'public/content/blog/*.md' | head -1)
+          if [ -n "$CHANGED" ]; then
+            SLUG=$(basename "$CHANGED" .md)
+            echo "slug=$SLUG" >> $GITHUB_OUTPUT
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "Detected article: $SLUG"
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "No new articles detected"
+          fi
+
+      - name: Set article slug
+        id: article
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "slug=${{ github.event.inputs.article_slug }}" >> $GITHUB_OUTPUT
+            echo "dry_run=${{ github.event.inputs.dry_run }}" >> $GITHUB_OUTPUT
+          else
+            echo "slug=${{ steps.detect.outputs.slug }}" >> $GITHUB_OUTPUT
+            echo "dry_run=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Read article metadata
+        id: metadata
+        if: steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          SLUG="${{ steps.article.outputs.slug }}"
+          ARTICLE_PATH="public/content/blog/${SLUG}.md"
+
+          if [ ! -f "$ARTICLE_PATH" ]; then
+            echo "Article not found: $ARTICLE_PATH"
+            exit 1
+          fi
+
+          # Extract title - remove 'title:' prefix and quotes
+          TITLE=$(grep -m1 '^title:' "$ARTICLE_PATH" | sed 's/^title: *//' | sed 's/^"//' | sed 's/"$//')
+
+          # Extract first 3 tags
+          TAGS=$(grep -m1 '^tags:' "$ARTICLE_PATH" | sed 's/^tags: *\[//' | sed 's/\]//' | tr -d '"' | cut -d',' -f1-3 | tr ',' ' ')
+
+          # Extract excerpt for description
+          EXCERPT=$(grep -m1 '^excerpt:' "$ARTICLE_PATH" | sed 's/^excerpt: *//' | sed 's/^"//' | sed 's/"$//' | head -c 200)
+
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+          echo "excerpt=$EXCERPT" >> $GITHUB_OUTPUT
+          echo "Title: $TITLE"
+          echo "Tags: $TAGS"
+
+      - name: Format post
+        id: post
+        if: steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          SLUG="${{ steps.article.outputs.slug }}"
+          TITLE="${{ steps.metadata.outputs.title }}"
+          TAGS="${{ steps.metadata.outputs.tags }}"
+          EXCERPT="${{ steps.metadata.outputs.excerpt }}"
+          URL="https://punitmishra.github.io/#/blog/${SLUG}"
+
+          # Format hashtags
+          HASHTAGS=""
+          for tag in $TAGS; do
+            clean=$(echo "$tag" | tr -d ' ' | sed 's/[^a-zA-Z0-9]//g')
+            if [ -n "$clean" ]; then
+              HASHTAGS="$HASHTAGS #$clean"
+            fi
+          done
+
+          # Build post (Threads has 500 char limit)
+          cat > post.txt << POSTEOF
+          ${TITLE}
+
+          ${EXCERPT}...
+
+          Read more: ${URL}
+          ${HASHTAGS}
+          POSTEOF
+
+          echo "Post preview:"
+          cat post.txt
+
+      - name: Post to Threads
+        if: (steps.detect.outputs.found == 'true' || github.event_name == 'workflow_dispatch') && steps.article.outputs.dry_run != 'true'
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+        run: |
+          if [ -z "$THREADS_ACCESS_TOKEN" ]; then
+            echo "Threads API credentials not configured"
+            echo "To configure:"
+            echo "1. Create a Meta Developer App at https://developers.facebook.com"
+            echo "2. Add Threads API permissions"
+            echo "3. Get Access Token and User ID"
+            echo "4. Add THREADS_ACCESS_TOKEN and THREADS_USER_ID to repo secrets"
+            exit 0
+          fi
+
+          POST_TEXT=$(cat post.txt)
+
+          # Create Threads post using Graph API
+          cat > post-threads.js << 'JSEOF'
+          const https = require('https');
+
+          const accessToken = process.env.THREADS_ACCESS_TOKEN;
+          const userId = process.env.THREADS_USER_ID;
+          const postText = require('fs').readFileSync('post.txt', 'utf8').trim();
+
+          // Step 1: Create media container
+          const createContainer = () => {
+            return new Promise((resolve, reject) => {
+              const params = new URLSearchParams({
+                media_type: 'TEXT',
+                text: postText,
+                access_token: accessToken
+              });
+
+              const options = {
+                hostname: 'graph.threads.net',
+                port: 443,
+                path: `/v1.0/${userId}/threads?${params.toString()}`,
+                method: 'POST'
+              };
+
+              const req = https.request(options, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  try {
+                    const json = JSON.parse(data);
+                    if (json.id) {
+                      console.log('Container created:', json.id);
+                      resolve(json.id);
+                    } else {
+                      console.error('Container creation failed:', data);
+                      reject(new Error('Failed to create container'));
+                    }
+                  } catch (e) {
+                    reject(e);
+                  }
+                });
+              });
+
+              req.on('error', reject);
+              req.end();
+            });
+          };
+
+          // Step 2: Publish the container
+          const publishContainer = (containerId) => {
+            return new Promise((resolve, reject) => {
+              const params = new URLSearchParams({
+                creation_id: containerId,
+                access_token: accessToken
+              });
+
+              const options = {
+                hostname: 'graph.threads.net',
+                port: 443,
+                path: `/v1.0/${userId}/threads_publish?${params.toString()}`,
+                method: 'POST'
+              };
+
+              const req = https.request(options, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  try {
+                    const json = JSON.parse(data);
+                    if (json.id) {
+                      console.log('Published! Post ID:', json.id);
+                      console.log('View at: https://threads.net/@punitmishra/post/' + json.id);
+                      resolve(json.id);
+                    } else {
+                      console.error('Publish failed:', data);
+                      reject(new Error('Failed to publish'));
+                    }
+                  } catch (e) {
+                    reject(e);
+                  }
+                });
+              });
+
+              req.on('error', reject);
+              req.end();
+            });
+          };
+
+          // Execute
+          createContainer()
+            .then(publishContainer)
+            .then(() => process.exit(0))
+            .catch(err => {
+              console.error('Error:', err.message);
+              process.exit(1);
+            });
+          JSEOF
+
+          node post-threads.js
+
+      - name: Dry run summary
+        if: steps.article.outputs.dry_run == 'true'
+        run: |
+          echo "DRY RUN - Post would be:"
+          cat post.txt
+          echo ""
+          echo "No actual post was made."
+          echo ""
+          echo "To enable Threads posting, add these secrets:"
+          echo "- THREADS_ACCESS_TOKEN: Your Threads/Meta Graph API access token"
+          echo "- THREADS_USER_ID: Your Threads user ID"

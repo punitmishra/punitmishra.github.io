@@ -12,6 +12,8 @@ import {
   mdiSourceFork,
   mdiArrowRight,
   mdiMagnify,
+  mdiWeatherSunny,
+  mdiWeatherNight,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import AnimatedCounter from "@/components/AnimatedCounter.vue";
@@ -25,8 +27,9 @@ import StatsGrid from "@/components/StatsGrid.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import BlogSection from "@/components/BlogSection.vue";
 import CurrentlyBuilding from "@/components/CurrentlyBuilding.vue";
-import TestimonialsSection from "@/components/TestimonialsSection.vue";
 import VisitorCounter from "@/components/VisitorCounter.vue";
+import GradientMesh from "@/components/GradientMesh.vue";
+import SocialFeed from "@/components/SocialFeed.vue";
 import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
@@ -1286,8 +1289,8 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- Testimonials -->
-    <TestimonialsSection />
+    <!-- Social Feed -->
+    <SocialFeed />
 
     <!-- Contact -->
     <section

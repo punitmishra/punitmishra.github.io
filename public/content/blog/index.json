@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "slug": "developer-productivity-2025",
+      "title": "Developer Productivity in 2025: Tools, Workflows, and AI Assistants",
+      "excerpt": "A comprehensive guide to modern developer productivity: terminal workflows, AI coding assistants, automation scripts, and techniques that actually move the needle.",
+      "date": "2025-01-20",
+      "category": "Technical",
+      "tags": ["Productivity", "Developer Tools", "AI", "Workflow", "Automation"],
+      "readTime": "14 min read",
+      "featured": true
+    },
+    {
+      "slug": "agentic-ai-patterns",
+      "title": "Agentic AI Patterns: Building Autonomous Systems That Actually Work",
+      "excerpt": "Production-tested patterns for building AI agents: ReAct, Supervisor, and Reflection patterns with LangGraph. Error handling, cost control, and real-world examples.",
+      "date": "2025-01-19",
+      "category": "AI/ML",
+      "tags": ["AI Agents", "LangGraph", "LLM", "Automation", "Architecture"],
+      "readTime": "16 min read",
+      "featured": true
+    },
+    {
       "slug": "complete-homelab-guide",
       "title": "Complete Homelab Setup: From Zero to Production Infrastructure",
       "excerpt": "Build a 5-node Raspberry Pi cluster with DNS filtering, media server, monitoring, IoT hub, and sensors. Docker deployments, Cloudflare tunnels, and backup strategies.",
