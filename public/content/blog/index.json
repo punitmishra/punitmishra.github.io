@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "slug": "latency-budget-playbook",
+      "title": "Latency Budget Playbook: How to Keep P99 Under 200ms",
+      "excerpt": "A practical guide to latency budgets, SLOs, and performance engineering. How to find the hot path, tame tail latency, and keep user-facing systems fast at scale.",
+      "date": "2025-02-08",
+      "category": "Technical",
+      "tags": ["Performance", "Latency", "SLO", "Distributed Systems", "Optimization"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
+      "slug": "prompt-injection-defense",
+      "title": "Prompt Injection Defense: Hardening LLM Apps in Production",
+      "excerpt": "Threat model and mitigation checklist for prompt injection attacks. Guardrails, structured outputs, tool permissions, and red-team testing patterns.",
+      "date": "2025-02-07",
+      "category": "Security",
+      "tags": ["LLM", "Security", "Prompt Injection", "RAG", "Defense"],
+      "readTime": "10 min read",
+      "featured": true
+    },
+    {
+      "slug": "engineering-leadership-notes",
+      "title": "Engineering Leadership Notes: Scaling Teams Without Slowing Down",
+      "excerpt": "Lessons from leading small, high-leverage teams. Decision velocity, ownership models, and how to keep quality high while shipping faster.",
+      "date": "2025-02-06",
+      "category": "Personal",
+      "tags": ["Leadership", "Teams", "Execution", "Culture"],
+      "readTime": "8 min read",
+      "featured": false
+    },
+    {
       "slug": "developer-productivity-2025",
       "title": "Developer Productivity in 2025: Tools, Workflows, and AI Assistants",
       "excerpt": "A comprehensive guide to modern developer productivity: terminal workflows, AI coding assistants, automation scripts, and techniques that actually move the needle.",
