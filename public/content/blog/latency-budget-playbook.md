@@ -1,6 +1,6 @@
 ---
 title: "Latency Budget Playbook: How to Keep P99 Under 200ms"
-date: "2025-02-08"
+date: "2026-02-08"
 category: "Technical"
 tags: ["Performance", "Latency", "SLO", "Distributed Systems", "Optimization"]
 readTime: "12 min read"

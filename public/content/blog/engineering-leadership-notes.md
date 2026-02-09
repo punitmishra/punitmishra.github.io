@@ -1,6 +1,6 @@
 ---
 title: "Engineering Leadership Notes: Scaling Teams Without Slowing Down"
-date: "2025-02-06"
+date: "2026-02-06"
 category: "Personal"
 tags: ["Leadership", "Teams", "Execution", "Culture"]
 readTime: "8 min read"
