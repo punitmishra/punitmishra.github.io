@@ -440,9 +440,9 @@ onMounted(() => {
           </router-link>
 
           <!-- Command Palette Trigger -->
-          <button
+           <button
             class="flex items-center gap-2 px-3 py-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100/80 dark:bg-slate-800/80 rounded-lg text-sm transition-colors border border-gray-200/50 dark:border-slate-700/50"
-            @click="commandPaletteRef.isOpen = true"
+             @click="commandPaletteRef?.value && (commandPaletteRef.value.isOpen = true)"
           >
             <BaseIcon
               :path="mdiMagnify"
