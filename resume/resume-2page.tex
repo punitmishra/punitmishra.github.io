@@ -1,0 +1,36 @@
+% ============================================================================
+% Punit Mishra — resume, TWO-PAGE version (secondary, roomier).
+% Content is in resume-content.tex (single source of truth). This driver only
+% sets the layout knobs. Build with: ./build.sh (produces both variants).
+% ============================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[letterpaper, margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[proportional,osf]{cochineal}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+
+\linespread{1.02}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\newcommand{\entrygap}{4pt}
+\newcommand{\skillgap}{2pt}
+
+\titleformat{\section}{\large\scshape}{}{0em}{}[{\titlerule[0.4pt]}]
+\titlespacing*{\section}{0pt}{11pt}{4pt}
+
+\setlist[itemize]{label=\textendash, leftmargin=1.1em, itemsep=2.5pt, topsep=2pt, parsep=0pt}
+
+\newcommand{\entry}[4]{%
+  {\scshape #1}\hfill #3\\[0.5pt]%
+  {\itshape #2}\hfill{\itshape #4}\par\vspace{1.5pt}%
+}
+
+\begin{document}
+\input{resume-content}
+\end{document}

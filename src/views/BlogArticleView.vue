@@ -496,7 +496,7 @@ watch(() => route.params.slug, (newSlug) => {
                   Punit Mishra
                 </p>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Senior Software Engineer @ SAP
+                  Senior ML Expert & AI Tech Lead @ SAP
                 </p>
               </div>
             </div>

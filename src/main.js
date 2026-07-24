@@ -46,8 +46,8 @@ if (
 
 /* Initialize SEO */
 initSEO({
-  title: 'Punit Mishra - Portfolio',
-  description: 'Full Stack Software Engineer with 12+ years of experience',
+  title: 'Punit Mishra - Senior ML Expert & AI Tech Lead',
+  description: 'Senior Machine Learning Expert & AI Tech Lead at SAP — agent platforms, LLM inference, and multi-tenant infrastructure at enterprise scale.',
   path: '/',
 });
 

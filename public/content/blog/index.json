@@ -171,16 +171,6 @@
       "featured": true
     },
     {
-      "slug": "launching-grepcoin",
-      "title": "Launching Grepcoin: Building a Cryptocurrency from Scratch",
-      "excerpt": "Complete journey of launching $GREP token - tokenomics design, smart contract development, security audits, liquidity provision, and community building.",
-      "date": "2025-01-06",
-      "category": "Crypto",
-      "tags": ["Cryptocurrency", "Blockchain", "Solidity", "Web3", "DeFi"],
-      "readTime": "20 min read",
-      "featured": true
-    },
-    {
       "slug": "web3-development-guide",
       "title": "Web3 Development: From Traditional Backend to Blockchain",
       "excerpt": "Transitioning from Web2 to Web3 - mental model shifts, tooling differences, smart contract patterns, and practical dApp development with Foundry and Wagmi.",
@@ -373,7 +363,7 @@
     {
       "slug": "career-engineering-growth",
       "title": "Engineering Career Growth: What Actually Matters",
-      "excerpt": "Lessons from 12+ years in software engineering on what separates engineers who grow continuously from those who plateau.",
+      "excerpt": "Lessons from 14+ years in software engineering on what separates engineers who grow continuously from those who plateau.",
       "date": "2024-11-23",
       "category": "Career",
       "tags": ["Career", "Engineering", "Leadership", "Growth"],

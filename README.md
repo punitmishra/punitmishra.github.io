@@ -2,7 +2,7 @@
 
 # Punit Mishra
 
-**Senior Software Engineer | AI/ML Infrastructure | Distributed Systems**
+**Senior Machine Learning Expert & AI Tech Lead @ SAP**
 
 [![Website](https://img.shields.io/badge/Website-punitmishra.com-0A66C2?style=for-the-badge&logo=safari&logoColor=white)](https://punitmishra.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-mishrapunit-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/mishrapunit)
@@ -11,7 +11,7 @@
 
 ---
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=3B82F6&center=true&vCenter=true&random=false&width=600&lines=12%2B+Years+of+Software+Engineering;AI%2FML+Infrastructure+%40+SAP;Building+Systems+at+Scale;UC+Berkeley+CS+%7C+AWS+%7C+CKA" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=3B82F6&center=true&vCenter=true&random=false&width=650&lines=14%2B+Years+in+Machine+Learning;Agent+Platforms+%26+LLM+Serving+%40+SAP;GPU+Inference+on+Custom+H100+Clusters;UC+Berkeley+EECS" alt="Typing SVG" />
 
 <br />
 
@@ -23,28 +23,31 @@
 
 ## About Me
 
-Senior Software Engineer with **12+ years** of experience architecting and building production systems at scale. Currently leading AI/ML infrastructure at **SAP**, serving Fortune 500 customers globally.
+Applied AI engineer and technical leader with **14+ years** taking machine learning from prototype to
+dependable production at enterprise scale. As Senior ML Expert & AI Tech Lead in **SAP CX Data & AI**,
+I lead a team of thirteen **and personally build** the agent orchestration, memory, multi-model serving,
+and multi-tenant infrastructure beneath our LLM products — delivered in direct forward-deployed partnerships.
 
 <table>
 <tr>
 <td width="50%">
 
-### Impact
+### What I build
 
-- Architected platforms handling **millions of daily requests**
-- Led **$500K+ annual cost savings** through optimization
-- Pioneer in ML containerization **3 years before industry**
-- Technical lead mentoring **10+ engineers**
+- **Agent platforms** — memory-managed runtime, multi-tenant LangGraph, MCP service hub
+- **LLM serving** — self-hosted + frontier models on Kubernetes, H100 clusters, Ray
+- **Vector search & RAG** — Qdrant, FAISS, CLIP embeddings behind gRPC agent services
+- **Multi-tenant infra** — identity (IAS/XSUAA), provisioning, GitOps delivery
 
 </td>
 <td width="50%">
 
 ### Focus Areas
 
-- **AI/ML Infrastructure** - LangGraph, multi-agent systems
-- **Systems Engineering** - Rust, Go, high-performance
-- **Cloud Native** - Kubernetes, microservices at scale
-- **Web3** - DeFi protocols, smart contracts
+- **AI/ML Infrastructure** — agents, inference, evaluation
+- **Systems Engineering** — Rust, performance-critical paths
+- **Cloud Native** — Kubernetes, Kyma/Gardener, Argo
+- **AI Security** — internal-auth design, threat modeling
 
 </td>
 </tr>
@@ -58,32 +61,24 @@ Senior Software Engineer with **12+ years** of experience architecting and build
 
 ### Languages
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=openjdk&logoColor=white)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
-![Solidity](https://img.shields.io/badge/Solidity-363636?style=flat-square&logo=solidity&logoColor=white)
 
-### AI/ML
+### AI / ML
 ![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
-![FAISS](https://img.shields.io/badge/FAISS-00599C?style=flat-square&logo=meta&logoColor=white)
+![Ray](https://img.shields.io/badge/Ray-028CF0?style=flat-square&logo=ray&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
 ![RAG](https://img.shields.io/badge/RAG-FF6F00?style=flat-square&logo=openai&logoColor=white)
-![Vector Search](https://img.shields.io/badge/Vector_Search-00897B?style=flat-square&logo=elasticsearch&logoColor=white)
+![FAISS](https://img.shields.io/badge/FAISS-00599C?style=flat-square&logo=meta&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?style=flat-square&logo=qdrant&logoColor=white)
 
 ### Infrastructure
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=flat-square&logo=terraform&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
+![Argo](https://img.shields.io/badge/Argo-EF7B4D?style=flat-square&logo=argo&logoColor=white)
+![gRPC](https://img.shields.io/badge/gRPC-244B5A?style=flat-square&logo=grpc&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-
-### Frontend
-![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 
 </div>
 
@@ -95,64 +90,51 @@ Senior Software Engineer with **12+ years** of experience architecting and build
 <tr>
 <td width="50%">
 
-### Shield AI
-**High-Performance DNS Security in Rust**
+### [CoViber](https://github.com/punitmishra/coviber)
+**Local-first memory for LLMs over MCP**
 
-AI-powered DNS filtering with ML-based DGA detection
+- Continuously-updated work graph
+- Multi-signal urgency triage queue
+- Local semantic memory, no cloud egress
 
-- Sub-millisecond latency
-- 127K queries/sec throughput
-- 15MB memory footprint
-- Real-time threat detection
-
-`Rust` `FAISS` `ML` `DNS`
+`Python` `MCP` `Embeddings`
 
 </td>
 <td width="50%">
 
-### Railroad Arcade
-**Remote IoT Model Railroad Control**
+### [Vaultic](https://github.com/punitmishra/vaultic)
+**Hardware-backed password manager in Rust**
 
-Web app for real-time model railroad control
+- FIDO2 / YubiKey support
+- CLI · TUI · daemon · GUI · MCP server
+- Local-first, no cloud, no telemetry
 
-- Sub-100ms latency
-- WebSocket real-time sync
-- Game modes & leaderboards
-- Multi-camera support
-
-`Next.js` `Raspberry Pi` `WebSockets`
+`Rust` `FIDO2` `Security`
 
 </td>
 </tr>
 <tr>
 <td width="50%">
 
-### Grepcoin ($GREP)
-**Developer-Focused Cryptocurrency**
+### [Shield AI](https://github.com/punitmishra/shield-ai)
+**AI-powered DNS filtering**
 
-ERC-20 token for code search APIs
+- Real-time threat detection
+- DNS-level filtering
 
-- Smart contract security audited
-- Staking & governance
-- 2,500+ token holders
-- DeFi integration
-
-`Solidity` `Hardhat` `Web3`
+`TypeScript` `AI/ML` `Security`
 
 </td>
 <td width="50%">
 
-### Raspberry Pi Homelab
-**5-Node IoT Infrastructure**
+### [Railroad Arcade](https://github.com/punitmishra/railroad-arcade)
+**Remote IoT model-railroad control**
 
-Fleet of Pis for home automation
+- Next.js frontend + Rust backend on a Pi
+- Controls real HO-scale hardware
+- Demo & live modes
 
-- DNS filtering & security
-- Docker-based deployments
-- Prometheus monitoring
-- Cloudflare Tunnels
-
-`Docker` `Prometheus` `Grafana`
+`Next.js` `Rust` `Raspberry Pi`
 
 </td>
 </tr>
@@ -164,8 +146,7 @@ Fleet of Pis for home automation
 
 <div align="center">
 
-![AWS Solutions Architect](https://img.shields.io/badge/AWS-Solutions_Architect-FF9900?style=for-the-badge&logo=amazonwebservices&logoColor=white)
-![CKA](https://img.shields.io/badge/CNCF-Kubernetes_Administrator-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![SAP Security Certified](https://img.shields.io/badge/SAP-Security_Certified-0FAAFF?style=for-the-badge&logo=sap&logoColor=white)
 
 </div>
 
@@ -185,60 +166,54 @@ Fleet of Pis for home automation
 ## Experience
 
 ```
-2013 - Present   Senior Software Engineer @ SAP
-                 |-- AI/ML Infrastructure & LLM Applications
-                 |-- Enterprise Commerce (Fortune 500 customers)
-                 |-- Cloud Native Development (K8s, CF)
-                 +-- Team Leadership & Mentoring (10+ engineers)
+Sep 2018 - Present   Senior ML Expert & AI Tech Lead @ SAP (CX Data & AI)
+                     |-- Agent platform, LLM serving, multi-tenant infra
+                     |-- Distributed AI on Ray + custom H100 GPU clusters
+                     |-- Vector search / RAG, NL-to-SQL (2026 cloud releases)
+                     +-- Lead a team of thirteen; forward-deployed engineer
 
-2020 - Present   Hardware & IoT Projects
-                 |-- Railroad Arcade (Raspberry Pi + Next.js)
-                 |-- Shield AI (Rust DNS Security)
-                 |-- 5-Node Homelab Infrastructure
-                 +-- CircuitPython Embedded Controllers
+2014 - 2018          Senior Software Engineer & Architect @ CallidusCloud
+                     |-- Thunderbridge AI backend on Dataiku  (acquired by SAP, $2.4B)
+                     +-- Multi-tenant ML/CI-CD; ML stack to GKE on-prem (Anthos)
 
-2010 - 2012      UC Berkeley
-                 |-- B.S. Computer Science
-                 |-- AI, Computer Architecture, Networks
-                 +-- International Student Scholarship
+2011 - 2014          Automation Systems Engineer @ IBM
+                     +-- Automation & test frameworks for JPMorgan Chase
+
+2012                 UC Berkeley — B.S. Electrical Engineering & Computer Science
 ```
 
 ---
 
 ## Portfolio Website
 
-This repository hosts my personal portfolio built with modern web technologies:
+This repository hosts my personal portfolio, built with modern web technologies:
 
 <div align="center">
 
 [![Vue.js](https://img.shields.io/badge/Vue.js_3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
-[![Vite](https://img.shields.io/badge/Vite_7-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat-square&logo=cloudinary&logoColor=white)](https://cloudinary.com/)
 
 </div>
 
 ### Features
 - Minimalist, responsive design with dark mode
-- Interactive resume with PDF export (FAANG-quality formatting)
+- Resume with high-quality PDF export (LaTeX-built)
 - Photo gallery with lightbox
-- Blog with 25+ technical articles
-- Project case studies with demos
-- GitHub & Twitter integration
+- Technical blog
+- Project case studies
 
 ### Quick Start
 
 ```bash
-# Clone and install
 git clone https://github.com/punitmishra/punitmishra.github.io.git
 cd punitmishra.github.io
 npm install
+npm run dev      # development
+npm run build    # production build
 
-# Development
-npm run dev
-
-# Build
-npm run build
+# Rebuild the resume PDFs from LaTeX (requires tectonic)
+cd resume && ./build.sh
 ```
 
 ---
@@ -247,9 +222,9 @@ npm run build
 
 <div align="center">
 
-**Let's build something amazing together**
+**Let's build something together**
 
-[![Email](https://img.shields.io/badge/Email-contact@punitmishra.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@punitmishra.com)
+[![Email](https://img.shields.io/badge/Email-punit.mishra09@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:punit.mishra09@gmail.com)
 [![Website](https://img.shields.io/badge/Website-punitmishra.com-0A66C2?style=for-the-badge&logo=safari&logoColor=white)](https://punitmishra.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/mishrapunit)
 
@@ -257,6 +232,6 @@ npm run build
 
 <img src="https://komarev.com/ghpvc/?username=punitmishra&style=flat-square&color=3b82f6" alt="Profile Views" />
 
-<sub>Built with Vue.js & Tailwind CSS | Deployed on Vercel & GitHub Pages</sub>
+<sub>Built with Vue.js & Tailwind CSS</sub>
 
 </div>
