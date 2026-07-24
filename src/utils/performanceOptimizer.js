@@ -13,15 +13,20 @@ export function preloadCriticalResources() {
 }
 
 /**
- * Defer non-critical CSS
+ * Defer non-critical CSS.
+ *
+ * DISABLED: this previously set every stylesheet to media="print" and only
+ * restored media="all" in an onload handler. Because the stylesheets are
+ * already loaded by the time this runs, onload never fired again — so the CSS
+ * stayed media="print", applied to no screen, and the whole app rendered
+ * unstyled (blank page). The app ships a single, render-critical CSS bundle
+ * that Vite already optimizes, so there is nothing safe to defer here.
  */
 export function deferNonCriticalCSS() {
-  const nonCriticalCSS = document.querySelectorAll('link[rel="stylesheet"]:not([data-critical])');
-  nonCriticalCSS.forEach((link) => {
-    link.media = 'print';
-    link.onload = () => {
-      link.media = 'all';
-    };
+  // Safety net: if anything ever left a stylesheet stuck on media="print",
+  // restore it so the page can never be left unstyled.
+  document.querySelectorAll('link[rel="stylesheet"][media="print"]').forEach((link) => {
+    link.media = 'all';
   });
 }
 
