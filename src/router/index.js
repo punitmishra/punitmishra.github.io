@@ -14,8 +14,8 @@ const Resume = defineAsyncComponent(() => import("@/views/ResumeView.vue"));
 const routes = [
   {
     meta: {
-      title: "Punit Mishra - Portfolio",
-      description: "Full Stack Software Engineer with 12+ years of experience building scalable applications from silicon to software. Specialized in AI/ML infrastructure, systems architecture, and enterprise software development.",
+      title: "Punit Mishra - Senior ML Expert & AI Tech Lead",
+      description: "Senior Machine Learning Expert & AI Tech Lead at SAP with 14+ years taking ML from prototype to production at enterprise scale — agent platforms, LLM inference on H100 clusters, and multi-tenant infrastructure.",
     },
     path: "/",
     name: "portfolio",

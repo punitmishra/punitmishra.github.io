@@ -4,8 +4,8 @@
  */
 
 export const siteConfig = {
-  title: 'Punit Mishra - Software Engineer Portfolio',
-  description: 'Full Stack Software Engineer with 12+ years of experience building scalable applications from silicon to software. Specialized in AI/ML infrastructure, systems architecture, and enterprise software development.',
+  title: 'Punit Mishra - Senior ML Expert & AI Tech Lead',
+  description: 'Senior Machine Learning Expert & AI Tech Lead at SAP with 14+ years taking ML from prototype to production at enterprise scale — agent platforms, LLM inference on H100 clusters, and multi-tenant infrastructure.',
   url: 'https://punitmishra.com',
   image: 'https://punitmishra.com/assets/images/github-header-image-pm.png',
   author: 'Punit Mishra',
@@ -108,7 +108,7 @@ export function generateStructuredData(type = 'Person', additionalData = {}) {
     name: 'Punit Mishra',
     url: siteConfig.url,
     image: siteConfig.image,
-    jobTitle: 'Senior Software Engineer',
+    jobTitle: 'Senior Machine Learning Expert & AI Tech Lead',
     worksFor: {
       '@type': 'Organization',
       name: 'SAP',

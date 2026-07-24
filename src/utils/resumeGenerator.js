@@ -29,48 +29,20 @@ function formatDate(dateStr) {
  * Download resume as PDF
  */
 export async function downloadResumePDF() {
+  // Serve the high-quality, LaTeX-built PDF (public/resume.pdf) instead of
+  // generating one client-side. Source: resume/resume.tex (built via resume/build.sh).
   try {
     trackDownload('resume', 'resume.pdf');
-
-    const resumeData = await fetchResumeData();
-    const resumeHTML = generateResumeHTML(resumeData);
-
-    const html2pdfModule = await import('html2pdf.js');
-    const html2pdf = html2pdfModule.default || html2pdfModule;
-
-    if (!html2pdf) {
-      throw new Error('html2pdf module not loaded');
-    }
-
-    const container = document.createElement('div');
-    container.innerHTML = resumeHTML;
-    container.style.cssText = 'position: absolute; left: -9999px; top: 0;';
-    document.body.appendChild(container);
-
-    const content = container.querySelector('.resume');
-
-    const options = {
-      margin: 0,
-      filename: 'Punit_Mishra_Resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-      },
-      jsPDF: {
-        unit: 'in',
-        format: 'letter',
-        orientation: 'portrait',
-      },
-    };
-
-    await html2pdf().set(options).from(content).save();
-    document.body.removeChild(container);
-
+    const a = document.createElement('a');
+    a.href = `${import.meta.env.BASE_URL || '/'}resume.pdf`;
+    a.download = 'Punit_Mishra_Resume.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   } catch (error) {
-    console.error('Error generating PDF:', error);
-    alert('Error generating PDF. Please try again.');
+    console.error('Error downloading resume:', error);
+    // Fallback: open in a new tab so the user can still save it
+    window.open(`${import.meta.env.BASE_URL || '/'}resume.pdf`, '_blank');
   }
 }
 

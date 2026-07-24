@@ -1,175 +1,177 @@
 {
   "basics": {
     "name": "Punit Mishra",
-    "title": "Senior Software Engineer",
-    "summary": "Senior Software Engineer with 12+ years of experience architecting and building production systems at scale. Deep expertise in AI/ML infrastructure, distributed systems, and full-stack development. Track record of delivering high-impact projects from concept to production serving enterprise customers globally.",
-    "email": "contact@punitmishra.com",
-    "location": "Pleasanton, CA",
+    "title": "Senior Machine Learning Expert & AI Tech Lead",
+    "summary": "Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to dependable production at enterprise scale. Not only an architect — I implement, deploy, and own systems end to end, from agent runtimes and LLM inference pipelines through GPU deployment on custom H100 clusters and production scaling. As Senior ML Expert and AI Tech Lead in SAP CX Data & AI, I lead a team of thirteen and personally build the agent orchestration, memory, multi-model serving, and multi-tenant infrastructure beneath our LLM products — delivered in direct forward-deployed partnerships.",
+    "email": "punit.mishra09@gmail.com",
+    "location": "Bay Area, CA",
     "profiles": [
       { "network": "GitHub", "url": "https://github.com/punitmishra" },
       { "network": "LinkedIn", "url": "https://linkedin.com/in/mishrapunit" },
-      { "network": "Twitter", "url": "https://twitter.com/punitmishra" },
-      { "network": "Instagram", "url": "https://instagram.com/punitmishra" }
+      { "network": "Website", "url": "https://punitmishra.com" }
     ]
   },
   "experience": [
     {
       "company": "SAP",
-      "position": "Senior Software Engineer",
-      "startDate": "2013-01",
+      "position": "Senior Machine Learning Expert & AI Tech Lead — CX Data & AI (CXAI)",
+      "location": "San Ramon, CA",
+      "startDate": "2018-09",
       "endDate": null,
       "current": true,
-      "summary": "Lead architect for AI/ML infrastructure serving Fortune 500 enterprise customers globally.",
+      "summary": "Lead and personally build the agent orchestration, LLM serving, and multi-tenant infrastructure beneath SAP CX's LLM products.",
       "highlights": [
-        "Architected and built core enterprise platform from v0 to production, now serving Fortune 500 customers with millions of daily requests",
-        "Led AI/ML infrastructure development including LLM integration, vector search (FAISS), and multi-agent systems using LangGraph",
-        "Pioneered ML containerization strategy 3 years before industry adoption of MLOps practices",
-        "Achieved 40% latency reduction and 3x throughput improvement through distributed caching and query optimization",
-        "Reduced cloud infrastructure costs by $500K+ annually through resource optimization and intelligent autoscaling",
-        "Technical lead for cross-functional teams of 5-8 engineers; mentored 10+ engineers across multiple teams",
-        "Led SOC 2 compliance initiatives and implemented zero-trust security architecture"
+        "Built and own end to end a domain-agnostic conversational agent platform — a memory-managed runtime with multi-tenant LangGraph orchestration, fronted by an agent gateway and MCP-based service hub; implemented performance-critical paths in Rust",
+        "Introduced Ray for distributed AI workloads and built/deployed LLM serving on custom bare-metal H100 GPU clusters, owning the full lifecycle from infrastructure bring-up through production inference and scaling",
+        "Stood up multi-model LLM serving — self-hosted internal models alongside frontier models (Claude, Qwen, Granite-class) on Kubernetes, with automated benchmark and evaluation harnesses",
+        "Shipped natural-language-to-SQL turning business questions into validated queries — shipping within SAP's 2026 public and private cloud releases",
+        "Re-architected vision capabilities (visual-attribute extraction, object detection, visual search) into gRPC agent services; PyTorch + CLIP embeddings backed by vector search and RAG (Qdrant, FAISS)",
+        "Designed multi-tenant identity and provisioning: cross-service internal-auth contract and tenant-resolution model unifying IAS and XSUAA, plus automated SaaS tenant provisioning (CAP / cds-mtxs)",
+        "Lead a team of thirteen engineers across three workstreams; set architecture direction via ADRs and serve as forward-deployed engineer on the platform's first production enterprise customer (a global retailer)",
+        "Established the CI/CD and delivery backbone: PR-test gates on ephemeral environments and GitOps promotion (dev → prod) via Argo and Piper on Kubernetes / Kyma (Gardener). SAP Security certified; own AI ethics & compliance"
       ],
-      "technologies": ["Python", "TypeScript", "Java", "Rust", "Kubernetes", "AWS", "PostgreSQL", "Redis", "LangGraph"]
+      "technologies": ["Python", "Rust", "LangGraph", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "Qdrant", "FAISS", "gRPC", "Kyma"]
     },
     {
-      "company": "Personal Projects",
-      "position": "Hardware & IoT Engineer",
-      "startDate": "2020-01",
-      "endDate": null,
-      "current": true,
-      "summary": "Building production-grade IoT systems, embedded controllers, and network infrastructure for home automation and personal projects.",
+      "company": "CallidusCloud",
+      "position": "Senior Software Engineer & Architect",
+      "location": "SF Bay Area",
+      "startDate": "2014",
+      "endDate": "2018",
+      "current": false,
+      "summary": "Acquired by SAP for $2.4B.",
       "highlights": [
-        "Built Railroad Arcade: remote-controlled model railroad with Next.js, WebSockets, and Raspberry Pi GPIO for real-time control",
-        "Developed Shield AI: high-performance DNS security system in Rust with ML-based threat detection, sub-millisecond latency",
-        "Created Circuit Playground Express controller with CircuitPython for embedded train control, open-sourced for maker community",
-        "Designed and deployed homelab with 5 Raspberry Pis: DNS filtering, media server, monitoring, IoT bridge, and sensor nodes",
-        "Implemented Pi-hole alternative with custom ML models for DGA detection and real-time threat analysis",
-        "Built automated deployment pipeline with GitHub Actions, Docker multi-arch builds, and Cloudflare Tunnels"
+        "Built the Thunderbridge AI backend on Dataiku",
+        "Designed multi-tenant ML and CI/CD across Oracle, Vertica, SAP HANA, and HDFS",
+        "Ported the full ML stack to GKE on-prem (Anthos) with Istio"
       ],
-      "technologies": ["Raspberry Pi", "CircuitPython", "Rust", "Docker", "Prometheus", "Grafana", "Pi-hole", "Cloudflare"]
+      "technologies": ["Dataiku", "GKE", "Anthos", "Istio", "SAP HANA", "Vertica", "Oracle", "HDFS"]
+    },
+    {
+      "company": "IBM",
+      "position": "Automation Systems Engineer",
+      "location": "Fort Worth, TX",
+      "startDate": "2011",
+      "endDate": "2014",
+      "current": false,
+      "summary": "Automation and test engineering for financial-services clients.",
+      "highlights": [
+        "Built reporting and data-validation automation for JPMorgan Chase",
+        "Built reusable Selenium / Java test frameworks adopted across the firm"
+      ],
+      "technologies": ["Java", "Selenium", "Automation"]
     }
   ],
   "education": [
     {
       "institution": "University of California, Berkeley",
-      "degree": "Bachelor of Science",
-      "field": "Computer Science",
-      "startDate": "2010",
+      "degree": "B.S. Electrical Engineering & Computer Science (EECS)",
+      "field": "Electrical Engineering & Computer Science",
+      "startDate": "",
       "endDate": "2012",
-      "highlights": [
-        "Coursework: Artificial Intelligence, Computer Architecture, Communication Networks, Signals & Systems",
-        "International Student Scholarship ($10,000)"
-      ]
+      "highlights": []
     }
   ],
   "skills": [
     {
+      "category": "AI & Agents",
+      "items": [
+        { "name": "LangGraph", "level": 92 },
+        { "name": "LangChain", "level": 88 },
+        { "name": "MCP", "level": 88 },
+        { "name": "LLM Serving & Eval", "level": 90 },
+        { "name": "RAG", "level": 90 },
+        { "name": "NL-to-SQL", "level": 85 },
+        { "name": "PyTorch", "level": 80 }
+      ]
+    },
+    {
+      "category": "GPU & Serving",
+      "items": [
+        { "name": "Ray (distributed)", "level": 85 },
+        { "name": "H100 clusters", "level": 82 },
+        { "name": "Self-hosted LLM/embeddings", "level": 85 },
+        { "name": "Knative / KServe", "level": 78 }
+      ]
+    },
+    {
+      "category": "Infra & Cloud",
+      "items": [
+        { "name": "Kubernetes", "level": 90 },
+        { "name": "Kyma / Gardener", "level": 85 },
+        { "name": "Istio", "level": 80 },
+        { "name": "Argo / GitOps", "level": 85 },
+        { "name": "Docker", "level": 92 },
+        { "name": "Azure (AKS)", "level": 80 },
+        { "name": "GCP (GKE / Anthos)", "level": 80 }
+      ]
+    },
+    {
+      "category": "Platform & Data",
+      "items": [
+        { "name": "gRPC / protobuf", "level": 85 },
+        { "name": "CAP / XSUAA (OIDC/PKCE)", "level": 82 },
+        { "name": "PostgreSQL", "level": 88 },
+        { "name": "SAP HANA", "level": 80 },
+        { "name": "Vector DBs (Qdrant, FAISS)", "level": 88 },
+        { "name": "Kafka", "level": 78 }
+      ]
+    },
+    {
       "category": "Languages",
       "items": [
         { "name": "Python", "level": 95 },
-        { "name": "TypeScript", "level": 90 },
-        { "name": "JavaScript", "level": 90 },
-        { "name": "Rust", "level": 80 },
+        { "name": "Rust", "level": 85 },
+        { "name": "TypeScript", "level": 88 },
         { "name": "Java", "level": 85 },
-        { "name": "Go", "level": 75 },
         { "name": "SQL", "level": 90 }
-      ]
-    },
-    {
-      "category": "Frontend",
-      "items": [
-        { "name": "Vue.js", "level": 90 },
-        { "name": "React", "level": 85 },
-        { "name": "Next.js", "level": 80 },
-        { "name": "Tailwind CSS", "level": 95 }
-      ]
-    },
-    {
-      "category": "Backend & Infrastructure",
-      "items": [
-        { "name": "Node.js", "level": 90 },
-        { "name": "FastAPI", "level": 85 },
-        { "name": "PostgreSQL", "level": 90 },
-        { "name": "Redis", "level": 85 },
-        { "name": "Kubernetes", "level": 85 },
-        { "name": "Docker", "level": 95 },
-        { "name": "AWS", "level": 90 },
-        { "name": "Terraform", "level": 80 }
-      ]
-    },
-    {
-      "category": "AI/ML",
-      "items": [
-        { "name": "LangGraph", "level": 90 },
-        { "name": "LangChain", "level": 85 },
-        { "name": "FAISS", "level": 85 },
-        { "name": "Vector Search", "level": 90 },
-        { "name": "RAG", "level": 90 },
-        { "name": "PyTorch", "level": 75 }
-      ]
-    },
-    {
-      "category": "Web3 & Blockchain",
-      "items": [
-        { "name": "Solidity", "level": 85 },
-        { "name": "Hardhat", "level": 85 },
-        { "name": "Foundry", "level": 80 },
-        { "name": "Wagmi/Viem", "level": 80 },
-        { "name": "ERC-20/721", "level": 85 },
-        { "name": "DeFi Protocols", "level": 75 }
       ]
     }
   ],
   "certifications": [
     {
-      "name": "AWS Solutions Architect",
-      "issuer": "Amazon Web Services",
-      "date": "2020",
-      "url": null
-    },
-    {
-      "name": "Kubernetes Administrator (CKA)",
-      "issuer": "CNCF",
-      "date": "2021",
+      "name": "SAP Security Certified",
+      "issuer": "SAP",
+      "date": "",
       "url": null
     }
   ],
   "projects": [
     {
+      "name": "CoViber",
+      "description": "Local-first memory for LLMs over the Model Context Protocol. Maintains a continuously-updated work graph, triage queue, and local semantic memory — no cloud egress.",
+      "url": "https://github.com/punitmishra/coviber",
+      "highlights": ["MCP-native", "Local-first / no telemetry", "Work graph + urgency triage", "Local embeddings"]
+    },
+    {
+      "name": "Vaultic",
+      "description": "Local-first, encrypted password manager in Rust with FIDO2/YubiKey support. One on-disk format shared by CLI, TUI, daemon, GUI, and MCP server. No cloud, no account, no telemetry.",
+      "url": "https://github.com/punitmishra/vaultic",
+      "highlights": ["Rust", "FIDO2 / YubiKey", "CLI / TUI / MCP", "Homebrew tap"]
+    },
+    {
       "name": "Shield AI",
-      "description": "AI-powered DNS filtering system with real-time threat detection using Rust and ML. Sub-millisecond latency, 15MB memory, DGA detection.",
+      "description": "AI-powered DNS filtering system with real-time threat detection.",
       "url": "https://github.com/punitmishra/shield-ai",
-      "highlights": ["Sub-millisecond DNS resolution", "ML-based DGA detection", "15MB memory footprint", "127K queries/sec throughput"]
+      "highlights": ["Real-time threat detection", "DNS filtering", "TypeScript"]
     },
     {
       "name": "Railroad Arcade",
-      "description": "Remote-controlled model railroad web app with real-time IoT control, game modes, and leaderboards using Next.js and Raspberry Pi.",
+      "description": "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend on Vercel with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode or live control.",
       "url": "https://github.com/punitmishra/railroad-arcade",
-      "highlights": ["Real-time WebSocket control", "Sub-100ms latency", "Gamification system", "Multi-camera support"]
+      "highlights": ["Next.js + Rust", "Raspberry Pi hardware control", "Demo & live modes", "WebSockets"]
     },
     {
-      "name": "Circuit Playground Express Controller",
-      "description": "Open-source CircuitPython firmware for embedded model railroad control with smooth acceleration and sensor feedback.",
-      "url": "https://github.com/punitmishra/railroad-arcade-cpx",
-      "highlights": ["CircuitPython firmware", "PWM motor control", "NeoPixel feedback", "Serial protocol bridge"]
+      "name": "RailCommand Firmware",
+      "description": "Multi-node ESP32-C3 firmware for the RailCommand model-railroad control system.",
+      "url": "https://github.com/punitmishra/esp32-firmware",
+      "highlights": ["ESP32-C3", "C++", "Multi-node", "Embedded"]
     },
     {
-      "name": "Raspberry Pi Homelab",
-      "description": "Fleet of 5 Raspberry Pis providing DNS security, IoT control, media serving, monitoring, and sensor collection.",
-      "url": "https://github.com/punitmishra/homelab",
-      "highlights": ["Docker-based deployments", "Prometheus/Grafana monitoring", "Cloudflare Tunnel access", "Automated CI/CD"]
-    },
-    {
-      "name": "Grepcoin ($GREP)",
-      "description": "Developer-focused cryptocurrency with utility for code search APIs. ERC-20 token with staking, governance, and DeFi integration.",
-      "url": "https://github.com/punitmishra/grepcoin",
-      "highlights": ["ERC-20 token launch", "Staking & governance", "Security audited", "2,500+ holders"]
-    },
-    {
-      "name": "Multi-Agent AI System",
-      "description": "Orchestrated AI agents for complex task automation using LangGraph with state management and error recovery.",
-      "url": "https://github.com/punitmishra",
-      "highlights": ["LangGraph orchestration", "Complex task automation", "State machine design", "Error recovery patterns"]
+      "name": "Pi Race",
+      "description": "Zero-dependency Rust CLI that benchmarks four classic π algorithms (Ramanujan, Euler/Basel, Wallis, Leibniz) head-to-head on accuracy and speed.",
+      "url": "https://github.com/punitmishra/pi-race",
+      "highlights": ["Zero-dependency Rust", "4 π algorithms", "Accuracy vs speed", "CLI"]
     }
   ]
 }
