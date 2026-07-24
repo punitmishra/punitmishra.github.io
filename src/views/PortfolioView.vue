@@ -343,7 +343,7 @@ const fetchGitHubRepos = async () => {
 
 
 const totalYearsExperience = computed(() => {
-  return 12.5;
+  return 14;
 });
 
 // Filter state
@@ -626,8 +626,9 @@ onMounted(() => {
 
             <!-- Description -->
             <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl leading-relaxed">
-              Architect and tech lead building enterprise AI infrastructure at scale.
-              {{ totalYearsExperience }}+ years shipping production systems—from silicon design to cloud-native microservices.
+              Applied AI engineer and tech lead building enterprise AI at scale — agent platforms,
+              LLM inference on custom H100 clusters, and multi-tenant infrastructure.
+              {{ totalYearsExperience }}+ years taking ML from prototype to production.
             </p>
 
             <!-- CTA Buttons -->
@@ -747,7 +748,7 @@ onMounted(() => {
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
             <div class="text-2xl font-bold text-gray-900 dark:text-white">
-              12+
+              14+
             </div>
             <div class="text-xs text-gray-500 dark:text-gray-400">
               Years Experience
