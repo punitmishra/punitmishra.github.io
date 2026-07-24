@@ -146,7 +146,7 @@ and multi-tenant infrastructure beneath our LLM products — delivered in direct
 
 <div align="center">
 
-![SAP Security Certified](https://img.shields.io/badge/SAP-Security_Certified-0FAAFF?style=for-the-badge&logo=sap&logoColor=white)
+![SAP Security Expert](https://img.shields.io/badge/SAP-Security_Expert-0FAAFF?style=for-the-badge&logo=sap&logoColor=white)
 
 </div>
 
@@ -167,17 +167,20 @@ and multi-tenant infrastructure beneath our LLM products — delivered in direct
 
 ```
 Sep 2018 - Present   Senior ML Expert & AI Tech Lead @ SAP (CX Data & AI)
-                     |-- Agent platform, LLM serving, multi-tenant infra
+                     |-- Agent platform (LangGraph, MCP), LLM serving, multi-tenant infra
                      |-- Distributed AI on Ray + custom H100 GPU clusters
-                     |-- Vector search / RAG, NL-to-SQL (2026 cloud releases)
+                     |-- CX & Commerce AI Toolkit, NL-to-SQL over S/4HANA (2026 releases)
                      +-- Lead a team of thirteen; forward-deployed engineer
 
-2014 - 2018          Senior Software Engineer & Architect @ CallidusCloud
-                     |-- Thunderbridge AI backend on Dataiku  (acquired by SAP, $2.4B)
-                     +-- Multi-tenant ML/CI-CD; ML stack to GKE on-prem (Anthos)
+Feb 2014 - Sep 2018  Senior Software Engineer @ CallidusCloud  (acquired by SAP, $2.4B)
+                     |-- Thunderbridge AI backend on Dataiku; multi-tenant ML
+                     +-- ML stack to GKE on-prem (Anthos); CI/CD backbone
 
-2011 - 2014          Automation Systems Engineer @ IBM
+Oct 2012 - Dec 2013  Automation Systems Engineer @ IBM  (Dallas–Fort Worth)
                      +-- Automation & test frameworks for JPMorgan Chase
+
+2011                 Web Developer @ UC Berkeley Law IST  ·  SWE Intern @ LawPivot
+2009 - 2010          SWE Intern @ LawPivot (Google Startup Labs)
 
 2012                 UC Berkeley — B.S. Electrical Engineering & Computer Science
 ```

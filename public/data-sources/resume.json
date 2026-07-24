@@ -2,7 +2,7 @@
   "basics": {
     "name": "Punit Mishra",
     "title": "Senior Machine Learning Expert & AI Tech Lead",
-    "summary": "Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to dependable production at enterprise scale. Not only an architect — I implement, deploy, and own systems end to end, from agent runtimes and LLM inference pipelines through GPU deployment on custom H100 clusters and production scaling. As Senior ML Expert and AI Tech Lead in SAP CX Data & AI, I lead a team of thirteen and personally build the agent orchestration, memory, multi-model serving, and multi-tenant infrastructure beneath our LLM products — delivered in direct forward-deployed partnerships.",
+    "summary": "Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to dependable production at enterprise scale. Not only an architect — I implement, deploy, and own systems end to end, from agent runtimes and LLM inference pipelines through GPU deployment on custom H100 clusters and production scaling. As Senior ML Expert and AI Tech Lead in SAP CX Data & AI, I lead a team of thirteen and personally build the agent orchestration, memory, multi-model serving, and multi-tenant infrastructure beneath our LLM products.",
     "email": "punit.mishra09@gmail.com",
     "location": "Bay Area, CA",
     "profiles": [
@@ -14,52 +14,92 @@
   "experience": [
     {
       "company": "SAP",
-      "position": "Senior Machine Learning Expert & AI Tech Lead — CX Data & AI (CXAI)",
+      "position": "Senior Machine Learning Expert & AI Tech Lead — CX Data & AI",
       "location": "San Ramon, CA",
       "startDate": "2018-09",
       "endDate": null,
       "current": true,
       "summary": "Lead and personally build the agent orchestration, LLM serving, and multi-tenant infrastructure beneath SAP CX's LLM products.",
       "highlights": [
-        "Built and own end to end a domain-agnostic conversational agent platform — a memory-managed runtime with multi-tenant LangGraph orchestration, fronted by an agent gateway and MCP-based service hub; implemented performance-critical paths in Rust",
-        "Introduced Ray for distributed AI workloads and built/deployed LLM serving on custom bare-metal H100 GPU clusters, owning the full lifecycle from infrastructure bring-up through production inference and scaling",
-        "Stood up multi-model LLM serving — self-hosted internal models alongside frontier models (Claude, Qwen, Granite-class) on Kubernetes, with automated benchmark and evaluation harnesses",
-        "Shipped natural-language-to-SQL turning business questions into validated queries — shipping within SAP's 2026 public and private cloud releases",
-        "Re-architected vision capabilities (visual-attribute extraction, object detection, visual search) into gRPC agent services; PyTorch + CLIP embeddings backed by vector search and RAG (Qdrant, FAISS)",
-        "Designed multi-tenant identity and provisioning: cross-service internal-auth contract and tenant-resolution model unifying IAS and XSUAA, plus automated SaaS tenant provisioning (CAP / cds-mtxs)",
-        "Lead a team of thirteen engineers across three workstreams; set architecture direction via ADRs and serve as forward-deployed engineer on the platform's first production enterprise customer (a global retailer)",
-        "Established the CI/CD and delivery backbone: PR-test gates on ephemeral environments and GitOps promotion (dev → prod) via Argo and Piper on Kubernetes / Kyma (Gardener). SAP Security certified; own AI ethics & compliance"
+        "Built and own a domain-agnostic conversational agent platform — a memory-managed runtime with multi-tenant LangGraph orchestration reusable across business domains, with performance-critical paths in Rust",
+        "Authored natural-language-to-SQL over S/4HANA, turning business questions into validated queries — shipping within SAP's 2026 public and private cloud releases",
+        "Introduced Ray and built LLM serving on custom bare-metal H100 GPU clusters; multi-model serving (self-hosted plus Claude, Qwen, Granite-class) on Kubernetes with automated evaluation harnesses",
+        "Delivered visual and textual LLM agents across SAP's CX & Commerce AI Toolkit (PyTorch on Kubernetes); visual-attribute prediction on OpenAI / CLIP embeddings backed by vector search and RAG",
+        "Designed multi-tenant ML on Kubeflow & Knative (Azure AKS) across SAP CX cloud (C4C, CPQ, CDC), with feature stores (Feathr, Feast)",
+        "Re-architected vision — attribute extraction, object detection, visual search — into first-class gRPC agent services via an agent gateway and MCP-based service hub",
+        "Lead a team of thirteen; own AI ethics & compliance; SAP Security Expert; set the group's SDLC and engineering standards, and serve as forward-deployed engineer on the platform's first production enterprise customer"
       ],
-      "technologies": ["Python", "Rust", "LangGraph", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "Qdrant", "FAISS", "gRPC", "Kyma"]
+      "technologies": ["Python", "Rust", "LangGraph", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "CLIP", "Qdrant", "FAISS", "Kubeflow", "Knative", "Azure AKS"]
     },
     {
       "company": "CallidusCloud",
-      "position": "Senior Software Engineer & Architect",
+      "position": "Senior Software Engineer — Thunderbridge AI / SAP Sales Cloud",
       "location": "SF Bay Area",
-      "startDate": "2014",
-      "endDate": "2018",
+      "startDate": "2014-02",
+      "endDate": "2018-09",
       "current": false,
-      "summary": "Acquired by SAP for $2.4B.",
+      "summary": "Acquired by SAP for $2.4B. Built the Thunderbridge AI ML platform and the CI/CD backbone; earlier, senior automation engineering.",
       "highlights": [
-        "Built the Thunderbridge AI backend on Dataiku",
-        "Designed multi-tenant ML and CI/CD across Oracle, Vertica, SAP HANA, and HDFS",
-        "Ported the full ML stack to GKE on-prem (Anthos) with Istio"
+        "Designed and built the Thunderbridge AI backend in Python on Dataiku, with multi-tenancy running every customer workload for SAP Sales Cloud optimization",
+        "Ported the full Dataiku ML stack to GKE on-prem (Google Anthos) with Istio; built the CI/CD backbone (Jenkins on Kubernetes, Kaniko, Artifactory) plus automated merges (Bulldozer / Policy-Bot)",
+        "Engineered multi-partition data resiliency for ML across Oracle, Vertica, SAP HANA, and HDFS (Spark); shipped inference services for CPQ on Dataiku's API node",
+        "Integrated SAP security scans (Coverity, Black Duck, Fortify) into Jenkins per commit; earlier, as Senior Automation Engineer, built TDD/Scala ETL validation and Selenium/Java + Node.js UI test frameworks over a self-maintaining Selenium Grid"
       ],
-      "technologies": ["Dataiku", "GKE", "Anthos", "Istio", "SAP HANA", "Vertica", "Oracle", "HDFS"]
+      "technologies": ["Python", "Dataiku", "GKE", "Anthos", "Istio", "Jenkins", "Kaniko", "SAP HANA", "Vertica", "Oracle", "HDFS", "Spark", "Scala", "Selenium"]
     },
     {
       "company": "IBM",
       "position": "Automation Systems Engineer",
-      "location": "Fort Worth, TX",
-      "startDate": "2011",
-      "endDate": "2014",
+      "location": "Dallas–Fort Worth, TX",
+      "startDate": "2012-10",
+      "endDate": "2013-12",
       "current": false,
-      "summary": "Automation and test engineering for financial-services clients.",
+      "summary": "Automation and test engineering for JPMorgan Chase.",
       "highlights": [
-        "Built reporting and data-validation automation for JPMorgan Chase",
-        "Built reusable Selenium / Java test frameworks adopted across the firm"
+        "Built a reporting and data-validation automation framework for JPMorgan Chase",
+        "Automated VM creation/configuration via a WCF SOAP service (IIS); parallelized and scheduled test execution across cloud machines with varied OS/browser configs",
+        "Developed reusable Selenium / Java test APIs (JUnit, TestNG) adopted across the firm"
       ],
-      "technologies": ["Java", "Selenium", "Automation"]
+      "technologies": ["Java", "Selenium", "JUnit", "TestNG", "WCF", "IIS"]
+    },
+    {
+      "company": "UC Berkeley — Law IST",
+      "position": "Web Developer",
+      "location": "Berkeley, CA",
+      "startDate": "2011-09",
+      "endDate": "2011-12",
+      "current": false,
+      "summary": "",
+      "highlights": [
+        "Built an online teaching-evaluation system for the Law School on a PHP / Oracle 10g backend, integrated with CalNet (Berkeley authentication) for end-of-course student evaluations"
+      ],
+      "technologies": ["PHP", "Oracle", "CalNet"]
+    },
+    {
+      "company": "LawPivot (Google Startup Labs)",
+      "position": "Software Engineering Intern",
+      "location": "Mountain View, CA",
+      "startDate": "2011-05",
+      "endDate": "2011-08",
+      "current": false,
+      "summary": "",
+      "highlights": [
+        "Built user-to-user interaction features on the Django backend and an internal analytics tool visualizing user data (logins, time on site) used by the sales team"
+      ],
+      "technologies": ["Python", "Django"]
+    },
+    {
+      "company": "LawPivot",
+      "position": "Software Engineering Intern",
+      "location": "Fremont, CA",
+      "startDate": "2009-10",
+      "endDate": "2010-08",
+      "current": false,
+      "summary": "",
+      "highlights": [
+        "Automated testing with Selenium IDE and tracked defects; worked with the founding team on wireframes and AWS server configuration"
+      ],
+      "technologies": ["Selenium", "AWS"]
     }
   ],
   "education": [
@@ -67,9 +107,9 @@
       "institution": "University of California, Berkeley",
       "degree": "B.S. Electrical Engineering & Computer Science (EECS)",
       "field": "Electrical Engineering & Computer Science",
-      "startDate": "",
+      "startDate": "2010",
       "endDate": "2012",
-      "highlights": []
+      "highlights": ["International Student Scholarship (2011)", "Computer Science Undergraduate Association"]
     }
   ],
   "skills": [
@@ -82,7 +122,9 @@
         { "name": "LLM Serving & Eval", "level": 90 },
         { "name": "RAG", "level": 90 },
         { "name": "NL-to-SQL", "level": 85 },
-        { "name": "PyTorch", "level": 80 }
+        { "name": "PyTorch", "level": 80 },
+        { "name": "OpenAI / CLIP", "level": 82 },
+        { "name": "MLOps (Kubeflow, Feathr, Feast)", "level": 82 }
       ]
     },
     {
@@ -101,9 +143,10 @@
         { "name": "Kyma / Gardener", "level": 85 },
         { "name": "Istio", "level": 80 },
         { "name": "Argo / GitOps", "level": 85 },
+        { "name": "Jenkins", "level": 82 },
         { "name": "Docker", "level": 92 },
         { "name": "Azure (AKS)", "level": 80 },
-        { "name": "GCP (GKE / Anthos)", "level": 80 }
+        { "name": "GCP (GKE / Anthos)", "level": 82 }
       ]
     },
     {
@@ -114,6 +157,7 @@
         { "name": "PostgreSQL", "level": 88 },
         { "name": "SAP HANA", "level": 80 },
         { "name": "Vector DBs (Qdrant, FAISS)", "level": 88 },
+        { "name": "HDFS / Spark", "level": 78 },
         { "name": "Kafka", "level": 78 }
       ]
     },
@@ -122,15 +166,16 @@
       "items": [
         { "name": "Python", "level": 95 },
         { "name": "Rust", "level": 85 },
-        { "name": "TypeScript", "level": 88 },
         { "name": "Java", "level": 85 },
+        { "name": "Scala", "level": 75 },
+        { "name": "TypeScript", "level": 88 },
         { "name": "SQL", "level": 90 }
       ]
     }
   ],
   "certifications": [
     {
-      "name": "SAP Security Certified",
+      "name": "SAP Security Expert",
       "issuer": "SAP",
       "date": "",
       "url": null
