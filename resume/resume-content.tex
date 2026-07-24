@@ -1,7 +1,9 @@
 % ============================================================================
 % Shared resume content — the SINGLE SOURCE OF TRUTH.
 % Included by resume.tex (1-page) and resume-2page.tex (2-page).
-% Layout knobs (font size, margins, spacing) live in the drivers, not here.
+% Drivers define: \entrygap, \skillgap, \entry, and the macros
+%   \longonly{...}  -> content shown ONLY on the 2-page version
+%   \shortonly{...} -> content shown ONLY on the 1-page version
 % The CONTACT_EMAIL token is substituted at build time by build.sh.
 % ============================================================================
 
@@ -23,66 +25,109 @@
 \section{Profile}
 Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to
 dependable production at enterprise scale. Not only an architect --- I \textbf{implement, deploy, and
-own systems end to end}, from agent runtimes and LLM inference pipelines through \textbf{GPU
-deployment on custom H100 clusters} and production scaling. As Senior ML Expert and AI Tech Lead in
-SAP CX Data \& AI, I lead a team of thirteen \emph{and personally build} the agent orchestration,
-memory, multi-model serving, and multi-tenant infrastructure beneath our LLM products --- delivered
-in direct \textbf{forward-deployed partnerships}. Deep command of Rust, Kubernetes, distributed
+own systems end to end}, from agent runtimes and LLM inference pipelines through \textbf{GPU deployment
+on custom H100 clusters}. As Senior ML Expert and AI Tech Lead in SAP CX Data \& AI, I lead a team of
+thirteen \emph{and personally build} the agent orchestration, memory, multi-model serving, and
+multi-tenant infrastructure beneath our LLM products. Deep command of Rust, Kubernetes, distributed
 inference, vector search, and AI security.
 
 % --- Experience -------------------------------------------------------------
 \section{Experience}
 
-\entry{SAP}{Senior Machine Learning Expert \& AI Tech Lead --- CX Data \& AI (CXAI)}{Sep 2018 -- Present}{San Ramon, CA}
+\entry{SAP}{Senior Machine Learning Expert \& AI Tech Lead --- CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
 \begin{itemize}
-  \item \textbf{Built and own end to end} a domain-agnostic conversational agent platform --- a
-  memory-managed runtime with multi-tenant LangGraph orchestration, reusable across business domains,
-  fronted by an \textbf{agent gateway and MCP-based service hub} that lets agents discover and compose
-  backend capabilities behind one hardened contract; \textbf{implemented performance-critical paths in Rust}.
-  \item \textbf{Introduced Ray} to the organization for distributed AI workloads and \textbf{built and
-  deployed LLM serving on custom bare-metal H100 GPU clusters} --- owning the full lifecycle from
-  infrastructure bring-up through production inference, scaling, and a configurable embedding-router /
-  self-hosted serving tier for latency- and cost-sensitive paths.
-  \item Stood up \textbf{multi-model LLM serving} --- self-hosted internal models alongside third-party
-  frontier models (Claude, Qwen, Granite-class) on Kubernetes, with resolver-aware prompting and
-  automated benchmark / evaluation harnesses across serving lanes.
-  \item Shipped \textbf{natural-language-to-SQL} --- turning business questions into validated queries
-  --- now shipping within SAP's \textbf{2026 public and private cloud releases}.
-  \item Re-architected the platform's \textbf{vision capabilities} --- visual-attribute extraction,
-  object detection, and visual search --- into first-class \textbf{gRPC agent services} exposed through
-  the agent gateway and MCP hub; PyTorch and CLIP / text-image embeddings backed by \textbf{vector
-  search and RAG} (Qdrant, FAISS).
-  \item Designed the platform's \textbf{multi-tenant identity and provisioning}: a cross-service
-  internal-auth contract and canonical tenant-resolution model unifying \textbf{IAS and XSUAA}, plus
-  automated SaaS tenant provisioning (CAP / \texttt{cds-mtxs} sidecar) and a tenant registry.
-  \item \textbf{Lead a team of thirteen engineers} across three workstreams; set architecture direction
-  through ADRs, own backlog and code review across multiple GitHub orgs, mentor senior engineers, and
-  \textbf{serve as forward-deployed engineer} on the platform's first production enterprise customer
-  (a global retailer) --- provisioning, security validation, and delivery.
-  \item Established the \textbf{CI/CD and delivery backbone}: PR-test gates on ephemeral environments and
-  \textbf{GitOps promotion} (dev\,$\rightarrow$\,prod) via Argo and Piper on Kubernetes / Kyma (Gardener).
-  \textbf{SAP Security certified}; own AI ethics \& compliance and set the group's SDLC and engineering standards.
+  \item \textbf{Built and own a domain-agnostic conversational agent platform} --- a memory-managed
+  runtime with multi-tenant LangGraph orchestration reusable across business domains, with
+  performance-critical paths written in \textbf{Rust}.
+  \item Authored \textbf{natural-language-to-SQL over S/4HANA}, turning business questions into
+  validated queries --- now shipping within SAP's \textbf{2026 public and private cloud releases}.
+  \item \textbf{Introduced Ray} and built \textbf{LLM serving on custom bare-metal H100 GPU clusters};
+  multi-model serving (self-hosted plus Claude, Qwen, Granite-class) on Kubernetes with automated
+  evaluation harnesses.
+  \item Delivered visual and textual LLM agents across SAP's \textbf{CX \& Commerce AI Toolkit}
+  (PyTorch on Kubernetes); visual-attribute prediction on OpenAI / CLIP embeddings backed by
+  \textbf{vector search and RAG}.
+  \item Designed \textbf{multi-tenant ML} on Kubeflow \& Knative (Azure AKS) across SAP CX cloud
+  (C4C, CPQ, CDC), with feature stores (Feathr, Feast); \textbf{lead a team of thirteen}, own AI ethics
+  \& compliance, and set the group's SDLC and engineering standards. \textbf{SAP Security Expert}.
+  \longonly{%
+  \item Re-architected \textbf{vision} --- attribute extraction, object detection, visual search ---
+  into first-class \textbf{gRPC agent services} exposed through an agent gateway and MCP-based service hub.
+  \item Designed multi-tenant identity and provisioning unifying \textbf{IAS and XSUAA}; established the
+  CI/CD backbone with \textbf{GitOps promotion} (Argo / Piper) on Kubernetes / Kyma (Gardener).
+  \item Serve as \textbf{forward-deployed engineer} on the platform's first production enterprise
+  customer, deploying always-on agent services at very large scale across multiple customers.%
+  }
 \end{itemize}
 \vspace{\entrygap}
 
-\entry{CallidusCloud}{Senior Software Engineer \& Architect --- acquired by SAP for \$2.4B}{2014 -- 2018}{SF Bay Area}
-Built the Thunderbridge AI backend on Dataiku; designed multi-tenant ML and CI/CD across Oracle,
-Vertica, SAP HANA, and HDFS; ported the full ML stack to GKE on-prem (Anthos) with Istio.
+\entry{CallidusCloud}{Senior Software Engineer --- Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018}{SF Bay Area \textnormal{(acquired by SAP, \$2.4B)}}
+\begin{itemize}
+  \item Designed and built the \textbf{Thunderbridge AI} backend in Python on \textbf{Dataiku}, with
+  multi-tenancy running every customer workload for SAP Sales Cloud optimization.
+  \item Ported the full Dataiku ML stack to \textbf{GKE on-prem (Google Anthos)} with Istio, and built
+  the CI/CD backbone --- Jenkins on Kubernetes, Kaniko image builds, Artifactory --- plus automated
+  merges (Palantir Bulldozer / Policy-Bot).
+  \longonly{%
+  \item Engineered multi-partition data resiliency for ML across \textbf{Oracle, Vertica, SAP HANA, and
+  HDFS} (Spark); shipped inference services for CPQ on Dataiku's API node.
+  \item Integrated SAP security scans (\textbf{Coverity, Black Duck, Fortify}) into Jenkins per commit.
+  As Senior Automation Engineer (earlier), built TDD/Scala ETL validation and resilient Selenium/Java
+  and Node.js UI test frameworks over a self-maintaining Selenium Grid.%
+  }
+\end{itemize}
 \vspace{\entrygap}
 
-\entry{IBM}{Automation Systems Engineer}{2011 -- 2014}{Fort Worth, TX}
-Built reporting and data-validation automation for JPMorgan Chase and reusable Selenium / Java test
-frameworks adopted across the firm.
+\entry{IBM}{Automation Systems Engineer}{Oct 2012 -- Dec 2013}{Dallas--Fort Worth, TX}
+\begin{itemize}
+  \item Built a reporting and \textbf{data-validation automation framework} for JPMorgan Chase.
+  \longonly{%
+  \item Automated VM creation/configuration via a WCF SOAP service (IIS); parallelized test execution
+  and scheduled runs across cloud machines with varied OS/browser configs.%
+  }
+  \item Developed reusable \textbf{Selenium / Java} test APIs (JUnit, TestNG) adopted across the firm.
+\end{itemize}
+
+% --- Earlier: condensed on 1-page, full on 2-page --------------------------
+\shortonly{%
+\vspace{\entrygap}
+{\scshape Earlier}\hfill\\[1pt]
+\textit{UC Berkeley Law IST} --- Web Developer (2011)\; \textbullet\;
+\textit{LawPivot (Google Startup Labs)} --- SWE Intern (2011)\; \textbullet\;
+\textit{LawPivot} --- SWE Intern (2009--2010)\par
+}
+\longonly{%
+\vspace{\entrygap}
+\entry{UC Berkeley Law IST}{Web Developer}{Sep -- Dec 2011}{Berkeley, CA}
+\begin{itemize}
+  \item Built an online teaching-evaluation system for the Law School on a PHP / Oracle 10g backend,
+  integrated with \textbf{CalNet} (Berkeley authentication) for end-of-course student evaluations.
+\end{itemize}
+\vspace{\entrygap}
+
+\entry{LawPivot Inc. (Google Startup Labs)}{Software Engineering Intern}{May -- Aug 2011}{Mountain View, CA}
+\begin{itemize}
+  \item Built user-to-user interaction features on the Django backend and an internal analytics tool
+  visualizing user data (logins, time on site) used by the sales team.
+\end{itemize}
+\vspace{\entrygap}
+
+\entry{LawPivot Inc.}{Software Engineering Intern}{Oct 2009 -- Aug 2010}{Fremont, CA}
+\begin{itemize}
+  \item Automated testing with Selenium IDE and tracked defects; worked with the founding team on
+  wireframes and AWS server configuration.
+\end{itemize}%
+}
 
 % --- Skills -----------------------------------------------------------------
 \section{Skills}
 \begin{tabularx}{\textwidth}{@{}>{\scshape}l X@{}}
-  AI \& Agents      & Agent orchestration (LangGraph, LangChain), MCP (agent gateway / tool hub), LLM serving \& evaluation, NL-to-SQL, RAG, retriever--reranker (bge-m3), PyTorch, MLOps, Kubeflow \\[\skillgap]
-  GPU \& Serving    & Ray (distributed), custom bare-metal H100 clusters, Garden Linux, self-hosted LLM / embedding serving (Ollama), embedding-router tier, Knative / KServe \\[\skillgap]
-  Infra \& Cloud    & Kubernetes, Kyma / Gardener, Istio, Argo / GitOps, Piper, Docker, Jenkins, CI/CD; vector DBs (Qdrant, FAISS), Redis; Azure (AKS), GCP (GKE / Anthos) \\[\skillgap]
-  Platform \& Data  & gRPC / protobuf, CAP / XSUAA (OIDC / PKCE); PostgreSQL, SAP HANA, Oracle, Vertica, Databricks, Kafka, Polars \\[\skillgap]
-  Languages         & Python (FastAPI, Spark), Rust, Java, TypeScript / Next.js \\[\skillgap]
-  Security          & SAP Security certified; internal-auth / identity design, threat modeling, SAST / SCA (GHAS / CodeQL, Coverity, Black Duck, Fortify) \\
+  AI \& Agents      & Agent orchestration (LangGraph, LangChain), MCP (agent gateway / tool hub), LLM serving \& evaluation, NL-to-SQL, RAG, retriever--reranker, PyTorch, OpenAI / CLIP, MLOps (Kubeflow, Feathr, Feast) \\[\skillgap]
+  GPU \& Serving    & Ray (distributed), custom bare-metal H100 clusters, self-hosted LLM / embedding serving, Knative / KServe \\[\skillgap]
+  Infra \& Cloud    & Kubernetes, Kyma / Gardener, Istio, Argo / GitOps, Jenkins, Docker, CI/CD; vector DBs (Qdrant, FAISS), Redis; Azure (AKS), GCP (GKE / Anthos) \\[\skillgap]
+  Platform \& Data  & gRPC / protobuf, CAP / XSUAA (OIDC / PKCE); PostgreSQL, SAP HANA, Oracle, Vertica, HDFS / Spark, Kafka \\[\skillgap]
+  Languages         & Python (FastAPI, Django), Rust, Java, Scala, TypeScript / Next.js \\[\skillgap]
+  Security          & SAP Security Expert; internal-auth / identity design, threat modeling, SAST / SCA (Coverity, Black Duck, Fortify) \\
 \end{tabularx}
 
 % --- Education --------------------------------------------------------------

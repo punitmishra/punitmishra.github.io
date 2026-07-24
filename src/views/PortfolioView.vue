@@ -155,11 +155,12 @@ const experience = [
     location: "San Ramon, CA",
     duration: "6+ years",
     achievements: [
-      "Built and own end to end a domain-agnostic conversational agent platform: memory-managed runtime with multi-tenant LangGraph orchestration, fronted by an agent gateway and MCP-based service hub; performance-critical paths in Rust",
-      "Introduced Ray for distributed AI workloads and deployed LLM serving on custom bare-metal H100 GPU clusters — full lifecycle from bring-up through production inference and scaling",
-      "Stood up multi-model LLM serving (self-hosted + frontier models: Claude, Qwen, Granite-class) on Kubernetes with automated evaluation harnesses; shipped natural-language-to-SQL in SAP's 2026 cloud releases",
-      "Designed multi-tenant identity/provisioning unifying IAS and XSUAA; re-architected vision (detection, visual search) into gRPC agent services with vector search + RAG (Qdrant, FAISS)",
-      "Lead a team of thirteen across three workstreams; forward-deployed engineer on the platform's first production enterprise customer. SAP Security certified",
+      "Built and own a domain-agnostic conversational agent platform: memory-managed runtime with multi-tenant LangGraph orchestration reusable across business domains; performance-critical paths in Rust",
+      "Authored natural-language-to-SQL over S/4HANA, turning business questions into validated queries — shipping in SAP's 2026 public and private cloud releases",
+      "Introduced Ray and built LLM serving on custom bare-metal H100 GPU clusters; multi-model serving (self-hosted + Claude, Qwen, Granite-class) on Kubernetes with automated evaluation harnesses",
+      "Delivered visual and textual LLM agents across SAP's CX & Commerce AI Toolkit (PyTorch on Kubernetes); visual-attribute prediction on OpenAI / CLIP embeddings backed by vector search + RAG",
+      "Designed multi-tenant ML on Kubeflow & Knative (Azure AKS) across SAP CX cloud (C4C, CPQ, CDC), with feature stores (Feathr, Feast); re-architected vision into gRPC agent services",
+      "Lead a team of thirteen; own AI ethics & compliance; SAP Security Expert; set the group's SDLC and engineering standards, and serve as forward-deployed engineer on the first production enterprise customer",
     ],
     tech: ["Python", "Rust", "LangGraph", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "Qdrant", "FAISS", "gRPC", "Kyma"],
     highlights: [
@@ -169,31 +170,69 @@ const experience = [
     ],
   },
   {
-    title: "Senior Software Engineer & Architect",
+    title: "Senior Software Engineer — Thunderbridge AI / SAP Sales Cloud",
     company: "CallidusCloud",
-    period: "2014 - 2018",
+    period: "Feb 2014 - Sep 2018",
     location: "SF Bay Area",
     duration: "Acquired by SAP for $2.4B",
     achievements: [
-      "Built the Thunderbridge AI backend on Dataiku",
-      "Designed multi-tenant ML and CI/CD across Oracle, Vertica, SAP HANA, and HDFS",
-      "Ported the full ML stack to GKE on-prem (Anthos) with Istio",
+      "Designed and built the Thunderbridge AI backend in Python on Dataiku, with multi-tenancy running every customer workload for SAP Sales Cloud optimization",
+      "Ported the full Dataiku ML stack to GKE on-prem (Google Anthos) with Istio; built the CI/CD backbone (Jenkins on Kubernetes, Kaniko, Artifactory) and automated merges (Bulldozer / Policy-Bot)",
+      "Engineered multi-partition data resiliency across Oracle, Vertica, SAP HANA, and HDFS (Spark); integrated SAP security scans (Coverity, Black Duck, Fortify) into Jenkins",
+      "Earlier, as Senior Automation Engineer: TDD/Scala ETL validation and resilient Selenium/Java + Node.js UI test frameworks over a self-maintaining Selenium Grid",
     ],
-    tech: ["Dataiku", "GKE", "Anthos", "Istio", "SAP HANA", "Vertica", "Oracle", "HDFS"],
-    highlights: ["ML Platform", "Multi-tenant CI/CD"],
+    tech: ["Python", "Dataiku", "GKE", "Anthos", "Istio", "Jenkins", "SAP HANA", "Vertica", "Oracle", "HDFS", "Scala"],
+    highlights: ["ML Platform (Thunderbridge)", "Multi-tenant CI/CD"],
   },
   {
     title: "Automation Systems Engineer",
     company: "IBM",
-    period: "2011 - 2014",
-    location: "Fort Worth, TX",
+    period: "Oct 2012 - Dec 2013",
+    location: "Dallas–Fort Worth, TX",
     duration: "",
     achievements: [
-      "Built reporting and data-validation automation for JPMorgan Chase",
-      "Built reusable Selenium / Java test frameworks adopted across the firm",
+      "Built a reporting and data-validation automation framework for JPMorgan Chase",
+      "Automated VM creation/config via a WCF SOAP service (IIS); parallelized and scheduled test runs across cloud machines",
+      "Developed reusable Selenium / Java test APIs (JUnit, TestNG) adopted across the firm",
     ],
-    tech: ["Java", "Selenium", "Automation"],
+    tech: ["Java", "Selenium", "JUnit", "TestNG", "WCF", "IIS"],
     highlights: ["Test Automation", "Financial Services"],
+  },
+  {
+    title: "Web Developer",
+    company: "UC Berkeley — Law IST",
+    period: "Sep - Dec 2011",
+    location: "Berkeley, CA",
+    duration: "",
+    achievements: [
+      "Built an online teaching-evaluation system for the Law School on a PHP / Oracle 10g backend, integrated with CalNet (Berkeley authentication)",
+    ],
+    tech: ["PHP", "Oracle", "CalNet"],
+    highlights: ["Full-Stack Web"],
+  },
+  {
+    title: "Software Engineering Intern — Google Startup Labs",
+    company: "LawPivot",
+    period: "May - Aug 2011",
+    location: "Mountain View, CA",
+    duration: "",
+    achievements: [
+      "Built user-to-user interaction features on the Django backend and an internal analytics tool visualizing user data used by the sales team",
+    ],
+    tech: ["Python", "Django"],
+    highlights: ["Backend", "Data Analytics"],
+  },
+  {
+    title: "Software Engineering Intern",
+    company: "LawPivot",
+    period: "Oct 2009 - Aug 2010",
+    location: "Fremont, CA",
+    duration: "",
+    achievements: [
+      "Automated testing with Selenium IDE and tracked defects; worked with the founding team on wireframes and AWS server configuration",
+    ],
+    tech: ["Selenium", "AWS"],
+    highlights: ["Early-stage Startup"],
   },
 ];
 
@@ -201,15 +240,15 @@ const education = [
   {
     degree: "B.S. Electrical Engineering & Computer Science (EECS)",
     school: "University of California, Berkeley",
-    period: "2012",
+    period: "2010 - 2012",
     description: "Electrical Engineering & Computer Science at one of the world's top engineering programs.",
     specializations: [],
-    awards: [],
+    awards: ["International Student Scholarship (2011)"],
   },
 ];
 
 const certifications = [
-  { name: "SAP Security Certified", issuer: "SAP", year: "" },
+  { name: "SAP Security Expert", issuer: "SAP", year: "" },
 ];
 
 const getLanguageColor = (language) => {
