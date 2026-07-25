@@ -1,8 +1,8 @@
 {
   "basics": {
     "name": "Punit Mishra",
-    "title": "Senior Machine Learning Expert & AI Tech Lead",
-    "summary": "Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to dependable production at enterprise scale. Not only an architect — I implement, deploy, and own systems end to end, from agent runtimes and LLM inference pipelines through GPU deployment on custom H100 clusters and production scaling. As Senior ML Expert and AI Tech Lead in SAP CX Data & AI, I lead a team of thirteen and personally build the agent orchestration, memory, multi-model serving, and multi-tenant infrastructure beneath our LLM products.",
+    "title": "Senior ML & AI Tech Lead",
+    "summary": "Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to dependable production at enterprise scale. Not only an architect — I implement, deploy, and own systems end to end, from agent runtimes and LLM inference pipelines to GPU deployment on custom H100 clusters. As Senior ML & AI Tech Lead in SAP CX Data & AI, I actively lead a team of thirteen — technically guiding and personally building the agent orchestration, memory, multi-model serving, fine-tuning, and multi-tenant infrastructure beneath our LLM products. Deep command of Python, Rust, Kubernetes, distributed inference, vector search, and secure, ethical AI.",
     "email": "punit.mishra09@gmail.com",
     "location": "Bay Area, CA",
     "profiles": [
@@ -14,7 +14,7 @@
   "experience": [
     {
       "company": "SAP",
-      "position": "Senior Machine Learning Expert & AI Tech Lead — CX Data & AI",
+      "position": "Senior ML & AI Tech Lead — CX Data & AI",
       "location": "San Ramon, CA",
       "startDate": "2018-09",
       "endDate": null,

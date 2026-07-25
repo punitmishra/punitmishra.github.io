@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Build resume PDFs from the shared resume-content.tex via Tectonic.
-#   resume.tex        -> ../public/resume.pdf         (1-page, primary)
-#   resume-2page.tex  -> ../public/resume-2page.pdf   (2-page, detailed)
+# Produces a 1-page (concise) and a multi-page (detailed) version PER LOCATION:
+#   Bay Area  -> ../public/resume.pdf            + resume-2page.pdf
+#   New York  -> ../public/resume-newyork.pdf    + resume-2page-newyork.pdf
 #
-# The .tex uses a CONTACT_EMAIL token so the address isn't committed in
-# plaintext to the source. Override via env: RESUME_EMAIL=you@example.com ./build.sh
+# Tokens substituted at build time (kept out of committed source):
+#   CONTACT_EMAIL  <- $RESUME_EMAIL   (default punit.mishra09@gmail.com)
+#   RESUMELOCATION <- per-location loop below
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -12,18 +14,27 @@ EMAIL="${RESUME_EMAIL:-punit.mishra09@gmail.com}"
 PUBLIC="${PUBLIC_DIR:-../public}"
 mkdir -p "$PUBLIC"
 
+# "Location|filename-suffix" — add rows here for more location-tailored versions.
+LOCATIONS=(
+  "Bay Area, CA|"
+  "New York, NY|-newyork"
+)
+
 build_one() {
-  local driver="$1" out="$2"
+  local driver="$1" out="$2" location="$3"
   local tmp; tmp="$(mktemp -d)"
-  # Copy sources, substitute the email token in the shared content file
   cp "$driver" "$tmp/"
-  sed "s|CONTACT_EMAIL|${EMAIL}|g; s|CONTACT\\\\_EMAIL|${EMAIL}|g" resume-content.tex > "$tmp/resume-content.tex"
+  sed "s|CONTACT_EMAIL|${EMAIL}|g; s|CONTACT\\\\_EMAIL|${EMAIL}|g; s|RESUMELOCATION|${location}|g" \
+    resume-content.tex > "$tmp/resume-content.tex"
   tectonic --outdir "$tmp" "$tmp/$driver" >/dev/null 2>&1
   cp "$tmp/${driver%.tex}.pdf" "$PUBLIC/$out"
-  echo "Built $PUBLIC/$out ($(du -h "$PUBLIC/$out" | cut -f1))"
+  echo "Built $PUBLIC/$out ($(du -h "$PUBLIC/$out" | cut -f1)) — $location"
   rm -rf "$tmp"
 }
 
-build_one resume.tex       resume.pdf
-build_one resume-2page.tex resume-2page.pdf
+for row in "${LOCATIONS[@]}"; do
+  loc="${row%%|*}"; sfx="${row##*|}"
+  build_one resume.tex       "resume${sfx}.pdf"        "$loc"
+  build_one resume-2page.tex "resume-2page${sfx}.pdf"  "$loc"
+done
 echo "Email embedded: $EMAIL"

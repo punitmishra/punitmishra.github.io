@@ -35,3 +35,7 @@ _site
 
 .vercel
 .env
+
+# Location-tailored resume variants (build on demand; not served publicly)
+public/resume-newyork.pdf
+public/resume-2page-newyork.pdf
