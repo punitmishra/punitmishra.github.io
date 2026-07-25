@@ -10,7 +10,7 @@
 % --- Header -----------------------------------------------------------------
 \begin{center}
   {\huge\scshape Punit Mishra}\\[4pt]
-  {\itshape Senior Machine Learning Expert \& AI Tech Lead --- Agents, Inference \& Multi-Tenant Platforms at Enterprise Scale}\\[6pt]
+  {\itshape Senior Machine Learning Expert \& AI Tech Lead \textbar\ Agents, Inference \& Multi-Tenant Platforms at Enterprise Scale}\\[6pt]
   {\small
     \href{mailto:CONTACT_EMAIL}{CONTACT\_EMAIL} \;\textbar\;
     Bay Area, CA \;\textbar\;
@@ -28,13 +28,13 @@ dependable production at enterprise scale. Not only an architect --- I \textbf{i
 own systems end to end}, from agent runtimes and LLM inference pipelines through \textbf{GPU deployment
 on custom H100 clusters}. As Senior ML Expert and AI Tech Lead in SAP CX Data \& AI, I lead a team of
 thirteen \emph{and personally build} the agent orchestration, memory, multi-model serving, and
-multi-tenant infrastructure beneath our LLM products. Deep command of Rust, Kubernetes, distributed
-inference, vector search, and AI security.
+multi-tenant infrastructure beneath our LLM products. Deep command of \textbf{Python}, \textbf{Rust},
+Kubernetes, distributed inference, vector search, and AI security.
 
 % --- Experience -------------------------------------------------------------
 \section{Experience}
 
-\entry{SAP}{Senior Machine Learning Expert \& AI Tech Lead --- CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
+\entry{SAP}{Senior Machine Learning Expert \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
 \begin{itemize}
   \item \textbf{Built and own a domain-agnostic conversational agent platform} --- a memory-managed
   runtime with multi-tenant LangGraph orchestration reusable across business domains, with
@@ -53,26 +53,30 @@ inference, vector search, and AI security.
   \longonly{%
   \item Re-architected \textbf{vision} --- attribute extraction, object detection, visual search ---
   into first-class \textbf{gRPC agent services} exposed through an agent gateway and MCP-based service hub.
+  \item Deployed always-on PyTorch predictors on Kubernetes to \textbf{process images and text at scale}
+  for multiple enterprise customers; built feature stores (Feathr, Feast) hosting product-pricing
+  recommendations.
   \item Designed multi-tenant identity and provisioning unifying \textbf{IAS and XSUAA}; established the
-  CI/CD backbone with \textbf{GitOps promotion} (Argo / Piper) on Kubernetes / Kyma (Gardener).
-  \item Serve as \textbf{forward-deployed engineer} on the platform's first production enterprise
-  customer, deploying always-on agent services at very large scale across multiple customers.%
+  CI/CD backbone with \textbf{GitOps promotion} (Argo / Piper) on Kubernetes / Kyma (Gardener), and serve
+  as \textbf{forward-deployed engineer} on the platform's first production enterprise customer.%
   }
 \end{itemize}
 \vspace{\entrygap}
 
-\entry{CallidusCloud}{Senior Software Engineer --- Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018}{SF Bay Area \textnormal{(acquired by SAP, \$2.4B)}}
+\entry{CallidusCloud}{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018}{SF Bay Area \textnormal{(acquired by SAP, \$2.4B)}}
 \begin{itemize}
   \item Designed and built the \textbf{Thunderbridge AI} backend in Python on \textbf{Dataiku}, with
   multi-tenancy running every customer workload for SAP Sales Cloud optimization.
   \item Ported the full Dataiku ML stack to \textbf{GKE on-prem (Google Anthos)} with Istio, and built
-  the CI/CD backbone --- Jenkins on Kubernetes, Kaniko image builds, Artifactory --- plus automated
-  merges (Palantir Bulldozer / Policy-Bot).
+  the CI/CD backbone --- Jenkins on Kubernetes, Kaniko image builds, and Artifactory distribution.
+  \item \textbf{Built developer-productivity tooling} --- automated pull-request merges with Palantir
+  \texttt{Bulldozer} and \texttt{Policy-Bot} on Kubernetes, wired into SAP GitHub Enterprise via OAuth
+  to capture all Git events --- cutting manual merge overhead across the team.
   \longonly{%
   \item Engineered multi-partition data resiliency for ML across \textbf{Oracle, Vertica, SAP HANA, and
   HDFS} (Spark); shipped inference services for CPQ on Dataiku's API node.
   \item Integrated SAP security scans (\textbf{Coverity, Black Duck, Fortify}) into Jenkins per commit.
-  As Senior Automation Engineer (earlier), built TDD/Scala ETL validation and resilient Selenium/Java
+  As Senior Automation Engineer (earlier), built TDD / Scala ETL validation and resilient Selenium/Java
   and Node.js UI test frameworks over a self-maintaining Selenium Grid.%
   }
 \end{itemize}
@@ -91,10 +95,10 @@ inference, vector search, and AI security.
 % --- Earlier: condensed on 1-page, full on 2-page --------------------------
 \shortonly{%
 \vspace{\entrygap}
-{\scshape Earlier}\hfill\\[1pt]
-\textit{UC Berkeley Law IST} --- Web Developer (2011)\; \textbullet\;
-\textit{LawPivot (Google Startup Labs)} --- SWE Intern (2011)\; \textbullet\;
-\textit{LawPivot} --- SWE Intern (2009--2010)\par
+{\scshape\bfseries Earlier}\hfill\\[1pt]
+\textbf{UC Berkeley Law IST} --- Web Developer (2011)\; \textbar\;
+\textbf{LawPivot (Google Startup Labs)} --- SWE Intern (2011)\; \textbar\;
+\textbf{LawPivot} --- SWE Intern (2009--2010)\par
 }
 \longonly{%
 \vspace{\entrygap}
@@ -107,8 +111,8 @@ inference, vector search, and AI security.
 
 \entry{LawPivot Inc. (Google Startup Labs)}{Software Engineering Intern}{May -- Aug 2011}{Mountain View, CA}
 \begin{itemize}
-  \item Built user-to-user interaction features on the Django backend and an internal analytics tool
-  visualizing user data (logins, time on site) used by the sales team.
+  \item Built user-to-user interaction features on the \textbf{Django} backend and an internal analytics
+  tool visualizing user data (logins, time on site) used by the sales team.
 \end{itemize}
 \vspace{\entrygap}
 
@@ -126,10 +130,11 @@ inference, vector search, and AI security.
   GPU \& Serving    & Ray (distributed), custom bare-metal H100 clusters, self-hosted LLM / embedding serving, Knative / KServe \\[\skillgap]
   Infra \& Cloud    & Kubernetes, Kyma / Gardener, Istio, Argo / GitOps, Jenkins, Docker, CI/CD; vector DBs (Qdrant, FAISS), Redis; Azure (AKS), GCP (GKE / Anthos) \\[\skillgap]
   Platform \& Data  & gRPC / protobuf, CAP / XSUAA (OIDC / PKCE); PostgreSQL, SAP HANA, Oracle, Vertica, HDFS / Spark, Kafka \\[\skillgap]
-  Languages         & Python (FastAPI, Django), Rust, Java, Scala, TypeScript / Next.js \\[\skillgap]
+  Languages         & \textbf{Python} (FastAPI, Django), \textbf{Rust}, Java, Scala, TypeScript / Next.js \\[\skillgap]
+  Dev Productivity  & GitHub Enterprise automation (Bulldozer, Policy-Bot), Artifactory, Kaniko, ADRs, ephemeral PR environments \\[\skillgap]
   Security          & SAP Security Expert; internal-auth / identity design, threat modeling, SAST / SCA (Coverity, Black Duck, Fortify) \\
 \end{tabularx}
 
 % --- Education --------------------------------------------------------------
 \section{Education}
-{\scshape University of California, Berkeley} --- B.S. Electrical Engineering \& Computer Science \hfill 2012
+{\scshape\bfseries University of California, Berkeley} --- B.S. Electrical Engineering \& Computer Science \hfill 2012

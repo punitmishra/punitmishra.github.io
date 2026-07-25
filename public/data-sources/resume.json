@@ -171,6 +171,15 @@
         { "name": "TypeScript", "level": 88 },
         { "name": "SQL", "level": 90 }
       ]
+    },
+    {
+      "category": "Dev Productivity",
+      "items": [
+        { "name": "GitHub Enterprise automation", "level": 88 },
+        { "name": "Bulldozer / Policy-Bot", "level": 85 },
+        { "name": "Artifactory / Kaniko", "level": 82 },
+        { "name": "ADRs / PR environments", "level": 85 }
+      ]
     }
   ],
   "certifications": [

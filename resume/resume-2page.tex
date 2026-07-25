@@ -28,10 +28,10 @@
 \titleformat{\section}{\large\scshape}{}{0em}{}[{\titlerule[0.4pt]}]
 \titlespacing*{\section}{0pt}{11pt}{4pt}
 
-\setlist[itemize]{label=\textendash, leftmargin=1.1em, itemsep=2.5pt, topsep=2pt, parsep=0pt}
+\setlist[itemize]{label={\small\textbar}, leftmargin=1.15em, itemsep=2.5pt, topsep=2pt, parsep=0pt}
 
 \newcommand{\entry}[4]{%
-  {\scshape #1}\hfill #3\\[0.5pt]%
+  {\scshape\bfseries #1}\hfill #3\\[0.5pt]%
   {\itshape #2}\hfill{\itshape #4}\par\vspace{1.5pt}%
 }
 

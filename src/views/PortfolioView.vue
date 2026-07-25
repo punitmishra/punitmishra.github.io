@@ -589,7 +589,7 @@ onMounted(() => {
     <!-- Hero Section -->
     <section
       id="hero"
-      class="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-16"
+      class="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16"
     >
       <div class="relative z-10 max-w-6xl mx-auto px-6">
         <!-- Bento Grid Hero Layout -->
@@ -674,7 +674,7 @@ onMounted(() => {
                   <img
                     :src="githubProfile.avatar || `https://github.com/${githubUsername}.png`"
                     :alt="githubProfile.name || 'Punit Mishra'"
-                    class="w-32 h-32 rounded-2xl shadow-xl mb-4 float"
+                    class="w-32 h-32 rounded-2xl shadow-xl mb-4 float object-cover object-center"
                     loading="eager"
                   >
                   <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading">
