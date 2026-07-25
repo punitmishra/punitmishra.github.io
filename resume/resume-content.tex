@@ -2,18 +2,19 @@
 % Shared resume content — the SINGLE SOURCE OF TRUTH.
 % Included by resume.tex (1-page) and resume-2page.tex (2-page).
 % Drivers define: \entrygap, \skillgap, \entry, and the macros
-%   \longonly{...}  -> content shown ONLY on the 2-page version
+%   \longonly{...}  -> content shown ONLY on the 2-page (detailed) version
 %   \shortonly{...} -> content shown ONLY on the 1-page version
-% The CONTACT_EMAIL token is substituted at build time by build.sh.
+% Tokens substituted at build time by build.sh:
+%   CONTACT_EMAIL  -> email        RESUMELOCATION -> location (multi-version)
 % ============================================================================
 
 % --- Header -----------------------------------------------------------------
 \begin{center}
   {\huge\scshape Punit Mishra}\\[4pt]
-  {\itshape Senior Machine Learning Expert \& AI Tech Lead \textbar\ Agents, Inference \& Multi-Tenant Platforms at Enterprise Scale}\\[6pt]
+  {\itshape Senior ML \& AI Tech Lead \textbar\ Agents, Inference \& Multi-Tenant Platforms at Enterprise Scale}\\[6pt]
   {\small
     \href{mailto:CONTACT_EMAIL}{CONTACT\_EMAIL} \;\textbar\;
-    Bay Area, CA \;\textbar\;
+    RESUMELOCATION \;\textbar\;
     \href{https://punitmishra.com}{punitmishra.com} \;\textbar\;
     \href{https://linkedin.com/in/mishrapunit}{linkedin.com/in/mishrapunit} \;\textbar\;
     \href{https://github.com/punitmishra}{github.com/punitmishra}
@@ -25,40 +26,41 @@
 \section{Profile}
 Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to
 dependable production at enterprise scale. Not only an architect --- I \textbf{implement, deploy, and
-own systems end to end}, from agent runtimes and LLM inference pipelines through \textbf{GPU deployment
-on custom H100 clusters}. As Senior ML Expert and AI Tech Lead in SAP CX Data \& AI, I lead a team of
-thirteen \emph{and personally build} the agent orchestration, memory, multi-model serving, and
-multi-tenant infrastructure beneath our LLM products. Deep command of \textbf{Python}, \textbf{Rust},
-Kubernetes, distributed inference, vector search, and AI security.
+own systems end to end}, from agent runtimes and LLM inference pipelines to \textbf{GPU deployment on
+custom H100 clusters}. As Senior ML \& AI Tech Lead in SAP CX Data \& AI, I \emph{actively lead a team
+of thirteen} --- technically guiding and personally building the agent orchestration, memory,
+multi-model serving, fine-tuning, and multi-tenant infrastructure beneath our LLM products. Deep
+command of \textbf{Python}, \textbf{Rust}, Kubernetes, distributed inference, vector search, and
+\textbf{secure, ethical AI}.
 
 % --- Experience -------------------------------------------------------------
 \section{Experience}
 
-\entry{SAP}{Senior Machine Learning Expert \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
+\entry{SAP}{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
 \begin{itemize}
   \item \textbf{Built and own a domain-agnostic conversational agent platform} --- a memory-managed
   runtime with multi-tenant LangGraph orchestration reusable across business domains, with
   performance-critical paths written in \textbf{Rust}.
   \item Authored \textbf{natural-language-to-SQL over S/4HANA}, turning business questions into
   validated queries --- now shipping within SAP's \textbf{2026 public and private cloud releases}.
-  \item \textbf{Introduced Ray} and built \textbf{LLM serving on custom bare-metal H100 GPU clusters};
-  multi-model serving (self-hosted plus Claude, Qwen, Granite-class) on Kubernetes with automated
-  evaluation harnesses.
+  \item \textbf{Introduced Ray} and built \textbf{LLM serving and fine-tuning on custom bare-metal H100
+  GPU clusters}; multi-model serving (self-hosted plus Claude, Qwen, Granite-class) on Kubernetes with
+  automated evaluation harnesses.
   \item Delivered visual and textual LLM agents across SAP's \textbf{CX \& Commerce AI Toolkit}
   (PyTorch on Kubernetes); visual-attribute prediction on OpenAI / CLIP embeddings backed by
   \textbf{vector search and RAG}.
-  \item Designed \textbf{multi-tenant ML} on Kubeflow \& Knative (Azure AKS) across SAP CX cloud
-  (C4C, CPQ, CDC), with feature stores (Feathr, Feast); \textbf{lead a team of thirteen}, own AI ethics
-  \& compliance, and set the group's SDLC and engineering standards. \textbf{SAP Security Expert}.
+  \item \textbf{Actively lead a team of thirteen} across three workstreams --- technically guiding
+  architecture (ADRs), owning AI ethics \& compliance, and setting the group's SDLC and engineering
+  standards. \textbf{SAP Security Expert}.
   \longonly{%
+  \item Designed \textbf{multi-tenant ML} on Kubeflow \& Knative (Azure AKS) across SAP CX cloud
+  (C4C, CPQ, CDC), with feature stores (Feathr, Feast).
   \item Re-architected \textbf{vision} --- attribute extraction, object detection, visual search ---
   into first-class \textbf{gRPC agent services} exposed through an agent gateway and MCP-based service hub.
-  \item Deployed always-on PyTorch predictors on Kubernetes to \textbf{process images and text at scale}
-  for multiple enterprise customers; built feature stores (Feathr, Feast) hosting product-pricing
-  recommendations.
-  \item Designed multi-tenant identity and provisioning unifying \textbf{IAS and XSUAA}; established the
-  CI/CD backbone with \textbf{GitOps promotion} (Argo / Piper) on Kubernetes / Kyma (Gardener), and serve
-  as \textbf{forward-deployed engineer} on the platform's first production enterprise customer.%
+  \item Contribute to \textbf{open-source GPU / inference tooling at the kernel level}, upstreaming
+  improvements that harden the self-hosted serving stack.
+  \item Designed multi-tenant identity and provisioning unifying \textbf{IAS and XSUAA}; serve as
+  \textbf{forward-deployed engineer} on the platform's first production enterprise customer.%
   }
 \end{itemize}
 \vspace{\entrygap}
@@ -123,16 +125,30 @@ Kubernetes, distributed inference, vector search, and AI security.
 \end{itemize}%
 }
 
+% --- Selected Projects & Open Source (multi-page only) ----------------------
+\longonly{%
+\section{Selected Projects \& Open Source}
+\begin{itemize}
+  \item \textbf{CoViber} --- local-first memory for LLMs over MCP: a continuously-updated work graph,
+  urgency-triage queue, and local semantic memory, entirely on-device (no cloud egress). \textit{Python.}
+  \item \textbf{Vaultic} --- hardware-backed (FIDO2 / YubiKey) password manager in \textbf{Rust}; one
+  on-disk vault format across CLI, TUI, daemon, GUI, and an MCP server. \textit{Homebrew tap.}
+  \item \textbf{Shield AI} --- AI-powered DNS filtering with real-time threat / intrusion detection.
+  \item \textbf{Pi Race} --- zero-dependency \textbf{Rust} CLI benchmarking four classic $\pi$
+  algorithms (Ramanujan, Euler/Basel, Wallis, Leibniz) on accuracy vs.\ speed.
+\end{itemize}%
+}
+
 % --- Skills -----------------------------------------------------------------
 \section{Skills}
 \begin{tabularx}{\textwidth}{@{}>{\scshape}l X@{}}
-  AI \& Agents      & Agent orchestration (LangGraph, LangChain), MCP (agent gateway / tool hub), LLM serving \& evaluation, NL-to-SQL, RAG, retriever--reranker, PyTorch, OpenAI / CLIP, MLOps (Kubeflow, Feathr, Feast) \\[\skillgap]
+  AI \& Agents      & Agent orchestration (LangGraph, LangChain), MCP (agent gateway / tool hub), LLM serving, fine-tuning \& evaluation, NL-to-SQL, RAG, retriever--reranker, PyTorch, OpenAI / CLIP, MLOps (Kubeflow, Feathr, Feast) \\[\skillgap]
   GPU \& Serving    & Ray (distributed), custom bare-metal H100 clusters, self-hosted LLM / embedding serving, Knative / KServe \\[\skillgap]
   Infra \& Cloud    & Kubernetes, Kyma / Gardener, Istio, Argo / GitOps, Jenkins, Docker, CI/CD; vector DBs (Qdrant, FAISS), Redis; Azure (AKS), GCP (GKE / Anthos) \\[\skillgap]
   Platform \& Data  & gRPC / protobuf, CAP / XSUAA (OIDC / PKCE); PostgreSQL, SAP HANA, Oracle, Vertica, HDFS / Spark, Kafka \\[\skillgap]
   Languages         & \textbf{Python} (FastAPI, Django), \textbf{Rust}, Java, Scala, TypeScript / Next.js \\[\skillgap]
   Dev Productivity  & GitHub Enterprise automation (Bulldozer, Policy-Bot), Artifactory, Kaniko, ADRs, ephemeral PR environments \\[\skillgap]
-  Security          & SAP Security Expert; internal-auth / identity design, threat modeling, SAST / SCA (Coverity, Black Duck, Fortify) \\
+  Security \& Ethics & SAP Security Expert; internal-auth / identity design, threat modeling, SAST / SCA (Coverity, Black Duck, Fortify); AI ethics, safety \& compliance \\
 \end{tabularx}
 
 % --- Education --------------------------------------------------------------
