@@ -15,13 +15,13 @@
 \usepackage{tabularx}
 \usepackage[hidelinks]{hyperref}
 
-\linespread{0.97}
+\linespread{0.95}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
 % Spacing knobs referenced by the shared content file
-\newcommand{\entrygap}{1.5pt}
-\newcommand{\skillgap}{1pt}
+\newcommand{\entrygap}{1.2pt}
+\newcommand{\skillgap}{0.5pt}
 
 % 1-page: hide long-form content, show condensed content
 \newcommand{\longonly}[1]{}
@@ -29,10 +29,10 @@
 
 % Section styling — small caps, hairline rule, compact
 \titleformat{\section}{\large\scshape}{}{0em}{}[{\titlerule[0.4pt]}]
-\titlespacing*{\section}{0pt}{5.5pt}{2.5pt}
+\titlespacing*{\section}{0pt}{4pt}{2pt}
 
 % Lists: pipe bullets, tight
-\setlist[itemize]{label={\small\textbar}, leftmargin=1.1em, itemsep=1.5pt, topsep=1.5pt, parsep=0pt}
+\setlist[itemize]{label={\small\textbar}, leftmargin=1.1em, itemsep=1.2pt, topsep=1.2pt, parsep=0pt}
 
 % Entry helper (bold small-caps company, italic role)
 \newcommand{\entry}[4]{%
