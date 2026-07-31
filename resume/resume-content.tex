@@ -25,36 +25,42 @@
 % --- Profile ----------------------------------------------------------------
 \section{Profile}
 I like taking machine learning the whole distance --- from rough prototype to something a real
-customer can lean on --- and I've done it at enterprise scale for 14+ years. As Senior ML \& AI Tech
-Lead in SAP CX Data \& AI I \emph{lead a team of thirteen} while staying hands-on: I \textbf{architect
-the systems and also write, deploy, and own them end to end}, from agent runtimes and LLM inference
-pipelines to \textbf{GPU serving on custom bare-metal H100 clusters}. Recently I brought \textbf{SAP's
-Nova model into our natural-language-to-SQL stack} for cost control and model optionality, and
-architected a \textbf{hardened internal-auth contract} that closes a cross-tenant data-leak class. I
-care about the ``so what'': automated onboarding over manual tenant setup, latency cut on our flagship
-retail deployment, security you can actually verify. Deep in \textbf{Python} and \textbf{Rust}, with
-multi-model serving, distributed inference, vector search, and \textbf{secure, ethical AI}.
+customer can lean on --- and I've done it at enterprise scale for 14+ years, all of them at SAP
+(joining through the CallidusCloud acquisition). As Senior ML \& AI Tech Lead in SAP CX Data \& AI I
+\emph{lead a team of thirteen} while staying hands-on: I \textbf{architect the systems and also write,
+deploy, and own them end to end}, from agent runtimes and LLM inference pipelines to \textbf{GPU serving
+on custom bare-metal H100 clusters}. Recently I brought \textbf{SAP's own LLM (Nova)} into our
+\textbf{natural-language-to-SQL} stack --- \textbf{lifting SQL accuracy} while cutting dependence on
+external frontier models --- and architected a \textbf{hardened internal-auth contract} that closes a
+cross-tenant data-leak class. I also architect \textbf{APEX}, our \textbf{Domain Data Access Agents}
+platform. I care about the ``so what'': \textbf{measurable accuracy}, automated onboarding over manual
+tenant setup, latency cut on our flagship retail deployment, security you can actually verify. Deep in
+\textbf{Python} and \textbf{Rust}, with multi-model serving, distributed inference, vector search, and
+\textbf{secure, ethical AI}.
 
 % --- Experience -------------------------------------------------------------
 \section{Experience}
 
-\entry{SAP}{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
+% SAP as one continuous employer (14+ yrs) — CallidusCloud folded in via the acquisition.
+\company{SAP}{Feb 2014 -- Present \;\textbullet\; 11+ yrs}
+\role{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present \;\textbullet\; San Ramon, CA}
 \begin{itemize}
-  \item I brought \textbf{Nova}, SAP's own code LLM, into our \textbf{natural-language-to-SQL} stack
+  \item I brought \textbf{SAP's own LLM, Nova}, into our \textbf{natural-language-to-SQL} stack
   (S/4HANA + Ariba) as a first-class alternative to Claude --- self-hosted serving, a
-  retriever-reranker, and seven benchmark lanes --- \textbf{cutting dependence on external frontier
-  models} and lifting decision-match \textbf{59.2\% $\rightarrow$ 64.8\%}; NL-to-SQL ships in SAP's
-  \textbf{2026 public and private cloud releases}.
+  retriever-reranker, and seven benchmark lanes --- \textbf{lifting NL-to-SQL decision-match accuracy
+  59.2\% $\rightarrow$ 64.8\%} (reranking 50\% $\rightarrow$ 53\%) while \textbf{cutting dependence on
+  external frontier models}; NL-to-SQL ships in SAP's \textbf{2026 public and private cloud releases}.
+  \item I architect \textbf{APEX}, our \textbf{Domain Data Access Agents} platform, and turned it from
+  manual, XSUAA-only tenancy into \textbf{direct app tenancy auto-provisioned via BTP UCL formations},
+  \textbf{enabling self-service customer onboarding} --- and serve as \textbf{forward-deployed engineer}
+  bringing up our first production enterprise customer, \textbf{a Fortune 500 retailer}.
   \item I architected the \textbf{hardened internal-auth contract} (ADR 0021) --- a constant-time
   shared-secret check before any tenant header is trusted, canonical tenant resolution, and
   \textbf{IAS alongside XSUAA} --- shipped backward-compatibly across four services to \textbf{close a
   real cross-tenant data-leak class}.
-  \item I turned APEX from manual, XSUAA-only tenancy into \textbf{direct app tenancy auto-provisioned
-  via BTP UCL formations}, \textbf{enabling self-service customer onboarding} --- and serve as
-  \textbf{forward-deployed engineer} bringing up our first production enterprise customer, \textbf{a Fortune 500 retailer}.
   \item I rewrote the legacy Shopping Assistant's \textbf{vision} (Vision-DNA, object detection, visual
-  search) into first-class agent services behind a unified \textbf{Agent Gateway} and an
-  \textbf{MCP Hub}, turning dead-end legacy code into reusable, discoverable services.
+  search) into first-class \textbf{Domain Data Access Agent} services behind a unified \textbf{Agent
+  Gateway} and an \textbf{MCP Hub}, turning dead-end legacy code into reusable, discoverable services.
   \item I \textbf{lead a team of thirteen} and set technical direction through the \textbf{ADRs} I
   author, our SDLC and engineering standards, and \textbf{AI ethics \& compliance} as an
   \textbf{SAP Security Expert}.
@@ -65,18 +71,19 @@ multi-model serving, distributed inference, vector search, and \textbf{secure, e
   the team self-service operational visibility and a reusable FDE UI scaffold.
   \item I run \textbf{multi-model serving} --- self-hosted Nova alongside Claude, Qwen, and
   Granite-class models --- on custom bare-metal H100 clusters, and \textbf{introduced Ray} plus
-  automated eval harnesses so we choose models on measurable accuracy, not intuition.
+  automated eval harnesses so we choose models on \textbf{measurable accuracy}, not intuition.
   \item I cut \textbf{``ask a product'' latency} on a \textbf{Fortune 500 retailer's} in-store concierge
   from \textbf{$\sim$25s to $\sim$10s} and added grounded follow-ups that stop product drift --- real
   customer-facing speed and quality wins on our flagship deployment.
-  \item I architect \textbf{APEX}, our domain-agnostic Digital Service Agents platform, writing the
-  performance-critical hot paths in \textbf{Rust} so one agent runtime is fast and cheap enough to
-  reuse across products instead of rebuilding per use case.%
+  \item I write the performance-critical hot paths of the \textbf{Domain Data Access Agents} runtime in
+  \textbf{Rust} so one agent runtime is fast and cheap enough to reuse across products instead of
+  rebuilding per use case.%
   }
 \end{itemize}
 \vspace{\entrygap}
 
-\entry{CallidusCloud}{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018}{SF Bay Area \textnormal{(acquired by SAP, \$2.4B)}}
+\role{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018 \;\textbullet\; SF Bay Area}
+{\small\itshape joined via CallidusCloud --- acquired by SAP for \$2.4B}\par\vspace{1.5pt}
 \begin{itemize}
   \item Designed and built the \textbf{Thunderbridge AI} backend in Python on \textbf{Dataiku}, with
   multi-tenancy running every customer workload for SAP Sales Cloud optimization.
@@ -93,43 +100,21 @@ multi-model serving, distributed inference, vector search, and \textbf{secure, e
   and Node.js UI test frameworks over a self-maintaining Selenium Grid.%
   }
 \end{itemize}
-\vspace{\entrygap}
 
-\entry{IBM}{Automation Systems Engineer}{Oct 2012 -- Dec 2013}{Dallas--Fort Worth, TX}
-\begin{itemize}
-  \item Built a reporting and \textbf{data-validation automation framework} for a major US bank.
-  \longonly{%
-  \item Automated VM creation/configuration via a WCF SOAP service (IIS); parallelized test execution
-  and scheduled runs across cloud machines with varied OS/browser configs.%
-  }
-  \item Developed reusable \textbf{Selenium / Java} test APIs (JUnit, TestNG) adopted across the firm.
-\end{itemize}
-
-% --- Earlier: condensed on 1-page, full on 2-page --------------------------
-\shortonly{%
+% --- Earlier: collapsed compact block at the bottom ------------------------
 \vspace{\entrygap}
-{\scshape\bfseries Earlier}\hfill\\[1pt]
-\textbf{UC Berkeley Law IST} --- Web Developer (2011)\; \textbar\;
-\textbf{LawPivot (Google Startup Labs)} --- SWE Intern (2011)\; \textbar\;
-\textbf{LawPivot} --- SWE Intern (2009--2010)\par
-}
-\longonly{%
-\vspace{\entrygap}
-\entry{UC Berkeley Law IST}{Web Developer}{Sep -- Dec 2011}{Berkeley, CA}
-\begin{itemize}
-  \item Built an online teaching-evaluation system for the Law School on a PHP / Oracle 10g backend,
-  integrated with \textbf{CalNet} (Berkeley authentication) for end-of-course student evaluations.
-\end{itemize}
-\vspace{\entrygap}
-
-\entry{LawPivot Inc. (Google Startup Labs)}{Software Engineering Intern}{2009 -- 2011}{Mountain View / Fremont, CA}
-\begin{itemize}
-  \item Built user-to-user interaction features on the \textbf{Django} backend and an internal analytics
-  tool visualizing user data (logins, time on site) used by the sales team.
-  \item Earlier, automated testing with Selenium IDE and tracked defects; worked with the founding team
-  on wireframes and AWS server configuration.
-\end{itemize}%
-}
+\section{Earlier}
+{\scshape\bfseries IBM} \textnormal{--- Automation Systems Engineer}\hfill Oct 2012 -- Dec 2013\\[1pt]
+Built a reporting and \textbf{data-validation automation framework} and reusable \textbf{Selenium / Java}
+test APIs (JUnit, TestNG) adopted across the firm, for a major US bank.%
+\longonly{ Automated VM creation/configuration via a WCF SOAP service (IIS) and parallelized scheduled
+test runs across cloud machines with varied OS / browser configs.}
+\par\vspace{3pt}
+\textbf{UC Berkeley Law IST} --- Web Developer (2011) \;\textbar\;
+\textbf{LawPivot (Google Startup Labs)} --- SWE Intern (2009--2011)%
+\longonly{ --- built a teaching-evaluation system (PHP / Oracle, CalNet auth) and Django
+user-interaction \& analytics features.}
+\par
 
 % --- Selected Projects & Open Source (multi-page only) ----------------------
 \longonly{%

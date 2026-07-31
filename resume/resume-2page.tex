@@ -34,6 +34,10 @@
   {\scshape\bfseries #1}\hfill #3\\[0.5pt]%
   {\itshape #2}\hfill{\itshape #4}\par\vspace{1.5pt}%
 }
+% Company header spanning multiple roles (bold small-caps company; right: overall span)
+\newcommand{\company}[2]{{\scshape\bfseries #1}\hfill #2\par\vspace{1pt}}
+% Role line under a company header (italic role; right: dates + location)
+\newcommand{\role}[2]{{\itshape #1}\hfill{\itshape #2}\par\vspace{2pt}}
 
 \begin{document}
 \input{resume-content}

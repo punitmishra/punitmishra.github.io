@@ -7,7 +7,7 @@
 % ============================================================================
 \documentclass[10pt,letterpaper]{article}
 
-\usepackage[letterpaper, margin=0.45in]{geometry}
+\usepackage[letterpaper, margin=0.42in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[proportional,osf]{cochineal}
 \usepackage{microtype}
@@ -17,21 +17,23 @@
 \usepackage{tcolorbox}
 \usepackage[hidelinks]{hyperref}
 
-\linespread{0.93}
+\linespread{0.9}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
-\newcommand{\entrygap}{1.5pt}
+\newcommand{\entrygap}{1pt}
 
 \titleformat{\section}{\large\scshape}{}{0em}{}[{\titlerule[0.4pt]}]
-\titlespacing*{\section}{0pt}{3.5pt}{2pt}
+\titlespacing*{\section}{0pt}{2.8pt}{1.5pt}
 
-\setlist[itemize]{label={\small\textbar}, leftmargin=1.1em, itemsep=1.1pt, topsep=1pt, parsep=0pt}
+\setlist[itemize]{label={\small\textbar}, leftmargin=1.1em, itemsep=0.9pt, topsep=0.8pt, parsep=0pt}
 
 \newcommand{\entry}[4]{%
   {\scshape\bfseries #1}\hfill #3\\[0.5pt]%
   {\itshape #2}\hfill{\itshape #4}\par\vspace{1.5pt}%
 }
+\newcommand{\company}[2]{{\scshape\bfseries #1}\hfill #2\par\vspace{0.5pt}}
+\newcommand{\role}[2]{{\itshape #1}\hfill{\itshape #2}\par\vspace{1.5pt}}
 
 \begin{document}
 
@@ -51,76 +53,80 @@
 
 % --- Executive Summary ------------------------------------------------------
 \section{Executive Summary}
-I lead a 13-person ML \& AI team at SAP CX Data \& AI, where I turn hard AI and platform problems into
-products that ship in SAP's public and private cloud. I brought SAP's own Nova model into our
-natural-language-to-SQL stack as a first-class alternative to external frontier models --- giving us
-model optionality, cost control, and measurable accuracy gains. I architect the security and
-multi-tenancy foundations that let us onboard enterprise customers safely and automatically, and I
+I lead a 13-person ML \& AI team at SAP CX Data \& AI --- 11+ years at SAP, all told --- where I turn
+hard AI and platform problems into products that ship in SAP's public and private cloud. I brought
+\textbf{SAP's own LLM (Nova)} into our natural-language-to-SQL stack as a first-class alternative to
+external frontier models --- \textbf{raising SQL accuracy} while giving us model optionality and cost
+control. I architect \textbf{APEX}, our \textbf{Domain Data Access Agents} platform, and the security
+and multi-tenancy foundations that let us onboard enterprise customers safely and automatically, and I
 authored the ADRs the org builds against. I also work forward-deployed on our flagship customer, a
 Fortune 500 retailer, where my work cut answer latency more than half. My throughline: reduce dependence
-and risk, automate
-what used to be manual, and get real customer wins into production.
+and risk, automate what used to be manual, and get real customer wins into production.
 
 % --- Impact Highlights ------------------------------------------------------
 \section{Impact Highlights}
 \begin{itemize}
-  \item \textbf{Model optionality \& cost control:} brought SAP's own Nova model into the NL-to-SQL
-  stack as a first-class alternative to external frontier models --- reducing single-vendor dependence,
-  with NL-to-SQL shipping in SAP's \textbf{2026 public and private cloud releases}.
-  \item \textbf{Measurable accuracy:} a date-arithmetic prompt fix moved decision-match
-  \textbf{59.2\% $\rightarrow$ 64.8\%}, and reranking \textbf{50\% $\rightarrow$ 53\%}.
+  \item \textbf{NL-to-SQL accuracy:} bringing \textbf{SAP's own LLM (Nova)} into the stack with a
+  date-arithmetic prompt fix moved decision-match \textbf{59.2\% $\rightarrow$ 64.8\%} and reranking
+  \textbf{50\% $\rightarrow$ 53\%} --- accuracy isolated and validated through a benchmark harness.
+  \item \textbf{Model optionality \& cost control:} Nova as a first-class alternative to external
+  frontier models reduces single-vendor dependence, with NL-to-SQL shipping in SAP's \textbf{2026 public
+  and private cloud releases}.
   \item \textbf{Customer-facing speed:} cut a Fortune 500 retailer's in-store concierge answer latency
   from \textbf{$\sim$25s to $\sim$10s} and added grounded follow-ups that stop product drift --- on SAP's
   first production enterprise customer.
   \item \textbf{Closed a security risk class:} architected a hardened internal-auth contract (ADR 0021)
   across four Java + Python services --- verified identity replacing trust-by-network-position.
-  \item \textbf{Automated onboarding:} turned APEX into direct app tenancy (ADR 0020) so tenants
-  provision themselves via BTP formations instead of manual setup --- fixing a real cross-tenant leak in
-  the process.
+  \item \textbf{Automated onboarding:} turned \textbf{APEX}, our \textbf{Domain Data Access Agents}
+  platform, into direct app tenancy (ADR 0020) so tenants provision themselves via BTP formations
+  instead of manual setup --- fixing a real cross-tenant leak in the process.
   \item \textbf{Leadership:} lead a 13-person team and set the group's architecture (via ADRs),
   SDLC/engineering standards, and AI ethics \& compliance as an \textbf{SAP Security Expert}.
 \end{itemize}
 
 % --- Experience -------------------------------------------------------------
 \section{Experience}
-\entry{SAP}{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
+\company{SAP}{Feb 2014 -- Present \;\textbullet\; 11+ yrs}
+\role{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present \;\textbullet\; San Ramon, CA}
 \begin{itemize}
-  \item I brought SAP's own \textbf{Nova} model into our natural-language-to-SQL stack (S/4HANA + Ariba)
+  \item I brought \textbf{SAP's own LLM (Nova)} into our natural-language-to-SQL stack (S/4HANA + Ariba)
   as a first-class alternative to Claude --- a self-hosted serving backend with OAuth2 and SAP-semantic
   prompts, an optional retriever--reranker, and seven benchmark lanes including SAP's first-ever Ariba
-  coverage --- giving the business \textbf{model optionality, reduced dependence on external frontier
-  models, and cost control}, with the stack shipping in SAP's 2026 public and private cloud releases.
+  coverage --- \textbf{raising NL-to-SQL accuracy} while giving the business \textbf{model optionality,
+  reduced dependence on external frontier models, and cost control}; the stack ships in SAP's 2026
+  public and private cloud releases.
+  \item I architect \textbf{APEX}, our \textbf{Domain Data Access Agents} platform, and converted it
+  from manual, XSUAA-only tenancy into \textbf{direct app tenancy} (ADR 0020) where the platform owns
+  its SaaS subscription lifecycle and tenants provision automatically via BTP formations ---
+  \textbf{automating self-service onboarding}, unifying identity, and fixing a real cross-tenant leak.
   \item I architected and authored the \textbf{hardened internal-auth contract} (ADR 0021) --- a shared
   secret validated by constant-time compare before any tenant header is trusted, canonical tenant
   resolution, and IAS identity alongside XSUAA --- \textbf{closing a real cross-tenant escalation and
   data-leak risk} across four services, opt-in and backward-compatible so nothing broke.
-  \item I converted APEX from manual, XSUAA-only tenancy into \textbf{direct app tenancy} (ADR 0020)
-  where the platform owns its SaaS subscription lifecycle and tenants provision automatically via BTP
-  formations --- \textbf{automating self-service onboarding}, unifying identity, and fixing a real
-  cross-tenant leak from shared state.
   \item As \textbf{forward-deployed engineer} on our flagship enterprise customer (a Fortune 500
   retailer), I cut ``ask a product'' answer latency from $\sim$25s to $\sim$10s and added grounded
   follow-ups that stop product drift --- directly improving the in-store customer experience.
-  \item I modernized the legacy Shopping Assistant's vision capabilities into first-class agent services
-  behind a unified \textbf{Agent Gateway} and an \textbf{MCP-based service Hub} --- turning aging code
-  into reusable, discoverable services.
+  \item I modernized the legacy Shopping Assistant's vision into first-class \textbf{Domain Data Access
+  Agent} services behind a unified \textbf{Agent Gateway} and an \textbf{MCP-based service Hub} ---
+  turning aging code into reusable, discoverable services.
   \item I set technical direction for the group --- guiding architecture through ADRs, owning AI ethics
   and compliance, introducing Ray, and standing up multi-model serving (self-hosted Nova plus
   Claude/Qwen/Granite-class) on bare-metal H100 clusters with automated eval harnesses.
 \end{itemize}
 \vspace{\entrygap}
 
-\entry{CallidusCloud}{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018}{SF Bay Area \textnormal{(acquired by SAP, \$2.4B)}}
+\role{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018 \;\textbullet\; SF Bay Area}
+{\small\itshape joined via CallidusCloud --- acquired by SAP for \$2.4B}\par\vspace{1.5pt}
 \begin{itemize}
   \item Built the Thunderbridge AI ML backend (Python/Dataiku, multi-tenant) and the CI/CD backbone;
   ported the full stack to GKE on-prem (Anthos) with Istio.
 \end{itemize}
-\vspace{\entrygap}
 
-\entry{IBM}{Automation Systems Engineer}{Oct 2012 -- Dec 2013}{Dallas--Fort Worth, TX}
-\begin{itemize}
-  \item Built a data-validation automation framework and reusable Selenium/Java test APIs for a major US bank.
-\end{itemize}
+\vspace{\entrygap}
+\section{Earlier}
+{\scshape\bfseries IBM} \textnormal{--- Automation Systems Engineer}\hfill Oct 2012 -- Dec 2013\\[1pt]
+Built a data-validation automation framework and reusable Selenium/Java test APIs, adopted across the
+firm, for a major US bank.
 
 % --- Core Competencies ------------------------------------------------------
 \section{Core Competencies}

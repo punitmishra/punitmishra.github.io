@@ -32,6 +32,8 @@
   {\scshape\bfseries #1}\hfill #3\\[0.5pt]%
   {\itshape #2}\hfill{\itshape #4}\par\vspace{2pt}%
 }
+\newcommand{\company}[2]{{\scshape\bfseries #1}\hfill #2\par\vspace{1pt}}
+\newcommand{\role}[2]{{\itshape #1}\hfill{\itshape #2}\par\vspace{2pt}}
 
 \begin{document}
 
@@ -51,13 +53,15 @@
 
 % --- Summary ----------------------------------------------------------------
 \section{Research \& Engineering Summary}
-Punit Mishra is a Senior ML \& AI Tech Lead at SAP CX Data \& AI, leading a team of 13 at the
-intersection of large-language-model systems, natural-language-to-SQL, and secure multi-tenant
-architecture. His recent focus is \emph{model optionality}: bringing SAP's own Nova LLM into the AutoSQL
-NL-to-SQL stack as a self-hosted, first-class alternative to external frontier models, with an
-evaluation harness that measures prompt- and retrieval-level interventions against benchmark suites over
-S/4HANA and Ariba. He treats architecture as a first-class artifact, authoring ADRs (0020, 0021) that
-specify tenancy and cross-service auth contracts and the failure modes they close --- cross-tenant
+Punit Mishra is a Senior ML \& AI Tech Lead at SAP CX Data \& AI --- 11+ years at SAP, joining through
+the CallidusCloud acquisition --- leading a team of 13 at the intersection of large-language-model
+systems, natural-language-to-SQL, and secure multi-tenant architecture. His recent focus is
+\emph{model optionality and accuracy}: bringing \textbf{SAP's own LLM (Nova)} into the AutoSQL NL-to-SQL
+stack as a self-hosted, first-class alternative to external frontier models, with an evaluation harness
+that measures prompt- and retrieval-level interventions --- and their effect on SQL accuracy --- against
+benchmark suites over S/4HANA and Ariba. He treats architecture as a first-class artifact, authoring
+ADRs (0020, 0021) that specify tenancy and cross-service auth contracts for \textbf{APEX}, SAP's
+\textbf{Domain Data Access Agents} platform, and the failure modes they close --- cross-tenant
 escalation and data leakage. Alongside the applied work he sets the group's SDLC and engineering
 standards, owns AI ethics and compliance, and serves as a forward-deployed engineer on the first
 production enterprise deployment. He holds a B.S. in EECS from UC Berkeley (2012), writes production
@@ -78,27 +82,28 @@ hardware-backed security.
 
 % --- Experience -------------------------------------------------------------
 \section{Experience}
-\entry{SAP}{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present}{San Ramon, CA}
+\company{SAP}{Feb 2014 -- Present \;\textbullet\; 11+ yrs}
+\role{Senior ML \& AI Tech Lead \textbar\ CX Data \& AI}{Sep 2018 -- Present \;\textbullet\; San Ramon, CA}
 \begin{itemize}
-  \item \textbf{Brought SAP's own Nova} code/LLM into the AutoSQL natural-language-to-SQL stack (S/4HANA
+  \item \textbf{Brought SAP's own LLM (Nova)} into the AutoSQL natural-language-to-SQL stack (S/4HANA
   + Ariba) as a first-class, self-hosted alternative to Claude --- an OAuth2 serving backend with
   resolver-aware SAP-semantic prompts, an optional retriever--reranker, and seven benchmark cronjob
   lanes, including the first-ever Ariba benchmark coverage; the NL-to-SQL work ships in SAP's 2026
   public and private cloud releases.
-  \item \textbf{Drove accuracy as a measured quantity:} a date-arithmetic prompt fix moved decision-match
-  \textbf{59.2\% $\rightarrow$ 64.8\%} and reranking \textbf{50\% $\rightarrow$ 53\%} --- isolated and
-  validated through the benchmark harness rather than asserted.
+  \item \textbf{Drove NL-to-SQL accuracy as a measured quantity:} a date-arithmetic prompt fix moved
+  decision-match \textbf{59.2\% $\rightarrow$ 64.8\%} and reranking \textbf{50\% $\rightarrow$ 53\%}
+  --- isolated and validated through the benchmark harness rather than asserted.
   \item \textbf{Architected and authored ADR 0021}, a hardened internal-auth contract: an
   X-Internal-Auth shared secret validated by constant-time compare before any tenant header is trusted,
   canonical tenant resolution (\texttt{app\_tid} $\rightarrow$ \texttt{tenant\_id}), and IAS identity
   alongside XSUAA --- opt-in and backward-compatible across four Java and Python services, closing a
   real cross-tenant escalation and data-leak class by replacing trust-by-network-position with verified
   identity.
-  \item \textbf{Specified APEX direct app tenancy} (ADR 0020, A2-Hybrid): turned the Digital Service
-  Agents platform from manual, XSUAA-only logical tenancy into an app-owned SaaS subscription lifecycle
-  with automatic tenant provisioning via BTP UCL formations, a CAP/cds-mtxs sidecar, a dual IAS/XSUAA
-  token path, and a canonical tenant registry --- fixing a real cross-tenant leak rooted in a shared
-  class attribute.
+  \item \textbf{Specified APEX direct app tenancy} (ADR 0020, A2-Hybrid): turned \textbf{APEX}, SAP's
+  \textbf{Domain Data Access Agents} platform, from manual, XSUAA-only logical tenancy into an app-owned
+  SaaS subscription lifecycle with automatic tenant provisioning via BTP UCL formations, a CAP/cds-mtxs
+  sidecar, a dual IAS/XSUAA token path, and a canonical tenant registry --- fixing a real cross-tenant
+  leak rooted in a shared class attribute.
   \item \textbf{Rewrote} the legacy Shopping Assistant's vision capabilities (Vision-DNA, object
   detection, visual search) as first-class agent services, exposed through a unified \textbf{Agent
   Gateway} and an \textbf{MCP-based service Hub} with registry and discovery, modernizing legacy code
@@ -120,7 +125,8 @@ hardware-backed security.
 \end{itemize}
 \vspace{\entrygap}
 
-\entry{CallidusCloud}{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018}{SF Bay Area \textnormal{(acquired by SAP, \$2.4B)}}
+\role{Senior Software Engineer \textbar\ Thunderbridge AI / SAP Sales Cloud}{Feb 2014 -- Sep 2018 \;\textbullet\; SF Bay Area}
+{\small\itshape joined via CallidusCloud --- acquired by SAP for \$2.4B}\par\vspace{2pt}
 \begin{itemize}
   \item Built the \textbf{Thunderbridge AI} ML backend in Python on Dataiku with multi-tenancy running
   every customer workload; ported the full stack to \textbf{GKE on-prem (Anthos)} with Istio and built
@@ -128,13 +134,12 @@ hardware-backed security.
   \item Engineered multi-partition data resiliency across Oracle, Vertica, SAP HANA, and HDFS (Spark);
   integrated Coverity, Black Duck, and Fortify security scans per commit.
 \end{itemize}
-\vspace{\entrygap}
 
-\entry{IBM}{Automation Systems Engineer}{Oct 2012 -- Dec 2013}{Dallas--Fort Worth, TX}
-\begin{itemize}
-  \item Built a reporting and data-validation automation framework for a major US bank, with reusable
-  Selenium/Java test APIs adopted across the firm.
-\end{itemize}
+\vspace{\entrygap}
+\section{Earlier}
+{\scshape\bfseries IBM} \textnormal{--- Automation Systems Engineer}\hfill Oct 2012 -- Dec 2013\\[1pt]
+Built a reporting and data-validation automation framework for a major US bank, with reusable
+Selenium/Java test APIs (JUnit, TestNG) adopted across the firm.
 
 % --- Selected Systems & Open Source -----------------------------------------
 \section{Selected Systems \& Open Source}

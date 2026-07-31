@@ -63,6 +63,24 @@ Employers (SAP, CallidusCloud, IBM) and the public CallidusCloud→SAP acquisiti
 those are Punit's own history, not client confidences. When adding a new engagement, describe
 the **industry + scale**, not the name. Before every push, grep for names (see below).
 
+## Naming conventions (keep consistent across all variants + resume.json)
+
+| Concept | Say | Not |
+|---------|-----|-----|
+| SAP's in-house model | **SAP's own LLM (Nova)** | "Nova, SAP's code LLM" |
+| The agents platform (APEX) | **Domain Data Access Agents** platform | "Digital Service Agents" (internal-only name) |
+| NL-to-SQL wins | frame as **accuracy** (decision-match 59.2%→64.8%, reranking 50%→53%) | generic "improvements" |
+
+## Experience structure — one continuous SAP tenure
+
+Punit has been at SAP since **Feb 2014** (joined via the **CallidusCloud** acquisition, $2.4B).
+Present it that way: a single `\company{SAP}{Feb 2014 -- Present • 11+ yrs}` header with two
+`\role{…}{…}` blocks nested under it (CX Data & AI, then Thunderbridge AI / SAP Sales Cloud with
+a *"joined via CallidusCloud"* subline). The `\company`/`\role` macros are defined in each driver
+(and inline in the standalone variants). Everything before SAP (IBM, UC Berkeley, LawPivot) is
+collapsed into a compact **Earlier** section at the bottom. Preserve the depth of the SAP section
+— that's the headline; compress everything else.
+
 ## Voice per variant (keep consistent)
 
 | Variant | Voice |

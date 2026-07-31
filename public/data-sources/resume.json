@@ -2,7 +2,7 @@
   "basics": {
     "name": "Punit Mishra",
     "title": "Senior ML & AI Tech Lead",
-    "summary": "I like taking machine learning the whole distance — from rough prototype to something a real customer can lean on — and I've done it at enterprise scale for 14+ years. As Senior ML & AI Tech Lead in SAP CX Data & AI I lead a team of thirteen while staying hands-on: I architect the systems and also write, deploy, and own them end to end, from agent runtimes and LLM inference pipelines to GPU serving on custom bare-metal H100 clusters. Recently I brought SAP's Nova model into our natural-language-to-SQL stack for cost control and model optionality, and architected a hardened internal-auth contract that closes a cross-tenant data-leak class. I care about the \"so what\": automated onboarding over manual tenant setup, latency cut on our flagship retail deployment, security you can actually verify. Deep in Python and Rust, with multi-model serving, distributed inference, vector search, and secure, ethical AI.",
+    "summary": "I like taking machine learning the whole distance — from rough prototype to something a real customer can lean on — and I've done it at enterprise scale for 14+ years. As Senior ML & AI Tech Lead in SAP CX Data & AI I lead a team of thirteen while staying hands-on: I architect the systems and also write, deploy, and own them end to end, from agent runtimes and LLM inference pipelines to GPU serving on custom bare-metal H100 clusters. Recently I brought SAP's own LLM (Nova) into our natural-language-to-SQL stack — raising SQL accuracy while cutting dependence on external frontier models — and architected a hardened internal-auth contract that closes a cross-tenant data-leak class. I also architect APEX, our Domain Data Access Agents platform. I care about the \"so what\": measurable accuracy, automated onboarding over manual tenant setup, latency cut on our flagship retail deployment, security you can actually verify. Deep in Python and Rust, with multi-model serving, distributed inference, vector search, and secure, ethical AI.",
     "email": "punit.mishra09@gmail.com",
     "location": "Bay Area, CA",
     "profiles": [
@@ -21,26 +21,26 @@
       "current": true,
       "summary": "I lead a team of thirteen and stay hands-on — architecting and personally building the agent platform, LLM serving, and multi-tenant infrastructure beneath SAP CX's LLM products.",
       "highlights": [
-        "I brought Nova, SAP's own code LLM, into our natural-language-to-SQL stack (S/4HANA + Ariba) as a first-class alternative to Claude — self-hosted serving, a retriever-reranker, and seven benchmark lanes — cutting dependence on external frontier models and lifting decision-match 59.2% → 64.8%; NL-to-SQL ships in SAP's 2026 public and private cloud releases",
+        "I brought SAP's own LLM, Nova, into our natural-language-to-SQL stack (S/4HANA + Ariba) as a first-class alternative to Claude — self-hosted serving, a retriever-reranker, and seven benchmark lanes — lifting NL-to-SQL decision-match accuracy 59.2% → 64.8% (reranking 50% → 53%) while cutting dependence on external frontier models; NL-to-SQL ships in SAP's 2026 public and private cloud releases",
         "I architected the hardened internal-auth contract (ADR 0021) — a constant-time shared-secret check before any tenant header is trusted, canonical tenant resolution, and IAS alongside XSUAA — shipped backward-compatibly across four services to close a real cross-tenant data-leak class",
-        "I turned APEX from manual, XSUAA-only tenancy into direct app tenancy auto-provisioned via BTP UCL formations, enabling self-service customer onboarding — and serve as forward-deployed engineer bringing up our first production enterprise customer, a Fortune 500 retailer",
-        "I rewrote the legacy Shopping Assistant's vision (Vision-DNA, object detection, visual search) into first-class agent services behind a unified Agent Gateway and an MCP Hub, turning dead-end legacy code into reusable, discoverable services",
+        "I architect APEX, our Domain Data Access Agents platform, and turned it from manual, XSUAA-only tenancy into direct app tenancy auto-provisioned via BTP UCL formations, enabling self-service customer onboarding — and serve as forward-deployed engineer bringing up our first production enterprise customer, a Fortune 500 retailer",
+        "I rewrote the legacy Shopping Assistant's vision (Vision-DNA, object detection, visual search) into first-class Domain Data Access Agent services behind a unified Agent Gateway and an MCP Hub, turning dead-end legacy code into reusable, discoverable services",
         "I lead a team of thirteen and set technical direction through the ADRs I author, our SDLC and engineering standards, and AI ethics & compliance as an SAP Security Expert",
         "I built the APEX Control Panel, a Next.js provisioning UI (IAS OIDC PKCE + server-side BFF) covering onboarding, formations, agent and data-ingestion config, playground, sessions, and handoff, and folded the AutoSQL eval dashboard into a HANA-backed Nova dashboard on Gardener — self-service operational visibility and a reusable FDE UI scaffold",
         "I run multi-model serving — self-hosted Nova alongside Claude, Qwen, and Granite-class models — on custom bare-metal H100 clusters, and introduced Ray plus automated eval harnesses so we choose models on measurable accuracy, not intuition",
         "I cut \"ask a product\" answer latency on a Fortune 500 retailer's in-store concierge from ~25s to ~10s and added grounded follow-ups that stop product drift — real customer-facing speed and quality wins on our flagship deployment",
-        "I architect APEX, our domain-agnostic Digital Service Agents platform, writing the performance-critical hot paths in Rust so one agent runtime is fast and cheap enough to reuse across products instead of rebuilding per use case"
+        "I write the performance-critical hot paths of APEX, our domain-agnostic Domain Data Access Agents platform, in Rust so one agent runtime is fast and cheap enough to reuse across products instead of rebuilding per use case"
       ],
       "technologies": ["Python", "Rust", "Nova", "LangGraph", "MCP", "Agent Gateway", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "CLIP", "Qdrant", "FAISS", "IAS / XSUAA", "CAP / cds-mtxs", "Knative", "Gardener", "Azure AKS"]
     },
     {
-      "company": "CallidusCloud",
+      "company": "SAP (via CallidusCloud)",
       "position": "Senior Software Engineer — Thunderbridge AI / SAP Sales Cloud",
       "location": "SF Bay Area",
       "startDate": "2014-02",
       "endDate": "2018-09",
       "current": false,
-      "summary": "Acquired by SAP for $2.4B. Built the Thunderbridge AI ML platform and the CI/CD backbone; earlier, senior automation engineering.",
+      "summary": "Joined via CallidusCloud, acquired by SAP for $2.4B. Built the Thunderbridge AI ML platform and the CI/CD backbone; earlier, senior automation engineering.",
       "highlights": [
         "Designed and built the Thunderbridge AI backend in Python on Dataiku, with multi-tenancy running every customer workload for SAP Sales Cloud optimization",
         "Ported the full Dataiku ML stack to GKE on-prem (Google Anthos) with Istio; built the CI/CD backbone (Jenkins on Kubernetes, Kaniko, Artifactory) plus automated merges (Bulldozer / Policy-Bot)",
@@ -137,7 +137,7 @@
         { "name": "Ray (distributed)", "level": 85 },
         { "name": "H100 clusters", "level": 82 },
         { "name": "Multi-model serving", "level": 88 },
-        { "name": "Nova (SAP code LLM)", "level": 80 },
+        { "name": "Nova (SAP's own LLM)", "level": 80 },
         { "name": "Self-hosted LLM/embeddings", "level": 85 },
         { "name": "Knative / KServe", "level": 78 }
       ]
