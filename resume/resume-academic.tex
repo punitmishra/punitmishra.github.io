@@ -16,17 +16,17 @@
 \usepackage{tabularx}
 \usepackage[hidelinks]{hyperref}
 
-\linespread{1.02}
+\linespread{0.98}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
-\newcommand{\entrygap}{4pt}
+\newcommand{\entrygap}{3pt}
 \newcommand{\skillgap}{2pt}
 
 \titleformat{\section}{\large\scshape}{}{0em}{}[{\titlerule[0.4pt]}]
-\titlespacing*{\section}{0pt}{9pt}{4pt}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
 
-\setlist[itemize]{label={\small\textbar}, leftmargin=1.2em, itemsep=3pt, topsep=2pt, parsep=0pt}
+\setlist[itemize]{label={\small\textbar}, leftmargin=1.2em, itemsep=2pt, topsep=1.5pt, parsep=0pt}
 
 \newcommand{\entry}[4]{%
   {\scshape\bfseries #1}\hfill #3\\[0.5pt]%
@@ -105,9 +105,9 @@ hardware-backed security.
   sidecar, a dual IAS/XSUAA token path, and a canonical tenant registry --- fixing a real cross-tenant
   leak rooted in a shared class attribute.
   \item \textbf{Rewrote} the legacy Shopping Assistant's vision capabilities (Vision-DNA, object
-  detection, visual search) as first-class agent services, exposed through a unified \textbf{Agent
-  Gateway} and an \textbf{MCP-based service Hub} with registry and discovery, modernizing legacy code
-  into reusable, MCP-native services.
+  detection, visual search) as first-class \textbf{Domain Data Access Agent} services, exposed through
+  a unified \textbf{Agent Gateway} and an \textbf{MCP-based service Hub} with registry and discovery,
+  modernizing legacy code into reusable, MCP-native services.
   \item \textbf{Built the APEX Control Panel}, a Next.js provisioning UI on IAS OIDC PKCE with a
   server-side BFF (onboarding checklists, formations, agent and data-ingestion config, playground,
   sessions, handoff), and folded the AutoSQL eval dashboard into the Nova dashboard with HANA-backed
@@ -164,6 +164,20 @@ clusters), FastAPI, CAP/cds-mtxs, Next.js, HANA, Gardener/Kubernetes. \textbf{Me
 benchmark design and decision-match evaluation, retrieval reranking, prompt engineering as a measured
 intervention. \textbf{Security:} multi-tenant identity (IAS/XSUAA), constant-time auth contracts,
 ADR-driven architecture; SAP Security Expert.
+
+% --- Selected Architecture Decisions ----------------------------------------
+\section{Selected Architecture Decisions (ADRs)}
+\begin{itemize}
+  \item \textbf{ADR 0021 --- Hardened internal-auth contract.} Verified cross-service identity
+  (X-Internal-Auth shared secret, constant-time compare, canonical tenant resolution, IAS alongside
+  XSUAA) replacing trust-by-network-position; opt-in and backward-compatible across four services.
+  \item \textbf{ADR 0020 --- APEX direct app tenancy (A2-Hybrid).} App-owned SaaS subscription
+  lifecycle with automatic tenant provisioning via BTP UCL formations and a canonical tenant registry,
+  for \textbf{APEX}, SAP's \textbf{Domain Data Access Agents} platform.
+  \item \textbf{Multi-model serving \& evaluation.} Self-hosted SAP's own LLM (Nova) alongside
+  frontier and open models on bare-metal H100 clusters, with NL-to-SQL benchmark lanes and
+  decision-match metrics as the acceptance gate.
+\end{itemize}
 
 % --- Education --------------------------------------------------------------
 \section{Education}
