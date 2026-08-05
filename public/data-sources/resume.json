@@ -2,7 +2,7 @@
   "basics": {
     "name": "Punit Mishra",
     "title": "Senior ML & AI Tech Lead",
-    "summary": "Applied AI engineer and technical leader with 14+ years taking machine learning from prototype to dependable production at enterprise scale. Not only an architect — I implement, deploy, and own systems end to end, from agent runtimes and LLM inference pipelines to GPU deployment on custom H100 clusters. As Senior ML & AI Tech Lead in SAP CX Data & AI, I actively lead a team of thirteen — technically guiding and personally building the agent orchestration, memory, multi-model serving, fine-tuning, and multi-tenant infrastructure beneath our LLM products. Deep command of Python, Rust, Kubernetes, distributed inference, vector search, and secure, ethical AI.",
+    "summary": "I like taking machine learning the whole distance — from rough prototype to something a real customer can lean on — and I've done it at enterprise scale for 14+ years. As Senior ML & AI Tech Lead in SAP CX Data & AI I lead a team of thirteen while staying hands-on: I architect the systems and also write, deploy, and own them end to end, from agent runtimes and LLM inference pipelines to GPU serving on custom bare-metal H100 clusters. Recently I brought SAP's own LLM (Nova) into our natural-language-to-SQL stack — raising SQL accuracy while cutting dependence on external frontier models — and architected a hardened internal-auth contract that closes a cross-tenant data-leak class. I also architect APEX, our Domain Data Access Agents platform. I care about the \"so what\": measurable accuracy, automated onboarding over manual tenant setup, latency cut on our flagship retail deployment, security you can actually verify. Deep in Python and Rust, with multi-model serving, distributed inference, vector search, and secure, ethical AI.",
     "email": "punit.mishra09@gmail.com",
     "location": "Bay Area, CA",
     "profiles": [
@@ -19,26 +19,28 @@
       "startDate": "2018-09",
       "endDate": null,
       "current": true,
-      "summary": "Lead and personally build the agent orchestration, LLM serving, and multi-tenant infrastructure beneath SAP CX's LLM products.",
+      "summary": "I lead a team of thirteen and stay hands-on — architecting and personally building the agent platform, LLM serving, and multi-tenant infrastructure beneath SAP CX's LLM products.",
       "highlights": [
-        "Built and own a domain-agnostic conversational agent platform — a memory-managed runtime with multi-tenant LangGraph orchestration reusable across business domains, with performance-critical paths in Rust",
-        "Authored natural-language-to-SQL over S/4HANA, turning business questions into validated queries — shipping within SAP's 2026 public and private cloud releases",
-        "Introduced Ray and built LLM serving on custom bare-metal H100 GPU clusters; multi-model serving (self-hosted plus Claude, Qwen, Granite-class) on Kubernetes with automated evaluation harnesses",
-        "Delivered visual and textual LLM agents across SAP's CX & Commerce AI Toolkit (PyTorch on Kubernetes); visual-attribute prediction on OpenAI / CLIP embeddings backed by vector search and RAG",
-        "Designed multi-tenant ML on Kubeflow & Knative (Azure AKS) across SAP CX cloud (C4C, CPQ, CDC), with feature stores (Feathr, Feast)",
-        "Re-architected vision — attribute extraction, object detection, visual search — into first-class gRPC agent services via an agent gateway and MCP-based service hub",
-        "Lead a team of thirteen; own AI ethics & compliance; SAP Security Expert; set the group's SDLC and engineering standards, and serve as forward-deployed engineer on the platform's first production enterprise customer"
+        "I brought SAP's own LLM, Nova, into our natural-language-to-SQL stack (S/4HANA + Ariba) as a first-class alternative to Claude — self-hosted serving, a retriever-reranker, and seven benchmark lanes — lifting NL-to-SQL decision-match accuracy 59.2% → 64.8% (reranking 50% → 53%) while cutting dependence on external frontier models; NL-to-SQL ships in SAP's 2026 public and private cloud releases",
+        "I architected the hardened internal-auth contract (ADR 0021) — a constant-time shared-secret check before any tenant header is trusted, canonical tenant resolution, and IAS alongside XSUAA — shipped backward-compatibly across four services to close a real cross-tenant data-leak class",
+        "I architect APEX, our Domain Data Access Agents platform, and turned it from manual, XSUAA-only tenancy into direct app tenancy auto-provisioned via BTP UCL formations, enabling self-service customer onboarding — and serve as forward-deployed engineer bringing up our first production enterprise customer, a Fortune 500 retailer",
+        "I rewrote the legacy Shopping Assistant's vision (Vision-DNA, object detection, visual search) into first-class Domain Data Access Agent services behind a unified Agent Gateway and an MCP Hub, turning dead-end legacy code into reusable, discoverable services",
+        "I lead a team of thirteen and set technical direction through the ADRs I author, our SDLC and engineering standards, and AI ethics & compliance as an SAP Security Expert",
+        "I built the APEX Control Panel, a Next.js provisioning UI (IAS OIDC PKCE + server-side BFF) covering onboarding, formations, agent and data-ingestion config, playground, sessions, and handoff, and folded the AutoSQL eval dashboard into a HANA-backed Nova dashboard on Gardener — self-service operational visibility and a reusable FDE UI scaffold",
+        "I run multi-model serving — self-hosted Nova alongside Claude, Qwen, and Granite-class models — on custom bare-metal H100 clusters, and introduced Ray plus automated eval harnesses so we choose models on measurable accuracy, not intuition",
+        "I cut \"ask a product\" answer latency on a Fortune 500 retailer's in-store concierge from ~25s to ~10s and added grounded follow-ups that stop product drift — real customer-facing speed and quality wins on our flagship deployment",
+        "I write the performance-critical hot paths of APEX, our domain-agnostic Domain Data Access Agents platform, in Rust so one agent runtime is fast and cheap enough to reuse across products instead of rebuilding per use case"
       ],
-      "technologies": ["Python", "Rust", "LangGraph", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "CLIP", "Qdrant", "FAISS", "Kubeflow", "Knative", "Azure AKS"]
+      "technologies": ["Python", "Rust", "Nova", "LangGraph", "MCP", "Agent Gateway", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "CLIP", "Qdrant", "FAISS", "IAS / XSUAA", "CAP / cds-mtxs", "Knative", "Gardener", "Azure AKS"]
     },
     {
-      "company": "CallidusCloud",
+      "company": "SAP (via CallidusCloud)",
       "position": "Senior Software Engineer — Thunderbridge AI / SAP Sales Cloud",
       "location": "SF Bay Area",
       "startDate": "2014-02",
       "endDate": "2018-09",
       "current": false,
-      "summary": "Acquired by SAP for $2.4B. Built the Thunderbridge AI ML platform and the CI/CD backbone; earlier, senior automation engineering.",
+      "summary": "Joined via CallidusCloud, acquired by SAP for $2.4B. Built the Thunderbridge AI ML platform and the CI/CD backbone; earlier, senior automation engineering.",
       "highlights": [
         "Designed and built the Thunderbridge AI backend in Python on Dataiku, with multi-tenancy running every customer workload for SAP Sales Cloud optimization",
         "Ported the full Dataiku ML stack to GKE on-prem (Google Anthos) with Istio; built the CI/CD backbone (Jenkins on Kubernetes, Kaniko, Artifactory) plus automated merges (Bulldozer / Policy-Bot)",
@@ -54,9 +56,9 @@
       "startDate": "2012-10",
       "endDate": "2013-12",
       "current": false,
-      "summary": "Automation and test engineering for JPMorgan Chase.",
+      "summary": "Automation and test engineering for a major US bank.",
       "highlights": [
-        "Built a reporting and data-validation automation framework for JPMorgan Chase",
+        "Built a reporting and data-validation automation framework for a major US bank",
         "Automated VM creation/configuration via a WCF SOAP service (IIS); parallelized and scheduled test execution across cloud machines with varied OS/browser configs",
         "Developed reusable Selenium / Java test APIs (JUnit, TestNG) adopted across the firm"
       ],
@@ -119,12 +121,14 @@
         { "name": "LangGraph", "level": 92 },
         { "name": "LangChain", "level": 88 },
         { "name": "MCP", "level": 88 },
+        { "name": "Agent Gateway", "level": 88 },
+        { "name": "MCP Hub (registry / discovery)", "level": 85 },
         { "name": "LLM Serving & Eval", "level": 90 },
         { "name": "RAG", "level": 90 },
         { "name": "NL-to-SQL", "level": 85 },
         { "name": "PyTorch", "level": 80 },
         { "name": "OpenAI / CLIP", "level": 82 },
-        { "name": "MLOps (Kubeflow, Feathr, Feast)", "level": 82 }
+        { "name": "Eval harnesses & benchmark lanes", "level": 85 }
       ]
     },
     {
@@ -132,6 +136,8 @@
       "items": [
         { "name": "Ray (distributed)", "level": 85 },
         { "name": "H100 clusters", "level": 82 },
+        { "name": "Multi-model serving", "level": 88 },
+        { "name": "Nova (SAP's own LLM)", "level": 80 },
         { "name": "Self-hosted LLM/embeddings", "level": 85 },
         { "name": "Knative / KServe", "level": 78 }
       ]
@@ -153,7 +159,9 @@
       "category": "Platform & Data",
       "items": [
         { "name": "gRPC / protobuf", "level": 85 },
-        { "name": "CAP / XSUAA (OIDC/PKCE)", "level": 82 },
+        { "name": "IAS / XSUAA (OIDC/PKCE)", "level": 85 },
+        { "name": "CAP / cds-mtxs", "level": 82 },
+        { "name": "BTP UCL formations", "level": 80 },
         { "name": "PostgreSQL", "level": 88 },
         { "name": "SAP HANA", "level": 80 },
         { "name": "Vector DBs (Qdrant, FAISS)", "level": 88 },
@@ -205,9 +213,9 @@
     },
     {
       "name": "Shield AI",
-      "description": "AI-powered DNS filtering system with real-time threat detection.",
+      "description": "AI-powered DNS filtering with real-time ML threat scoring. Rust core + TypeScript dashboard — ~15MB resident, <1ms lookups at 100K+ QPS, with a live demo and a macOS/iOS DNS profile.",
       "url": "https://github.com/punitmishra/shield-ai",
-      "highlights": ["Real-time threat detection", "DNS filtering", "TypeScript"]
+      "highlights": ["ML threat scoring", "DNS filtering", "Rust + TypeScript", "<1ms @ 100K+ QPS", "Live demo"]
     },
     {
       "name": "Railroad Arcade",
@@ -223,9 +231,9 @@
     },
     {
       "name": "Pi Race",
-      "description": "Zero-dependency Rust CLI that benchmarks four classic π algorithms (Ramanujan, Euler/Basel, Wallis, Leibniz) head-to-head on accuracy and speed.",
+      "description": "Zero-dependency Rust CLI that benchmarks four classic π algorithms (Ramanujan, Euler/Basel, Wallis, Leibniz) head-to-head on accuracy and speed. CI cross-compiles for Linux/macOS/Windows and posts weekly timing tables.",
       "url": "https://github.com/punitmishra/pi-race",
-      "highlights": ["Zero-dependency Rust", "4 π algorithms", "Accuracy vs speed", "CLI"]
+      "highlights": ["Zero-dependency Rust", "4 π algorithms", "Accuracy vs speed", "Cross-compile CI"]
     }
   ]
 }
