@@ -38,7 +38,7 @@
     "express": "^4.22.1",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
-    "html2pdf.js": "^0.12.1",
+    "html2pdf.js": "^0.14.0",
     "marked": "^17.0.1",
     "mermaid": "^11.12.2",
     "numeral": "^2.0.6",
@@ -71,5 +71,8 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
+  },
+  "overrides": {
+    "lodash-es": "4.17.23"
   }
 }

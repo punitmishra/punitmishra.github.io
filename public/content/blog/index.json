@@ -11,6 +11,36 @@
       "featured": true
     },
     {
+      "slug": "agent-memory-hybrid-store-2026",
+      "title": "Agent Memory in 2026: Hybrid Vector + Relational Stores",
+      "excerpt": "A practical architecture for agent memory: vector search for recall and relational storage for truth. Includes code for write paths, retrieval, and compression.",
+      "date": "2026-02-09",
+      "category": "AI/ML",
+      "tags": ["Agents", "Memory", "Vector Search", "PostgreSQL", "RAG"],
+      "readTime": "15 min read",
+      "featured": true
+    },
+    {
+      "slug": "rag-chunking-strategies-2026",
+      "title": "RAG Chunking Strategies in 2026: Accuracy Without Latency Pain",
+      "excerpt": "Chunking is the hidden lever of RAG quality. This guide compares semantic, recursive, and structure-aware chunking with evaluation code.",
+      "date": "2026-02-09",
+      "category": "AI/ML",
+      "tags": ["RAG", "Chunking", "Retrieval", "Evaluation", "LLM"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
+      "slug": "judge-models-eval-2026",
+      "title": "Judge Models for LLM Evaluation in 2026: Reliable, Cheap, and Fast",
+      "excerpt": "How to build a judge-model harness that correlates with human evals. Rubrics, calibration, and cost controls with code examples.",
+      "date": "2026-02-09",
+      "category": "AI/ML",
+      "tags": ["Evaluation", "LLM", "Judge Models", "Rubrics", "QA"],
+      "readTime": "13 min read",
+      "featured": true
+    },
+    {
       "slug": "rag-evaluation-framework",
       "title": "RAG Evaluation Framework: Measuring Quality Beyond BLEU",
       "excerpt": "A production-grade evaluation framework for retrieval-augmented generation. Precision/recall at K, groundedness, citation quality, and human-in-the-loop review.",

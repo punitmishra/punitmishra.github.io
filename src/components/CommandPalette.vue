@@ -1,11 +1,13 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
-import { mdiMagnify, mdiHome, mdiCodeBraces, mdiAccount, mdiBriefcase, mdiEmail, mdiGithub, mdiLinkedin, mdiWeatherNight, mdiWeatherSunny, mdiClose } from '@mdi/js';
+import { useRouter } from 'vue-router';
+import { mdiMagnify, mdiHome, mdiCodeBraces, mdiAccount, mdiBriefcase, mdiEmail, mdiGithub, mdiLinkedin, mdiWeatherNight, mdiWeatherSunny, mdiClose, mdiNewspaperVariant, mdiImageMultiple, mdiFileDocument } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 import { useStyleStore } from '@/stores/style.js';
 
 const emit = defineEmits(['navigate', 'close']);
 const styleStore = useStyleStore();
+const router = useRouter();
 
 const isOpen = ref(false);
 const searchQuery = ref('');
@@ -14,9 +16,13 @@ const selectedIndex = ref(0);
 const commands = [
   { id: 'home', label: 'Go to Home', icon: mdiHome, section: 'hero', type: 'navigation' },
   { id: 'projects', label: 'View Projects', icon: mdiCodeBraces, section: 'projects', type: 'navigation' },
+  { id: 'latest', label: 'Latest Projects', icon: mdiCodeBraces, section: 'latest', type: 'navigation' },
+  { id: 'blog', label: 'Open Blog', icon: mdiNewspaperVariant, section: 'blog', type: 'navigation' },
   { id: 'skills', label: 'View Skills', icon: mdiCodeBraces, section: 'skills', type: 'navigation' },
   { id: 'experience', label: 'View Experience', icon: mdiBriefcase, section: 'experience', type: 'navigation' },
   { id: 'contact', label: 'Contact Me', icon: mdiEmail, section: 'contact', type: 'navigation' },
+  { id: 'photos', label: 'Open Photos', icon: mdiImageMultiple, route: '/photos', type: 'route' },
+  { id: 'resume', label: 'Open Resume', icon: mdiFileDocument, route: '/resume', type: 'route' },
   { id: 'github', label: 'Open GitHub', icon: mdiGithub, url: 'https://github.com/punitmishra', type: 'link' },
   { id: 'linkedin', label: 'Open LinkedIn', icon: mdiLinkedin, url: 'https://linkedin.com/in/mishrapunit', type: 'link' },
   { id: 'darkmode', label: 'Toggle Dark Mode', icon: mdiWeatherNight, type: 'action', action: 'toggleDarkMode' },
@@ -37,6 +43,8 @@ watch(filteredCommands, () => {
 const executeCommand = (command) => {
   if (command.type === 'navigation') {
     emit('navigate', command.section);
+  } else if (command.type === 'route') {
+    router.push(command.route);
   } else if (command.type === 'link') {
     window.open(command.url, '_blank');
   } else if (command.type === 'action') {
