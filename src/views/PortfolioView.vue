@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import {
@@ -15,7 +15,6 @@ import {
   mdiWeatherNight,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
-import AnimatedCounter from "@/components/AnimatedCounter.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import ProjectFilter from "@/components/ProjectFilter.vue";
 import ResumeDownload from "@/components/ResumeDownload.vue";
@@ -1144,7 +1143,7 @@ onBeforeUnmount(() => {
     <!-- Skills -->
     <section
       id="skills"
-      class="py-12"
+      class="py-14"
     >
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
@@ -1230,7 +1229,7 @@ onBeforeUnmount(() => {
     <!-- Experience -->
     <section
       id="experience"
-      class="py-12 bg-gray-50/50 dark:bg-slate-900/50"
+      class="py-14 bg-gray-50/50 dark:bg-slate-900/50"
     >
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
@@ -1468,14 +1467,3 @@ onBeforeUnmount(() => {
     </footer>
   </div>
 </template>
-
-<style scoped>
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-</style>

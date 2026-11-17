@@ -80,7 +80,7 @@ onMounted(() => {
 <template>
   <section
     id="blog"
-    class="py-24 relative overflow-hidden"
+    class="py-14 relative overflow-hidden"
   >
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/30 dark:from-slate-900/50 dark:via-slate-900 dark:to-slate-800/50" />
 
@@ -114,6 +114,7 @@ onMounted(() => {
             <input
               v-model="searchQuery"
               type="text"
+              aria-label="Search articles"
               placeholder="Search articles by title, excerpt, or tags..."
               class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-sm"
             >
@@ -200,7 +201,7 @@ onMounted(() => {
             <!-- Tags -->
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span
-            v-for="tag in (article.tags || []).slice(0, 3)"
+                v-for="tag in (article.tags || []).slice(0, 3)"
                 :key="tag"
                 class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 rounded text-xs"
               >

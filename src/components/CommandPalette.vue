@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { mdiMagnify, mdiHome, mdiCodeBraces, mdiAccount, mdiBriefcase, mdiEmail, mdiGithub, mdiLinkedin, mdiWeatherNight, mdiWeatherSunny, mdiClose, mdiNewspaperVariant, mdiImageMultiple, mdiFileDocument } from '@mdi/js';
+import { mdiMagnify, mdiHome, mdiCodeBraces, mdiBriefcase, mdiEmail, mdiGithub, mdiLinkedin, mdiWeatherNight, mdiNewspaperVariant, mdiImageMultiple, mdiFileDocument } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 import { useStyleStore } from '@/stores/style.js';
 
@@ -123,6 +123,7 @@ defineExpose({ isOpen });
             <input
               v-model="searchQuery"
               type="text"
+              aria-label="Search commands"
               placeholder="Type a command or search..."
               class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-lg"
               autofocus
