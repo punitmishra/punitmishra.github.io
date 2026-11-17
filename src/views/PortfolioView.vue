@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import {
@@ -273,6 +273,8 @@ const fetchGitHubProfile = async () => {
     githubProfile.value = { 
       ...response.data, 
       htmlUrl: response.data.html_url,
+      avatar: response.data.avatar_url,
+      publicRepos: response.data.public_repos,
       bio: response.data.bio || "Software Engineer"
     };
     loading.value.profile = false;
@@ -376,14 +378,19 @@ const scrollToSection = (sectionId) => {
 };
 
 // Auto-refresh every 5 minutes
+let githubRefreshTimer = null;
 onMounted(() => {
   fetchGitHubProfile();
   fetchGitHubRepos();
   
-  setInterval(() => {
+  githubRefreshTimer = setInterval(() => {
     fetchGitHubProfile();
     fetchGitHubRepos();
   }, 5 * 60 * 1000);
+});
+
+onBeforeUnmount(() => {
+  if (githubRefreshTimer) clearInterval(githubRefreshTimer);
 });
 </script>
 
