@@ -8,7 +8,7 @@ Professional portfolio website for Punit Mishra - Senior Software Engineer @ SAP
 - **Build Tool:** Vite 5.4
 - **Styling:** Tailwind CSS 3.4 with custom utilities
 - **Fonts:** Plus Jakarta Sans (body), Space Grotesk (headings), JetBrains Mono (code)
-- **Deployment:** Vercel (primary), GitHub Pages
+- **Deployment:** GitHub Pages
 
 ## Key Features
 - Command Palette (Cmd+K) for quick navigation
@@ -138,7 +138,6 @@ npm run preview  # Preview production build
 
 ### Automatic Deployment
 Push to `main` triggers:
-- **Vercel:** https://punitmishragithubio.vercel.app
 - **GitHub Pages:** https://punitmishra.github.io
 
 ### Manual Steps

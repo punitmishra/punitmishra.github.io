@@ -219,7 +219,7 @@
     },
     {
       "name": "Railroad Arcade",
-      "description": "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend on Vercel with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode or live control.",
+      "description": "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode or live control.",
       "url": "https://github.com/punitmishra/railroad-arcade",
       "highlights": ["Next.js + Rust", "Raspberry Pi hardware control", "Demo & live modes", "WebSockets"]
     },

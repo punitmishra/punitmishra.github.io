@@ -107,7 +107,7 @@ const featuredProjects = [
   },
   {
     name: "Railroad Arcade",
-    description: "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend on Vercel with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode, or live control of trains, junctions, and crossings.",
+    description: "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode, or live control of trains, junctions, and crossings.",
     tech: ["Next.js", "Rust", "Raspberry Pi", "IoT", "WebSockets"],
     gradient: "from-violet-500 to-purple-500",
     url: `https://github.com/${githubUsername}/railroad-arcade`,

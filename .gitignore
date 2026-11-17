@@ -33,7 +33,6 @@ _site
 .jekyll-cache
 .jekyll-metadata
 
-.vercel
 .env
 
 # Location-tailored resume variants (build on demand; not served publicly)
