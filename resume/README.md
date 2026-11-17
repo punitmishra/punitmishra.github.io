@@ -51,17 +51,16 @@ The website's interactive résumé is driven separately by
 
 ## Confidentiality policy — NO customer names
 
-The résumé is public. **Never name a customer or client.** Use anonymized, industry-appropriate
-descriptors instead. Current conventions:
-
-| Real | Use instead |
-|------|-------------|
-| H&M (SAP enterprise customer) | *a Fortune 500 retailer* |
-| JPMorgan Chase (IBM client) | *a major US bank* |
+The résumé is public. **Never name a customer or client.** Describe the **industry + scale**
+instead — e.g. *a Fortune 500 retailer*, *a major US bank* — never the company. This applies to
+every `.tex` source, `resume.json`, the site components under `../src`, and this repo's READMEs.
 
 Employers (SAP, CallidusCloud, IBM) and the public CallidusCloud→SAP acquisition are fine —
 those are Punit's own history, not client confidences. When adding a new engagement, describe
-the **industry + scale**, not the name. Before every push, grep for names (see below).
+the industry + scale, not the name. Before every push, run the leak check (see below).
+
+The real names to scan for are kept **out of git** in `resume/.leak-patterns` (git-ignored),
+so the public repo never contains them. Create that file locally — one regex per line.
 
 ## Naming conventions (keep consistent across all variants + resume.json)
 
@@ -117,8 +116,15 @@ python3 -c "import fitz; d=fitz.open('../public/resume.pdf'); print(d.page_count
 
 ### Pre-push checklist
 ```bash
-# 1. No customer names anywhere (note LaTeX escapes & as \&):
-grep -rniE 'h\\?&m|jpmorgan|chase' resume/ ../public/data-sources/
+# 1. No customer names anywhere. Patterns live in the git-ignored resume/.leak-patterns
+#    (one regex per line). Scans the WHOLE repo — src, public, and the READMEs — not just resume/.
+if [ -s .leak-patterns ]; then
+  grep -rniE -f .leak-patterns --exclude=.leak-patterns ../src ../public ../README.md . \
+    && { echo '❌ LEAK: real customer name found — do not push'; exit 1; } \
+    || echo '✓ no customer names';
+else
+  echo '⚠ resume/.leak-patterns missing — create it (git-ignored) with real names to scan for';
+fi
 # 2. resume.json still parses:
 python3 -c "import json; json.load(open('../public/data-sources/resume.json'))"
 # 3. Rebuild + eyeball every PDF:

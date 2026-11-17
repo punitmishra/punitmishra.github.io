@@ -51,16 +51,6 @@
       "featured": false
     },
     {
-      "slug": "mentoring-engineers",
-      "title": "Mentoring Engineers: Feedback That Actually Lands",
-      "excerpt": "How to give feedback that engineers can act on without burning trust. Structured 1:1s, growth goals, and concrete ways to level up quickly.",
-      "date": "2026-02-06",
-      "category": "Personal",
-      "tags": ["Mentorship", "Leadership", "Career", "Growth"],
-      "readTime": "7 min read",
-      "featured": false
-    },
-    {
       "slug": "prompt-injection-defense",
       "title": "Prompt Injection Defense: Hardening LLM Apps in Production",
       "excerpt": "Threat model and mitigation checklist for prompt injection attacks. Guardrails, structured outputs, tool permissions, and red-team testing patterns.",

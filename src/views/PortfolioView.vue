@@ -191,7 +191,7 @@ const experience = [
     location: "Dallas–Fort Worth, TX",
     duration: "",
     achievements: [
-      "Built a reporting and data-validation automation framework for JPMorgan Chase",
+      "Built a reporting and data-validation automation framework for a major US bank",
       "Automated VM creation/config via a WCF SOAP service (IIS); parallelized and scheduled test runs across cloud machines",
       "Developed reusable Selenium / Java test APIs (JUnit, TestNG) adopted across the firm",
     ],
