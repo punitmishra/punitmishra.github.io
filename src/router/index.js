@@ -10,6 +10,7 @@ const ProjectDetail = defineAsyncComponent(() => import("@/views/ProjectDetailVi
 const BlogArticle = defineAsyncComponent(() => import("@/views/BlogArticleView.vue"));
 const PhotoGallery = defineAsyncComponent(() => import("@/views/PhotoGalleryView.vue"));
 const Resume = defineAsyncComponent(() => import("@/views/ResumeView.vue"));
+const Troll = defineAsyncComponent(() => import("@/views/TrollView.vue"));
 
 const routes = [
   {
@@ -56,6 +57,16 @@ const routes = [
     path: "/resume",
     name: "resume",
     component: Resume,
+  },
+  {
+    // Hidden easter egg — not linked anywhere. Leave it open on an unlocked screen.
+    meta: {
+      title: "⚠ you've been p0wned",
+      description: "Nothing to see here. Go lock your screen.",
+    },
+    path: "/troll",
+    name: "troll",
+    component: Troll,
   },
 ];
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import {
@@ -15,7 +15,6 @@ import {
   mdiWeatherNight,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
-import AnimatedCounter from "@/components/AnimatedCounter.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import ProjectFilter from "@/components/ProjectFilter.vue";
 import ResumeDownload from "@/components/ResumeDownload.vue";
@@ -107,7 +106,7 @@ const featuredProjects = [
   },
   {
     name: "Railroad Arcade",
-    description: "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend on Vercel with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode, or live control of trains, junctions, and crossings.",
+    description: "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode, or live control of trains, junctions, and crossings.",
     tech: ["Next.js", "Rust", "Raspberry Pi", "IoT", "WebSockets"],
     gradient: "from-violet-500 to-purple-500",
     url: `https://github.com/${githubUsername}/railroad-arcade`,
@@ -191,7 +190,7 @@ const experience = [
     location: "Dallas–Fort Worth, TX",
     duration: "",
     achievements: [
-      "Built a reporting and data-validation automation framework for JPMorgan Chase",
+      "Built a reporting and data-validation automation framework for a major US bank",
       "Automated VM creation/config via a WCF SOAP service (IIS); parallelized and scheduled test runs across cloud machines",
       "Developed reusable Selenium / Java test APIs (JUnit, TestNG) adopted across the firm",
     ],
@@ -273,6 +272,8 @@ const fetchGitHubProfile = async () => {
     githubProfile.value = { 
       ...response.data, 
       htmlUrl: response.data.html_url,
+      avatar: response.data.avatar_url,
+      publicRepos: response.data.public_repos,
       bio: response.data.bio || "Software Engineer"
     };
     loading.value.profile = false;
@@ -376,14 +377,19 @@ const scrollToSection = (sectionId) => {
 };
 
 // Auto-refresh every 5 minutes
+let githubRefreshTimer = null;
 onMounted(() => {
   fetchGitHubProfile();
   fetchGitHubRepos();
   
-  setInterval(() => {
+  githubRefreshTimer = setInterval(() => {
     fetchGitHubProfile();
     fetchGitHubRepos();
   }, 5 * 60 * 1000);
+});
+
+onBeforeUnmount(() => {
+  if (githubRefreshTimer) clearInterval(githubRefreshTimer);
 });
 </script>
 
@@ -1137,7 +1143,7 @@ onMounted(() => {
     <!-- Skills -->
     <section
       id="skills"
-      class="py-12"
+      class="py-14"
     >
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
@@ -1223,7 +1229,7 @@ onMounted(() => {
     <!-- Experience -->
     <section
       id="experience"
-      class="py-12 bg-gray-50/50 dark:bg-slate-900/50"
+      class="py-14 bg-gray-50/50 dark:bg-slate-900/50"
     >
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
@@ -1461,14 +1467,3 @@ onMounted(() => {
     </footer>
   </div>
 </template>
-
-<style scoped>
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-</style>

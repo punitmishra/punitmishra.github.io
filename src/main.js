@@ -9,7 +9,6 @@ import { darkModeKey, styleKey } from "@/config.js";
 import { measurePerformance, lazyLoadImages } from "@/utils/performance.js";
 import { initScrollAnimations, initScrollProgress } from "@/utils/scrollEffects.js";
 import { initAnalytics, trackPageView, trackScrollDepth, trackTimeOnPage } from "@/utils/analytics.js";
-import { initScrollAnimations as initAdvancedAnimations } from "@/utils/animations.js";
 import { initPerformanceOptimizations } from "@/utils/performanceOptimizer.js";
 import { initSEO } from "@/utils/seo.js";
 import { vScrollReveal } from "@/directives/scrollReveal.js";
@@ -27,7 +26,7 @@ app.directive('scroll-reveal', vScrollReveal);
 app.mount("#app");
 
 /* Init Pinia stores */
-const mainStore = useMainStore(pinia);
+useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
 
 /* Data fetching handled by individual components as needed */
@@ -51,67 +50,32 @@ initSEO({
   path: '/',
 });
 
-/* Initialize Analytics */
+/* Initialize Analytics (production only) */
 if (import.meta.env.PROD) {
   initAnalytics();
   trackScrollDepth();
   trackTimeOnPage();
-  
-  // Track initial page view
+
   router.afterEach((to) => {
     trackPageView(to.fullPath, to.meta?.title || 'Punit Mishra - Portfolio');
   });
 }
 
-/* Performance optimizations - with error handling */
-try {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        initScrollAnimations();
-        initScrollProgress();
-        lazyLoadImages();
-        measurePerformance();
-        initAdvancedAnimations();
-        initPerformanceOptimizations();
-        
-        // Register service worker for PWA (temporarily disabled due to build issues)
-        // if ('serviceWorker' in navigator && import.meta.env.PROD) {
-        //   navigator.serviceWorker.register('/sw.js')
-        //     .then((registration) => {
-        //       console.log('Service Worker registered:', registration);
-        //     })
-        //     .catch((error) => {
-        //       console.warn('Service Worker registration failed:', error);
-        //     });
-        // }
-      } catch (e) {
-        console.warn('Performance optimizations error:', e);
-      }
-    });
-  } else {
-    try {
-      initScrollAnimations();
-      initScrollProgress();
-      lazyLoadImages();
-      measurePerformance();
-      initAdvancedAnimations();
-      initPerformanceOptimizations();
-      
-      // Register service worker for PWA (temporarily disabled due to build issues)
-      // if ('serviceWorker' in navigator && import.meta.env.PROD) {
-      //   navigator.serviceWorker.register('/sw.js')
-      //     .then((registration) => {
-      //       console.log('Service Worker registered:', registration);
-      //     })
-      //     .catch((error) => {
-      //       console.warn('Service Worker registration failed:', error);
-      //     });
-      // }
-    } catch (e) {
-      console.warn('Performance optimizations error:', e);
-    }
+/* Startup tasks — run once the DOM is ready (now, or on DOMContentLoaded). */
+const runStartupTasks = () => {
+  try {
+    initScrollAnimations();
+    initScrollProgress();
+    lazyLoadImages();
+    measurePerformance();
+    initPerformanceOptimizations();
+  } catch (e) {
+    console.warn("Startup tasks error:", e);
   }
-} catch (e) {
-  console.warn('Failed to initialize performance optimizations:', e);
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", runStartupTasks);
+} else {
+  runStartupTasks();
 }

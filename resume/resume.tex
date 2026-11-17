@@ -6,7 +6,7 @@
 % ============================================================================
 \documentclass[10pt,letterpaper]{article}
 
-\usepackage[letterpaper, margin=0.46in]{geometry}
+\usepackage[letterpaper, margin=0.44in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[proportional,osf]{cochineal}   % book serif w/ old-style figures
 \usepackage{microtype}
@@ -15,13 +15,13 @@
 \usepackage{tabularx}
 \usepackage[hidelinks]{hyperref}
 
-\linespread{0.97}
+\linespread{0.9}
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 
 % Spacing knobs referenced by the shared content file
-\newcommand{\entrygap}{1.5pt}
-\newcommand{\skillgap}{1pt}
+\newcommand{\entrygap}{1pt}
+\newcommand{\skillgap}{0.4pt}
 
 % 1-page: hide long-form content, show condensed content
 \newcommand{\longonly}[1]{}
@@ -29,16 +29,20 @@
 
 % Section styling — small caps, hairline rule, compact
 \titleformat{\section}{\large\scshape}{}{0em}{}[{\titlerule[0.4pt]}]
-\titlespacing*{\section}{0pt}{5.5pt}{2.5pt}
+\titlespacing*{\section}{0pt}{2.5pt}{1pt}
 
 % Lists: pipe bullets, tight
-\setlist[itemize]{label={\small\textbar}, leftmargin=1.1em, itemsep=1.5pt, topsep=1.5pt, parsep=0pt}
+\setlist[itemize]{label={\small\textbar}, leftmargin=1.1em, itemsep=0.8pt, topsep=0.8pt, parsep=0pt}
 
 % Entry helper (bold small-caps company, italic role)
 \newcommand{\entry}[4]{%
   {\scshape\bfseries #1}\hfill #3\\[0.5pt]%
   {\itshape #2}\hfill{\itshape #4}\par\vspace{1.5pt}%
 }
+% Company header spanning multiple roles (bold small-caps company; right: overall span)
+\newcommand{\company}[2]{{\scshape\bfseries #1}\hfill #2\par\vspace{0.5pt}}
+% Role line under a company header (italic role; right: dates + location)
+\newcommand{\role}[2]{{\itshape #1}\hfill{\itshape #2}\par\vspace{1.5pt}}
 
 \begin{document}
 \input{resume-content}

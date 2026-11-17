@@ -20,7 +20,7 @@ export const initScrollAnimations = () => {
     }, observerOptions);
 
     // Observe elements with animation classes
-    document.querySelectorAll('.fade-in, .slide-up, .scale-in').forEach(el => {
+    document.querySelectorAll('.fade-in, .slide-up, .slide-in, .scale-in').forEach(el => {
       observer.observe(el);
     });
   }
@@ -78,7 +78,7 @@ export const initScrollProgress = () => {
           const scrolled = (window.pageYOffset / windowHeight) * 100;
           progressBar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
         }
-      } catch (e) {
+      } catch {
         // Silently fail on scroll updates
       }
     };

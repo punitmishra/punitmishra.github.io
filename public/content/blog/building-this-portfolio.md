@@ -308,15 +308,6 @@ jobs:
       - uses: actions/deploy-pages@v4
 ```
 
-### Vercel (Alternative)
-
-Zero-config deployment:
-
-```bash
-npm i -g vercel
-vercel --prod
-```
-
 ## Lessons Learned
 
 1. **Start Simple**: Built the core structure first, added features incrementally

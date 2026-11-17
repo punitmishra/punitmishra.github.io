@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "slug": "agent-memory-hybrid-store-2026",
+      "title": "Agent Memory in 2026: Hybrid Vector + Relational Stores",
+      "excerpt": "A practical architecture for agent memory: vector search for recall and relational storage for truth. Includes code for write paths, retrieval, and compression.",
+      "date": "2026-02-09",
+      "category": "AI/ML",
+      "tags": ["Agents", "Memory", "Vector Search", "PostgreSQL", "RAG"],
+      "readTime": "15 min read",
+      "featured": true
+    },
+    {
+      "slug": "rag-chunking-strategies-2026",
+      "title": "RAG Chunking Strategies in 2026: Accuracy Without Latency Pain",
+      "excerpt": "Chunking is the hidden lever of RAG quality. This guide compares semantic, recursive, and structure-aware chunking with evaluation code.",
+      "date": "2026-02-09",
+      "category": "AI/ML",
+      "tags": ["RAG", "Chunking", "Retrieval", "Evaluation", "LLM"],
+      "readTime": "12 min read",
+      "featured": true
+    },
+    {
+      "slug": "judge-models-eval-2026",
+      "title": "Judge Models for LLM Evaluation in 2026: Reliable, Cheap, and Fast",
+      "excerpt": "How to build a judge-model harness that correlates with human evals. Rubrics, calibration, and cost controls with code examples.",
+      "date": "2026-02-09",
+      "category": "AI/ML",
+      "tags": ["Evaluation", "LLM", "Judge Models", "Rubrics", "QA"],
+      "readTime": "13 min read",
+      "featured": true
+    },
+    {
       "slug": "latency-budget-playbook",
       "title": "Latency Budget Playbook: How to Keep P99 Under 200ms",
       "excerpt": "A practical guide to latency budgets, SLOs, and performance engineering. How to find the hot path, tame tail latency, and keep user-facing systems fast at scale.",
@@ -48,16 +78,6 @@
       "category": "Technical",
       "tags": ["Incident Response", "Reliability", "On-Call", "SRE"],
       "readTime": "9 min read",
-      "featured": false
-    },
-    {
-      "slug": "mentoring-engineers",
-      "title": "Mentoring Engineers: Feedback That Actually Lands",
-      "excerpt": "How to give feedback that engineers can act on without burning trust. Structured 1:1s, growth goals, and concrete ways to level up quickly.",
-      "date": "2026-02-06",
-      "category": "Personal",
-      "tags": ["Mentorship", "Leadership", "Career", "Growth"],
-      "readTime": "7 min read",
       "featured": false
     },
     {

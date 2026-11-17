@@ -33,9 +33,11 @@ _site
 .jekyll-cache
 .jekyll-metadata
 
-.vercel
 .env
 
 # Location-tailored resume variants (build on demand; not served publicly)
 public/resume-newyork.pdf
 public/resume-2page-newyork.pdf
+
+# Real customer-name patterns for the résumé leak check — kept out of git
+resume/.leak-patterns

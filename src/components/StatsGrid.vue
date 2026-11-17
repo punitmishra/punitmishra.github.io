@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { mdiCodeBraces, mdiStar, mdiAccountGroup, mdiCalendar, mdiCoffee, mdiGit } from '@mdi/js';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+import { mdiCodeBraces, mdiStar, mdiCalendar, mdiCoffee } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 
 const props = defineProps({
@@ -17,22 +17,66 @@ const stats = ref([
   { icon: mdiCoffee, value: 0, target: 10000, label: 'Cups of Coffee', suffix: '+' },
 ]);
 
-onMounted(() => {
-  stats.value.forEach((stat, index) => {
-    setTimeout(() => {
-      const duration = 2000;
-      const start = performance.now();
-      const animate = (now) => {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4);
-        stat.value = Math.round(stat.target * eased);
-        if (progress < 1) requestAnimationFrame(animate);
-      };
-      requestAnimationFrame(animate);
-    }, index * 150);
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Track each stat's in-flight delay timer + RAF so a re-animation cancels the
+// previous loop instead of overlapping it (overlapping loops write the same
+// stat.value every frame and visibly flash/snap the counter on load).
+const timers = [];
+
+const clearTimers = () => {
+  timers.forEach((t) => {
+    if (!t) return;
+    clearTimeout(t.timeout);
+    if (t.raf) cancelAnimationFrame(t.raf);
   });
-});
+  timers.length = 0;
+};
+
+const animateStat = (stat, index) => {
+  if (prefersReducedMotion()) {
+    stat.value = stat.target;
+    return;
+  }
+  const from = stat.value;
+  const handle = { timeout: 0, raf: 0 };
+  handle.timeout = setTimeout(() => {
+    const duration = 2000;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      stat.value = Math.round(from + (stat.target - from) * eased);
+      if (progress < 1) handle.raf = requestAnimationFrame(step);
+    };
+    handle.raf = requestAnimationFrame(step);
+  }, index * 150);
+  timers[index] = handle;
+};
+
+const runAnimation = () => {
+  clearTimers();
+  stats.value.forEach(animateStat);
+};
+
+onMounted(runAnimation);
+onBeforeUnmount(clearTimers);
+
+// Re-seed targets and re-animate when async GitHub data (stars/repos) arrives,
+// so "GitHub Stars" no longer sticks at 0 after the fetch resolves. clearTimers()
+// inside runAnimation cancels the mount animation so the two never overlap/flash.
+watch(
+  () => [props.repos, props.years, props.stars],
+  ([repos, years, stars]) => {
+    stats.value[0].target = repos;
+    stats.value[1].target = years;
+    stats.value[2].target = stars;
+    runAnimation();
+  }
+);
 </script>
 
 <template>

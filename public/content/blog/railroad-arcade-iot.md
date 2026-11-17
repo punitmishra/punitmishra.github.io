@@ -28,7 +28,7 @@ graph TB
         Mobile[Mobile App]
     end
 
-    subgraph "Cloud (Vercel)"
+    subgraph "Cloud"
         Next[Next.js App Router]
         API[API Routes]
         WS[WebSocket Server]
@@ -615,4 +615,4 @@ Building Railroad Arcade taught me:
 3. **Gamification works** - Achievements and leaderboards drive engagement
 4. **PWA for IoT** - Installable apps with offline support enhance the experience
 
-Check out the live demo at [railroad-arcade.vercel.app](https://railroad-arcade.vercel.app) or view the source on [GitHub](https://github.com/punitmishra/railroad-arcade).
+Check out the source on [GitHub](https://github.com/punitmishra/railroad-arcade).

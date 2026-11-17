@@ -156,7 +156,6 @@ and multi-tenant infrastructure beneath our LLM products — delivered in direct
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=punitmishra&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=3b82f6&icon_color=3b82f6&text_color=c9d1d9" alt="GitHub Stats" height="165" />
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=punitmishra&theme=tokyonight&hide_border=true&background=0d1117&stroke=3b82f6&ring=3b82f6&fire=f97316&currStreakLabel=3b82f6" alt="GitHub Streak" height="165" />
 
 </div>
@@ -177,7 +176,7 @@ Feb 2014 - Sep 2018  Senior Software Engineer @ CallidusCloud  (acquired by SAP,
                      +-- ML stack to GKE on-prem (Anthos); CI/CD backbone
 
 Oct 2012 - Dec 2013  Automation Systems Engineer @ IBM  (Dallas–Fort Worth)
-                     +-- Automation & test frameworks for JPMorgan Chase
+                     +-- Automation & test frameworks for a major US bank
 
 2011                 Web Developer @ UC Berkeley Law IST  ·  SWE Intern @ LawPivot
 2009 - 2010          SWE Intern @ LawPivot (Google Startup Labs)
