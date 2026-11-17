@@ -1,35 +1,57 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { mdiArrowRight, mdiClockOutline, mdiTagOutline } from '@mdi/js';
+import { mdiArrowRight, mdiClockOutline, mdiMagnify } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 
 const router = useRouter();
 const articles = ref([]);
 const loading = ref(true);
 const selectedCategory = ref('all');
+const searchQuery = ref('');
 
-const categories = ['all', 'AI/ML', 'Technical', 'Personal', 'Security'];
+const categories = computed(() => {
+  const unique = new Set(
+    articles.value
+      .map((article) => article.category)
+      .filter(Boolean)
+  );
+  return ['all', ...Array.from(unique).sort()];
+});
 
 const categoryColors = {
   'AI/ML': 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
   'Technical': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
   'Personal': 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300',
   'Security': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300',
+  'Projects': 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300',
+  'Career': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300',
+  'Crypto': 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300',
 };
 
 const filteredArticles = computed(() => {
-  if (selectedCategory.value === 'all') {
-    return articles.value;
-  }
-  return articles.value.filter(a => a.category === selectedCategory.value);
+  const query = searchQuery.value.trim().toLowerCase();
+  const byCategory = selectedCategory.value === 'all'
+    ? articles.value
+    : articles.value.filter((article) => article.category === selectedCategory.value);
+
+  if (!query) return byCategory;
+
+  return byCategory.filter((article) => {
+    const tags = Array.isArray(article.tags) ? article.tags.join(' ') : '';
+    return [
+      article.title,
+      article.excerpt,
+      tags,
+    ].join(' ').toLowerCase().includes(query);
+  });
 });
 
 const fetchArticles = async () => {
   try {
     const response = await fetch('/content/blog/index.json');
     const data = await response.json();
-    articles.value = data.articles;
+    articles.value = Array.isArray(data.articles) ? data.articles : [];
     loading.value = false;
   } catch (error) {
     console.error('Failed to load articles:', error);
@@ -77,11 +99,26 @@ onMounted(() => {
         </p>
       </div>
 
-      <!-- Category Filter -->
+      <!-- Search + Category Filter -->
       <div
         v-scroll-reveal="{ delay: '100ms' }"
-        class="flex flex-wrap justify-center gap-2 mb-10"
+        class="flex flex-col items-center gap-4 mb-10"
       >
+        <div class="w-full max-w-xl">
+          <div class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm">
+            <BaseIcon
+              :path="mdiMagnify"
+              size="18"
+              class="text-gray-400"
+            />
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Search articles by title, excerpt, or tags..."
+              class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-sm"
+            >
+          </div>
+        </div>
         <button
           v-for="category in categories"
           :key="category"
@@ -163,7 +200,7 @@ onMounted(() => {
             <!-- Tags -->
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span
-                v-for="tag in article.tags.slice(0, 3)"
+            v-for="tag in (article.tags || []).slice(0, 3)"
                 :key="tag"
                 class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 rounded text-xs"
               >
