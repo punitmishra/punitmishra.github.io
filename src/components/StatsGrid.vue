@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import { mdiCodeBraces, mdiStar, mdiCalendar, mdiCoffee } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 
@@ -22,31 +22,52 @@ const prefersReducedMotion = () =>
   typeof window.matchMedia === 'function' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Track each stat's in-flight delay timer + RAF so a re-animation cancels the
+// previous loop instead of overlapping it (overlapping loops write the same
+// stat.value every frame and visibly flash/snap the counter on load).
+const timers = [];
+
+const clearTimers = () => {
+  timers.forEach((t) => {
+    if (!t) return;
+    clearTimeout(t.timeout);
+    if (t.raf) cancelAnimationFrame(t.raf);
+  });
+  timers.length = 0;
+};
+
 const animateStat = (stat, index) => {
   if (prefersReducedMotion()) {
     stat.value = stat.target;
     return;
   }
   const from = stat.value;
-  setTimeout(() => {
+  const handle = { timeout: 0, raf: 0 };
+  handle.timeout = setTimeout(() => {
     const duration = 2000;
     const start = performance.now();
-    const animate = (now) => {
+    const step = (now) => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 4);
       stat.value = Math.round(from + (stat.target - from) * eased);
-      if (progress < 1) requestAnimationFrame(animate);
+      if (progress < 1) handle.raf = requestAnimationFrame(step);
     };
-    requestAnimationFrame(animate);
+    handle.raf = requestAnimationFrame(step);
   }, index * 150);
+  timers[index] = handle;
 };
 
-const runAnimation = () => stats.value.forEach(animateStat);
+const runAnimation = () => {
+  clearTimers();
+  stats.value.forEach(animateStat);
+};
 
 onMounted(runAnimation);
+onBeforeUnmount(clearTimers);
 
 // Re-seed targets and re-animate when async GitHub data (stars/repos) arrives,
-// so "GitHub Stars" no longer sticks at 0 after the fetch resolves.
+// so "GitHub Stars" no longer sticks at 0 after the fetch resolves. clearTimers()
+// inside runAnimation cancels the mount animation so the two never overlap/flash.
 watch(
   () => [props.repos, props.years, props.stars],
   ([repos, years, stars]) => {
