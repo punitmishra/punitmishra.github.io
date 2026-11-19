@@ -14,12 +14,10 @@ const searchQuery = ref('');
 const selectedIndex = ref(0);
 
 const commands = [
-  { id: 'home', label: 'Go to Home', icon: mdiHome, section: 'hero', type: 'navigation' },
-  { id: 'projects', label: 'View Projects', icon: mdiCodeBraces, section: 'projects', type: 'navigation' },
-  { id: 'latest', label: 'Latest Projects', icon: mdiCodeBraces, section: 'latest', type: 'navigation' },
-  { id: 'blog', label: 'Open Blog', icon: mdiNewspaperVariant, section: 'blog', type: 'navigation' },
-  { id: 'skills', label: 'View Skills', icon: mdiCodeBraces, section: 'skills', type: 'navigation' },
-  { id: 'experience', label: 'View Experience', icon: mdiBriefcase, section: 'experience', type: 'navigation' },
+  { id: 'home', label: 'Go to Home', icon: mdiHome, section: 'top', type: 'navigation' },
+  { id: 'work', label: 'Selected Work', icon: mdiCodeBraces, section: 'work', type: 'navigation' },
+  { id: 'writing', label: 'Writing', icon: mdiNewspaperVariant, section: 'writing', type: 'navigation' },
+  { id: 'about', label: 'About / Experience', icon: mdiBriefcase, section: 'about', type: 'navigation' },
   { id: 'contact', label: 'Contact Me', icon: mdiEmail, section: 'contact', type: 'navigation' },
   { id: 'photos', label: 'Open Photos', icon: mdiImageMultiple, route: '/photos', type: 'route' },
   { id: 'resume', label: 'Open Resume', icon: mdiFileDocument, route: '/resume', type: 'route' },

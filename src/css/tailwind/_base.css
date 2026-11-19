@@ -14,11 +14,11 @@
 
   /* Mono · Editorial palette tokens — light defaults + dark overrides */
   :root {
-    --paper: #fbfbf9; --ink: #14151a; --muted: #6b6f76; --faint: #a7abb2;
+    --paper: #fbfbf9; --ink: #14151a; --muted: #6b6f76; --faint: #6e737b;
     --hairline: #e7e6e1; --accent: #2563eb; --chip: #f1f1ec;
   }
   .dark {
-    --paper: #0f1011; --ink: #ececea; --muted: #9aa0a8; --faint: #5e636b;
+    --paper: #0f1011; --ink: #ececea; --muted: #9aa0a8; --faint: #878c94;
     --hairline: #272829; --accent: #5b8cff; --chip: #1c1d1f;
   }
 
