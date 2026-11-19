@@ -12,14 +12,24 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        // Mono · Editorial: JetBrains Mono for structure, Plus Jakarta Sans for body
+        'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        'body': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        'display': ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        'heading': ['JetBrains Mono', 'ui-monospace', 'monospace'],
         'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
-        'heading': ['Space Grotesk', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       // Minimalist color palette - focused on 2-3 accents
       colors: {
+        // Mono · Editorial tokens — defined as CSS vars in _base.css so they flip under .dark
+        paper: 'var(--paper)',
+        ink: 'var(--ink)',
+        muted: 'var(--muted)',
+        faint: 'var(--faint)',
+        hairline: 'var(--hairline)',
+        chip: 'var(--chip)',
         accent: {
-          DEFAULT: '#3b82f6', // blue-500
+          DEFAULT: 'var(--accent)',
           light: '#60a5fa',   // blue-400
           dark: '#2563eb',    // blue-600
         },
