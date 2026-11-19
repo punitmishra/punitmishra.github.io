@@ -12,16 +12,28 @@
     }
   }
 
+  /* Mono · Editorial palette tokens — light defaults + dark overrides */
+  :root {
+    --paper: #fbfbf9; --ink: #14151a; --muted: #6b6f76; --faint: #a7abb2;
+    --hairline: #e7e6e1; --accent: #2563eb; --chip: #f1f1ec;
+  }
+  .dark {
+    --paper: #0f1011; --ink: #ececea; --muted: #9aa0a8; --faint: #5e636b;
+    --hairline: #272829; --accent: #5b8cff; --chip: #1c1d1f;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background-color: var(--paper);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', 'Poppins', system-ui, sans-serif;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
     letter-spacing: -0.02em;
     font-weight: 700;
   }
