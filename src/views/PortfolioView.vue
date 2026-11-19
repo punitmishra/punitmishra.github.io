@@ -291,12 +291,6 @@ onBeforeUnmount(() => {
             <div class="font-mono text-sm font-bold tracking-[0.16em] uppercase">
               <span class="text-accent">§02</span> Writing
             </div>
-            <router-link
-              to="/resume"
-              class="font-mono text-[10px] tracking-[0.12em] uppercase text-faint hover:text-ink"
-            >
-              all ↗
-            </router-link>
           </div>
           <router-link
             v-for="post in recentPosts"
@@ -388,7 +382,7 @@ onBeforeUnmount(() => {
             :href="l.url"
             :target="l.url.startsWith('http') ? '_blank' : '_self'"
             rel="noopener"
-            class="font-mono text-xs text-accent hover:underline"
+            class="font-mono text-xs text-accent hover:underline py-1 w-fit"
           >{{ l.label }} ↗</a>
         </div>
         <div class="font-mono text-[11px] text-faint mt-5 pt-4 border-t border-hairline">
@@ -418,6 +412,9 @@ onBeforeUnmount(() => {
       </div>
     </footer>
 
-    <CommandPalette ref="commandPaletteRef" />
+    <CommandPalette
+      ref="commandPaletteRef"
+      @navigate="scrollToSection"
+    />
   </div>
 </template>
