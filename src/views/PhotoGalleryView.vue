@@ -22,13 +22,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
+  <div class="min-h-screen bg-paper">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
+    <nav class="fixed top-0 w-full z-50 bg-paper border-b border-hairline">
       <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <router-link
           to="/"
-          class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight hover:opacity-80 transition-opacity"
+          class="font-mono text-xl font-bold text-ink tracking-tight hover:opacity-80 transition-opacity"
         >
           PM
         </router-link>
@@ -36,20 +36,20 @@ onMounted(async () => {
         <div class="flex items-center gap-6">
           <router-link
             to="/"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            class="font-mono text-xs text-muted hover:text-ink transition-colors tracking-wide relative group"
           >
             Home
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
           </router-link>
-          <span class="text-gray-900 dark:text-white font-medium text-sm tracking-wide">
+          <span class="font-mono text-xs text-ink tracking-wide">
             Photos
           </span>
           <router-link
             to="/resume"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            class="font-mono text-xs text-muted hover:text-ink transition-colors tracking-wide relative group"
           >
             Resume
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
           </router-link>
           <DarkModeToggle />
         </div>
@@ -59,10 +59,10 @@ onMounted(async () => {
     <!-- Hero Section -->
     <section class="pt-28 pb-12 px-6">
       <div class="max-w-6xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-4">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-ink mb-4">
           Photo Gallery
         </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        <p class="font-body text-lg text-muted max-w-2xl mx-auto">
           A collection of professional photos, project screenshots, and personal moments.
         </p>
       </div>
@@ -76,7 +76,7 @@ onMounted(async () => {
           v-if="loading"
           class="flex justify-center py-20"
         >
-          <div class="animate-spin rounded-full h-12 w-12 border-2 border-blue-500 border-t-transparent" />
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-accent border-t-transparent" />
         </div>
 
         <!-- Error State -->
@@ -84,9 +84,9 @@ onMounted(async () => {
           v-else-if="error"
           class="text-center py-20"
         >
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-chip mb-4">
             <svg
-              class="w-8 h-8 text-red-500"
+              class="w-8 h-8 text-muted"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -99,7 +99,7 @@ onMounted(async () => {
               />
             </svg>
           </div>
-          <p class="text-gray-600 dark:text-gray-400">
+          <p class="font-body text-muted">
             {{ error }}
           </p>
         </div>
@@ -109,9 +109,9 @@ onMounted(async () => {
           v-else-if="photos.length === 0"
           class="text-center py-20"
         >
-          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 dark:bg-slate-800 mb-6">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-chip mb-6">
             <svg
-              class="w-10 h-10 text-gray-400"
+              class="w-10 h-10 text-faint"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -124,10 +124,10 @@ onMounted(async () => {
               />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 class="text-xl font-semibold text-ink mb-2">
             No photos yet
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+          <p class="font-body text-muted max-w-md mx-auto">
             Photos will appear here once they're uploaded to Cloudinary and added to the gallery.
           </p>
         </div>

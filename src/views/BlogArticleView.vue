@@ -102,7 +102,7 @@ marked.use({
             </div>
             <div class="flex items-center justify-center h-48 bg-gray-900 rounded-lg border border-gray-700">
               <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-accent flex items-center justify-center">
                   <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
                 <p class="text-gray-400 text-sm font-mono">Click to load terminal recording</p>
@@ -213,12 +213,12 @@ const initAsciinema = async () => {
 };
 
 const categoryColors = {
-  'AI/ML': 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
-  'Technical': 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
-  'Personal': 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300',
-  'Security': 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300',
-  'Projects': 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300',
-  'Career': 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300',
+  'AI/ML': 'bg-chip text-muted border border-hairline',
+  'Technical': 'bg-chip text-muted border border-hairline',
+  'Personal': 'bg-chip text-muted border border-hairline',
+  'Security': 'bg-chip text-muted border border-hairline',
+  'Projects': 'bg-chip text-muted border border-hairline',
+  'Career': 'bg-chip text-muted border border-hairline',
 };
 
 const formatDate = (dateStr) => {
@@ -329,24 +329,24 @@ watch(() => route.params.slug, (newSlug) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-slate-900 dark:via-slate-800/30 dark:to-slate-900">
+  <div class="min-h-screen bg-paper">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-gray-200/50 dark:border-slate-800/50">
+    <nav class="fixed top-0 w-full z-50 bg-paper border-b border-hairline">
       <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
         <button
-          class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          class="flex items-center gap-2 text-muted hover:text-ink transition-colors"
           @click="goBack"
         >
           <BaseIcon
             :path="mdiArrowLeft"
             size="20"
           />
-          <span class="font-medium">Back</span>
+          <span class="font-mono text-xs uppercase tracking-[0.12em]">Back</span>
         </button>
 
         <div class="flex items-center gap-3">
           <button
-            class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            class="p-2 rounded-md border border-hairline text-muted hover:text-ink hover:border-faint transition-colors"
             title="Share article"
             @click="shareArticle"
           >
@@ -359,7 +359,7 @@ watch(() => route.params.slug, (newSlug) => {
             v-if="article"
             :href="`https://github.com/punitmishra/punitmishra.github.io/blob/main/public/content/blog/${route.params.slug}.md`"
             target="_blank"
-            class="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            class="p-2 rounded-md border border-hairline text-muted hover:text-ink hover:border-faint transition-colors"
             title="View source on GitHub"
           >
             <BaseIcon
@@ -378,11 +378,11 @@ watch(() => route.params.slug, (newSlug) => {
     >
       <div class="max-w-4xl mx-auto px-6">
         <div class="animate-pulse">
-          <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4" />
-          <div class="h-12 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-6" />
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-4" />
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 mb-4" />
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6" />
+          <div class="h-8 bg-chip rounded w-1/4 mb-4" />
+          <div class="h-12 bg-chip rounded w-3/4 mb-6" />
+          <div class="h-4 bg-chip rounded w-full mb-4" />
+          <div class="h-4 bg-chip rounded w-5/6 mb-4" />
+          <div class="h-4 bg-chip rounded w-4/6" />
         </div>
       </div>
     </div>
@@ -393,14 +393,14 @@ watch(() => route.params.slug, (newSlug) => {
       class="pt-24 pb-16"
     >
       <div class="max-w-4xl mx-auto px-6 text-center">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 class="text-2xl font-bold text-ink font-heading mb-4">
           Article Not Found
         </h1>
-        <p class="text-gray-600 dark:text-gray-400 mb-8">
+        <p class="text-muted font-body mb-8">
           {{ error }}
         </p>
         <button
-          class="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium"
+          class="px-6 py-3 bg-ink text-paper rounded-md font-mono font-medium hover:opacity-90 transition-opacity"
           @click="goBack"
         >
           Go Back
@@ -418,24 +418,24 @@ watch(() => route.params.slug, (newSlug) => {
         <header class="mb-12">
           <!-- Category -->
           <div class="flex items-center gap-3 mb-4">
-            <span :class="['px-3 py-1 rounded-full text-sm font-medium', categoryColors[article.category] || categoryColors['Technical']]">
+            <span :class="['px-2.5 py-1 rounded text-[11px] font-mono uppercase tracking-[0.1em]', categoryColors[article.category] || categoryColors['Technical']]">
               {{ article.category }}
             </span>
             <span
               v-if="article.featured"
-              class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-medium rounded-full"
+              class="px-2.5 py-1 border border-accent text-accent text-[11px] font-mono uppercase tracking-[0.1em] rounded"
             >
               Featured
             </span>
           </div>
 
           <!-- Title -->
-          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading leading-tight mb-6">
+          <h1 class="text-4xl md:text-5xl font-bold text-ink font-heading tracking-tight leading-tight mb-6">
             {{ article.title }}
           </h1>
 
           <!-- Meta -->
-          <div class="flex flex-wrap items-center gap-4 text-gray-500 dark:text-gray-400 text-sm mb-6">
+          <div class="flex flex-wrap items-center gap-4 text-faint font-mono text-xs mb-6">
             <div class="flex items-center gap-1.5">
               <BaseIcon
                 :path="mdiCalendar"
@@ -457,7 +457,7 @@ watch(() => route.params.slug, (newSlug) => {
             <span
               v-for="tag in (Array.isArray(article.tags) ? article.tags : [])"
               :key="tag"
-              class="px-3 py-1 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 rounded-lg text-sm"
+              class="px-2.5 py-1 bg-chip text-muted border border-hairline rounded text-[11px] font-mono"
             >
               {{ tag }}
             </span>
@@ -467,41 +467,41 @@ watch(() => route.params.slug, (newSlug) => {
         <!-- Content -->
         <div
           class="prose prose-lg dark:prose-invert max-w-none
-            prose-headings:font-heading prose-headings:font-bold
+            prose-headings:font-heading prose-headings:font-bold prose-headings:text-ink
             prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
-            prose-p:text-gray-600 dark:prose-p:text-gray-300
-            prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
-            prose-code:text-pink-600 dark:prose-code:text-pink-400 prose-code:bg-gray-100 dark:prose-code:bg-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
-            prose-pre:bg-gray-900 dark:prose-pre:bg-slate-800 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-slate-700 prose-pre:rounded-xl
-            prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
-            prose-table:border prose-table:border-gray-200 dark:prose-table:border-slate-700
-            prose-th:bg-gray-100 dark:prose-th:bg-slate-800 prose-th:px-4 prose-th:py-2
-            prose-td:px-4 prose-td:py-2 prose-td:border prose-td:border-gray-200 dark:prose-td:border-slate-700
-            prose-img:rounded-xl prose-img:shadow-lg
-            prose-hr:border-gray-200 dark:prose-hr:border-slate-700"
+            prose-p:text-muted prose-li:text-muted
+            prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+            prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+            prose-pre:rounded-xl
+            prose-blockquote:py-1 prose-blockquote:px-4
+            prose-table:border prose-table:border-hairline
+            prose-th:px-4 prose-th:py-2
+            prose-td:px-4 prose-td:py-2 prose-td:border prose-td:border-hairline
+            prose-img:rounded-lg prose-img:border prose-img:border-hairline
+            prose-hr:border-hairline"
           v-html="content"
         />
 
         <!-- Footer -->
-        <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-slate-700">
+        <footer class="mt-16 pt-8 border-t border-hairline">
           <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4">
               <img
                 src="https://github.com/punitmishra.png"
                 alt="Punit Mishra"
-                class="w-12 h-12 rounded-full"
+                class="w-12 h-12 rounded-full border border-hairline"
               >
               <div>
-                <p class="font-semibold text-gray-900 dark:text-white">
+                <p class="font-mono font-bold text-ink">
                   Punit Mishra
                 </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
+                <p class="text-sm text-muted font-body">
                   Senior ML Expert & AI Tech Lead @ SAP
                 </p>
               </div>
             </div>
             <button
-              class="flex items-center gap-2 px-6 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+              class="flex items-center gap-2 px-6 py-2 bg-ink text-paper rounded-md font-mono font-medium hover:opacity-90 transition-opacity"
               @click="goBack"
             >
               <BaseIcon
@@ -535,7 +535,7 @@ watch(() => route.params.slug, (newSlug) => {
   background: #161b22;
   border-bottom-left-radius: 0.5rem;
   border-top-right-radius: 0.75rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   z-index: 10;
@@ -545,15 +545,10 @@ watch(() => route.params.slug, (newSlug) => {
 .mermaid-wrapper {
   position: relative;
   margin: 1.5rem 0;
-  background: #f8fafc;
+  background: var(--chip);
   border-radius: 0.75rem;
   padding: 1.5rem;
-  border: 1px solid #e2e8f0;
-}
-
-.dark .mermaid-wrapper {
-  background: #1e293b;
-  border-color: #334155;
+  border: 1px solid var(--hairline);
 }
 
 .mermaid {
@@ -577,7 +572,6 @@ watch(() => route.params.slug, (newSlug) => {
   padding-top: 2.5rem;
   margin: 0;
   border: 1px solid #30363d;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .code-block-wrapper pre code,
@@ -652,20 +646,14 @@ watch(() => route.params.slug, (newSlug) => {
 
 /* Inline code */
 .prose :not(pre) > code {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--chip);
+  color: var(--ink);
   padding: 0.2rem 0.5rem;
   border-radius: 0.375rem;
   font-size: 0.875em;
   font-weight: 500;
   font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
-  border: 1px solid #e2e8f0;
-}
-
-.dark .prose :not(pre) > code {
-  background: #1e293b;
-  color: #f1f5f9;
-  border-color: #334155;
+  border: 1px solid var(--hairline);
 }
 
 /* Better table styling */
@@ -677,59 +665,38 @@ watch(() => route.params.slug, (newSlug) => {
 }
 
 .prose th {
-  background: #f8fafc;
+  background: var(--chip);
   font-weight: 600;
   text-align: left;
   padding: 0.875rem 1rem;
-  border-bottom: 2px solid #e2e8f0;
-}
-
-.dark .prose th {
-  background: #1e293b;
-  border-bottom-color: #334155;
+  border-bottom: 2px solid var(--hairline);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 .prose td {
   padding: 0.875rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.dark .prose td {
-  border-bottom-color: #334155;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .prose tr:hover td {
-  background: #f8fafc;
-}
-
-.dark .prose tr:hover td {
-  background: #1e293b;
+  background: var(--chip);
 }
 
 /* Better blockquote styling */
 .prose blockquote {
-  border-left: 4px solid #3b82f6;
-  background: linear-gradient(to right, #eff6ff, transparent);
+  border-left: 3px solid var(--accent);
+  background: var(--chip);
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 0.25rem 0.25rem 0;
   font-style: italic;
-}
-
-.dark .prose blockquote {
-  background: linear-gradient(to right, rgba(59, 130, 246, 0.1), transparent);
-  border-left-color: #60a5fa;
 }
 
 /* Heading anchors */
 .prose h2 {
   margin-top: 2.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.dark .prose h2 {
-  border-bottom-color: #334155;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .prose h3 {
@@ -773,21 +740,13 @@ watch(() => route.params.slug, (newSlug) => {
   margin: 3rem 0;
   border: none;
   height: 1px;
-  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
-}
-
-.dark .prose hr {
-  background: linear-gradient(to right, transparent, #334155, transparent);
+  background: var(--hairline);
 }
 
 /* Strong/bold text */
 .prose strong {
-  color: #0f172a;
+  color: var(--ink);
   font-weight: 600;
-}
-
-.dark .prose strong {
-  color: #f1f5f9;
 }
 
 /* Plain text code blocks without language */
@@ -809,8 +768,7 @@ watch(() => route.params.slug, (newSlug) => {
 }
 
 .asciinema-placeholder:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  border-color: var(--accent);
 }
 
 .asciinema-player-container {
