@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
-import { mdiWeatherNight, mdiWeatherSunny, mdiCreation } from '@mdi/js';
+import { ref } from 'vue';
+import { mdiWeatherNight, mdiWeatherSunny } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 import { useStyleStore } from '@/stores/style.js';
 
@@ -44,55 +44,33 @@ const toggleDarkMode = () => {
 <template>
   <div class="relative">
     <button
-      class="group relative p-2.5 rounded-xl bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-300 overflow-hidden"
+      class="group p-2 rounded-md border border-hairline text-muted hover:text-ink hover:bg-chip transition-colors"
       :title="styleStore.darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+      :aria-label="styleStore.darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
       @click="toggleDarkMode"
     >
-      <!-- Animated background -->
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 dark:from-indigo-600 dark:to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+      <BaseIcon
+        :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight"
+        size="18"
+        class="transition-transform duration-300 group-hover:rotate-12"
       />
-
-      <!-- Icon with rotation animation -->
-      <div class="relative transition-transform duration-500 group-hover:rotate-12">
-        <BaseIcon
-          :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight"
-          size="20"
-          :class="[
-            'transition-colors duration-300',
-            styleStore.darkMode ? 'text-yellow-500' : 'text-indigo-600'
-          ]"
-        />
-      </div>
-
-      <!-- Sparkle effect on hover -->
-      <div class="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity">
-        <BaseIcon
-          :path="mdiCreation"
-          size="12"
-          class="text-yellow-400 dark:text-purple-400"
-        />
-      </div>
     </button>
 
     <!-- Toast notification -->
     <Transition
       enter-active-class="transition-all duration-300 ease-out"
-      enter-from-class="opacity-0 translate-y-2 scale-95"
-      enter-to-class="opacity-100 translate-y-0 scale-100"
+      enter-from-class="opacity-0 translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
       leave-active-class="transition-all duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0 scale-100"
-      leave-to-class="opacity-0 -translate-y-2 scale-95"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
     >
       <div
         v-if="showToast"
-        class="absolute top-full right-0 mt-3 px-4 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium rounded-xl shadow-xl whitespace-nowrap z-50"
+        class="absolute top-full right-0 mt-3 px-3 py-2 bg-ink text-paper font-mono text-xs rounded-md whitespace-nowrap z-50"
       >
-        <div class="flex items-center gap-2">
-          <span>{{ toastMessage }}</span>
-        </div>
-        <!-- Arrow pointing up -->
-        <div class="absolute -top-1.5 right-4 w-3 h-3 bg-gray-900 dark:bg-white transform rotate-45" />
+        {{ toastMessage }}
+        <div class="absolute -top-1.5 right-4 w-3 h-3 bg-ink transform rotate-45" />
       </div>
     </Transition>
   </div>
