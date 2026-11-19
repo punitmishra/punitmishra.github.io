@@ -34,13 +34,13 @@ async function downloadPDF() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
+  <div class="min-h-screen bg-paper font-body">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
+    <nav class="fixed top-0 w-full z-50 bg-paper border-b border-hairline">
       <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
         <router-link
           to="/"
-          class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight hover:opacity-80 transition-opacity"
+          class="text-lg font-mono font-bold text-ink tracking-tight hover:opacity-80 transition-opacity"
         >
           PM
         </router-link>
@@ -48,19 +48,19 @@ async function downloadPDF() {
         <div class="flex items-center gap-6">
           <router-link
             to="/"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            class="text-muted hover:text-ink transition-colors font-mono text-xs uppercase tracking-[0.12em] relative group"
           >
             Home
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
           </router-link>
           <router-link
             to="/photos"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
+            class="text-muted hover:text-ink transition-colors font-mono text-xs uppercase tracking-[0.12em] relative group"
           >
             Photos
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
           </router-link>
-          <span class="text-gray-900 dark:text-white font-medium text-sm tracking-wide">
+          <span class="text-ink font-mono text-xs uppercase tracking-[0.12em]">
             Resume
           </span>
           <DarkModeToggle />
@@ -73,16 +73,16 @@ async function downloadPDF() {
       <div class="max-w-4xl mx-auto">
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 dark:text-white mb-2">
+            <h1 class="text-4xl md:text-5xl font-heading font-bold text-ink tracking-tight mb-2">
               Resume
             </h1>
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-muted font-body">
               Professional experience and qualifications
             </p>
           </div>
           <button
             :disabled="isDownloading"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg text-sm font-medium hover:from-blue-700 hover:to-cyan-700 transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-paper rounded-md text-sm font-mono font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             @click="downloadPDF"
           >
             <svg
@@ -113,7 +113,7 @@ async function downloadPDF() {
           v-if="loading"
           class="flex justify-center py-20"
         >
-          <div class="animate-spin rounded-full h-12 w-12 border-2 border-blue-500 border-t-transparent" />
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-accent border-t-transparent" />
         </div>
 
         <!-- Error State -->
@@ -136,7 +136,7 @@ async function downloadPDF() {
               />
             </svg>
           </div>
-          <p class="text-gray-600 dark:text-gray-400">
+          <p class="text-muted font-body">
             {{ error }}
           </p>
         </div>
@@ -144,7 +144,7 @@ async function downloadPDF() {
         <!-- Resume Component -->
         <div
           v-else-if="resume"
-          class="bg-white dark:bg-slate-900/50 rounded-2xl shadow-soft-xl border border-gray-100 dark:border-slate-800 p-8 md:p-12"
+          class="bg-paper rounded-lg border border-hairline p-8 md:p-12"
         >
           <InteractiveResume :resume="resume" />
         </div>
