@@ -110,24 +110,24 @@ defineExpose({ isOpen });
         />
 
         <!-- Palette -->
-        <div class="relative w-full max-w-xl mx-4 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+        <div class="relative w-full max-w-xl mx-4 bg-paper rounded-lg shadow-2xl border border-hairline overflow-hidden">
           <!-- Search Input -->
-          <div class="flex items-center gap-3 px-4 py-4 border-b border-gray-200 dark:border-slate-700">
+          <div class="flex items-center gap-3 px-4 py-4 border-b border-hairline">
             <BaseIcon
               :path="mdiMagnify"
               size="24"
-              class="text-gray-400"
+              class="text-faint"
             />
             <input
               v-model="searchQuery"
               type="text"
               aria-label="Search commands"
               placeholder="Type a command or search..."
-              class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-lg"
+              class="flex-1 bg-transparent text-ink placeholder-faint focus:outline-none text-lg font-mono"
               autofocus
             >
-            <div class="flex items-center gap-1 text-xs text-gray-400">
-              <kbd class="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded font-mono">esc</kbd>
+            <div class="flex items-center gap-1 text-xs text-faint">
+              <kbd class="px-2 py-1 bg-chip border border-hairline rounded font-mono">esc</kbd>
               <span>to close</span>
             </div>
           </div>
@@ -140,8 +140,8 @@ defineExpose({ isOpen });
               :class="[
                 'flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors',
                 index === selectedIndex
-                  ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
+                  ? 'bg-chip text-accent'
+                  : 'text-muted hover:bg-chip'
               ]"
               @click="executeCommand(command)"
             >
@@ -149,36 +149,36 @@ defineExpose({ isOpen });
                 :path="command.icon"
                 size="20"
               />
-              <span class="font-medium">{{ command.label }}</span>
+              <span class="font-mono text-sm">{{ command.label }}</span>
               <span
                 v-if="command.type === 'link'"
-                class="ml-auto text-xs text-gray-400"
+                class="ml-auto text-xs text-faint"
               >Opens in new tab</span>
             </div>
 
             <div
               v-if="filteredCommands.length === 0"
-              class="px-4 py-8 text-center text-gray-400"
+              class="px-4 py-8 text-center text-faint"
             >
               No commands found
             </div>
           </div>
 
           <!-- Footer -->
-          <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 text-xs text-gray-400">
+          <div class="flex items-center justify-between px-4 py-3 border-t border-hairline text-xs text-faint">
             <div class="flex items-center gap-4">
               <span class="flex items-center gap-1">
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">↑↓</kbd>
+                <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">↑↓</kbd>
                 navigate
               </span>
               <span class="flex items-center gap-1">
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">↵</kbd>
+                <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">↵</kbd>
                 select
               </span>
             </div>
             <span class="flex items-center gap-1">
-              <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">⌘</kbd>
-              <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">K</kbd>
+              <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">⌘</kbd>
+              <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">K</kbd>
               to toggle
             </span>
           </div>
