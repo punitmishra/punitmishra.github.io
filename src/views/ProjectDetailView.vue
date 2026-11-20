@@ -12,6 +12,7 @@ import {
   mdiClockOutline,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
+import { sapProjectBySlug } from "@/data/sapProjects.js";
 
 const route = useRoute();
 const router = useRouter();
@@ -69,7 +70,13 @@ const getLanguageColor = (language) => {
 };
 
 onMounted(() => {
-  fetchProjectDetails();
+  const staticProject = sapProjectBySlug[projectId];
+  if (staticProject) {
+    project.value = { ...staticProject, isStatic: true };
+    loading.value = false;
+  } else {
+    fetchProjectDetails();
+  }
 });
 </script>
 
@@ -95,6 +102,51 @@ onMounted(() => {
         <p class="mt-4 font-mono text-xs uppercase tracking-widest text-muted">
           Loading project details...
         </p>
+      </div>
+
+      <div
+        v-else-if="project && project.isStatic"
+        class="space-y-8"
+      >
+        <div class="border border-hairline rounded-lg bg-paper p-8">
+          <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent mb-4">
+            {{ project.org }} · {{ project.period }}
+          </div>
+          <h1 class="text-4xl md:text-5xl font-heading font-bold text-ink mb-4">
+            {{ project.name }}
+          </h1>
+          <p class="font-body text-lg text-muted mb-6 max-w-2xl">
+            {{ project.summary }}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="t in project.stack"
+              :key="t"
+              class="font-mono text-[11px] text-muted bg-chip border border-hairline rounded px-2 py-0.5"
+            >{{ t }}</span>
+          </div>
+        </div>
+        <div class="border border-hairline rounded-lg bg-paper p-8">
+          <h2 class="font-mono text-xs font-bold tracking-[0.16em] uppercase text-ink border-b border-hairline pb-3 mb-5">
+            Highlights
+          </h2>
+          <ul class="space-y-3">
+            <li
+              v-for="(h, i) in project.highlights"
+              :key="i"
+              class="flex gap-3 font-body text-muted"
+            >
+              <span class="font-mono text-faint shrink-0">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span>{{ h }}</span>
+            </li>
+          </ul>
+          <router-link
+            to="/resume"
+            class="inline-flex items-center gap-2 mt-6 font-mono text-xs uppercase tracking-[0.16em] text-accent hover:underline"
+          >
+            Full résumé ↗
+          </router-link>
+        </div>
       </div>
 
       <div
