@@ -67,7 +67,7 @@ export const initScrollProgress = () => {
     if (document.querySelector('.scroll-progress-bar')) return;
     
     const progressBar = document.createElement('div');
-    progressBar.className = 'scroll-progress-bar fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 z-50 transition-all duration-150';
+    progressBar.className = 'scroll-progress-bar fixed top-0 left-0 h-1 bg-accent z-50 transition-all duration-150';
     progressBar.style.width = '0%';
     document.body.appendChild(progressBar);
 
