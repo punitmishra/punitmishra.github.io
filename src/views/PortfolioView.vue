@@ -4,6 +4,7 @@ import axios from "axios";
 import ContactForm from "@/components/ContactForm.vue";
 import CommandPalette from "@/components/CommandPalette.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
+import { sapProjects } from "@/data/sapProjects.js";
 
 const commandPaletteRef = ref(null);
 const githubUsername = "punitmishra";
@@ -23,11 +24,13 @@ const lede =
   "I take machine learning from prototype to production at enterprise scale — agent platforms, LLM inference on custom H100 clusters, and the multi-tenant infrastructure underneath.";
 
 /* ---- Selected Work: professional (SAP/ML) + personal (OSS) ---- */
-const PRO_WORK = [
-  { kind: "pro", title: "Domain Data Access Agents", summary: "Natural-language-to-SQL over S/4HANA; decision-match accuracy 59%→65% with reranking and schema-aware planning.", stack: ["LLM", "NL-to-SQL", "Agents"], link: "/resume" },
-  { kind: "pro", title: "LLM Inference Platform", summary: "Multi-tenant model serving on custom bare-metal H100 GPU clusters with distributed scheduling on Ray.", stack: ["Ray", "H100", "Serving"], link: "/resume" },
-  { kind: "pro", title: "CX & Commerce AI Toolkit", summary: "Visual + textual LLM agents across SAP's CX & Commerce (PyTorch on Kubernetes), with vector search + RAG.", stack: ["AI", "CX", "Platform"], link: "/resume" },
-];
+const PRO_WORK = sapProjects.map((p) => ({
+  kind: "pro",
+  title: p.name,
+  summary: p.card,
+  stack: p.stack.slice(0, 3),
+  link: `/project/${p.slug}`,
+}));
 const featuredProjects = [
   { name: "CoViber", description: "Local-first memory for LLMs over the Model Context Protocol — work graph, urgency triage, and local semantic memory. No cloud, no telemetry.", tech: ["Python", "MCP", "LLM"], url: `https://github.com/${githubUsername}/coviber` },
   { name: "Vaultic", description: "Local-first, encrypted password manager in Rust with FIDO2/YubiKey — one vault across CLI, TUI, daemon, GUI, and an MCP server.", tech: ["Rust", "FIDO2", "Security"], url: `https://github.com/${githubUsername}/vaultic` },
