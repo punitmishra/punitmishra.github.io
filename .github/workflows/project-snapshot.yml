@@ -1,0 +1,52 @@
+name: Project snapshot
+
+# Refreshes public/data-sources/projects.json — the daily-cached GitHub data
+# the portfolio reads instead of calling the API from the browser. Runs on the
+# built-in GITHUB_TOKEN (authenticated: reads public repos across the owner's
+# account and owned orgs; private repos are never included).
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily, ahead of the Pages redeploy
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/build-project-snapshot.mjs
+      - .github/workflows/project-snapshot.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: project-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-project-snapshot.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- public/data-sources/projects.json; then
+            echo "No snapshot changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data-sources/projects.json
+          git commit -m "chore(snapshot): refresh cached project data"
+          git push

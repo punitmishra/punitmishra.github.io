@@ -10,6 +10,7 @@ const ProjectDetail = defineAsyncComponent(() => import("@/views/ProjectDetailVi
 const BlogArticle = defineAsyncComponent(() => import("@/views/BlogArticleView.vue"));
 const PhotoGallery = defineAsyncComponent(() => import("@/views/PhotoGalleryView.vue"));
 const Resume = defineAsyncComponent(() => import("@/views/ResumeView.vue"));
+const Projects = defineAsyncComponent(() => import("@/views/ProjectsView.vue"));
 const Troll = defineAsyncComponent(() => import("@/views/TrollView.vue"));
 
 const routes = [
@@ -52,11 +53,20 @@ const routes = [
   {
     meta: {
       title: "Resume - Punit Mishra",
-      description: "Interactive resume and CV of Punit Mishra, Full Stack Software Engineer.",
+      description: "Interactive resume and CV of Punit Mishra, Senior Machine Learning Expert & AI Tech Lead.",
     },
     path: "/resume",
     name: "resume",
     component: Resume,
+  },
+  {
+    meta: {
+      title: "Projects & Labs - Punit Mishra",
+      description: "All projects across Punit Mishra's personal account and the labs he runs — open-source tools, active experiments, and infrastructure.",
+    },
+    path: "/projects",
+    name: "projects",
+    component: Projects,
   },
   {
     // Hidden easter egg — not linked anywhere. Leave it open on an unlocked screen.
