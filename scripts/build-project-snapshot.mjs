@@ -58,7 +58,7 @@ const EXCLUDE = new Set([
 
 const AGE_MIN = "2024-01-01"; // drop ancient/abandoned repos
 const ACTIVE_DAYS = 60; // "actively being worked on" window
-const PER_OWNER_CAP = 6; // keep the index tidy
+const PER_OWNER_CAP = 12; // cap per owner so featured repos don't crowd out the rest
 
 const headers = {
   Accept: "application/vnd.github+json",

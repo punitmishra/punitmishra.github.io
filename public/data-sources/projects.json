@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-21T04:25:53.935Z",
+  "generated": "2026-11-21T04:44:11.146Z",
   "profile": {
     "publicRepos": 38,
     "followers": 15,
@@ -10,7 +10,7 @@
       "login": "punitmishra",
       "label": "Personal",
       "type": "user",
-      "count": 6
+      "count": 7
     },
     {
       "login": "calipercad",
@@ -339,6 +339,32 @@
           "message": "chore: release v0.0.30 [skip ci]",
           "date": "2026-10-19",
           "url": "https://github.com/punitmishra/pi-race/commit/32a509e63cb09d7d4efd30e42097aade24db2ae6"
+        }
+      ]
+    },
+    {
+      "slug": "career-tools",
+      "name": "career-tools",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "CLI utilities for keeping a dev portfolio, profile, and resume accurate & in sync",
+      "language": "Shell",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/career-tools",
+      "homepage": "",
+      "pushedAt": "2026-07-25",
+      "active": false,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "1dc5ebe",
+          "message": "career-tools: showcase generator + LaTeX resume builder",
+          "date": "2026-07-25",
+          "url": "https://github.com/punitmishra/career-tools/commit/1dc5ebe37febed87e67f6048a93fb63f36b24c53"
         }
       ]
     },
