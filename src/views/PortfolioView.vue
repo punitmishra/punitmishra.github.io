@@ -5,6 +5,7 @@ import ContactForm from "@/components/ContactForm.vue";
 import CommandPalette from "@/components/CommandPalette.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import { sapProjects } from "@/data/sapProjects.js";
+import SocialFeed from "@/components/SocialFeed.vue";
 
 const commandPaletteRef = ref(null);
 const githubUsername = "punitmishra";
@@ -318,6 +319,8 @@ onBeforeUnmount(() => {
             Loading writing…
           </p>
         </section>
+
+        <SocialFeed />
       </div>
 
       <!-- ===== DOSSIER SIDEBAR ===== -->
