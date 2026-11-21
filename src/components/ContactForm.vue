@@ -61,7 +61,7 @@ const submitForm = async () => {
     // Check if EmailJS is configured
     if (!emailServiceId || !emailTemplateId || !emailPublicKey) {
       // Fallback: Use mailto link
-      const mailtoLink = `mailto:punitmishra@example.com?subject=${encodeURIComponent(formData.value.subject)}&body=${encodeURIComponent(`Name: ${formData.value.name}\nEmail: ${formData.value.email}\n\nMessage:\n${formData.value.message}`)}`;
+      const mailtoLink = `mailto:punit.mishra09@gmail.com?subject=${encodeURIComponent(formData.value.subject)}&body=${encodeURIComponent(`Name: ${formData.value.name}\nEmail: ${formData.value.email}\n\nMessage:\n${formData.value.message}`)}`;
       window.location.href = mailtoLink;
       submitStatus.value = 'success';
       trackContactForm('submit', true);
@@ -78,7 +78,7 @@ const submitForm = async () => {
       from_email: formData.value.email,
       subject: formData.value.subject,
       message: formData.value.message,
-      to_email: 'punitmishra@example.com', // Your email
+      to_email: 'punit.mishra09@gmail.com', // Your email
     };
 
     await emailjs.send(emailServiceId, emailTemplateId, templateParams);
@@ -143,9 +143,9 @@ const submitForm = async () => {
         <p class="text-red-600 dark:text-red-500 text-sm mt-2 font-body">
           You can also email directly at: 
           <a
-            href="mailto:punitmishra@example.com"
+            href="mailto:punit.mishra09@gmail.com"
             class="underline font-semibold"
-          >punitmishra@example.com</a>
+          >punit.mishra09@gmail.com</a>
         </p>
       </div>
     </div>

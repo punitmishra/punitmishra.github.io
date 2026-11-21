@@ -1,11 +1,13 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import ContactForm from "@/components/ContactForm.vue";
 import CommandPalette from "@/components/CommandPalette.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
 import { sapProjects } from "@/data/sapProjects.js";
+import { ossProjects } from "@/data/ossProjects.js";
 import SocialFeed from "@/components/SocialFeed.vue";
+import { loadProjects } from "@/utils/projects.js";
 
 const commandPaletteRef = ref(null);
 const githubUsername = "punitmishra";
@@ -32,19 +34,14 @@ const PRO_WORK = sapProjects.map((p) => ({
   stack: p.stack.slice(0, 3),
   link: `/project/${p.slug}`,
 }));
-const featuredProjects = [
-  { name: "CoViber", description: "Local-first memory for LLMs over the Model Context Protocol — work graph, urgency triage, and local semantic memory. No cloud, no telemetry.", tech: ["Python", "MCP", "LLM"], url: `https://github.com/${githubUsername}/coviber` },
-  { name: "Vaultic", description: "Local-first, encrypted password manager in Rust with FIDO2/YubiKey — one vault across CLI, TUI, daemon, GUI, and an MCP server.", tech: ["Rust", "FIDO2", "Security"], url: `https://github.com/${githubUsername}/vaultic` },
-  { name: "Shield AI", description: "AI-powered DNS filtering with real-time threat detection.", tech: ["TypeScript", "AI/ML", "DNS"], url: `https://github.com/${githubUsername}/shield-ai` },
-  { name: "Railroad Arcade", description: "Full-stack IoT app controlling a real HO-scale model railroad — Next.js front end, a Rust backend on a Raspberry Pi driving the hardware.", tech: ["Next.js", "Rust", "IoT"], url: `https://github.com/${githubUsername}/railroad-arcade` },
-  { name: "RailCommand Firmware", description: "Multi-node ESP32-C3 firmware — the embedded layer beneath Railroad Arcade.", tech: ["C++", "ESP32-C3", "Embedded"], url: `https://github.com/${githubUsername}/esp32-firmware` },
-  { name: "Pi Race", description: "Zero-dependency Rust CLI racing four classic π algorithms on accuracy and speed.", tech: ["Rust", "CLI", "Numerics"], url: `https://github.com/${githubUsername}/pi-race` },
-];
-const slugFromUrl = (u) => u.split("/").pop();
-const selectedWork = [
-  ...PRO_WORK,
-  ...featuredProjects.map((p) => ({ kind: "oss", title: p.name, summary: p.description, stack: p.tech.slice(0, 3), link: `/project/${slugFromUrl(p.url)}` })),
-];
+const OSS_WORK = ossProjects.map((p) => ({
+  kind: "oss",
+  title: p.name,
+  summary: p.card,
+  stack: p.stack.slice(0, 3),
+  link: `/project/${p.slug}`,
+}));
+const selectedWork = [...PRO_WORK, ...OSS_WORK];
 const proCount = selectedWork.filter((w) => w.kind === "pro").length;
 const ossCount = selectedWork.filter((w) => w.kind === "oss").length;
 
@@ -87,19 +84,31 @@ const postMonth = (d) => {
 };
 const latestRev = computed(() => (recentPosts.value[0] ? postMonth(recentPosts.value[0].date) : "2026·02"));
 
-/* ---- GitHub stats (repo count + summed stars); keep auto-refresh ---- */
-const fetchGitHub = async () => {
-  try {
-    const profile = await axios.get(`https://api.github.com/users/${githubUsername}`);
-    if (profile.data && typeof profile.data.public_repos === "number") {
-      githubProfile.value = { ...githubProfile.value, publicRepos: profile.data.public_repos, htmlUrl: profile.data.html_url };
-    }
-    const repos = await axios.get(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100&type=all`);
-    if (Array.isArray(repos.data)) {
-      githubStats.value.totalStars = repos.data.reduce((s, r) => s + (r.stargazers_count || 0), 0);
-    }
-  } catch (e) {
-    console.warn("GitHub fetch failed; using seeded stats:", e?.message);
+/* ---- Project snapshot (daily cached JSON) → stats + currently building ---- */
+const snapshot = ref({ profile: {}, repos: [], owners: [] });
+
+// One representative active repo per lab/org (newest first) for the highlight.
+const activeBuilds = computed(() => {
+  const seen = new Set();
+  const out = [];
+  for (const r of snapshot.value.repos || []) {
+    if (!r.active || r.owner === githubUsername || seen.has(r.owner)) continue;
+    seen.add(r.owner);
+    out.push(r);
+  }
+  return out
+    .sort((a, b) => (b.pushedAt || "").localeCompare(a.pushedAt || ""))
+    .slice(0, 4);
+});
+
+const fetchSnapshot = async () => {
+  const data = await loadProjects();
+  snapshot.value = data;
+  if (typeof data.profile?.publicRepos === "number" && data.profile.publicRepos > 0) {
+    githubProfile.value = { ...githubProfile.value, publicRepos: data.profile.publicRepos };
+  }
+  if (typeof data.profile?.totalStars === "number") {
+    githubStats.value.totalStars = data.profile.totalStars;
   }
 };
 
@@ -108,14 +117,9 @@ const scrollToSection = (id) => {
   if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 70, behavior: "smooth" });
 };
 
-let refreshTimer = null;
 onMounted(() => {
   fetchPosts();
-  fetchGitHub();
-  refreshTimer = setInterval(fetchGitHub, 5 * 60 * 1000);
-});
-onBeforeUnmount(() => {
-  if (refreshTimer) clearInterval(refreshTimer);
+  fetchSnapshot();
 });
 </script>
 
@@ -141,6 +145,12 @@ onBeforeUnmount(() => {
           >
             work
           </button>
+          <router-link
+            to="/projects"
+            class="hidden sm:inline hover:text-ink transition-colors"
+          >
+            projects
+          </router-link>
           <button
             class="hidden sm:inline hover:text-ink transition-colors"
             @click="scrollToSection('writing')"
@@ -236,6 +246,45 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </div>
+
+        <!-- Currently building — active work across the labs -->
+        <section
+          v-if="activeBuilds.length"
+          class="pt-14"
+        >
+          <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+            <div class="font-mono text-sm font-bold tracking-[0.16em] uppercase">
+              <span class="text-accent">●</span> Currently Building
+            </div>
+            <router-link
+              to="/projects"
+              class="font-mono text-[10px] tracking-[0.12em] uppercase text-faint hover:text-ink transition-colors"
+            >
+              all projects ↗
+            </router-link>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-px bg-hairline border-b border-hairline">
+            <a
+              v-for="r in activeBuilds"
+              :key="r.owner + '/' + r.slug"
+              :href="r.url"
+              target="_blank"
+              rel="noopener"
+              class="group bg-paper p-5 hover:bg-chip transition-colors"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-[9px] font-semibold tracking-[0.1em] uppercase text-accent border border-accent rounded-sm px-1.5 py-0.5">{{ r.ownerLabel }}</span>
+                <span class="font-mono text-[10px] text-faint">{{ r.release ? r.release.tag : r.language }}</span>
+              </div>
+              <h3 class="font-mono text-lg font-bold tracking-tight group-hover:text-accent transition-colors">
+                {{ r.name }}
+              </h3>
+              <p class="font-sans text-sm text-muted leading-relaxed mt-1">
+                {{ r.description }}
+              </p>
+            </a>
+          </div>
+        </section>
 
         <!-- §01 Selected Work -->
         <section

@@ -6,6 +6,8 @@ on:
       - main
       - master
   workflow_dispatch:
+  schedule:
+    - cron: "20 6 * * *" # daily — redeploy with a freshly cached project snapshot
 
 permissions:
   contents: read
@@ -32,6 +34,11 @@ jobs:
         run: |
           rm -rf node_modules package-lock.json
           npm install
+
+      - name: Refresh project snapshot (non-fatal; falls back to committed cache)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-project-snapshot.mjs || echo "snapshot refresh failed; using committed cache"
 
       - name: Build
         run: npm run build
