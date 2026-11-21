@@ -111,10 +111,6 @@
   -webkit-backdrop-filter: blur(8px);
 }
 
-.dark .glass-minimal {
-  background: rgba(15, 23, 42, 0.6);
-}
-
 /* Gradient border effect */
 .gradient-border {
   position: relative;
@@ -133,10 +129,6 @@
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-}
-
-.dark .gradient-border {
-  background: rgb(30 41 59);
 }
 
 /* Animated gradient background */
@@ -283,13 +275,6 @@
     0 16px 32px rgb(0 0 0 / 0.06);
 }
 
-.dark .shadow-elegant {
-  box-shadow:
-    0 1px 2px rgb(0 0 0 / 0.2),
-    0 4px 8px rgb(0 0 0 / 0.15),
-    0 8px 16px rgb(0 0 0 / 0.1);
-}
-
 /* Glass morphism effect */
 .glass {
   background: rgba(255, 255, 255, 0.7);
@@ -326,10 +311,6 @@
 
 .hover-glow:hover {
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
-}
-
-.dark .hover-glow:hover {
-  box-shadow: 0 0 24px rgba(99, 102, 241, 0.12);
 }
 
 /* Gradient text with better rendering */
@@ -461,24 +442,6 @@ html.dark {
   color-scheme: dark;
 }
 
-/* Dark mode enhanced glow effects */
-.dark .glow-blue {
-  box-shadow: 0 0 50px rgba(59, 130, 246, 0.25);
-}
-
-.dark .glow-indigo {
-  box-shadow: 0 0 50px rgba(99, 102, 241, 0.25);
-}
-
-.dark .glow-cyan {
-  box-shadow: 0 0 30px rgb(6 182 212 / 0.2);
-}
-
-/* Dark mode card hover glow */
-.dark .card-glow:hover::before {
-  background: linear-gradient(135deg, transparent 40%, rgb(99 102 241 / 0.15) 50%, transparent 60%);
-}
-
 /* Dark mode skeleton loading */
 .dark .skeleton {
   background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
@@ -498,19 +461,6 @@ html.dark {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgb(100 116 139 / 0.6);
-}
-
-/* Dark mode enhanced shadows */
-.dark .shadow-elegant-lg {
-  box-shadow:
-    0 2px 4px rgb(0 0 0 / 0.1),
-    0 8px 16px rgb(0 0 0 / 0.2),
-    0 16px 32px rgb(0 0 0 / 0.25);
-}
-
-/* Dark mode gradient border */
-.dark .gradient-border::before {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
 }
 
 /* Dark mode text gradient */

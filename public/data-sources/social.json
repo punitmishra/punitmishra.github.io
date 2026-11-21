@@ -1,0 +1,29 @@
+{
+  "_note": "Seed data for the on-site social feed. Replace text/url with your real X/Threads posts, or have the twitter-post / threads-post workflows append here. Dates are ISO (YYYY-MM-DD).",
+  "handles": {
+    "x": "https://x.com/punitmishra",
+    "threads": "https://www.threads.net/@punitmishra"
+  },
+  "posts": [
+    {
+      "date": "2026-02-09",
+      "text": "New post — Agent Memory in 2026: why production agents need both vector and relational stores, and how to keep retrieval fast without losing structure.",
+      "url": "#/blog/agent-memory-hybrid-store-2026"
+    },
+    {
+      "date": "2026-02-09",
+      "text": "RAG chunking in 2026: getting accuracy up without paying for it in latency. Wrote up the strategies I actually reach for.",
+      "url": "#/blog/rag-chunking-strategies-2026"
+    },
+    {
+      "date": "2026-02-08",
+      "text": "Latency Budget Playbook — keeping P99 under 200ms: find the hot path, tame the tail, give every subsystem a number.",
+      "url": "#/blog/latency-budget-playbook"
+    },
+    {
+      "date": "2026-02-08",
+      "text": "Measuring RAG quality beyond BLEU — precision/recall@K, groundedness, citation quality, and human-in-the-loop review.",
+      "url": "#/blog/rag-evaluation-framework"
+    }
+  ]
+}

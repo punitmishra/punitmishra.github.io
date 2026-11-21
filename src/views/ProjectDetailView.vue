@@ -12,6 +12,7 @@ import {
   mdiClockOutline,
 } from "@mdi/js";
 import BaseIcon from "@/components/BaseIcon.vue";
+import { sapProjectBySlug } from "@/data/sapProjects.js";
 
 const route = useRoute();
 const router = useRouter();
@@ -69,15 +70,21 @@ const getLanguageColor = (language) => {
 };
 
 onMounted(() => {
-  fetchProjectDetails();
+  const staticProject = sapProjectBySlug[projectId];
+  if (staticProject) {
+    project.value = { ...staticProject, isStatic: true };
+    loading.value = false;
+  } else {
+    fetchProjectDetails();
+  }
 });
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 pt-20">
-    <div class="max-w-7xl mx-auto px-6 py-12">
+  <div class="min-h-screen bg-paper pt-20">
+    <div class="max-w-4xl mx-auto px-6 py-12">
       <button
-        class="mb-8 flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        class="mb-10 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-muted hover:text-ink transition-colors"
         @click="router.push('/')"
       >
         <BaseIcon
@@ -91,10 +98,55 @@ onMounted(() => {
         v-if="loading"
         class="text-center py-20"
       >
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
-        <p class="mt-4 text-gray-600 dark:text-gray-400">
+        <div class="animate-spin rounded-full h-12 w-12 border-2 border-hairline border-t-accent mx-auto" />
+        <p class="mt-4 font-mono text-xs uppercase tracking-widest text-muted">
           Loading project details...
         </p>
+      </div>
+
+      <div
+        v-else-if="project && project.isStatic"
+        class="space-y-8"
+      >
+        <div class="border border-hairline rounded-lg bg-paper p-8">
+          <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent mb-4">
+            {{ project.org }} · {{ project.period }}
+          </div>
+          <h1 class="text-4xl md:text-5xl font-heading font-bold text-ink mb-4">
+            {{ project.name }}
+          </h1>
+          <p class="font-body text-lg text-muted mb-6 max-w-2xl">
+            {{ project.summary }}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="t in project.stack"
+              :key="t"
+              class="font-mono text-[11px] text-muted bg-chip border border-hairline rounded px-2 py-0.5"
+            >{{ t }}</span>
+          </div>
+        </div>
+        <div class="border border-hairline rounded-lg bg-paper p-8">
+          <h2 class="font-mono text-xs font-bold tracking-[0.16em] uppercase text-ink border-b border-hairline pb-3 mb-5">
+            Highlights
+          </h2>
+          <ul class="space-y-3">
+            <li
+              v-for="(h, i) in project.highlights"
+              :key="i"
+              class="flex gap-3 font-body text-muted"
+            >
+              <span class="font-mono text-faint shrink-0">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span>{{ h }}</span>
+            </li>
+          </ul>
+          <router-link
+            to="/resume"
+            class="inline-flex items-center gap-2 mt-6 font-mono text-xs uppercase tracking-[0.16em] text-accent hover:underline"
+          >
+            Full résumé ↗
+          </router-link>
+        </div>
       </div>
 
       <div
@@ -102,20 +154,20 @@ onMounted(() => {
         class="space-y-8"
       >
         <!-- Project Header -->
-        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl">
+        <div class="border border-hairline rounded-lg bg-paper p-8">
           <div class="flex items-start justify-between mb-6">
             <div class="flex-1">
-              <h1 class="text-5xl font-black mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 class="text-4xl md:text-5xl font-heading font-bold text-ink mb-4">
                 {{ project.name }}
               </h1>
-              <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
+              <p class="font-body text-lg text-muted mb-6">
                 {{ project.description || "No description" }}
               </p>
               <div class="flex flex-wrap gap-4">
                 <a
                   :href="project.htmlUrl"
                   target="_blank"
-                  class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all"
+                  class="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-hairline font-mono text-sm text-ink hover:border-faint hover:bg-chip transition-colors"
                 >
                   <BaseIcon
                     :path="mdiGithub"
@@ -127,36 +179,36 @@ onMounted(() => {
             </div>
           </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-gray-200 dark:border-slate-700">
-            <div>
-              <div class="text-2xl font-black text-blue-600 dark:text-blue-400">
+          <div class="grid grid-cols-2 md:grid-cols-4 border-y border-hairline mt-8">
+            <div class="py-5 px-5 border-r border-hairline">
+              <div class="font-mono text-2xl font-bold text-ink">
                 {{ project.stargazers_count || 0 }}
               </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400">
+              <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-faint mt-1">
                 Stars
               </div>
             </div>
-            <div>
-              <div class="text-2xl font-black text-purple-600 dark:text-purple-400">
+            <div class="py-5 px-5 border-hairline md:border-r">
+              <div class="font-mono text-2xl font-bold text-ink">
                 {{ project.forks_count || 0 }}
               </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400">
+              <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-faint mt-1">
                 Forks
               </div>
             </div>
-            <div>
-              <div class="text-2xl font-black text-pink-600 dark:text-pink-400">
+            <div class="py-5 px-5 border-r border-t md:border-t-0 border-hairline">
+              <div class="font-mono text-2xl font-bold text-ink">
                 {{ project.language || "N/A" }}
               </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400">
+              <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-faint mt-1">
                 Language
               </div>
             </div>
-            <div>
-              <div class="text-2xl font-black text-indigo-600 dark:text-indigo-400">
+            <div class="py-5 px-5 border-t md:border-t-0 border-hairline">
+              <div class="font-mono text-2xl font-bold text-ink">
                 {{ project.size || 0 }} KB
               </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400">
+              <div class="font-mono text-[11px] uppercase tracking-[0.16em] text-faint mt-1">
                 Size
               </div>
             </div>
@@ -166,27 +218,27 @@ onMounted(() => {
         <!-- Recent Commits -->
         <div
           v-if="commits.length > 0"
-          class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-xl"
+          class="border border-hairline rounded-lg bg-paper p-8"
         >
-          <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+          <h2 class="font-mono text-xs font-bold tracking-[0.16em] uppercase text-ink border-b border-hairline pb-3 mb-5">
             Recent Activity
           </h2>
-          <div class="space-y-4">
+          <div class="divide-y divide-hairline">
             <div
               v-for="(commit, index) in commits"
               :key="index"
-              class="flex items-start gap-4 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl"
+              class="flex items-start gap-4 py-4"
             >
               <BaseIcon
                 :path="mdiCodeBraces"
                 size="20"
-                class="text-blue-600 dark:text-blue-400 mt-1"
+                class="text-faint mt-1 shrink-0"
               />
               <div class="flex-1">
-                <p class="text-gray-900 dark:text-white font-medium mb-1">
+                <p class="font-body text-ink font-medium mb-1">
                   {{ commit.message.split('\n')[0] }}
                 </p>
-                <div class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-muted">
                   <span>{{ commit.author }}</span>
                   <span class="flex items-center gap-1">
                     <BaseIcon
@@ -198,7 +250,7 @@ onMounted(() => {
                   <a
                     :href="commit.url"
                     target="_blank"
-                    class="text-blue-600 dark:text-blue-400 hover:underline"
+                    class="text-accent hover:underline"
                   >
                     {{ commit.sha }}
                   </a>

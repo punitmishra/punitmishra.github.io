@@ -1,1469 +1,426 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
-import { useRouter } from "vue-router";
 import axios from "axios";
-import {
-  mdiGithub,
-  mdiLinkedin,
-  mdiTwitter,
-  mdiWeb,
-  mdiStar,
-  mdiSourceFork,
-  mdiArrowRight,
-  mdiMagnify,
-  mdiWeatherSunny,
-  mdiWeatherNight,
-} from "@mdi/js";
-import BaseIcon from "@/components/BaseIcon.vue";
 import ContactForm from "@/components/ContactForm.vue";
-import ProjectFilter from "@/components/ProjectFilter.vue";
-import ResumeDownload from "@/components/ResumeDownload.vue";
-import GitHubContributionGraph from "@/components/GitHubContributionGraph.vue";
-import TypingAnimation from "@/components/TypingAnimation.vue";
 import CommandPalette from "@/components/CommandPalette.vue";
-import StatsGrid from "@/components/StatsGrid.vue";
 import DarkModeToggle from "@/components/DarkModeToggle.vue";
-import BlogSection from "@/components/BlogSection.vue";
-import CurrentlyBuilding from "@/components/CurrentlyBuilding.vue";
-import VisitorCounter from "@/components/VisitorCounter.vue";
-import GradientMesh from "@/components/GradientMesh.vue";
+import { sapProjects } from "@/data/sapProjects.js";
 import SocialFeed from "@/components/SocialFeed.vue";
-import { useStyleStore } from "@/stores/style.js";
 
 const commandPaletteRef = ref(null);
-const router = useRouter();
-const styleStore = useStyleStore();
 const githubUsername = "punitmishra";
 const linkedinUsername = "mishrapunit";
 
 const githubProfile = ref({
   name: "Punit Mishra",
   bio: "Senior ML Expert & AI Tech Lead @ SAP",
-  avatar: `https://github.com/${githubUsername}.png`,
-  followers: 13,
-  following: 10,
   publicRepos: 36,
-  location: "Bay Area, CA",
-  company: "@SAP",
-  blog: "https://punitmishra.com",
   htmlUrl: `https://github.com/${githubUsername}`,
-  createdAt: "2011-04-13T13:26:01Z",
 });
+const githubStats = ref({ totalStars: 0 });
 
-const githubRepos = ref([]);
-const latestRepos = ref([]);
-const githubStats = ref({ totalStars: 0, totalForks: 0, languages: {} });
-const loading = ref({ profile: true, repos: true });
-const reposError = ref(false);
+const totalYearsExperience = computed(() => 14);
 
-const socialLinks = [
-  { icon: mdiGithub, label: "GitHub", url: `https://github.com/${githubUsername}`, color: "hover:text-gray-900 dark:hover:text-white" },
-  { icon: mdiLinkedin, label: "LinkedIn", url: `https://linkedin.com/in/${linkedinUsername}`, color: "hover:text-blue-600" },
-  { icon: mdiTwitter, label: "Twitter", url: "https://twitter.com/punitmishra", color: "hover:text-sky-400" },
-  { icon: mdiWeb, label: "Website", url: "https://punitmishra.com", color: "hover:text-cyan-600" },
-];
+const lede =
+  "I take machine learning from prototype to production at enterprise scale — agent platforms, LLM inference on custom H100 clusters, and the multi-tenant infrastructure underneath.";
 
+/* ---- Selected Work: professional (SAP/ML) + personal (OSS) ---- */
+const PRO_WORK = sapProjects.map((p) => ({
+  kind: "pro",
+  title: p.name,
+  summary: p.card,
+  stack: p.stack.slice(0, 3),
+  link: `/project/${p.slug}`,
+}));
 const featuredProjects = [
-  {
-    name: "CoViber",
-    description: "Local-first memory for LLMs over the Model Context Protocol. Keeps a continuously-updated work graph, urgency triage queue, and local semantic memory on your machine — no cloud egress, no telemetry.",
-    tech: ["Python", "MCP", "LLM", "Embeddings", "Local-first"],
-    gradient: "from-blue-500 to-indigo-500",
-    url: `https://github.com/${githubUsername}/coviber`,
-    featured: true,
-    highlights: [
-      "MCP-native",
-      "Local-first / no telemetry",
-      "Work graph + urgency triage",
-      "Local semantic memory",
-    ],
-  },
-  {
-    name: "Vaultic",
-    description: "Local-first, encrypted password manager in Rust with FIDO2/YubiKey support. One on-disk vault format shared across CLI, TUI, daemon, GUI, and an MCP server. No cloud, no account.",
-    tech: ["Rust", "FIDO2", "Security", "CLI/TUI", "MCP"],
-    gradient: "from-rose-500 to-orange-500",
-    url: `https://github.com/${githubUsername}/vaultic`,
-    featured: true,
-    highlights: [
-      "Hardware-backed (FIDO2/YubiKey)",
-      "CLI · TUI · daemon · GUI · MCP",
-      "Local-first, no telemetry",
-      "Homebrew tap available",
-    ],
-  },
-  {
-    name: "Shield AI",
-    description: "AI-powered DNS filtering system with real-time threat detection.",
-    tech: ["TypeScript", "AI/ML", "DNS", "Security"],
-    gradient: "from-emerald-500 to-teal-500",
-    url: `https://github.com/${githubUsername}/shield-ai`,
-    featured: true,
-    highlights: [
-      "Real-time threat detection",
-      "AI-powered DNS filtering",
-    ],
-  },
-  {
-    name: "Railroad Arcade",
-    description: "Full-stack IoT app to control a real HO-scale model railroad remotely — Next.js frontend with a Rust backend on a Raspberry Pi driving the physical hardware. Free demo mode, or live control of trains, junctions, and crossings.",
-    tech: ["Next.js", "Rust", "Raspberry Pi", "IoT", "WebSockets"],
-    gradient: "from-violet-500 to-purple-500",
-    url: `https://github.com/${githubUsername}/railroad-arcade`,
-    featured: true,
-    highlights: [
-      "Next.js + Rust backend",
-      "Controls real hardware via Pi",
-      "Demo & live modes",
-      "Live demo online",
-    ],
-  },
-  {
-    name: "RailCommand Firmware",
-    description: "Multi-node ESP32-C3 firmware for the RailCommand model-railroad control system — the embedded layer beneath Railroad Arcade.",
-    tech: ["C++", "ESP32-C3", "Embedded", "Firmware"],
-    gradient: "from-amber-500 to-yellow-500",
-    url: `https://github.com/${githubUsername}/esp32-firmware`,
-    featured: true,
-    highlights: [
-      "ESP32-C3 multi-node",
-      "Embedded C++",
-      "Powers Railroad Arcade",
-    ],
-  },
-  {
-    name: "Pi Race",
-    description: "Zero-dependency Rust CLI that races four classic π algorithms — Ramanujan, Euler/Basel, Wallis, and Leibniz — head-to-head on accuracy and speed.",
-    tech: ["Rust", "CLI", "Algorithms", "Numerics"],
-    gradient: "from-sky-500 to-cyan-500",
-    url: `https://github.com/${githubUsername}/pi-race`,
-    featured: true,
-    highlights: [
-      "Zero-dependency Rust",
-      "4 π algorithms compared",
-      "Accuracy vs. speed",
-    ],
-  },
+  { name: "CoViber", description: "Local-first memory for LLMs over the Model Context Protocol — work graph, urgency triage, and local semantic memory. No cloud, no telemetry.", tech: ["Python", "MCP", "LLM"], url: `https://github.com/${githubUsername}/coviber` },
+  { name: "Vaultic", description: "Local-first, encrypted password manager in Rust with FIDO2/YubiKey — one vault across CLI, TUI, daemon, GUI, and an MCP server.", tech: ["Rust", "FIDO2", "Security"], url: `https://github.com/${githubUsername}/vaultic` },
+  { name: "Shield AI", description: "AI-powered DNS filtering with real-time threat detection.", tech: ["TypeScript", "AI/ML", "DNS"], url: `https://github.com/${githubUsername}/shield-ai` },
+  { name: "Railroad Arcade", description: "Full-stack IoT app controlling a real HO-scale model railroad — Next.js front end, a Rust backend on a Raspberry Pi driving the hardware.", tech: ["Next.js", "Rust", "IoT"], url: `https://github.com/${githubUsername}/railroad-arcade` },
+  { name: "RailCommand Firmware", description: "Multi-node ESP32-C3 firmware — the embedded layer beneath Railroad Arcade.", tech: ["C++", "ESP32-C3", "Embedded"], url: `https://github.com/${githubUsername}/esp32-firmware` },
+  { name: "Pi Race", description: "Zero-dependency Rust CLI racing four classic π algorithms on accuracy and speed.", tech: ["Rust", "CLI", "Numerics"], url: `https://github.com/${githubUsername}/pi-race` },
 ];
+const slugFromUrl = (u) => u.split("/").pop();
+const selectedWork = [
+  ...PRO_WORK,
+  ...featuredProjects.map((p) => ({ kind: "oss", title: p.name, summary: p.description, stack: p.tech.slice(0, 3), link: `/project/${slugFromUrl(p.url)}` })),
+];
+const proCount = selectedWork.filter((w) => w.kind === "pro").length;
+const ossCount = selectedWork.filter((w) => w.kind === "oss").length;
 
+/* ---- Dossier: experience (compact), skills, education, links ---- */
 const experience = [
-  {
-    title: "Senior Machine Learning Expert & AI Tech Lead — CX Data & AI (CXAI)",
-    company: "SAP",
-    period: "Sep 2018 - Present",
-    location: "San Ramon, CA",
-    duration: "6+ years",
-    achievements: [
-      "Built and own a domain-agnostic conversational agent platform: memory-managed runtime with multi-tenant LangGraph orchestration reusable across business domains; performance-critical paths in Rust",
-      "Authored natural-language-to-SQL over S/4HANA, turning business questions into validated queries — shipping in SAP's 2026 public and private cloud releases",
-      "Introduced Ray and built LLM serving on custom bare-metal H100 GPU clusters; multi-model serving (self-hosted + Claude, Qwen, Granite-class) on Kubernetes with automated evaluation harnesses",
-      "Delivered visual and textual LLM agents across SAP's CX & Commerce AI Toolkit (PyTorch on Kubernetes); visual-attribute prediction on OpenAI / CLIP embeddings backed by vector search + RAG",
-      "Designed multi-tenant ML on Kubeflow & Knative (Azure AKS) across SAP CX cloud (C4C, CPQ, CDC), with feature stores (Feathr, Feast); re-architected vision into gRPC agent services",
-      "Lead a team of thirteen; own AI ethics & compliance; SAP Security Expert; set the group's SDLC and engineering standards, and serve as forward-deployed engineer on the first production enterprise customer",
-    ],
-    tech: ["Python", "Rust", "LangGraph", "Ray", "Kubernetes", "H100 GPUs", "PyTorch", "Qdrant", "FAISS", "gRPC", "Kyma"],
-    highlights: [
-      "Agent Platform & LLM Serving",
-      "GPU Infrastructure (H100)",
-      "Technical Leadership (team of 13)",
-    ],
-  },
-  {
-    title: "Senior Software Engineer — Thunderbridge AI / SAP Sales Cloud",
-    company: "CallidusCloud",
-    period: "Feb 2014 - Sep 2018",
-    location: "SF Bay Area",
-    duration: "Acquired by SAP for $2.4B",
-    achievements: [
-      "Designed and built the Thunderbridge AI backend in Python on Dataiku, with multi-tenancy running every customer workload for SAP Sales Cloud optimization",
-      "Ported the full Dataiku ML stack to GKE on-prem (Google Anthos) with Istio; built the CI/CD backbone (Jenkins on Kubernetes, Kaniko, Artifactory) and automated merges (Bulldozer / Policy-Bot)",
-      "Engineered multi-partition data resiliency across Oracle, Vertica, SAP HANA, and HDFS (Spark); integrated SAP security scans (Coverity, Black Duck, Fortify) into Jenkins",
-      "Earlier, as Senior Automation Engineer: TDD/Scala ETL validation and resilient Selenium/Java + Node.js UI test frameworks over a self-maintaining Selenium Grid",
-    ],
-    tech: ["Python", "Dataiku", "GKE", "Anthos", "Istio", "Jenkins", "SAP HANA", "Vertica", "Oracle", "HDFS", "Scala"],
-    highlights: ["ML Platform (Thunderbridge)", "Multi-tenant CI/CD"],
-  },
-  {
-    title: "Automation Systems Engineer",
-    company: "IBM",
-    period: "Oct 2012 - Dec 2013",
-    location: "Dallas–Fort Worth, TX",
-    duration: "",
-    achievements: [
-      "Built a reporting and data-validation automation framework for a major US bank",
-      "Automated VM creation/config via a WCF SOAP service (IIS); parallelized and scheduled test runs across cloud machines",
-      "Developed reusable Selenium / Java test APIs (JUnit, TestNG) adopted across the firm",
-    ],
-    tech: ["Java", "Selenium", "JUnit", "TestNG", "WCF", "IIS"],
-    highlights: ["Test Automation", "Financial Services"],
-  },
-  {
-    title: "Web Developer",
-    company: "UC Berkeley — Law IST",
-    period: "Sep - Dec 2011",
-    location: "Berkeley, CA",
-    duration: "",
-    achievements: [
-      "Built an online teaching-evaluation system for the Law School on a PHP / Oracle 10g backend, integrated with CalNet (Berkeley authentication)",
-    ],
-    tech: ["PHP", "Oracle", "CalNet"],
-    highlights: ["Full-Stack Web"],
-  },
-  {
-    title: "Software Engineering Intern — Google Startup Labs",
-    company: "LawPivot",
-    period: "May - Aug 2011",
-    location: "Mountain View, CA",
-    duration: "",
-    achievements: [
-      "Built user-to-user interaction features on the Django backend and an internal analytics tool visualizing user data used by the sales team",
-    ],
-    tech: ["Python", "Django"],
-    highlights: ["Backend", "Data Analytics"],
-  },
-  {
-    title: "Software Engineering Intern",
-    company: "LawPivot",
-    period: "Oct 2009 - Aug 2010",
-    location: "Fremont, CA",
-    duration: "",
-    achievements: [
-      "Automated testing with Selenium IDE and tracked defects; worked with the founding team on wireframes and AWS server configuration",
-    ],
-    tech: ["Selenium", "AWS"],
-    highlights: ["Early-stage Startup"],
-  },
+  { company: "SAP", role: "Senior ML & AI Tech Lead · CX Data & AI", period: "2018 — Present" },
+  { company: "CallidusCloud", role: "Senior Software Engineer · Thunderbridge AI", period: "2014 — 2018" },
+  { company: "IBM", role: "Automation Systems Engineer", period: "2012 — 2013" },
+];
+const skills = [
+  { group: "ML / AI", items: ["LLMs", "RAG", "Agents", "Inference", "PyTorch"] },
+  { group: "Platforms", items: ["Ray", "Kubernetes", "Multi-tenant", "GPU / H100"] },
+  { group: "Languages", items: ["Python", "Rust", "TypeScript", "Java"] },
+  { group: "Data", items: ["S/4HANA", "SQL", "Vector DBs"] },
+];
+const education = { school: "UC Berkeley", degree: "B.S. EECS", year: "2012" };
+const links = [
+  { label: "github", url: `https://github.com/${githubUsername}` },
+  { label: "linkedin", url: `https://linkedin.com/in/${linkedinUsername}` },
+  { label: "résumé", url: "#/resume" },
 ];
 
-const education = [
-  {
-    degree: "B.S. Electrical Engineering & Computer Science (EECS)",
-    school: "University of California, Berkeley",
-    period: "2010 - 2012",
-    description: "Electrical Engineering & Computer Science at one of the world's top engineering programs.",
-    specializations: [],
-    awards: ["International Student Scholarship (2011)"],
-  },
-];
-
-const certifications = [
-  { name: "SAP Security Expert", issuer: "SAP", year: "" },
-];
-
-const getLanguageColor = (language) => {
-  const colors = {
-    JavaScript: "bg-yellow-400",
-    TypeScript: "bg-blue-500",
-    Python: "bg-green-500",
-    Vue: "bg-emerald-500",
-    Rust: "bg-orange-600",
-    Go: "bg-cyan-500",
-    Java: "bg-red-500",
-    HTML: "bg-orange-500",
-    CSS: "bg-blue-400",
-    Other: "bg-gray-500",
-  };
-  return colors[language] || colors.Other;
-};
-
-const fetchGitHubProfile = async () => {
+/* ---- Writing: newest posts from the blog index ---- */
+const recentPosts = ref([]);
+const fetchPosts = async () => {
   try {
-    const response = await axios.get(`https://api.github.com/users/${githubUsername}`);
-    githubProfile.value = { 
-      ...response.data, 
-      htmlUrl: response.data.html_url,
-      avatar: response.data.avatar_url,
-      publicRepos: response.data.public_repos,
-      bio: response.data.bio || "Software Engineer"
-    };
-    loading.value.profile = false;
-  } catch (error) {
-    console.error("Error fetching GitHub profile:", error);
-    loading.value.profile = false;
+    const res = await axios.get(`${import.meta.env.BASE_URL}content/blog/index.json`);
+    const arts = (res.data && res.data.articles) || res.data || [];
+    recentPosts.value = [...arts]
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 5);
+  } catch {
+    recentPosts.value = [];
   }
 };
+const postMonth = (d) => {
+  if (!d) return "";
+  const [y, m] = d.split("-");
+  return `${y}·${m}`;
+};
+const latestRev = computed(() => (recentPosts.value[0] ? postMonth(recentPosts.value[0].date) : "2026·02"));
 
-const fetchGitHubRepos = async () => {
+/* ---- GitHub stats (repo count + summed stars); keep auto-refresh ---- */
+const fetchGitHub = async () => {
   try {
-    loading.value.repos = true;
-    reposError.value = false;
-
-    const response = await axios.get(
-      `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=15&type=all`
-    );
-
-    if (!response.data || response.data.length === 0) {
-      console.warn("No repositories found");
-      reposError.value = true;
-      loading.value.repos = false;
-      return;
+    const profile = await axios.get(`https://api.github.com/users/${githubUsername}`);
+    if (profile.data && typeof profile.data.public_repos === "number") {
+      githubProfile.value = { ...githubProfile.value, publicRepos: profile.data.public_repos, htmlUrl: profile.data.html_url };
     }
-
-    const allRepos = response.data.map((repo) => ({
-      id: repo.id,
-      name: repo.name,
-      description: repo.description || "No description",
-      language: repo.language || "Other",
-      stars: repo.stargazers_count || 0,
-      forks: repo.forks_count || 0,
-      url: repo.html_url,
-      updated: new Date(repo.updated_at).toLocaleDateString(),
-      updatedAt: repo.updated_at,
-      topics: repo.topics || [],
-      createdAt: repo.created_at,
-      pushedAt: repo.pushed_at,
-      tech: repo.topics || [],
-      category: repo.topics?.includes('ai') || repo.topics?.includes('ml') ? 'AI/ML' :
-                 repo.topics?.includes('web') || repo.topics?.includes('frontend') ? 'Web' :
-                 repo.topics?.includes('infrastructure') || repo.topics?.includes('devops') ? 'Infrastructure' :
-                 repo.topics?.includes('systems') || repo.topics?.includes('rust') ? 'Systems' : 'Other',
-    }));
-
-    githubRepos.value = allRepos.slice(0, 10);
-    latestRepos.value = allRepos.slice(0, 6);
-    filteredRepos.value = [...latestRepos.value];
-
-    githubStats.value.totalStars = allRepos.reduce((sum, repo) => sum + repo.stars, 0);
-    githubStats.value.totalForks = allRepos.reduce((sum, repo) => sum + repo.forks, 0);
-
-    const langCount = {};
-    allRepos.forEach((repo) => {
-      if (repo.language) {
-        langCount[repo.language] = (langCount[repo.language] || 0) + 1;
-      }
-    });
-    githubStats.value.languages = langCount;
-
-    loading.value.repos = false;
-  } catch (error) {
-    console.error("Error fetching GitHub repos:", error);
-    reposError.value = true;
-    loading.value.repos = false;
+    const repos = await axios.get(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100&type=all`);
+    if (Array.isArray(repos.data)) {
+      githubStats.value.totalStars = repos.data.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+    }
+  } catch (e) {
+    console.warn("GitHub fetch failed; using seeded stats:", e?.message);
   }
 };
 
-
-const totalYearsExperience = computed(() => {
-  return 14;
-});
-
-// Filter state
-const filteredRepos = ref([]);
-
-const handleFiltered = (filtered) => {
-  filteredRepos.value = filtered;
+const scrollToSection = (id) => {
+  const el = document.getElementById(id);
+  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 70, behavior: "smooth" });
 };
 
-
-const goToProject = (repoName) => {
-  router.push(`/project/${repoName}`);
-};
-
-const isMobileMenuOpen = ref(false);
-
-const scrollToSection = (sectionId) => {
-  isMobileMenuOpen.value = false;
-  const element = document.getElementById(sectionId);
-  if (element) {
-    const offset = 80; // Account for fixed navbar
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - offset;
-    
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  }
-};
-
-// Auto-refresh every 5 minutes
-let githubRefreshTimer = null;
+let refreshTimer = null;
 onMounted(() => {
-  fetchGitHubProfile();
-  fetchGitHubRepos();
-  
-  githubRefreshTimer = setInterval(() => {
-    fetchGitHubProfile();
-    fetchGitHubRepos();
-  }, 5 * 60 * 1000);
+  fetchPosts();
+  fetchGitHub();
+  refreshTimer = setInterval(fetchGitHub, 5 * 60 * 1000);
 });
-
 onBeforeUnmount(() => {
-  if (githubRefreshTimer) clearInterval(githubRefreshTimer);
+  if (refreshTimer) clearInterval(refreshTimer);
 });
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 font-display">
-    <!-- Animated Gradient Mesh Background -->
-    <GradientMesh />
-
-    <!-- Command Palette -->
-    <CommandPalette
-      ref="commandPaletteRef"
-      @navigate="scrollToSection"
-    />
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-white/70 dark:bg-slate-950/70 border-b border-gray-200/30 dark:border-slate-800/50 shadow-sm">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <button
-          class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
-          @click="scrollToSection('hero')"
-        >
-          PM
-        </button>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center gap-8">
+  <div
+    id="top"
+    class="min-h-screen bg-paper text-ink font-sans"
+  >
+    <!-- Masthead -->
+    <header class="sticky top-0 z-40 bg-paper border-b border-hairline">
+      <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
+        <div class="flex items-baseline gap-4 min-w-0">
+          <a
+            href="#top"
+            class="font-mono font-bold text-sm tracking-tight shrink-0"
+          >punit<span class="text-accent">.</span>mishra</a>
+          <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-faint hidden sm:inline truncate">INDEX — REV {{ latestRev }}</span>
+        </div>
+        <nav class="flex items-center gap-4 font-mono text-xs text-muted">
           <button
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-            @click="scrollToSection('projects')"
+            class="hidden sm:inline hover:text-ink transition-colors"
+            @click="scrollToSection('work')"
           >
-            Projects
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            work
           </button>
           <button
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-            @click="scrollToSection('latest')"
+            class="hidden sm:inline hover:text-ink transition-colors"
+            @click="scrollToSection('writing')"
           >
-            Latest
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            writing
           </button>
           <button
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-            @click="scrollToSection('skills')"
+            class="hidden sm:inline hover:text-ink transition-colors"
+            @click="scrollToSection('about')"
           >
-            Skills
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            about
           </button>
           <button
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-            @click="scrollToSection('experience')"
+            class="px-2 py-1 border border-hairline rounded text-faint hover:text-ink transition-colors"
+            aria-label="Open command palette"
+            @click="commandPaletteRef && (commandPaletteRef.isOpen = true)"
           >
-            Experience
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
+            ⌘K
           </button>
-          <button
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-            @click="scrollToSection('blog')"
-          >
-            Blog
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
-          </button>
-          <router-link
-            to="/photos"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-          >
-            Photos
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
-          </router-link>
-          <router-link
-            to="/resume"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium text-sm tracking-wide relative group"
-          >
-            Resume
-            <span class="absolute -bottom-1 left-0 w-0 h-px bg-blue-500 group-hover:w-full transition-all duration-300" />
-          </router-link>
-
-          <!-- Command Palette Trigger -->
-          <button
-            class="flex items-center gap-2 px-3 py-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100/80 dark:bg-slate-800/80 rounded-lg text-sm transition-colors border border-gray-200/50 dark:border-slate-700/50"
-            @click="commandPaletteRef.isOpen = true"
-          >
-            <BaseIcon
-              :path="mdiMagnify"
-              size="16"
-            />
-            <span class="text-xs">Search</span>
-            <kbd class="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-gray-400 bg-white dark:bg-slate-700 rounded border border-gray-200 dark:border-slate-600">
-              <span>⌘</span><span>K</span>
-            </kbd>
-          </button>
-
-          <!-- Dark Mode Toggle with Fun Messages -->
           <DarkModeToggle />
-
-          <button
-            class="px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium text-sm hover:bg-gray-800 dark:hover:bg-gray-100 transition-all"
-            @click="scrollToSection('contact')"
-          >
-            Contact
-          </button>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button
-          class="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          aria-label="Toggle menu"
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              v-if="!isMobileMenuOpen"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-            <path
-              v-else
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+        </nav>
       </div>
+    </header>
 
-      <!-- Mobile Menu -->
-      <div 
-        v-if="isMobileMenuOpen"
-        class="md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-gray-200/50 dark:border-slate-700/50"
-      >
-        <div class="max-w-7xl mx-auto px-6 py-4 space-y-3">
-          <button 
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2" 
-            @click="scrollToSection('projects')"
-          >
-            Projects
-          </button>
-          <button 
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2" 
-            @click="scrollToSection('latest')"
-          >
-            Latest
-          </button>
-          <button 
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2" 
-            @click="scrollToSection('skills')"
-          >
-            Skills
-          </button>
-          <button
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
-            @click="scrollToSection('experience')"
-          >
-            Experience
-          </button>
-          <button
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
-            @click="scrollToSection('blog')"
-          >
-            Blog
-          </button>
-          <router-link
-            to="/photos"
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
-            @click="isMobileMenuOpen = false"
-          >
-            Photos
-          </router-link>
-          <router-link
-            to="/resume"
-            class="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium font-display py-2"
-            @click="isMobileMenuOpen = false"
-          >
-            Resume
-          </router-link>
-          <button
-            class="flex items-center gap-2 px-6 py-2.5 text-gray-700 dark:text-gray-300 font-semibold font-display"
-            @click="styleStore.setDarkMode()"
-          >
-            <BaseIcon
-              :path="styleStore.darkMode ? mdiWeatherSunny : mdiWeatherNight"
-              size="20"
-            />
-            <span>{{ styleStore.darkMode ? 'Light Mode' : 'Dark Mode' }}</span>
-          </button>
-          <button 
-            class="block w-full text-left px-6 py-2.5 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 text-white rounded-full font-semibold font-display text-center hover:shadow-lg transition-all" 
-            @click="scrollToSection('contact')"
-          >
-            Contact
-          </button>
-        </div>
-      </div>
-    </nav>
+    <main class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 lg:gap-14 py-10">
+      <!-- ===== MAIN COLUMN ===== -->
+      <div class="min-w-0">
+        <!-- Hero -->
+        <section class="pt-10 pb-8">
+          <div class="font-mono text-[11px] tracking-[0.2em] uppercase text-accent mb-5">
+            §00 · ML · AI · Platforms · @ SAP
+          </div>
+          <h1 class="font-mono font-extrabold text-5xl sm:text-6xl leading-[0.95] tracking-tight mb-6">
+            Punit Mishra
+          </h1>
+          <p class="font-sans text-lg leading-relaxed text-ink max-w-2xl">
+            {{ lede }}
+          </p>
+          <div class="flex flex-wrap gap-3 mt-8 font-mono text-sm">
+            <button
+              class="px-4 py-2.5 rounded-md bg-ink text-paper font-medium hover:opacity-90 transition-opacity"
+              @click="scrollToSection('work')"
+            >
+              view work →
+            </button>
+            <router-link
+              to="/resume"
+              class="px-4 py-2.5 rounded-md border border-hairline text-muted hover:text-ink hover:border-faint transition-colors"
+            >
+              résumé
+            </router-link>
+            <a
+              :href="githubProfile.htmlUrl"
+              target="_blank"
+              rel="noopener"
+              class="px-4 py-2.5 rounded-md border border-hairline text-muted hover:text-ink hover:border-faint transition-colors"
+            >github ↗</a>
+          </div>
+        </section>
 
-    <!-- Hero Section -->
-    <section
-      id="hero"
-      class="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16"
-    >
-      <div class="relative z-10 max-w-6xl mx-auto px-6">
-        <!-- Bento Grid Hero Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-          <!-- Main Hero Content - Spans 2 columns -->
-          <div
-            v-scroll-reveal
-            class="lg:col-span-2 text-center lg:text-left"
-          >
-            <!-- Status Badge -->
-            <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 glass-premium rounded-full">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Available for opportunities</span>
+        <!-- Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 border-y border-hairline">
+          <div class="py-5 pr-6 border-r border-hairline">
+            <div class="font-mono text-3xl font-bold tracking-tight">
+              {{ githubProfile.publicRepos }}
             </div>
-
-            <!-- Name with gradient animation -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight font-heading tracking-tight">
-              <span class="text-gray-900 dark:text-white">Hi, I'm </span>
-              <span class="text-gradient-animate">{{ githubProfile.name?.split(' ')[0] || "Punit" }}</span>
-            </h1>
-
-            <!-- Typing Animation -->
-            <div class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-6 font-medium h-8">
-              <TypingAnimation
-                :texts="['Senior ML Expert & AI Tech Lead @ SAP', 'Agents · Inference · Multi-Tenant Platforms', 'GPU Serving on Custom H100 Clusters', '14+ Years • UC Berkeley EECS']"
-                :typing-speed="60"
-                :deleting-speed="30"
-                :pause-duration="3000"
-              />
-            </div>
-
-            <!-- Description -->
-            <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl leading-relaxed">
-              Applied AI engineer and tech lead building enterprise AI at scale — agent platforms,
-              LLM inference on custom H100 clusters, and multi-tenant infrastructure.
-              {{ totalYearsExperience }}+ years taking ML from prototype to production.
-            </p>
-
-            <!-- CTA Buttons -->
-            <div class="flex flex-wrap justify-center lg:justify-start items-center gap-3">
-              <a
-                :href="`https://github.com/${githubUsername}`"
-                target="_blank"
-                class="group flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 shine"
-              >
-                <BaseIcon
-                  :path="mdiGithub"
-                  size="20"
-                />
-                <span>GitHub</span>
-              </a>
-              <a
-                :href="`https://linkedin.com/in/${linkedinUsername}`"
-                target="_blank"
-                class="group flex items-center gap-2 px-6 py-3 glass-premium rounded-full font-medium text-gray-700 dark:text-gray-200 hover:-translate-y-0.5 transition-all"
-              >
-                <BaseIcon
-                  :path="mdiLinkedin"
-                  size="20"
-                />
-                <span>LinkedIn</span>
-              </a>
-              <ResumeDownload />
+            <div class="font-mono text-[10px] tracking-[0.14em] uppercase text-faint mt-2">
+              Repositories
             </div>
           </div>
-
-          <!-- Profile Card - Right column -->
-          <div
-            v-scroll-reveal="{ delay: '200ms' }"
-            class="hidden lg:block space-y-6"
-          >
-            <div class="relative group">
-              <!-- Glow effect -->
-              <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
-
-              <!-- Card -->
-              <div class="relative glass-premium rounded-3xl p-6 gradient-border">
-                <div class="flex flex-col items-center">
-                  <img
-                    :src="githubProfile.avatar || `https://github.com/${githubUsername}.png`"
-                    :alt="githubProfile.name || 'Punit Mishra'"
-                    class="w-32 h-32 rounded-2xl shadow-xl mb-4 float object-cover object-center"
-                    loading="eager"
-                  >
-                  <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading">
-                    {{ githubProfile.name }}
-                  </h3>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                    {{ githubProfile.company }}
-                  </p>
-
-                  <!-- Mini stats -->
-                  <div class="grid grid-cols-3 gap-4 w-full pt-4 border-t border-gray-200/50 dark:border-slate-700/50">
-                    <div class="text-center">
-                      <div class="text-xl font-bold text-gray-900 dark:text-white">
-                        {{ githubProfile.publicRepos }}
-                      </div>
-                      <div class="text-xs text-gray-500">
-                        Repos
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-xl font-bold text-gray-900 dark:text-white">
-                        {{ totalYearsExperience }}+
-                      </div>
-                      <div class="text-xs text-gray-500">
-                        Years
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-xl font-bold text-gray-900 dark:text-white">
-                        {{ githubProfile.followers }}
-                      </div>
-                      <div class="text-xs text-gray-500">
-                        Followers
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="py-5 px-6 sm:border-r border-hairline">
+            <div class="font-mono text-3xl font-bold tracking-tight">
+              {{ totalYearsExperience }}<span class="text-accent">+</span>
             </div>
-
-            <!-- Currently Building -->
-            <CurrentlyBuilding :username="githubUsername" />
-          </div>
-        </div>
-
-        <!-- Stats Grid below hero -->
-        <div
-          v-scroll-reveal="{ delay: '400ms' }"
-          class="mt-10"
-        >
-          <StatsGrid
-            :repos="githubProfile.publicRepos"
-            :stars="githubStats.totalStars"
-            :followers="githubProfile.followers"
-            :years="totalYearsExperience"
-          />
-        </div>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-50 hover:opacity-100 transition-opacity">
-        <div class="w-6 h-10 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center pt-2">
-          <div class="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" />
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Stats Section -->
-    <section class="py-10 relative overflow-hidden">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">
-              14+
-            </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">
-              Years Experience
+            <div class="font-mono text-[10px] tracking-[0.14em] uppercase text-faint mt-2">
+              Years
             </div>
           </div>
-          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">
-              SAP
+          <div class="py-5 sm:px-6 pr-6 border-r sm:border-r border-hairline border-t sm:border-t-0 border-hairline">
+            <div class="font-mono text-3xl font-bold tracking-tight">
+              {{ githubStats.totalStars }}<span class="text-accent">★</span>
             </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">
-              Senior Engineer
+            <div class="font-mono text-[10px] tracking-[0.14em] uppercase text-faint mt-2">
+              Stars
             </div>
           </div>
-          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">
+          <div class="py-5 px-6 border-t sm:border-t-0 border-hairline">
+            <div class="font-mono text-3xl font-bold tracking-tight">
+              EECS
+            </div>
+            <div class="font-mono text-[10px] tracking-[0.14em] uppercase text-faint mt-2">
               UC Berkeley
             </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">
-              Computer Science
-            </div>
-          </div>
-          <div class="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-100 dark:border-slate-700/50">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">
-              AI/ML
-            </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400">
-              Infrastructure
-            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Blog Section - Highlighted -->
-    <BlogSection />
-
-    <!-- Latest Projects -->
-    <section
-      id="latest"
-      class="py-14 bg-gray-50/50 dark:bg-slate-900/50"
-    >
-      <div class="max-w-7xl mx-auto px-6">
-        <div
-          v-scroll-reveal
-          class="text-center mb-10"
+        <!-- §01 Selected Work -->
+        <section
+          id="work"
+          class="pt-14"
         >
-          <span class="inline-block px-3 py-1 text-sm font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20 rounded-full mb-3">Recent Work</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Latest Projects
-          </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">
-            Most recently updated repositories and contributions
-          </p>
-        </div>
-
-        <!-- Project Filter -->
-        <ProjectFilter
-          v-if="!loading.repos && githubRepos.length > 0"
-          :projects="githubRepos"
-          @filtered="handleFiltered"
-        />
-
-        <div
-          v-if="loading.repos"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <div
-            v-for="i in 6"
-            :key="i"
-            class="bg-white dark:bg-slate-800 rounded-2xl p-6 skeleton"
+          <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+            <div class="font-mono text-sm font-bold tracking-[0.16em] uppercase">
+              <span class="text-accent">§01</span> Selected Work
+            </div>
+            <div class="font-mono text-[10px] tracking-[0.12em] uppercase text-faint">
+              {{ proCount }} pro · {{ ossCount }} oss
+            </div>
+          </div>
+          <router-link
+            v-for="(item, i) in selectedWork"
+            :key="item.title"
+            :to="item.link"
+            class="group grid grid-cols-[2rem_1fr_1.25rem] gap-4 items-baseline py-6 border-b border-hairline hover:bg-chip transition-colors -mx-3 px-3"
           >
-            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3" />
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
-          </div>
-        </div>
-
-        <div
-          v-else-if="latestRepos.length > 0 || filteredRepos.length > 0"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <div
-            v-for="(repo, index) in (filteredRepos.length > 0 ? filteredRepos : latestRepos)"
-            :key="repo.id"
-            v-scroll-reveal="{ delay: `${index * 50}ms` }"
-            class="group bg-white dark:bg-slate-800/80 rounded-2xl p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer card-glow"
-            @click="goToProject(repo.name)"
-          >
-            <div class="flex items-start justify-between mb-3">
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading leading-tight">
-                {{ repo.name }}
-              </h3>
-              <BaseIcon
-                :path="mdiGithub"
-                size="20"
-                class="text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors flex-shrink-0"
-              />
+            <div class="font-mono text-xs text-faint pt-1">
+              {{ String(i + 1).padStart(2, "0") }}
             </div>
-            <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm leading-relaxed line-clamp-2">
-              {{ repo.description }}
-            </p>
-            <div
-              v-if="repo.topics && repo.topics.length > 0"
-              class="flex flex-wrap gap-1.5 mb-4"
-            >
-              <span
-                v-for="topic in repo.topics.slice(0, 3)"
-                :key="topic"
-                class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 rounded text-xs font-medium"
-              >
-                {{ topic }}
-              </span>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700/50">
-              <div class="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
-                <div class="flex items-center gap-1">
-                  <BaseIcon
-                    :path="mdiStar"
-                    size="14"
-                  />
-                  <span>{{ repo.stars }}</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <BaseIcon
-                    :path="mdiSourceFork"
-                    size="14"
-                  />
-                  <span>{{ repo.forks }}</span>
-                </div>
-                <div
-                  v-if="repo.language"
-                  class="flex items-center gap-1"
-                >
-                  <span
-                    class="w-2 h-2 rounded-full"
-                    :class="getLanguageColor(repo.language)"
-                  />
-                  <span>{{ repo.language }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Error state when repos failed to load -->
-        <div
-          v-else-if="reposError"
-          class="text-center py-12"
-        >
-          <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
-            <BaseIcon
-              :path="mdiGithub"
-              size="48"
-              class="text-gray-400 mx-auto mb-4"
-            />
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Couldn't load repositories
-            </h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">
-              GitHub API may be rate limited. Check out my profile directly.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <button
-                class="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
-                @click="fetchGitHubRepos"
-              >
-                Retry
-              </button>
-              <a
-                :href="`https://github.com/${githubUsername}`"
-                target="_blank"
-                class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
-              >
-                View on GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Empty loading state -->
-        <div
-          v-else
-          class="text-center py-12"
-        >
-          <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
-            <div class="w-12 h-12 border-4 border-gray-200 dark:border-gray-700 border-t-blue-500 rounded-full animate-spin mx-auto mb-4" />
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Loading repositories...
-            </h3>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
-              Fetching latest projects from GitHub
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section
-      id="projects"
-      class="py-14"
-    >
-      <div class="max-w-7xl mx-auto px-6">
-        <div
-          v-scroll-reveal
-          class="text-center mb-10"
-        >
-          <span class="inline-block px-3 py-1 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 rounded-full mb-3">Showcase</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Featured Projects
-          </h2>
-          <p class="text-base text-gray-500 dark:text-gray-400">
-            Innovative solutions built with cutting-edge technology
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <a
-            v-for="(project, index) in featuredProjects"
-            :key="index"
-            v-scroll-reveal="{ delay: `${index * 75}ms` }"
-            :href="project.url"
-            target="_blank"
-            class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-800/80 p-6 shadow-elegant hover:shadow-elegant-lg hover-lift border border-gray-100 dark:border-slate-700/50 cursor-pointer"
-          >
-            <!-- Gradient accent bar -->
-            <div :class="`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient}`" />
-            <div class="relative z-10">
-              <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white font-heading group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ project.name }}</h3>
-              <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed text-sm line-clamp-2">{{ project.description }}</p>
-              <div class="flex flex-wrap gap-1.5 mb-4">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2.5 mb-1.5">
                 <span
-                  v-for="tech in project.tech.slice(0, 4)"
-                  :key="tech"
-                  class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700/50 text-gray-600 dark:text-gray-400 rounded text-xs font-medium"
-                >
-                  {{ tech }}
-                </span>
-              </div>
-              <div class="flex items-center gap-1.5 text-sm text-blue-600 dark:text-blue-400 font-medium group-hover:gap-2 transition-all">
-                <span>View on GitHub</span>
-                <BaseIcon
-                  :path="mdiArrowRight"
-                  size="16"
-                />
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- GitHub Repositories -->
-    <section class="py-14">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-10">
-          <h2 class="text-3xl md:text-4xl font-black mb-2 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 bg-clip-text text-transparent font-heading tracking-tight">
-            Open Source
-          </h2>
-          <p class="text-base text-gray-600 dark:text-gray-400 font-display">
-            Recent contributions and repositories
-          </p>
-        </div>
-
-        <!-- GitHub Contribution Graph -->
-        <div class="mb-8">
-          <GitHubContributionGraph :username="githubUsername" />
-        </div>
-
-        <div
-          v-if="loading.repos"
-          class="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          <div
-            v-for="i in 4"
-            :key="i"
-            class="bg-white dark:bg-slate-800 rounded-2xl p-6 animate-pulse"
-          >
-            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full" />
-          </div>
-        </div>
-
-        <div
-          v-else-if="githubRepos.length > 0"
-          class="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          <a
-            v-for="repo in githubRepos"
-            :key="repo.id"
-            :href="repo.url"
-            target="_blank"
-            class="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 border border-gray-200 dark:border-slate-700"
-          >
-            <div class="flex items-start justify-between mb-4">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-heading">
-                {{ repo.name }}
-              </h3>
-              <BaseIcon
-                :path="mdiGithub"
-                size="24"
-                class="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
-              />
-            </div>
-            <p class="text-gray-600 dark:text-gray-400 mb-4 font-display line-clamp-2">
-              {{ repo.description }}
-            </p>
-            <div
-              v-if="repo.topics && repo.topics.length > 0"
-              class="flex flex-wrap gap-2 mb-4"
-            >
-              <span
-                v-for="topic in repo.topics.slice(0, 4)"
-                :key="topic"
-                class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium font-display"
-              >
-                {{ topic }}
-              </span>
-            </div>
-            <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700">
-              <div class="flex items-center gap-4 text-sm">
-                <div class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                  <BaseIcon
-                    :path="mdiStar"
-                    size="16"
-                  />
-                  <span class="font-display">{{ repo.stars }}</span>
-                </div>
-                <div class="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                  <BaseIcon
-                    :path="mdiSourceFork"
-                    size="16"
-                  />
-                  <span class="font-display">{{ repo.forks }}</span>
-                </div>
-                <div
-                  v-if="repo.language"
-                  class="flex items-center gap-1"
-                >
-                  <span
-                    class="w-3 h-3 rounded-full"
-                    :class="getLanguageColor(repo.language)"
-                  />
-                  <span class="text-gray-600 dark:text-gray-400 font-display">{{ repo.language }}</span>
-                </div>
-              </div>
-              <span class="text-xs text-gray-500 font-mono">{{ repo.updated }}</span>
-            </div>
-          </a>
-        </div>
-        
-        <!-- No repos message -->
-        <div
-          v-else
-          class="text-center py-12"
-        >
-          <div class="glass-premium rounded-2xl p-8 max-w-md mx-auto">
-            <BaseIcon
-              :path="mdiGithub"
-              size="48"
-              class="text-gray-400 mx-auto mb-4"
-            />
-            <p class="text-gray-600 dark:text-gray-400 text-lg font-display mb-4">
-              Unable to load repositories at the moment.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <button
-                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-display"
-                @click="fetchGitHubRepos"
-              >
-                Retry
-              </button>
-              <a
-                :href="`https://github.com/${githubUsername}`"
-                target="_blank"
-                class="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-display hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
-              >
-                View Profile
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section
-      id="skills"
-      class="py-14"
-    >
-      <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
-          Skills
-        </h2>
-        <div class="space-y-4">
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              Languages
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="lang in ['Python', 'TypeScript', 'JavaScript', 'Rust', 'Java', 'Go', 'SQL', 'CircuitPython']"
-                :key="lang"
-                class="px-3 py-1.5 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium"
-              >{{ lang }}</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              Frontend
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in ['Vue.js', 'React', 'Next.js', 'Tailwind CSS']"
-                :key="tech"
-                class="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium"
-              >{{ tech }}</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              Backend & Infrastructure
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'Kubernetes', 'Docker', 'AWS', 'Terraform']"
-                :key="tech"
-                class="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 rounded-lg text-sm font-medium"
-              >{{ tech }}</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              AI/ML
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in ['LangGraph', 'LangChain', 'FAISS', 'Vector Search', 'RAG', 'PyTorch']"
-                :key="tech"
-                class="px-3 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-lg text-sm font-medium"
-              >{{ tech }}</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              Hardware & IoT
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in ['Raspberry Pi', 'Circuit Playground', 'GPIO', 'PWM', 'Prometheus', 'Grafana', 'WebSockets']"
-                :key="tech"
-                class="px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 rounded-lg text-sm font-medium"
-              >{{ tech }}</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              Web3 & Blockchain
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in ['Solidity', 'Hardhat', 'Foundry', 'Wagmi', 'Ethers.js', 'ERC-20', 'DeFi', 'The Graph']"
-                :key="tech"
-                class="px-3 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-lg text-sm font-medium"
-              >{{ tech }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section
-      id="experience"
-      class="py-14 bg-gray-50/50 dark:bg-slate-900/50"
-    >
-      <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-6">
-          Experience
-        </h2>
-
-        <!-- All Experience Entries -->
-        <div class="space-y-4 mb-6">
-          <div
-            v-for="exp in experience"
-            :key="exp.company"
-            class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700/50"
-          >
-            <div class="flex items-start justify-between mb-3">
-              <div>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-                  {{ exp.title }}
+                  class="font-mono text-[9px] font-semibold tracking-[0.1em] uppercase px-1.5 py-0.5 rounded-sm"
+                  :class="item.kind === 'pro' ? 'text-accent border border-accent' : 'text-muted border border-hairline bg-chip'"
+                >{{ item.kind }}</span>
+                <h3 class="font-mono text-xl font-bold tracking-tight group-hover:text-accent transition-colors truncate">
+                  {{ item.title }}
                 </h3>
-                <p class="text-blue-600 dark:text-blue-400 font-medium">
-                  {{ exp.company }}
-                </p>
               </div>
-              <div class="text-right">
-                <span class="text-sm text-gray-500 dark:text-gray-400">{{ exp.period }}</span>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  {{ exp.location }}
-                </p>
+              <p class="font-sans text-sm text-muted leading-relaxed max-w-xl">
+                {{ item.summary }}
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                <span
+                  v-for="t in item.stack"
+                  :key="t"
+                  class="font-mono text-[11px] text-muted bg-chip border border-hairline rounded px-2 py-0.5"
+                >{{ t }}</span>
               </div>
             </div>
-            <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li
-                v-for="achievement in exp.achievements"
-                :key="achievement"
-                class="flex items-start gap-2"
-              >
-                <span class="text-emerald-500 mt-1 flex-shrink-0">•</span>
-                <span>{{ achievement }}</span>
-              </li>
-            </ul>
-            <div class="flex flex-wrap gap-1.5 mt-4">
-              <span
-                v-for="tech in exp.tech.slice(0, 8)"
-                :key="tech"
-                class="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-400 rounded text-xs"
-              >{{ tech }}</span>
+            <div class="font-mono text-faint group-hover:text-accent transition-colors text-right pt-1">
+              ↗
+            </div>
+          </router-link>
+        </section>
+
+        <!-- §02 Writing -->
+        <section
+          id="writing"
+          class="pt-14"
+        >
+          <div class="flex items-baseline justify-between border-b-2 border-ink pb-2.5">
+            <div class="font-mono text-sm font-bold tracking-[0.16em] uppercase">
+              <span class="text-accent">§02</span> Writing
             </div>
           </div>
-        </div>
-
-        <!-- Education -->
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
-          Education
-        </h3>
-        <div class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-100 dark:border-slate-700/50 mb-6">
-          <div
-            v-for="edu in education"
-            :key="edu.school"
+          <router-link
+            v-for="post in recentPosts"
+            :key="post.slug"
+            :to="`/blog/${post.slug}`"
+            class="group grid grid-cols-[5rem_1fr_1.25rem] gap-4 items-baseline py-4 border-b border-hairline hover:bg-chip transition-colors -mx-3 px-3"
           >
-            <h4 class="font-bold text-gray-900 dark:text-white">
-              {{ edu.school }}
+            <div class="font-mono text-xs text-faint">
+              {{ postMonth(post.date) }}
+            </div>
+            <h4 class="font-mono text-base font-semibold tracking-tight group-hover:text-accent transition-colors">
+              {{ post.title }}
             </h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ edu.degree }} • {{ edu.period }}
-            </p>
-            <p
-              v-if="edu.awards && edu.awards[0]"
-              class="text-xs text-amber-600 dark:text-amber-400 mt-2"
-            >
-              {{ edu.awards[0] }}
-            </p>
+            <div class="font-mono text-faint group-hover:text-accent transition-colors text-right">
+              ↗
+            </div>
+          </router-link>
+          <p
+            v-if="recentPosts.length === 0"
+            class="font-mono text-sm text-faint py-4"
+          >
+            Loading writing…
+          </p>
+        </section>
+
+        <SocialFeed />
+      </div>
+
+      <!-- ===== DOSSIER SIDEBAR ===== -->
+      <aside
+        id="about"
+        class="lg:border-l lg:border-hairline lg:pl-8 pt-14 lg:pt-10 border-t lg:border-t-0 border-hairline"
+      >
+        <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-faint mb-7">
+          / dossier · meta
+        </div>
+
+        <!-- Experience -->
+        <div class="font-mono text-xs font-bold tracking-[0.16em] uppercase border-b border-hairline pb-2 mb-3">
+          <span class="text-accent">§03</span> Experience
+        </div>
+        <div
+          v-for="x in experience"
+          :key="x.company"
+          class="py-2.5 border-b border-hairline last:border-0"
+        >
+          <div class="flex items-baseline justify-between gap-2">
+            <span class="font-mono text-sm font-bold">{{ x.company }}</span>
+            <span class="font-mono text-[10px] text-faint whitespace-nowrap">{{ x.period }}</span>
+          </div>
+          <div class="font-sans text-xs text-muted mt-0.5 leading-snug">
+            {{ x.role }}
           </div>
         </div>
 
-        <!-- Certifications - Inline -->
-        <div class="flex flex-wrap items-center gap-3">
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Certifications:</span>
-          <span
-            v-for="cert in certifications"
-            :key="cert.name"
-            class="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg text-sm"
-          >
-            {{ cert.name }}
-          </span>
+        <!-- Skills -->
+        <div class="font-mono text-xs font-bold tracking-[0.16em] uppercase border-b border-hairline pb-2 mb-3 mt-8">
+          <span class="text-accent">§04</span> Skills
         </div>
-      </div>
-    </section>
+        <div
+          v-for="s in skills"
+          :key="s.group"
+          class="mb-3.5"
+        >
+          <div class="font-mono text-[10px] tracking-[0.12em] uppercase text-faint mb-1.5">
+            {{ s.group }}
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span
+              v-for="it in s.items"
+              :key="it"
+              class="font-mono text-[11px] text-muted bg-chip border border-hairline rounded px-2 py-0.5"
+            >{{ it }}</span>
+          </div>
+        </div>
 
-    <!-- Social Feed -->
-    <SocialFeed />
+        <!-- Education + links -->
+        <div class="font-mono text-xs font-bold tracking-[0.16em] uppercase border-b border-hairline pb-2 mb-3 mt-8">
+          <span class="text-accent">§05</span> Education + Links
+        </div>
+        <div class="font-mono text-sm font-bold">
+          {{ education.school }}
+        </div>
+        <div class="font-sans text-xs text-muted mb-4">
+          {{ education.degree }} · {{ education.year }}
+        </div>
+        <div class="flex flex-col gap-1">
+          <a
+            v-for="l in links"
+            :key="l.label"
+            :href="l.url"
+            :target="l.url.startsWith('http') ? '_blank' : '_self'"
+            rel="noopener"
+            class="font-mono text-xs text-accent hover:underline py-1 w-fit"
+          >{{ l.label }} ↗</a>
+        </div>
+        <div class="font-mono text-[11px] text-faint mt-5 pt-4 border-t border-hairline">
+          {{ githubProfile.publicRepos }} public repos · {{ githubStats.totalStars }}★ · active 2012—present
+        </div>
+      </aside>
+    </main>
 
     <!-- Contact -->
     <section
       id="contact"
-      class="py-14 bg-gradient-to-b from-white to-gray-50/50 dark:from-slate-900 dark:to-slate-800/50"
+      class="border-t border-hairline bg-chip"
     >
-      <div class="max-w-7xl mx-auto px-6">
-        <div
-          v-scroll-reveal
-          class="text-center mb-8"
-        >
-          <span class="inline-block px-3 py-1 text-sm font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 rounded-full mb-3">Get in Touch</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading tracking-tight mb-2">
-            Let's Connect
-          </h2>
-          <p class="text-lg text-gray-500 dark:text-gray-400 mb-2 max-w-2xl mx-auto">
-            Ready to collaborate on your next project? Let's build something amazing together.
-          </p>
-          <p class="text-gray-400 dark:text-gray-500 text-sm">
-            Open to opportunities in AI/ML infrastructure, software development, and systems engineering.
-          </p>
+      <div class="max-w-6xl mx-auto px-6 py-14">
+        <div class="font-mono text-sm font-bold tracking-[0.16em] uppercase border-b-2 border-ink pb-2.5 mb-8">
+          <span class="text-accent">§06</span> Let's Connect
         </div>
-
-        <!-- Social Links -->
-        <div
-          v-scroll-reveal="{ delay: '100ms' }"
-          class="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          <a
-            v-for="link in socialLinks"
-            :key="link.label"
-            :href="link.url"
-            target="_blank"
-            class="group flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 rounded-full shadow-md hover:shadow-lg transition-all text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 hover:-translate-y-0.5"
-          >
-            <BaseIcon
-              :path="link.icon"
-              size="18"
-              class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
-            />
-            <span class="font-medium text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ link.label }}</span>
-          </a>
-        </div>
-
-        <div
-          v-scroll-reveal="{ delay: '150ms' }"
-          class="max-w-3xl mx-auto"
-        >
-          <div class="glass-premium rounded-3xl p-8 border border-gray-200/50 dark:border-slate-700/50">
-            <ContactForm />
-          </div>
-        </div>
+        <ContactForm />
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 bg-gray-50 dark:bg-slate-900 border-t border-gray-200/50 dark:border-slate-800/50">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <!-- Brand -->
-          <div class="flex items-center gap-3">
-            <div class="text-2xl font-black bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent font-heading">
-              PM
-            </div>
-            <div class="h-6 w-px bg-gray-300 dark:bg-gray-700" />
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
-              &copy; {{ new Date().getFullYear() }} Punit Mishra. All rights reserved.
-            </p>
-          </div>
-
-          <!-- Quick Links -->
-          <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm">
-            <button
-              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              @click="scrollToSection('projects')"
-            >
-              Projects
-            </button>
-            <button
-              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              @click="scrollToSection('experience')"
-            >
-              Experience
-            </button>
-            <button
-              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              @click="scrollToSection('blog')"
-            >
-              Blog
-            </button>
-            <router-link
-              to="/photos"
-              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              Photos
-            </router-link>
-            <router-link
-              to="/resume"
-              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              Resume
-            </router-link>
-            <button
-              class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              @click="scrollToSection('contact')"
-            >
-              Contact
-            </button>
-          </div>
-
-          <!-- Made with & Views -->
-          <div class="flex items-center gap-4">
-            <VisitorCounter />
-            <div class="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
-              <span>Built with</span>
-              <span class="text-emerald-500">Vue.js</span>
-              <span>&</span>
-              <span class="text-cyan-500">Tailwind</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom section -->
-        <div class="mt-8 pt-6 border-t border-gray-200/50 dark:border-slate-800/50">
-          <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-gray-400 dark:text-gray-500">
-            <a
-              href="https://github.com/punitmishra/punitmishra.github.io/blob/main/LICENSE"
-              target="_blank"
-              class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-            >
-              MIT License (Code)
-            </a>
-            <span class="hidden md:inline">•</span>
-            <span>Content &copy; {{ new Date().getFullYear() }} Punit Mishra</span>
-            <span class="hidden md:inline">•</span>
-            <a
-              href="#contact"
-              class="hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-              @click.prevent="scrollToSection('contact')"
-            >
-              Licensing Inquiries
-            </a>
-          </div>
-        </div>
+    <footer class="border-t border-hairline">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap justify-between gap-3 font-mono text-[11px] tracking-[0.08em] uppercase text-faint">
+        <span>© 2026 Punit Mishra</span>
+        <span>Built from silicon to software · ⌘K to navigate</span>
       </div>
     </footer>
+
+    <CommandPalette
+      ref="commandPaletteRef"
+      @navigate="scrollToSection"
+    />
   </div>
 </template>

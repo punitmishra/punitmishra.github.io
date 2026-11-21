@@ -14,12 +14,10 @@ const searchQuery = ref('');
 const selectedIndex = ref(0);
 
 const commands = [
-  { id: 'home', label: 'Go to Home', icon: mdiHome, section: 'hero', type: 'navigation' },
-  { id: 'projects', label: 'View Projects', icon: mdiCodeBraces, section: 'projects', type: 'navigation' },
-  { id: 'latest', label: 'Latest Projects', icon: mdiCodeBraces, section: 'latest', type: 'navigation' },
-  { id: 'blog', label: 'Open Blog', icon: mdiNewspaperVariant, section: 'blog', type: 'navigation' },
-  { id: 'skills', label: 'View Skills', icon: mdiCodeBraces, section: 'skills', type: 'navigation' },
-  { id: 'experience', label: 'View Experience', icon: mdiBriefcase, section: 'experience', type: 'navigation' },
+  { id: 'home', label: 'Go to Home', icon: mdiHome, section: 'top', type: 'navigation' },
+  { id: 'work', label: 'Selected Work', icon: mdiCodeBraces, section: 'work', type: 'navigation' },
+  { id: 'writing', label: 'Writing', icon: mdiNewspaperVariant, section: 'writing', type: 'navigation' },
+  { id: 'about', label: 'About / Experience', icon: mdiBriefcase, section: 'about', type: 'navigation' },
   { id: 'contact', label: 'Contact Me', icon: mdiEmail, section: 'contact', type: 'navigation' },
   { id: 'photos', label: 'Open Photos', icon: mdiImageMultiple, route: '/photos', type: 'route' },
   { id: 'resume', label: 'Open Resume', icon: mdiFileDocument, route: '/resume', type: 'route' },
@@ -112,24 +110,24 @@ defineExpose({ isOpen });
         />
 
         <!-- Palette -->
-        <div class="relative w-full max-w-xl mx-4 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+        <div class="relative w-full max-w-xl mx-4 bg-paper rounded-lg shadow-2xl border border-hairline overflow-hidden">
           <!-- Search Input -->
-          <div class="flex items-center gap-3 px-4 py-4 border-b border-gray-200 dark:border-slate-700">
+          <div class="flex items-center gap-3 px-4 py-4 border-b border-hairline">
             <BaseIcon
               :path="mdiMagnify"
               size="24"
-              class="text-gray-400"
+              class="text-faint"
             />
             <input
               v-model="searchQuery"
               type="text"
               aria-label="Search commands"
               placeholder="Type a command or search..."
-              class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-lg"
+              class="flex-1 bg-transparent text-ink placeholder-faint focus:outline-none text-lg font-mono"
               autofocus
             >
-            <div class="flex items-center gap-1 text-xs text-gray-400">
-              <kbd class="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded font-mono">esc</kbd>
+            <div class="flex items-center gap-1 text-xs text-faint">
+              <kbd class="px-2 py-1 bg-chip border border-hairline rounded font-mono">esc</kbd>
               <span>to close</span>
             </div>
           </div>
@@ -142,8 +140,8 @@ defineExpose({ isOpen });
               :class="[
                 'flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors',
                 index === selectedIndex
-                  ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50'
+                  ? 'bg-chip text-accent'
+                  : 'text-muted hover:bg-chip'
               ]"
               @click="executeCommand(command)"
             >
@@ -151,36 +149,36 @@ defineExpose({ isOpen });
                 :path="command.icon"
                 size="20"
               />
-              <span class="font-medium">{{ command.label }}</span>
+              <span class="font-mono text-sm">{{ command.label }}</span>
               <span
                 v-if="command.type === 'link'"
-                class="ml-auto text-xs text-gray-400"
+                class="ml-auto text-xs text-faint"
               >Opens in new tab</span>
             </div>
 
             <div
               v-if="filteredCommands.length === 0"
-              class="px-4 py-8 text-center text-gray-400"
+              class="px-4 py-8 text-center text-faint"
             >
               No commands found
             </div>
           </div>
 
           <!-- Footer -->
-          <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-slate-700 text-xs text-gray-400">
+          <div class="flex items-center justify-between px-4 py-3 border-t border-hairline text-xs text-faint">
             <div class="flex items-center gap-4">
               <span class="flex items-center gap-1">
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">↑↓</kbd>
+                <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">↑↓</kbd>
                 navigate
               </span>
               <span class="flex items-center gap-1">
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">↵</kbd>
+                <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">↵</kbd>
                 select
               </span>
             </div>
             <span class="flex items-center gap-1">
-              <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">⌘</kbd>
-              <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-slate-700 rounded font-mono">K</kbd>
+              <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">⌘</kbd>
+              <kbd class="px-1.5 py-0.5 bg-chip border border-hairline rounded font-mono">K</kbd>
               to toggle
             </span>
           </div>
