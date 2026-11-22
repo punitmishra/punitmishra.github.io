@@ -1,0 +1,843 @@
+{
+  "generated": "2026-11-21T04:44:11.146Z",
+  "profile": {
+    "publicRepos": 38,
+    "followers": 15,
+    "totalStars": 15
+  },
+  "owners": [
+    {
+      "login": "punitmishra",
+      "label": "Personal",
+      "type": "user",
+      "count": 7
+    },
+    {
+      "login": "calipercad",
+      "label": "CaliperCAD",
+      "type": "org",
+      "count": 1
+    },
+    {
+      "login": "ohmforge",
+      "label": "OhmForge",
+      "type": "org",
+      "count": 1
+    },
+    {
+      "login": "termling",
+      "label": "Termling",
+      "type": "org",
+      "count": 1
+    },
+    {
+      "login": "orgolabs",
+      "label": "Orgolabs",
+      "type": "org",
+      "count": 6
+    }
+  ],
+  "repos": [
+    {
+      "slug": "coviber",
+      "name": "coviber",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/coviber",
+      "homepage": "",
+      "pushedAt": "2026-07-05",
+      "active": false,
+      "featured": true,
+      "release": {
+        "tag": "v0.5.0",
+        "name": "v0.5.0 — architect audit fixes",
+        "date": "2026-07-05",
+        "url": "https://github.com/punitmishra/coviber/releases/tag/v0.5.0"
+      },
+      "commits": [
+        {
+          "sha": "d5bfbae",
+          "message": "paper: LaTeX scaffold + 12 workflow-drafted sections (first draft of #16) (#57)",
+          "date": "2026-07-05",
+          "url": "https://github.com/punitmishra/coviber/commit/d5bfbae25ba30b32b33fdeaaeb8b9b6ab3f06ed4"
+        },
+        {
+          "sha": "50dd532",
+          "message": "bench: sweep + cold/warm + JSON results + real 10^5 numbers (closes #48) (#56)",
+          "date": "2026-07-05",
+          "url": "https://github.com/punitmishra/coviber/commit/50dd5325c2ed2f9de887c157e209f8f65e81330c"
+        },
+        {
+          "sha": "5f2ae93",
+          "message": "CI: add [search] and [qdrant] extras jobs (closes #42) (#55)",
+          "date": "2026-07-05",
+          "url": "https://github.com/punitmishra/coviber/commit/5f2ae93095cf79aa2386908a04ff0aadf66b7011"
+        },
+        {
+          "sha": "61fc356",
+          "message": "Ship CHANGELOG.md (#37) — Keep-a-Changelog + SemVer discipline (#54)",
+          "date": "2026-07-05",
+          "url": "https://github.com/punitmishra/coviber/commit/61fc3561acd54cb11d72938060d38bc72fb09254"
+        },
+        {
+          "sha": "b5761d2",
+          "message": "Bump version to 0.5.0 (#46)",
+          "date": "2026-07-05",
+          "url": "https://github.com/punitmishra/coviber/commit/b5761d299f5555700372087fccb584d70947412e"
+        }
+      ]
+    },
+    {
+      "slug": "vaultic",
+      "name": "vaultic",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "🔐 Local-first, hardware-secured password manager with FIDO2/YubiKey support, AI-powered analysis, and beautiful CLI/TUI",
+      "language": "Rust",
+      "topics": [
+        "cli",
+        "encryption",
+        "fido2",
+        "password-manager",
+        "rust",
+        "security"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/vaultic",
+      "homepage": "",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": true,
+      "release": {
+        "tag": "v2.3.1",
+        "name": "v2.3.1",
+        "date": "2026-11-12",
+        "url": "https://github.com/punitmishra/vaultic/releases/tag/v2.3.1"
+      },
+      "commits": [
+        {
+          "sha": "c7206ca",
+          "message": "Update Homebrew formula for v2.3.1 (#74)",
+          "date": "2026-11-12",
+          "url": "https://github.com/punitmishra/vaultic/commit/c7206ca45dadda2198961073d99f53809b08f05d"
+        },
+        {
+          "sha": "568bdd0",
+          "message": "release: v2.3.1 (#71)",
+          "date": "2026-11-12",
+          "url": "https://github.com/punitmishra/vaultic/commit/568bdd00e95997190302d0a99571c155c24aa095"
+        },
+        {
+          "sha": "b8cd229",
+          "message": "fix(storage): detect sled lock error by message so the open-retry works (#73)",
+          "date": "2026-11-12",
+          "url": "https://github.com/punitmishra/vaultic/commit/b8cd229a5a05ccf9f1e6277a6f9a754694de394d"
+        },
+        {
+          "sha": "1120e5f",
+          "message": "fix(storage): widen sled open-retry budget; retry on create too (#72)",
+          "date": "2026-11-12",
+          "url": "https://github.com/punitmishra/vaultic/commit/1120e5fb9798d4bf0b610981f1fbaf906f0dbb82"
+        },
+        {
+          "sha": "3f2adf1",
+          "message": "test(crypto): de-flake the EFF passphrase test; add generate_passphrase_words (#70)",
+          "date": "2026-11-12",
+          "url": "https://github.com/punitmishra/vaultic/commit/3f2adf12c660d9c687e16049398b2831e46dc83f"
+        }
+      ]
+    },
+    {
+      "slug": "shield-ai",
+      "name": "shield-ai",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "AI-powered DNS filtering system with real-time threat detection",
+      "language": "TypeScript",
+      "topics": [],
+      "stars": 2,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/shield-ai",
+      "homepage": "",
+      "pushedAt": "2026-06-26",
+      "active": false,
+      "featured": true,
+      "release": null,
+      "commits": [
+        {
+          "sha": "08dd380",
+          "message": "Merge pull request #1 from punitmishra/claude/fix-ads-profiles-1icrH",
+          "date": "2026-06-26",
+          "url": "https://github.com/punitmishra/shield-ai/commit/08dd3802d7401ee6a6e37affd22c9c3e6bf5f995"
+        },
+        {
+          "sha": "00faf69",
+          "message": "feat: Add elite backend features - background tasks, analytics, webhooks",
+          "date": "2026-01-04",
+          "url": "https://github.com/punitmishra/shield-ai/commit/00faf695e616b5d02f1c4b7acc0c5f1ee9fadea9"
+        },
+        {
+          "sha": "94b9688",
+          "message": "feat: Add blocklist refresh endpoint and ad blocking tests",
+          "date": "2026-01-04",
+          "url": "https://github.com/punitmishra/shield-ai/commit/94b9688165b05587d98bbe62f4aa637b724379fc"
+        },
+        {
+          "sha": "bcecc7e",
+          "message": "docs: Update checkpoint for session 20 - unified filter fixes",
+          "date": "2026-01-04",
+          "url": "https://github.com/punitmishra/shield-ai/commit/bcecc7e75ce4b0729f523815439364d54d5cc532"
+        },
+        {
+          "sha": "ee1081d",
+          "message": "feat: Add unified filter with profile-aware ad blocking",
+          "date": "2026-01-04",
+          "url": "https://github.com/punitmishra/shield-ai/commit/ee1081d3aa7448743723ff405c04343a9b7cd9ae"
+        }
+      ]
+    },
+    {
+      "slug": "railroad-arcade",
+      "name": "railroad-arcade",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "",
+      "language": "TypeScript",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/railroad-arcade",
+      "homepage": "",
+      "pushedAt": "2025-12-28",
+      "active": false,
+      "featured": true,
+      "release": {
+        "tag": "v1.4.0",
+        "name": "v1.4.0 - Rust Backend Integration",
+        "date": "2025-12-27",
+        "url": "https://github.com/punitmishra/railroad-arcade/releases/tag/v1.4.0"
+      },
+      "commits": [
+        {
+          "sha": "8cc9dfd",
+          "message": "Add comprehensive checkpoint for resuming work",
+          "date": "2025-12-28",
+          "url": "https://github.com/punitmishra/railroad-arcade/commit/8cc9dfdfbc7fd8ad9330889574d0704f654b0307"
+        },
+        {
+          "sha": "6a17b14",
+          "message": "Update checkpoint with test documentation reference",
+          "date": "2025-12-28",
+          "url": "https://github.com/punitmishra/railroad-arcade/commit/6a17b1472001a1206ee153bb6510fce6d0b594aa"
+        },
+        {
+          "sha": "2020c9e",
+          "message": "Add comprehensive test documentation",
+          "date": "2025-12-28",
+          "url": "https://github.com/punitmishra/railroad-arcade/commit/2020c9e219d44ddda5698315901fa9138627f259"
+        },
+        {
+          "sha": "e2d3b31",
+          "message": "Update README.md with v1.4.1 features and setup instructions",
+          "date": "2025-12-28",
+          "url": "https://github.com/punitmishra/railroad-arcade/commit/e2d3b31ad31a009d20cfcc2759493cafb305f9eb"
+        },
+        {
+          "sha": "b8903d7",
+          "message": "Bump version to 1.4.1, add setup instructions and checkpoint",
+          "date": "2025-12-28",
+          "url": "https://github.com/punitmishra/railroad-arcade/commit/b8903d7329e68799a5854a59a15cd72ff179c24d"
+        }
+      ]
+    },
+    {
+      "slug": "esp32-firmware",
+      "name": "esp32-firmware",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "Multi-node ESP32-C3 firmware for RailCommand model railroad control system",
+      "language": "C++",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/esp32-firmware",
+      "homepage": "",
+      "pushedAt": "2026-01-27",
+      "active": false,
+      "featured": true,
+      "release": null,
+      "commits": [
+        {
+          "sha": "599498d",
+          "message": "Add .gitignore for PlatformIO build files",
+          "date": "2026-01-27",
+          "url": "https://github.com/punitmishra/esp32-firmware/commit/599498d800415ab63de41845065f4314a332e69b"
+        },
+        {
+          "sha": "8bbd8e4",
+          "message": "Add multi-node ESP32 firmware for RailCommand system",
+          "date": "2026-01-27",
+          "url": "https://github.com/punitmishra/esp32-firmware/commit/8bbd8e49ee71aa850707deb7bcf932cee07c9634"
+        }
+      ]
+    },
+    {
+      "slug": "pi-race",
+      "name": "pi-race",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "Pi Race",
+      "language": "Rust",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/pi-race",
+      "homepage": "",
+      "pushedAt": "2026-11-16",
+      "active": true,
+      "featured": true,
+      "release": null,
+      "commits": [
+        {
+          "sha": "02cb28b",
+          "message": "chore: release v0.0.34 [skip ci]",
+          "date": "2026-11-16",
+          "url": "https://github.com/punitmishra/pi-race/commit/02cb28b15958776c76c87b197a9d25f0f363dc49"
+        },
+        {
+          "sha": "c489a7c",
+          "message": "chore: release v0.0.33 [skip ci]",
+          "date": "2026-11-09",
+          "url": "https://github.com/punitmishra/pi-race/commit/c489a7c2b0b3664a16ba19811b3fe55e106d2b7d"
+        },
+        {
+          "sha": "5dbc01e",
+          "message": "chore: release v0.0.32 [skip ci]",
+          "date": "2026-11-02",
+          "url": "https://github.com/punitmishra/pi-race/commit/5dbc01ee7ebd249893504e6be7297e792f0ac98e"
+        },
+        {
+          "sha": "281e51d",
+          "message": "chore: release v0.0.31 [skip ci]",
+          "date": "2026-10-26",
+          "url": "https://github.com/punitmishra/pi-race/commit/281e51d36e2c7725c9fbb8fa30118554e8a3c326"
+        },
+        {
+          "sha": "32a509e",
+          "message": "chore: release v0.0.30 [skip ci]",
+          "date": "2026-10-19",
+          "url": "https://github.com/punitmishra/pi-race/commit/32a509e63cb09d7d4efd30e42097aade24db2ae6"
+        }
+      ]
+    },
+    {
+      "slug": "career-tools",
+      "name": "career-tools",
+      "owner": "punitmishra",
+      "ownerLabel": "Personal",
+      "ownerType": "user",
+      "description": "CLI utilities for keeping a dev portfolio, profile, and resume accurate & in sync",
+      "language": "Shell",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/punitmishra/career-tools",
+      "homepage": "",
+      "pushedAt": "2026-07-25",
+      "active": false,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "1dc5ebe",
+          "message": "career-tools: showcase generator + LaTeX resume builder",
+          "date": "2026-07-25",
+          "url": "https://github.com/punitmishra/career-tools/commit/1dc5ebe37febed87e67f6048a93fb63f36b24c53"
+        }
+      ]
+    },
+    {
+      "slug": "caliper",
+      "name": "caliper",
+      "owner": "calipercad",
+      "ownerLabel": "CaliperCAD",
+      "ownerType": "org",
+      "description": "Terminal-native, AI-assisted parametric CAD toolkit (std-only Rust)",
+      "language": "Rust",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/calipercad/caliper",
+      "homepage": "https://calipercad.github.io/caliper/",
+      "pushedAt": "2026-11-20",
+      "active": true,
+      "featured": false,
+      "release": {
+        "tag": "v1.12.0",
+        "name": "Caliper v1.12.0 — Sweep along a path",
+        "date": "2026-11-20",
+        "url": "https://github.com/calipercad/caliper/releases/tag/v1.12.0"
+      },
+      "commits": [
+        {
+          "sha": "c9cfc7f",
+          "message": "Phase 23 (v1.12.0): sweep a profile along a path",
+          "date": "2026-11-20",
+          "url": "https://github.com/calipercad/caliper/commit/c9cfc7f4988221ca59453377d1e8579a6d5988d9"
+        },
+        {
+          "sha": "0b7c211",
+          "message": "Phase 21+22 (v1.11.0): PDF vector export + joinery skills",
+          "date": "2026-11-19",
+          "url": "https://github.com/calipercad/caliper/commit/0b7c2114fb7a50cb2bfb20374b68daed4b517819"
+        },
+        {
+          "sha": "91d2174",
+          "message": "fix(ci): clear clippy error and cargo manifest warnings on latest stable",
+          "date": "2026-11-17",
+          "url": "https://github.com/calipercad/caliper/commit/91d2174c0502fb493d51275137d361599c451eb8"
+        },
+        {
+          "sha": "743d509",
+          "message": "Phase 20 (v1.10): non-convex fillets & chamfers (concave inside corners)",
+          "date": "2026-11-17",
+          "url": "https://github.com/calipercad/caliper/commit/743d5091f8b025fc4dd25fe181e9e2eb54c8dab2"
+        },
+        {
+          "sha": "e97c420",
+          "message": "docs: cross-link the sites + advertise the live pages",
+          "date": "2026-11-17",
+          "url": "https://github.com/calipercad/caliper/commit/e97c4206015752b19df80180b2aa791c511ed015"
+        }
+      ]
+    },
+    {
+      "slug": "ohmforge",
+      "name": "ohmforge",
+      "owner": "ohmforge",
+      "ownerLabel": "OhmForge",
+      "ownerType": "org",
+      "description": "The AI-native circuit & firmware workbench — SPICE-class analog + MCU firmware co-sim + AI copilot, in your terminal or browser. One Rust binary.",
+      "language": "Rust",
+      "topics": [
+        "ai-tools",
+        "circuit-simulator",
+        "eda",
+        "electronics",
+        "embedded",
+        "microcontroller",
+        "rust",
+        "simulation",
+        "spice",
+        "wasm"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/ohmforge/ohmforge",
+      "homepage": "https://github.com/ohmforge/ohmforge",
+      "pushedAt": "2026-11-20",
+      "active": true,
+      "featured": false,
+      "release": {
+        "tag": "v0.7.0",
+        "name": "v0.7.0 — ohmforge debut",
+        "date": "2026-11-17",
+        "url": "https://github.com/ohmforge/ohmforge/releases/tag/v0.7.0"
+      },
+      "commits": [
+        {
+          "sha": "a077462",
+          "message": "docs: half-wave rectifier runs in the shell (fixed-step), verified [0, ~4.37 V]",
+          "date": "2026-11-20",
+          "url": "https://github.com/ohmforge/ohmforge/commit/a0774622793747a6558738dcc024d7d163ff273c"
+        },
+        {
+          "sha": "165b6fd",
+          "message": "docs: elite + accurate pass across docs, legal/community, and landing (v0.8.1)",
+          "date": "2026-11-19",
+          "url": "https://github.com/ohmforge/ohmforge/commit/165b6fd71d5ebb4374299a755a78fe20113d327d"
+        },
+        {
+          "sha": "ef180dc",
+          "message": "feat(shell): fixed-step 'run tran <dur> <step>' + 'run sparams' with Smith chart",
+          "date": "2026-11-19",
+          "url": "https://github.com/ohmforge/ohmforge/commit/ef180dc9a421babd3f12abba387474d0c313ae7a"
+        },
+        {
+          "sha": "9d0fc2b",
+          "message": "ci: add .gitattributes (eol=lf) so byte-exact golden tests pass on Windows",
+          "date": "2026-11-17",
+          "url": "https://github.com/ohmforge/ohmforge/commit/9d0fc2bf0f047a58848f805e4b809f6171f1bc06"
+        },
+        {
+          "sha": "574604c",
+          "message": "chore(manifest): drop redundant workspace homepage + uninherited authors",
+          "date": "2026-11-17",
+          "url": "https://github.com/ohmforge/ohmforge/commit/574604cda09129edc1ec4820d17ca11622bb02d2"
+        }
+      ]
+    },
+    {
+      "slug": "termling",
+      "name": "termling",
+      "owner": "termling",
+      "ownerLabel": "Termling",
+      "ownerType": "org",
+      "description": "A tiny mood creature + arcade that lives in a pane beside your real zsh, reacting to your commands. Your shell stays 100% your own. Rust · ratatui.",
+      "language": "Rust",
+      "topics": [
+        "ratatui",
+        "rust",
+        "tamagotchi",
+        "terminal",
+        "tui",
+        "zsh"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/termling/termling",
+      "homepage": "",
+      "pushedAt": "2026-11-19",
+      "active": true,
+      "featured": false,
+      "release": {
+        "tag": "v0.1.2",
+        "name": "v0.1.2",
+        "date": "2026-11-19",
+        "url": "https://github.com/termling/termling/releases/tag/v0.1.2"
+      },
+      "commits": [
+        {
+          "sha": "51bdf78",
+          "message": "docs: refresh demo.gif on v0.1.2 (distinct creatures + dashboard tour)",
+          "date": "2026-11-19",
+          "url": "https://github.com/termling/termling/commit/51bdf78613c41fe9d31a5cf073f9107eb8a78a9e"
+        },
+        {
+          "sha": "6a4f0e4",
+          "message": "docs: Homebrew install is one-word via tap (brew tap termling/termling && brew install termling)",
+          "date": "2026-11-19",
+          "url": "https://github.com/termling/termling/commit/6a4f0e4b2d37e5f2b1333bfc96b13f1be5872a56"
+        },
+        {
+          "sha": "e2bd71c",
+          "message": "docs: Homebrew is published (manual 0.1.2 formula); only crates.io still pending",
+          "date": "2026-11-19",
+          "url": "https://github.com/termling/termling/commit/e2bd71ce456cac66d379e691ee8b3ae6fde9b6f1"
+        },
+        {
+          "sha": "e5d60c1",
+          "message": "release: build macOS arm64 locally until org macOS runners are enabled",
+          "date": "2026-11-19",
+          "url": "https://github.com/termling/termling/commit/e5d60c1fe735e21eb1103e5260738c55d80cc6f9"
+        },
+        {
+          "sha": "e860e46",
+          "message": "Release v0.1.2",
+          "date": "2026-11-19",
+          "url": "https://github.com/termling/termling/commit/e860e46e1eed3bb420ce9036f2123ac695084661"
+        }
+      ]
+    },
+    {
+      "slug": "borneol-oxidation",
+      "name": "borneol-oxidation",
+      "owner": "orgolabs",
+      "ownerLabel": "Orgolabs",
+      "ownerType": "org",
+      "description": "Interactive, fact-checked explainer: oxidation of borneol to camphor with bleach in acetic acid.",
+      "language": "HTML",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/orgolabs/borneol-oxidation",
+      "homepage": "",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "445ba09",
+          "message": "CI: validate lab on push/PR (runs the playbook validator)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/borneol-oxidation/commit/445ba09c6e70f3c92b45719a4c85d30e1d7bcf42"
+        },
+        {
+          "sha": "669288c",
+          "message": "Load the shared engine as an ES module (type=module)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/borneol-oxidation/commit/669288cf1825ed90136bae84f18296f4582f3594"
+        },
+        {
+          "sha": "5e7defd",
+          "message": "Fix rendering: ~ -> ≈ (GFM strikethrough), Unicode formula sub/superscripts -> mhchem $\\ce{}$, plain C=O -> $\\ce{C=O}$",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/borneol-oxidation/commit/5e7defd6a61b6a86b41e38df0e9e6e99da309b91"
+        },
+        {
+          "sha": "e2fbe46",
+          "message": "Oxidation of borneol to camphor interactive explainer",
+          "date": "2026-11-10",
+          "url": "https://github.com/orgolabs/borneol-oxidation/commit/e2fbe46059c11043db2f01e75cba09fcdbaa4258"
+        }
+      ]
+    },
+    {
+      "slug": "guaifenesin-synthesis",
+      "name": "guaifenesin-synthesis",
+      "owner": "orgolabs",
+      "ownerLabel": "Orgolabs",
+      "ownerType": "org",
+      "description": "Interactive, fact-checked explainer: Williamson ether synthesis of guaifenesin from guaiacol.",
+      "language": "HTML",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/orgolabs/guaifenesin-synthesis",
+      "homepage": "",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "9d14165",
+          "message": "CI: validate lab on push/PR (runs the playbook validator)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/guaifenesin-synthesis/commit/9d14165e92b35d8f3852ff9ab0b7a832a2a5bcfd"
+        },
+        {
+          "sha": "625148d",
+          "message": "Load the shared engine as an ES module (type=module)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/guaifenesin-synthesis/commit/625148d747d44365d2cf716c12c508359957bafa"
+        },
+        {
+          "sha": "bbd0f1d",
+          "message": "Swap in real PubChem 3D structures (CIDs 460/7290/3516)",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/guaifenesin-synthesis/commit/bbd0f1dd539d4e7d64d75eecaecac8c3cf0f9cba"
+        },
+        {
+          "sha": "b0d682e",
+          "message": "Add computed 3D structures (stopgap; swap for PubChem CIDs 460/7290/3516 when API returns)",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/guaifenesin-synthesis/commit/b0d682e01d525cdd805ed5b14422092379ccda82"
+        },
+        {
+          "sha": "45d1e7f",
+          "message": "Guaifenesin (Williamson ether) interactive explainer",
+          "date": "2026-11-10",
+          "url": "https://github.com/orgolabs/guaifenesin-synthesis/commit/45d1e7fbb4c645290d5fe5955d52d55467ed8905"
+        }
+      ]
+    },
+    {
+      "slug": "trityl-methyl-ether",
+      "name": "trityl-methyl-ether",
+      "owner": "orgolabs",
+      "ownerLabel": "Orgolabs",
+      "ownerType": "org",
+      "description": "Interactive, fact-checked explainer: trityl methyl ether from triphenylmethanol via the trityl cation.",
+      "language": "HTML",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/orgolabs/trityl-methyl-ether",
+      "homepage": "",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "6c8feb2",
+          "message": "CI: validate lab on push/PR (runs the playbook validator)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/trityl-methyl-ether/commit/6c8feb26c09c796e9f9050bc2c36e60d7e321e2e"
+        },
+        {
+          "sha": "16ce648",
+          "message": "Load the shared engine as an ES module (type=module)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/trityl-methyl-ether/commit/16ce6484871bb98937f10e50b70ca2f9df1b621f"
+        },
+        {
+          "sha": "772a991",
+          "message": "Fix rendering: ~ -> ≈ (GFM strikethrough), Unicode formula sub/superscripts -> mhchem $\\ce{}$, plain C=O -> $\\ce{C=O}$",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/trityl-methyl-ether/commit/772a991f0f39b62f51cbe598d1b01188d94280a2"
+        },
+        {
+          "sha": "c558a07",
+          "message": "Swap in real PubChem 3D structures (CIDs 6457/887/136388)",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/trityl-methyl-ether/commit/c558a072c415e0e9c0c8957cd4f6d1eaf7536196"
+        },
+        {
+          "sha": "506c396",
+          "message": "Add computed 3D structures (stopgap; swap for PubChem CIDs 6457/887/136388 when API returns)",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/trityl-methyl-ether/commit/506c396811e8191f4ccfcfef38f5929c6b509a2c"
+        }
+      ]
+    },
+    {
+      "slug": "diels-alder",
+      "name": "diels-alder",
+      "owner": "orgolabs",
+      "ownerLabel": "Orgolabs",
+      "ownerType": "org",
+      "description": "Interactive, fact-checked explainer: the Diels–Alder [4+2] cycloaddition of cyclopentadiene and maleic anhydride.",
+      "language": "HTML",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/orgolabs/diels-alder",
+      "homepage": "",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "986e4c2",
+          "message": "CI: validate lab on push/PR (runs the playbook validator)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/diels-alder/commit/986e4c27d2f1b40762ee2ec33bf9d465908e7a6a"
+        },
+        {
+          "sha": "806cb38",
+          "message": "Load the shared engine as an ES module (type=module)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/diels-alder/commit/806cb3845651e0972734066a2b823ffa8048e0ac"
+        },
+        {
+          "sha": "7848828",
+          "message": "Fix rendering: ~ -> ≈ (GFM strikethrough), Unicode formula sub/superscripts -> mhchem $\\ce{}$, plain C=O -> $\\ce{C=O}$",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/diels-alder/commit/7848828d8850bfa9bf203a996f5d219523c32ba8"
+        },
+        {
+          "sha": "90d5f84",
+          "message": "Swap in real PubChem 3D structures (CIDs 7612/7923/2723766, defined-stereo endo adduct)",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/diels-alder/commit/90d5f84701ffdb33e550abd06b509d0347bc695c"
+        },
+        {
+          "sha": "bcf733a",
+          "message": "Add computed 3D structures (stopgap; swap for PubChem CIDs 7612/7923/2723766 when API returns)",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/diels-alder/commit/bcf733a406e0084968a8922a9681521b4e0ce9bd"
+        }
+      ]
+    },
+    {
+      "slug": "camphor-reduction",
+      "name": "camphor-reduction",
+      "owner": "orgolabs",
+      "ownerLabel": "Orgolabs",
+      "ownerType": "org",
+      "description": "Interactive, fact-checked explainer for the NaBH4 reduction of camphor to isoborneol & borneol: real 3D structures, mechanism, procedure, live calculator.",
+      "language": "HTML",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/orgolabs/camphor-reduction",
+      "homepage": "https://orgolabs.github.io/camphor-reduction/",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "ba05da5",
+          "message": "CI: validate lab on push/PR (runs the playbook validator)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/camphor-reduction/commit/ba05da57b367bb5c42582b0594db5b5e1cc1061d"
+        },
+        {
+          "sha": "536f51b",
+          "message": "Load the shared engine as an ES module (type=module)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/camphor-reduction/commit/536f51b9019b112ac20c2fac3823d37727dcef4f"
+        },
+        {
+          "sha": "bee4742",
+          "message": "Fix rendering: ~ -> ≈ (GFM strikethrough), Unicode formula sub/superscripts -> mhchem $\\ce{}$, plain C=O -> $\\ce{C=O}$",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/camphor-reduction/commit/bee47428070db164ef4ddd7ee08a0a57e8b1121d"
+        },
+        {
+          "sha": "f155ed9",
+          "message": "Hero reaction: let mhchem subscript the arrow labels (NaBH4)",
+          "date": "2026-10-25",
+          "url": "https://github.com/orgolabs/camphor-reduction/commit/f155ed973cc7664561e16110f35a573a12e684c9"
+        },
+        {
+          "sha": "2d2a356",
+          "message": "Rewrite as Markdown + config on the shared lab engine (content.md + window.LAB); drop per-lab calculator/references JS",
+          "date": "2026-10-25",
+          "url": "https://github.com/orgolabs/camphor-reduction/commit/2d2a35604e2a200adbbb593255f54731be73db32"
+        }
+      ]
+    },
+    {
+      "slug": "aspirin-synthesis",
+      "name": "aspirin-synthesis",
+      "owner": "orgolabs",
+      "ownerLabel": "Orgolabs",
+      "ownerType": "org",
+      "description": "Interactive, fact-checked explainer for the synthesis of aspirin from salicylic acid & acetic anhydride (Olmsted 1998): real 3D structures, mechanism, procedure, live yield calculator.",
+      "language": "HTML",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/orgolabs/aspirin-synthesis",
+      "homepage": "",
+      "pushedAt": "2026-11-12",
+      "active": true,
+      "featured": false,
+      "release": null,
+      "commits": [
+        {
+          "sha": "1875c09",
+          "message": "CI: validate lab on push/PR (runs the playbook validator)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/aspirin-synthesis/commit/1875c0909fd4850bd3d2c70a14345a5c24af76d5"
+        },
+        {
+          "sha": "5420a35",
+          "message": "Load the shared engine as an ES module (type=module)",
+          "date": "2026-11-12",
+          "url": "https://github.com/orgolabs/aspirin-synthesis/commit/5420a3547682fed530991e748406a8e9f20570f0"
+        },
+        {
+          "sha": "251a7b3",
+          "message": "Fix rendering: ~ -> ≈ (GFM strikethrough), Unicode formula sub/superscripts -> mhchem $\\ce{}$, plain C=O -> $\\ce{C=O}$",
+          "date": "2026-11-11",
+          "url": "https://github.com/orgolabs/aspirin-synthesis/commit/251a7b3608712f3b9f21901df7b08668c00924b7"
+        },
+        {
+          "sha": "405c1b9",
+          "message": "Synthesis of Aspirin — interactive microscale lab",
+          "date": "2026-11-10",
+          "url": "https://github.com/orgolabs/aspirin-synthesis/commit/405c1b91e6b80917216f03ae8a86d82eede24110"
+        }
+      ]
+    }
+  ]
+}

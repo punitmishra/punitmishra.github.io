@@ -15,7 +15,7 @@ import FooterBar from "@/components/FooterBar.vue";
 
 useMainStore().setUser({
   name: "Punit Mishra",
-  email: "punit@example.com",
+  email: "punit.mishra09@gmail.com",
   avatar:
     "https://avatars.dicebear.com/api/avataaars/punitmishra.svg?options[top][]=shortHair&options[accessoriesChance]=93",
 });

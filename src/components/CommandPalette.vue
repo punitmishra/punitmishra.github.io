@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { mdiMagnify, mdiHome, mdiCodeBraces, mdiBriefcase, mdiEmail, mdiGithub, mdiLinkedin, mdiWeatherNight, mdiNewspaperVariant, mdiImageMultiple, mdiFileDocument } from '@mdi/js';
+import { mdiMagnify, mdiHome, mdiCodeBraces, mdiBriefcase, mdiEmail, mdiGithub, mdiLinkedin, mdiWeatherNight, mdiNewspaperVariant, mdiImageMultiple, mdiFileDocument, mdiViewGridOutline } from '@mdi/js';
 import BaseIcon from './BaseIcon.vue';
 import { useStyleStore } from '@/stores/style.js';
 
@@ -16,6 +16,7 @@ const selectedIndex = ref(0);
 const commands = [
   { id: 'home', label: 'Go to Home', icon: mdiHome, section: 'top', type: 'navigation' },
   { id: 'work', label: 'Selected Work', icon: mdiCodeBraces, section: 'work', type: 'navigation' },
+  { id: 'projects', label: 'All Projects & Labs', icon: mdiViewGridOutline, route: '/projects', type: 'route' },
   { id: 'writing', label: 'Writing', icon: mdiNewspaperVariant, section: 'writing', type: 'navigation' },
   { id: 'about', label: 'About / Experience', icon: mdiBriefcase, section: 'about', type: 'navigation' },
   { id: 'contact', label: 'Contact Me', icon: mdiEmail, section: 'contact', type: 'navigation' },
