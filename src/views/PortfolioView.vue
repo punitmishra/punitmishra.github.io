@@ -62,6 +62,7 @@ const links = [
   { label: "github", url: `https://github.com/${githubUsername}` },
   { label: "linkedin", url: `https://linkedin.com/in/${linkedinUsername}` },
   { label: "résumé", url: "#/resume" },
+  { label: "photos", url: "#/photos" },
 ];
 
 /* ---- Writing: newest posts from the blog index ---- */
@@ -151,6 +152,12 @@ onMounted(() => {
           >
             projects
           </router-link>
+          <router-link
+            to="/photos"
+            class="hidden sm:inline hover:text-ink transition-colors"
+          >
+            photos
+          </router-link>
           <button
             class="hidden sm:inline hover:text-ink transition-colors"
             @click="scrollToSection('writing')"
@@ -180,12 +187,25 @@ onMounted(() => {
       <div class="min-w-0">
         <!-- Hero -->
         <section class="pt-10 pb-8">
-          <div class="font-mono text-[11px] tracking-[0.2em] uppercase text-accent mb-5">
-            §00 · ML · AI · Platforms · @ SAP
+          <div class="flex items-start justify-between gap-6 mb-6">
+            <div class="min-w-0">
+              <div class="font-mono text-[11px] tracking-[0.2em] uppercase text-accent mb-5">
+                §00 · ML · AI · Platforms · @ SAP
+              </div>
+              <h1 class="font-mono font-extrabold text-5xl sm:text-6xl leading-[0.95] tracking-tight">
+                Punit Mishra
+              </h1>
+            </div>
+            <!-- Monogram placeholder. To use a real headshot, replace this div
+                 with: <img src="<cloudinary-url>" alt="Punit Mishra" class="shrink-0
+                 w-20 h-20 sm:w-28 sm:h-28 rounded-md border border-hairline object-cover"> -->
+            <div
+              class="shrink-0 w-20 h-20 sm:w-28 sm:h-28 rounded-md border border-hairline bg-chip flex items-center justify-center select-none"
+              aria-label="Punit Mishra"
+            >
+              <span class="font-mono font-extrabold text-3xl sm:text-4xl tracking-tight">pm<span class="text-accent">.</span></span>
+            </div>
           </div>
-          <h1 class="font-mono font-extrabold text-5xl sm:text-6xl leading-[0.95] tracking-tight mb-6">
-            Punit Mishra
-          </h1>
           <p class="font-sans text-lg leading-relaxed text-ink max-w-2xl">
             {{ lede }}
           </p>
